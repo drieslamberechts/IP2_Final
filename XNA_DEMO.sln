@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModelData", "SkinnedModelData\SkinnedModelData.csproj", "{3899FB5E-0ED8-4606-81D5-4053C24C52AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinnedModelPipeline", "SkinnedModelPipeline\SkinnedModelPipeline.csproj", "{FDC4EB6B-4FC3-45DC-8E17-7F560C58CD0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_ENGINE", "XNA_ENGINE\XNA_ENGINE.csproj", "{4053C6C5-8338-457D-9126-7249FAC61353}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_GoingWild", "XNA_GoingWild\XNA_GoingWild.csproj", "{1E06CC5A-D09C-401E-8A56-E4E50139A847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_Interaction", "XNA_Interaction\XNA_Interaction.csproj", "{EFA9BBA5-FE7F-436C-8FE4-DFCB5A78B71E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_LoadContent", "XNA_LoadContent\XNA_LoadContent.csproj", "{12912286-10CD-475A-80C2-C9299A26AE34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_Movement", "XNA_Movement\XNA_Movement.csproj", "{EDB6BEB8-0B21-4B46-8B2E-F25EC7867513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_DEMOContent", "XNA_DEMOContent\XNA_DEMOContent.contentproj", "{019DE630-5711-48FA-8AE7-C0C67A910398}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_Fiddle", "XNA_Fiddle\XNA_Fiddle.csproj", "{887DFE77-C852-456D-9569-F2BAFC8D426F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3899FB5E-0ED8-4606-81D5-4053C24C52AF}.Debug|x86.ActiveCfg = Debug|x86
+		{3899FB5E-0ED8-4606-81D5-4053C24C52AF}.Debug|x86.Build.0 = Debug|x86
+		{3899FB5E-0ED8-4606-81D5-4053C24C52AF}.Release|x86.ActiveCfg = Release|x86
+		{3899FB5E-0ED8-4606-81D5-4053C24C52AF}.Release|x86.Build.0 = Release|x86
+		{FDC4EB6B-4FC3-45DC-8E17-7F560C58CD0C}.Debug|x86.ActiveCfg = Debug|x86
+		{FDC4EB6B-4FC3-45DC-8E17-7F560C58CD0C}.Debug|x86.Build.0 = Debug|x86
+		{FDC4EB6B-4FC3-45DC-8E17-7F560C58CD0C}.Release|x86.ActiveCfg = Release|x86
+		{FDC4EB6B-4FC3-45DC-8E17-7F560C58CD0C}.Release|x86.Build.0 = Release|x86
+		{4053C6C5-8338-457D-9126-7249FAC61353}.Debug|x86.ActiveCfg = Debug|x86
+		{4053C6C5-8338-457D-9126-7249FAC61353}.Debug|x86.Build.0 = Debug|x86
+		{4053C6C5-8338-457D-9126-7249FAC61353}.Release|x86.ActiveCfg = Release|x86
+		{4053C6C5-8338-457D-9126-7249FAC61353}.Release|x86.Build.0 = Release|x86
+		{1E06CC5A-D09C-401E-8A56-E4E50139A847}.Debug|x86.ActiveCfg = Debug|x86
+		{1E06CC5A-D09C-401E-8A56-E4E50139A847}.Debug|x86.Build.0 = Debug|x86
+		{1E06CC5A-D09C-401E-8A56-E4E50139A847}.Release|x86.ActiveCfg = Release|x86
+		{1E06CC5A-D09C-401E-8A56-E4E50139A847}.Release|x86.Build.0 = Release|x86
+		{EFA9BBA5-FE7F-436C-8FE4-DFCB5A78B71E}.Debug|x86.ActiveCfg = Debug|x86
+		{EFA9BBA5-FE7F-436C-8FE4-DFCB5A78B71E}.Debug|x86.Build.0 = Debug|x86
+		{EFA9BBA5-FE7F-436C-8FE4-DFCB5A78B71E}.Release|x86.ActiveCfg = Release|x86
+		{EFA9BBA5-FE7F-436C-8FE4-DFCB5A78B71E}.Release|x86.Build.0 = Release|x86
+		{12912286-10CD-475A-80C2-C9299A26AE34}.Debug|x86.ActiveCfg = Debug|x86
+		{12912286-10CD-475A-80C2-C9299A26AE34}.Debug|x86.Build.0 = Debug|x86
+		{12912286-10CD-475A-80C2-C9299A26AE34}.Release|x86.ActiveCfg = Release|x86
+		{12912286-10CD-475A-80C2-C9299A26AE34}.Release|x86.Build.0 = Release|x86
+		{EDB6BEB8-0B21-4B46-8B2E-F25EC7867513}.Debug|x86.ActiveCfg = Debug|x86
+		{EDB6BEB8-0B21-4B46-8B2E-F25EC7867513}.Debug|x86.Build.0 = Debug|x86
+		{EDB6BEB8-0B21-4B46-8B2E-F25EC7867513}.Release|x86.ActiveCfg = Release|x86
+		{EDB6BEB8-0B21-4B46-8B2E-F25EC7867513}.Release|x86.Build.0 = Release|x86
+		{019DE630-5711-48FA-8AE7-C0C67A910398}.Debug|x86.ActiveCfg = Debug|x86
+		{019DE630-5711-48FA-8AE7-C0C67A910398}.Release|x86.ActiveCfg = Release|x86
+		{887DFE77-C852-456D-9569-F2BAFC8D426F}.Debug|x86.ActiveCfg = Debug|x86
+		{887DFE77-C852-456D-9569-F2BAFC8D426F}.Debug|x86.Build.0 = Debug|x86
+		{887DFE77-C852-456D-9569-F2BAFC8D426F}.Release|x86.ActiveCfg = Release|x86
+		{887DFE77-C852-456D-9569-F2BAFC8D426F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

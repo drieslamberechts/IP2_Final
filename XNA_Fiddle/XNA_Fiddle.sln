@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNA_Fiddle", "XNA_Fiddle\XNA_Fiddle\XNA_Fiddle.csproj", "{8F4C828A-2C9B-4B97-BF98-9C303A821C7A}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "XNA_FiddleContent", "XNA_Fiddle\XNA_FiddleContent\XNA_FiddleContent.contentproj", "{B1098A5D-DB2D-4F76-90A2-89DAD77B266A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F4C828A-2C9B-4B97-BF98-9C303A821C7A}.Debug|x86.ActiveCfg = Debug|x86
+		{8F4C828A-2C9B-4B97-BF98-9C303A821C7A}.Debug|x86.Build.0 = Debug|x86
+		{8F4C828A-2C9B-4B97-BF98-9C303A821C7A}.Release|x86.ActiveCfg = Release|x86
+		{8F4C828A-2C9B-4B97-BF98-9C303A821C7A}.Release|x86.Build.0 = Release|x86
+		{B1098A5D-DB2D-4F76-90A2-89DAD77B266A}.Debug|x86.ActiveCfg = Debug|x86
+		{B1098A5D-DB2D-4F76-90A2-89DAD77B266A}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
