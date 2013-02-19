@@ -135,7 +135,7 @@
       <Project>{3899FB5E-0ED8-4606-81D5-4053C24C52AF}</Project>
       <Name>SkinnedModelData</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\XNA_DEMO\XNA_DEMOContent\XNA_DEMOContent.contentproj">
+    <ProjectReference Include="..\XNA_DEMOContent\XNA_DEMOContent.contentproj">
       <Project>{019DE630-5711-48FA-8AE7-C0C67A910398}</Project>
       <Name>XNA_DEMOContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
