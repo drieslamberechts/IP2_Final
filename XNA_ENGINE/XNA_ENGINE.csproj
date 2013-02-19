@@ -95,6 +95,7 @@
     <Compile Include="Game\Scenes\GameSceneConcept1.cs" />
     <Compile Include="Game\Scenes\GameSpriteDemo.cs" />
     <Compile Include="Game\Scenes\GoingWildDemo.cs" />
+    <Compile Include="Game\Scenes\WoutScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
