@@ -89,6 +89,7 @@
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
     <Compile Include="Game\MainGame.cs" />
     <Compile Include="Game\Objects\GridBox.cs" />
+    <Compile Include="Game\Scenes\DriesScene.cs" />
     <Compile Include="Game\Scenes\FiddleDemoScene.cs" />
     <Compile Include="Game\Scenes\GameAnimatedSpriteDemo.cs" />
     <Compile Include="Game\Scenes\GameModelDemo.cs" />
