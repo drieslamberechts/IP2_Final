@@ -32,20 +32,25 @@ namespace XNA_ENGINE.Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            SceneManager.AddGameScene(new GameSceneConcept1());
+            SceneManager.AddGameScene(new WoutScene());
+            SceneManager.AddGameScene(new DriesScene());
             SceneManager.AddGameScene(new GameSpriteDemo());
             SceneManager.AddGameScene(new GameAnimatedSpriteDemo());
             SceneManager.AddGameScene(new GameModelDemo());
             SceneManager.AddGameScene(new GoingWildDemo());
             SceneManager.AddGameScene(new FiddleDemoScene());
-            SceneManager.AddGameScene(new GameSceneConcept1());
 
 
+            SceneManager.SetActiveScene("GameSceneConcept1");
+            //SceneManager.SetActiveScene("WoutScene");
+            //SceneManager.SetActiveScene("DriesScene");
             //SceneManager.SetActiveScene("FiddleDemoScene");
             //SceneManager.SetActiveScene("GameAnimatedSpriteDemo");
             //SceneManager.SetActiveScene("GameModelDemo");
             //SceneManager.SetActiveScene("GoingWildDemo");
             //SceneManager.SetActiveScene("GameSpriteDemo");
-            SceneManager.SetActiveScene("GameSceneConcept1");
+            
             
 
             SceneManager.Initialize();
@@ -95,17 +100,21 @@ namespace XNA_ENGINE.Game
 
             //Change the active scene
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D1))
-                SceneManager.SetActiveScene("FiddleDemoScene");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D2))
-                SceneManager.SetActiveScene("GameAnimatedSpriteDemo");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D3))
-                SceneManager.SetActiveScene("GameModelDemo");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D4))
-                SceneManager.SetActiveScene("GoingWildDemo");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D5))
-                SceneManager.SetActiveScene("GameSpriteDemo");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D6))
                 SceneManager.SetActiveScene("GameSceneConcept1");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D2))
+                SceneManager.SetActiveScene("WoutScene");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D3))
+                SceneManager.SetActiveScene("DriesScene");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D4))
+                SceneManager.SetActiveScene("FiddleDemoScene");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D5))
+                SceneManager.SetActiveScene("GameAnimatedSpriteDemo");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D6))
+                SceneManager.SetActiveScene("GameModelDemo");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D7))
+                SceneManager.SetActiveScene("GoingWildDemo");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D8))
+                SceneManager.SetActiveScene("GameSpriteDemo");
 
             // TODO: Add your update logic here
             SceneManager.Update(gameTime);
