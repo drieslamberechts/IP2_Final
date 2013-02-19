@@ -25,7 +25,7 @@ namespace XNA_ENGINE.Game.Scenes
             AddSceneObject(m_SmileySprite);
         }
 
-
+        // Test Dries
 
     }
 }
