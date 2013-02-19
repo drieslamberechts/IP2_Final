@@ -18,7 +18,7 @@ namespace XNA_ENGINE.Game
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Window.Title = "XNA_DEMO - Wout De Puysseleir";
+            Window.Title = "IP2";
 
             SceneManager.MainGame = this;
         }
@@ -37,13 +37,15 @@ namespace XNA_ENGINE.Game
             SceneManager.AddGameScene(new GameModelDemo());
             SceneManager.AddGameScene(new GoingWildDemo());
             SceneManager.AddGameScene(new FiddleDemoScene());
+            SceneManager.AddGameScene(new GameSceneConcept1());
 
 
-            SceneManager.SetActiveScene("FiddleDemoScene");
+            //SceneManager.SetActiveScene("FiddleDemoScene");
             //SceneManager.SetActiveScene("GameAnimatedSpriteDemo");
             //SceneManager.SetActiveScene("GameModelDemo");
             //SceneManager.SetActiveScene("GoingWildDemo");
             //SceneManager.SetActiveScene("GameSpriteDemo");
+            SceneManager.SetActiveScene("GameSceneConcept1");
             
 
             SceneManager.Initialize();
@@ -102,6 +104,8 @@ namespace XNA_ENGINE.Game
                 SceneManager.SetActiveScene("GoingWildDemo");
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D5))
                 SceneManager.SetActiveScene("GameSpriteDemo");
+            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D6))
+                SceneManager.SetActiveScene("GameSceneConcept1");
 
             // TODO: Add your update logic here
             SceneManager.Update(gameTime);
