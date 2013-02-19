@@ -92,6 +92,7 @@
     <Compile Include="Game\Scenes\FiddleDemoScene.cs" />
     <Compile Include="Game\Scenes\GameAnimatedSpriteDemo.cs" />
     <Compile Include="Game\Scenes\GameModelDemo.cs" />
+    <Compile Include="Game\Scenes\GameSceneConcept1.cs" />
     <Compile Include="Game\Scenes\GameSpriteDemo.cs" />
     <Compile Include="Game\Scenes\GoingWildDemo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
