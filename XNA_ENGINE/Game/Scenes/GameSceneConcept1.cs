@@ -14,7 +14,18 @@ namespace XNA_ENGINE.Game.Scenes
 {
     class GameSceneConcept1:GameScene
     {
+        private GameSprite m_SmileySprite;
+
         public GameSceneConcept1() : base("GameSceneConcept1") { }
+
+        public override void Initialize()
+        {
+            m_SmileySprite = new GameSprite("TestSmiley");
+            m_SmileySprite.Translate(0, 0);
+            AddSceneObject(m_SmileySprite);
+        }
+
+
 
     }
 }
