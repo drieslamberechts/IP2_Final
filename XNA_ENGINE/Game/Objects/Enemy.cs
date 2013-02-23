@@ -25,6 +25,7 @@ namespace IP2_Xna_Template.Objects
         {
             Content = content;
             m_RectEnemy = new Rectangle((int)startPosition.X, (int)startPosition.Y, 100, 100);
+            Initialize();
         }
 
         public void Initialize()
@@ -46,5 +47,8 @@ namespace IP2_Xna_Template.Objects
 
         // GET FUNTIONS
         public Rectangle GetPosition() { return m_RectEnemy; }
+
+        // SET FUNTIONS
+        public void OffsetPosition(int xPos, int yPos) { m_RectEnemy.Offset(xPos,yPos); }
     }
 }

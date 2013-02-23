@@ -33,6 +33,8 @@ namespace XNA_ENGINE.Game
         Enemy m_Enemy;
         Bullet[] m_Bullets;
 
+        private List<Enemy> m_EnemyList = new List<Enemy>();
+
         // Music
         Song song;
         Boolean m_bMusicPlaying = true;
@@ -45,7 +47,12 @@ namespace XNA_ENGINE.Game
         // Old Keyboard State
         KeyboardState m_OldKeyboardState;
 
+        // Scroll speed of level
         float m_BackgroundScrollSpeed = 5;
+
+        // Time interval for spawning enemies
+        private double m_TimeIntervalEnemies = 0;
+        private double m_TimeBetweenEachSpawn = 0.8;
 
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
@@ -62,7 +69,6 @@ namespace XNA_ENGINE.Game
 
             // Create an Enemy
             m_Enemy = new Enemy(Content, new Vector2(800, 450));
-            m_Enemy.Initialize();
 
             // Create Background
             m_TexBackground = Content.Load<Texture2D>("Backgrounds/PrimaryBackground");
@@ -90,27 +96,26 @@ namespace XNA_ENGINE.Game
             m_Player.Update();
             if (m_Enemy != null) m_Enemy.Update();
 
-            // Check if a bullets hits an enemy and destroy both (bullet and enemy)
-            // Get Bullets from Player
-            m_Bullets = m_Player.GetBullets();
-            for (int t = 0; t < 10; ++t)
+            // Update the spawntiming
+            m_TimeIntervalEnemies += (double)renderContext.GameTime.ElapsedGameTime.Milliseconds/1000;
+            if (m_TimeIntervalEnemies >= m_TimeBetweenEachSpawn)
             {
-                if (m_Bullets[t] != null && m_Enemy != null)
-                {
-                    // Check intersection based on rectangles
-                    if (m_Bullets[t].GetPosition().Intersects(m_Enemy.GetPosition()))
-                    {
-                        // Delete both Objects if they hit
-                        m_Enemy = null;
-                        m_Bullets[t] = null;
-                    }
-                }
+                Random random = new Random();
+                int randomNumber = random.Next(50, 500);
+
+                m_TimeIntervalEnemies = 0;
+                m_EnemyList.Add(new Enemy(Content, new Vector2(1400, randomNumber)));
             }
 
+            //Scroll and destroy enemies
+            HandleEnemies(renderContext);
 
+
+
+            //Scroll background
             m_RectBackground.Offset(new Point(-(int)m_BackgroundScrollSpeed, 0));
-
             if (m_RectBackground.Left <= -1280) m_RectBackground.Offset(new Point(1280, 0));
+
 
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -194,7 +199,8 @@ namespace XNA_ENGINE.Game
             m_Player.Draw(renderContext);
 
             // Enemies
-            if (m_Enemy != null) m_Enemy.Draw(renderContext);
+            //if (m_Enemy != null) m_Enemy.Draw(renderContext);
+            DrawEnemies(renderContext);
 
             //DebugScreen
             if (m_bShowDebugScreen) DrawDebugScreen(renderContext);
@@ -213,18 +219,63 @@ namespace XNA_ENGINE.Game
             int offset = 15;
 
             renderContext.SpriteBatch.DrawString(m_DebugFont, "DEBUG:", new Vector2(10, yPos += offset), Color.Green);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Heroposition: " + m_Player.m_Rectangle.Location.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "HeroPosition: " + m_Player.m_Rectangle.Location.ToString(), new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraWorldPosition: " + renderContext.Camera.WorldPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraLocalPosition: " + renderContext.Camera.LocalPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
-
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Time Interval: " + m_TimeIntervalEnemies.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            
             renderContext.SpriteBatch.DrawString(m_DebugFont, "INSTRUCTIONS:", new Vector2(10, yPos += offset + 10), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Disbale debug: D", new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Up and down: Z/S", new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Shoot: Spacebar", new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
-            
         }
 
+        private void HandleEnemies(RenderContext renderContext)
+        {
+            m_Bullets = m_Player.GetBullets();
+
+            List<Enemy> enemiesToDelete = new List<Enemy>();
+            
+            foreach(Enemy enemy in m_EnemyList)
+            {
+                //Move the enemies
+                enemy.OffsetPosition(-(int)m_BackgroundScrollSpeed, 0);
+
+                //Delete the enemy if it reached the end of the screen
+                if (enemy.GetPosition().X < -200) enemiesToDelete.Add(enemy);
+
+                //Go over all bullets and check collision with the enemy
+                for (int t = 0; t < 10; ++t)
+                {
+                    if (m_Bullets[t] != null && m_Enemy != null)
+                    {
+                        // Check intersection based on rectangles
+                        if (m_Bullets[t].GetPosition().Intersects(enemy.GetPosition()))
+                        {
+                            // Delete both Objects if they hit
+                            // Add to list the objects that need to be deleted
+                            enemiesToDelete.Add(enemy);
+                            m_Bullets[t] = null;
+                        }
+                    }
+                }
+            }
+
+            //Delete the enemies
+            foreach (Enemy enemy in enemiesToDelete)
+            {
+                m_EnemyList.Remove(enemy);
+            }
+        }
+
+        private void DrawEnemies(RenderContext renderContext)
+        {
+            foreach (Enemy enemy in m_EnemyList)
+            {
+                if (enemy != null) enemy.Draw(renderContext);
+            }
+        }
         //...
     }
 }
