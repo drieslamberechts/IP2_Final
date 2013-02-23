@@ -88,7 +88,10 @@
     <Compile Include="Engine\Scenegraph\GameScene.cs" />
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
     <Compile Include="Game\MainGame.cs" />
+    <Compile Include="Game\Objects\Bullet.cs" />
+    <Compile Include="Game\Objects\Enemy.cs" />
     <Compile Include="Game\Objects\GridBox.cs" />
+    <Compile Include="Game\Objects\Player.cs" />
     <Compile Include="Game\Objects\TutorialClasses\Background.cs" />
     <Compile Include="Game\Scenes\DriesScene.cs" />
     <Compile Include="Game\Scenes\FiddleDemoScene.cs" />

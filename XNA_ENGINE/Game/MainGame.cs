@@ -38,7 +38,7 @@ namespace XNA_ENGINE.Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            SceneManager.AddGameScene(new GameSceneConcept1());
+            SceneManager.AddGameScene(new GameSceneConcept1(Content));
             SceneManager.AddGameScene(new WoutScene());
             SceneManager.AddGameScene(new DriesScene());
             SceneManager.AddGameScene(new GameSpriteDemo());
