@@ -103,7 +103,7 @@
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
     <Compile Include="Game\MainGame.cs" />
     <Compile Include="Game\Objects\Bullet.cs" />
-    <Compile Include="Game\Objects\Enemy.cs" />
+    <Compile Include="Game\Objects\Target.cs" />
     <Compile Include="Game\Objects\GridBox.cs" />
     <Compile Include="Game\Objects\MusicBeat.cs" />
     <Compile Include="Game\Objects\Player.cs" />

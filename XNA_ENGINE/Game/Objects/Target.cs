@@ -10,7 +10,7 @@ using XNA_ENGINE.Engine;
 
 namespace IP2_Xna_Template.Objects
 {
-    class Enemy
+    class Target
     {
         // Variables
         ContentManager Content;
@@ -21,7 +21,7 @@ namespace IP2_Xna_Template.Objects
         Vector2 m_MovingPosition = new Vector2(0, 0);
 
         // Methods
-        public Enemy(ContentManager content, Vector2 startPosition)
+        public Target(ContentManager content, Vector2 startPosition)
         {
             Content = content;
             m_RectEnemy = new Rectangle((int)startPosition.X, (int)startPosition.Y, 192, 100);
