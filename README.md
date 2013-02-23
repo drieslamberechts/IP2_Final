@@ -1,4 +1,4 @@
-# Disclaimer:
+# Disclaimer
 
 This is a school project by: 
 
