@@ -5,8 +5,6 @@ Content\MovableBox.xnb
 Content\StaticBox.xnb
 Content\HeroBox.xnb
 Content\TestSmiley.xnb
-Content\Vampire.xnb
-Content\Vampire_Diffuse_0.xnb
 Content\protag.xnb
 Content\protagtransparant.xnb
 Content\Backgrounds\ParallaxStars.xnb
@@ -18,6 +16,6 @@ Content\enemy.xnb
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
 Content\Music.xnb
-Content\Vampire.xnb
 Content\Vampire_Diffuse_0.xnb
+Content\Vampire.xnb
 Content\Music.wma
