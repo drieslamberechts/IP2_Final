@@ -77,6 +77,8 @@ namespace XNA_ENGINE.Game
 
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+            KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
+
             if (gamePadState.IsConnected)
             {
                 if (gamePadState.Buttons.Start == ButtonState.Pressed && m_bCanSwitchScene)
@@ -88,6 +90,17 @@ namespace XNA_ENGINE.Game
                 if (gamePadState.Buttons.Start == ButtonState.Released && !m_bCanSwitchScene)
                     m_bCanSwitchScene = true;
             }
+
+
+
+            if (keyboardState[Keys.P] == KeyState.Down && m_bCanSwitchScene)
+            {
+                SceneManager.SetActiveScene("PauseScreen");
+                m_bCanSwitchScene = false;
+            }
+
+            if (keyboardState[Keys.P] == KeyState.Up && !m_bCanSwitchScene)
+                m_bCanSwitchScene = true;
 
             // CREATE ENEMIES BASED ON THE POSITION OF THE CAMERA
             // THIS WILL INCREASE PREFORMANCE.

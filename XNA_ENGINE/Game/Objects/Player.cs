@@ -34,11 +34,16 @@ namespace IP2_Xna_Template.Objects
             m_Rectangle = new Rectangle(30, 220, 144, 72);
 
             m_Bullets = new Bullet[MAX_BULLETS];
+
+            Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D1);
         }
 
         public void Update()
         {
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+            KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
+
+            //GamePad
             if (gamePadState.IsConnected)
             {
                 // UP or DOWN  Movement
@@ -48,11 +53,18 @@ namespace IP2_Xna_Template.Objects
                     m_Rectangle.Y += 3;
             }
 
+            //Keyboard
+            if (keyboardState[Keys.Z] == KeyState.Down)
+                m_Rectangle.Y -= 3;
+            if (keyboardState[Keys.S] == KeyState.Down)
+                m_Rectangle.Y += 3;
+
+
             //------------------------------------------------------------------
             // BULLETS
             //------------------------------------------------------------------
                 // Create A Bullet
-                if (gamePadState.Buttons.A == ButtonState.Pressed) 
+                if (gamePadState.Buttons.A == ButtonState.Pressed || keyboardState[Keys.Space] == KeyState.Down)
                 {
                     if (m_CanCreateBullet)
                     {
@@ -79,7 +91,7 @@ namespace IP2_Xna_Template.Objects
                     m_CanCreateBullet = false;
                 }
 
-                if (gamePadState.Buttons.A == ButtonState.Released) m_CanCreateBullet = true;
+                if (gamePadState.Buttons.A == ButtonState.Released || keyboardState[Keys.Space] == KeyState.Up) m_CanCreateBullet = true;
 
                 // Delete Bullets
                 // Bullets get deleted when they aren't rendered on the screen (if they are to far in the X-position so they are out of the screen)
