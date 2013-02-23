@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using XNA_ENGINE.Engine;
+
 namespace IP2_Xna_Template.Objects
 {
     class Enemy
@@ -37,9 +39,9 @@ namespace IP2_Xna_Template.Objects
         
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(RenderContext renderContext)
         {
-            spriteBatch.Draw(m_TexEnemy, m_RectEnemy, Color.White);
+            renderContext.SpriteBatch.Draw(m_TexEnemy, m_RectEnemy, Color.White);
         }
 
         // GET FUNTIONS
