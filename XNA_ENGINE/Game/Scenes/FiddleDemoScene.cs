@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Objects;
-using VampirePuzzle.Framework;
+//using VampirePuzzle.Framework;
 
 namespace XNA_ENGINE.Game.Scenes
 {
@@ -17,7 +17,7 @@ namespace XNA_ENGINE.Game.Scenes
     {
         //Create Box
         private GameSprite m_Box;//,m_Hero;
-        private GameButton m_TestButton;
+       // private GameButton m_TestButton;
        // private GameH
        // private GridBox m_TestGridBox;
  
@@ -49,12 +49,12 @@ namespace XNA_ENGINE.Game.Scenes
             m_Hero.Translate(100, 200);
             AddSceneObject(m_Hero);*/
 
-            m_TestButton = new GameButton("StaticBox");
+          /*  m_TestButton = new GameButton("StaticBox");
             m_TestButton.Translate(100, 100);
             AddSceneObject(m_TestButton);
 
             m_TestButton.OnClick += new Action(BoxClicked);
-
+            */
 
            /* m_TestGridBox = new GridBox(GridBox.TypesOfBoxes.MovableBox);
             m_TestGridBox.Translate(100, 100);

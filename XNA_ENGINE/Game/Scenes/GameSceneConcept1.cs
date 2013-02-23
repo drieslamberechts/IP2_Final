@@ -95,10 +95,13 @@ namespace XNA_ENGINE.Game
                 }
             }
 
+            Vector3 camPos = new Vector3(renderContext.Camera.WorldPosition.X,renderContext.Camera.WorldPosition.Y,renderContext.Camera.WorldPosition.Z);
+            camPos.X += 5;
+            renderContext.Camera.Translate(camPos);
+
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
             KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
-
 
             //GamePad
             if (gamePadState.IsConnected)
@@ -152,6 +155,7 @@ namespace XNA_ENGINE.Game
 
             // Draw Game Objects
             spriteBatch.Begin();
+
             // Background
             spriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
 
@@ -162,10 +166,9 @@ namespace XNA_ENGINE.Game
             if (m_Enemy != null) m_Enemy.Draw(spriteBatch);
 
             //DebugScreen
-            if (m_bShowDebugScreen) DrawDebugScreen();
+            if (m_bShowDebugScreen) DrawDebugScreen(renderContext);
 
             spriteBatch.End();
-
             base.Draw2D(renderContext, drawBefore3D);
         }
 
@@ -174,17 +177,20 @@ namespace XNA_ENGINE.Game
             base.Draw3D(renderContext);
         }
 
-        private void DrawDebugScreen()
+        private void DrawDebugScreen(RenderContext renderContext)
         {
             int yPos = 0;
             int offset = 15;
             spriteBatch.DrawString(m_DebugFont,"DEBUG:", new Vector2(10, yPos += offset), Color.Green);
-            spriteBatch.DrawString(m_DebugFont, "Heroposition: (" + m_Player.m_Rectangle.X.ToString() + ", " + m_Player.m_Rectangle.Y.ToString() + ")", new Vector2(15, yPos += offset), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "Heroposition: " + m_Player.m_Rectangle.Location.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "CameraPosition: " + renderContext.Camera.WorldPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            
             spriteBatch.DrawString(m_DebugFont, "INSTRUCTIONS:", new Vector2(10, yPos += offset+10), Color.Green);
             spriteBatch.DrawString(m_DebugFont, "Disbale debug: D", new Vector2(15, yPos += offset), Color.Green);
             spriteBatch.DrawString(m_DebugFont, "Up and down: Z/S", new Vector2(15, yPos += offset), Color.Green);
             spriteBatch.DrawString(m_DebugFont, "Shoot: Spacebar", new Vector2(15, yPos += offset), Color.Green);
             spriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
+            
         }
 
         //...

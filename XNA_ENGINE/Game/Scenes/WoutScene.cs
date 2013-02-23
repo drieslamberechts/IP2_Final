@@ -9,7 +9,7 @@ using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Objects;
-using VampirePuzzle.Framework;
+//using VampirePuzzle.Framework;
 
 namespace XNA_ENGINE.Game.Scenes
 {
