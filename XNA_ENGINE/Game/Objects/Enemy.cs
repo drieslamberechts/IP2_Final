@@ -24,13 +24,13 @@ namespace IP2_Xna_Template.Objects
         public Enemy(ContentManager content, Vector2 startPosition)
         {
             Content = content;
-            m_RectEnemy = new Rectangle((int)startPosition.X, (int)startPosition.Y, 100, 100);
+            m_RectEnemy = new Rectangle((int)startPosition.X, (int)startPosition.Y, 192, 100);
             Initialize();
         }
 
         public void Initialize()
         {
-            m_TexEnemy = Content.Load<Texture2D>("enemy");
+            m_TexEnemy = Content.Load<Texture2D>("cloud");
         }
 
         public void Update()

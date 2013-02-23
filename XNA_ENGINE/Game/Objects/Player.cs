@@ -33,12 +33,12 @@ namespace IP2_Xna_Template.Objects
 
         public void Initialize()
         {
-            m_Texture = Content.Load<Texture2D>("player");
+            m_Texture = Content.Load<Texture2D>("protagtransparant");
             m_Rectangle = new Rectangle(30, 220, 144, 72);
 
             m_Bullets = new Bullet[MAX_BULLETS];
 
-            Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D1);
+            //Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D1);
         }
 
         public void Update()
@@ -83,7 +83,7 @@ namespace IP2_Xna_Template.Objects
                                 {
                                     // Create the bullet and go out the for loop
                                     m_Bullets[t] = new Bullet(Content);
-                                    m_Bullets[t].m_Position = new Vector2(m_Rectangle.X + m_Texture.Width, m_Rectangle.Y + (m_Texture.Height / 2));
+                                    m_Bullets[t].m_Position = new Vector2(m_Rectangle.X + 110, m_Rectangle.Y + 35);
                                     m_Bullets[t].InitializePos();
                                     break;
                                 }
