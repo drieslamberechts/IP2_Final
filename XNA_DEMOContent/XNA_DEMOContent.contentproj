@@ -90,15 +90,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TutorialResources\PrimaryBackground.png">
-      <Name>PrimaryBackground</Name>
+    <Compile Include="protag.png">
+      <Name>protag</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TutorialResources\ParallaxStars.png">
-      <Name>ParallaxStars</Name>
+    <Compile Include="protagtransparant.png">
+      <Name>protagtransparant</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
