@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Engine;
 
 namespace XNA_ENGINE.Game.Scenes
 {

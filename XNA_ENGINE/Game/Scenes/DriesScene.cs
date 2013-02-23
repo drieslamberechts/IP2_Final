@@ -17,7 +17,7 @@ namespace XNA_ENGINE.Game.Scenes
 {
     class DriesScene : GameScene
     {
-        Background background;
+        //Background background;
 
         public DriesScene() : base("DriesScene") { }
 

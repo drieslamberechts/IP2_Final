@@ -7,8 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using XNA_ENGINE.Engine.Scenegraph;
+
 using XNA_ENGINE.Engine;
+using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Engine.Objects;
+
 using IP2_Xna_Template.Objects;
 using Microsoft.Xna.Framework.Media;
 
@@ -17,7 +20,6 @@ namespace XNA_ENGINE.Game
     public class GameSceneConcept1 : GameScene
     {
         ContentManager Content;
-        SpriteBatch spriteBatch;
 
         Boolean m_bCanSwitchScene = true;
 
@@ -37,8 +39,11 @@ namespace XNA_ENGINE.Game
         SpriteFont m_DebugFont;
         Boolean m_bShowDebugScreen = true;
 
-
+        //Old Keyboard State
         KeyboardState m_OldKeyboardState;
+
+        //TestObject
+        private GameSprite m_TestSprite;
 
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
@@ -69,6 +74,12 @@ namespace XNA_ENGINE.Game
             // Set the old state of the keyboard
             m_OldKeyboardState = Keyboard.GetState(PlayerIndex.One);
 
+            //TestStuff
+            m_TestSprite = new GameSprite("protagtransparant");
+            m_TestSprite.Translate(0, 0);
+            m_TestSprite.Scale(0.2f, 0.2f);
+            AddSceneObject(m_TestSprite);
+
             base.Initialize();
         }
 
@@ -98,8 +109,13 @@ namespace XNA_ENGINE.Game
            // Vector3 camPos = new Vector3(renderContext.Camera.WorldPosition.X,renderContext.Camera.WorldPosition.Y,renderContext.Camera.WorldPosition.Z);
            // camPos.X += 5;
            // renderContext.Camera.Translate(camPos);
-
            // renderContext.Camera.LocalPosition.X = 10;// += 10;
+            //renderContext.Camera. = 10;
+
+            renderContext.Camera.Translate(1000, 1000, 1000);
+         
+
+           //renderContext.Camera.LocalPosition = new Vector3(1000,1000,1000);
 
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -153,24 +169,19 @@ namespace XNA_ENGINE.Game
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
-            spriteBatch = new SpriteBatch(renderContext.GraphicsDevice);
-
             // Draw Game Objects
-            spriteBatch.Begin();
-
             // Background
-            spriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
+            renderContext.SpriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
 
             // Player & Possible Bullets
-            m_Player.Draw(spriteBatch);
+            m_Player.Draw(renderContext);
 
             // Enemies
-            if (m_Enemy != null) m_Enemy.Draw(spriteBatch);
+            if (m_Enemy != null) m_Enemy.Draw(renderContext);
 
             //DebugScreen
             if (m_bShowDebugScreen) DrawDebugScreen(renderContext);
 
-            spriteBatch.End();
             base.Draw2D(renderContext, drawBefore3D);
         }
 
@@ -183,15 +194,17 @@ namespace XNA_ENGINE.Game
         {
             int yPos = 0;
             int offset = 15;
-            spriteBatch.DrawString(m_DebugFont,"DEBUG:", new Vector2(10, yPos += offset), Color.Green);
-            spriteBatch.DrawString(m_DebugFont, "Heroposition: " + m_Player.m_Rectangle.Location.ToString(), new Vector2(15, yPos += offset), Color.Green);
-            spriteBatch.DrawString(m_DebugFont, "CameraPosition: " + renderContext.Camera.WorldPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
-            
-            spriteBatch.DrawString(m_DebugFont, "INSTRUCTIONS:", new Vector2(10, yPos += offset+10), Color.Green);
-            spriteBatch.DrawString(m_DebugFont, "Disbale debug: D", new Vector2(15, yPos += offset), Color.Green);
-            spriteBatch.DrawString(m_DebugFont, "Up and down: Z/S", new Vector2(15, yPos += offset), Color.Green);
-            spriteBatch.DrawString(m_DebugFont, "Shoot: Spacebar", new Vector2(15, yPos += offset), Color.Green);
-            spriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
+
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "DEBUG:", new Vector2(10, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Heroposition: " + m_Player.m_Rectangle.Location.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraWorldPosition: " + renderContext.Camera.WorldPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraLocalPosition: " + renderContext.Camera.LocalPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
+
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "INSTRUCTIONS:", new Vector2(10, yPos += offset + 10), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Disbale debug: D", new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Up and down: Z/S", new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Shoot: Spacebar", new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
             
         }
 

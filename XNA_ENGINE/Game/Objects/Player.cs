@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using XNA_ENGINE.Engine;
+
 namespace IP2_Xna_Template.Objects
 {
     class Player
@@ -114,19 +116,19 @@ namespace IP2_Xna_Template.Objects
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(RenderContext renderContext)
         {
             // This is all called in the MainScene (which is the actual Game)
 
             // The player gets drawn
-            spriteBatch.Draw(m_Texture, m_Rectangle, Color.White);
+            renderContext.SpriteBatch.Draw(m_Texture, m_Rectangle, Color.White);
 
             // A loop which checks for bullets that exist and if so draws them
             for (int t = 0; t < MAX_BULLETS; ++t)
             {
                 if (m_Bullets[t] != null)
                 {
-                    m_Bullets[t].Draw(spriteBatch);
+                    m_Bullets[t].Draw(renderContext);
                 }
             }
         }

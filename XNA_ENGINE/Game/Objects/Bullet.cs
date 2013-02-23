@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using XNA_ENGINE.Engine;
+
 namespace IP2_Xna_Template.Objects
 {
     class Bullet
@@ -35,9 +37,9 @@ namespace IP2_Xna_Template.Objects
             m_RectBullet.X += 10;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(RenderContext renderContext)
         {
-            spriteBatch.Draw(m_TextureBullet, m_RectBullet, Color.White);
+            renderContext.SpriteBatch.Draw(m_TextureBullet, m_RectBullet, Color.White);
         }
 
         // GET FUNCTIONS
