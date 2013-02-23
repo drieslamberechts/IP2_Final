@@ -21,6 +21,7 @@ namespace XNA_ENGINE.Game
     {
         ContentManager Content;
 
+        // PauseScreen
         Boolean m_bCanSwitchScene = true;
 
         // Background
@@ -35,15 +36,14 @@ namespace XNA_ENGINE.Game
         // Music
         Song song;
 
-        //DebugScreen
+        // DebugScreen
         SpriteFont m_DebugFont;
         Boolean m_bShowDebugScreen = true;
 
-        //Old Keyboard State
+        // Old Keyboard State
         KeyboardState m_OldKeyboardState;
 
-        //TestObject
-        private GameSprite m_TestSprite;
+        float m_BackgroundScrollSpeed = 5;
 
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
@@ -74,13 +74,12 @@ namespace XNA_ENGINE.Game
             // Set the old state of the keyboard
             m_OldKeyboardState = Keyboard.GetState(PlayerIndex.One);
 
-            //TestStuff
-            m_TestSprite = new GameSprite("protagtransparant");
-            m_TestSprite.Translate(0, 0);
-            m_TestSprite.Scale(0.2f, 0.2f);
-            AddSceneObject(m_TestSprite);
-
             base.Initialize();
+        }
+
+        public override void LoadContent(ContentManager contentManager)
+        {
+            base.LoadContent(contentManager);
         }
 
         public override void Update(RenderContext renderContext)
@@ -106,16 +105,10 @@ namespace XNA_ENGINE.Game
                 }
             }
 
-           // Vector3 camPos = new Vector3(renderContext.Camera.WorldPosition.X,renderContext.Camera.WorldPosition.Y,renderContext.Camera.WorldPosition.Z);
-           // camPos.X += 5;
-           // renderContext.Camera.Translate(camPos);
-           // renderContext.Camera.LocalPosition.X = 10;// += 10;
-            //renderContext.Camera. = 10;
 
-            renderContext.Camera.Translate(1000, 1000, 1000);
-         
+            m_RectBackground.Offset(new Point(-(int)m_BackgroundScrollSpeed, 0));
 
-           //renderContext.Camera.LocalPosition = new Vector3(1000,1000,1000);
+            if (m_RectBackground.Left <= -1280) m_RectBackground.Offset(new Point(1280, 0));
 
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
@@ -172,6 +165,11 @@ namespace XNA_ENGINE.Game
             // Draw Game Objects
             // Background
             renderContext.SpriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
+
+            Rectangle rectangle;
+            rectangle = m_RectBackground;
+            rectangle.Offset(new Point(1280, 0));
+            renderContext.SpriteBatch.Draw(m_TexBackground, rectangle, Color.White);
 
             // Player & Possible Bullets
             m_Player.Draw(renderContext);
