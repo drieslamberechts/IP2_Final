@@ -20,6 +20,12 @@ namespace XNA_ENGINE.Game
             Content.RootDirectory = "Content";
             Window.Title = "IP2";
 
+            // Dries Test
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.ApplyChanges();
+            // End Dries Test
+
             SceneManager.MainGame = this;
         }
 
