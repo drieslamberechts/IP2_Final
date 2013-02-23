@@ -47,7 +47,7 @@ namespace XNA_ENGINE.Game
 
             // Create Background
             m_TexBackground = Content.Load<Texture2D>("Backgrounds/PrimaryBackground");
-            m_RectBackground = new Rectangle(0, 0, 800, 500);
+            m_RectBackground = new Rectangle(0, 0, 1280, 720);
 
             base.Initialize();
         }

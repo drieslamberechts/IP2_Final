@@ -87,7 +87,7 @@ namespace IP2_Xna_Template.Objects
                 {
                     if (m_Bullets[t] != null)
                     {
-                        if (m_Bullets[t].GetPosition().X >= 800) m_Bullets[t] = null;
+                        if (m_Bullets[t].GetPosition().X >= GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width) m_Bullets[t] = null;
                     }
                 }
 

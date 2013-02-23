@@ -25,7 +25,7 @@ namespace IP2_Xna_Template.Objects
         public void Initialize()
         {
             m_TexEnemy = Content.Load<Texture2D>("ball");
-            m_RectEnemy = new Rectangle(600, 220, 64, 64);
+            m_RectEnemy = new Rectangle(800, 350, 64, 64);
         }
 
         public void Update()
