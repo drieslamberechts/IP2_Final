@@ -32,6 +32,8 @@ namespace XNA_ENGINE.Game
 
         // Music
         Song song;
+        Boolean m_bMusicPlaying = true;
+        Boolean m_bCanChangeMusic = true;
 
         //DebugScreen
         SpriteFont m_DebugFont;
@@ -116,6 +118,23 @@ namespace XNA_ENGINE.Game
 
                 if (gamePadState.Buttons.Start == ButtonState.Released && !m_bCanSwitchScene)
                     m_bCanSwitchScene = true;
+
+                if (gamePadState.Buttons.Y == ButtonState.Pressed && m_bCanChangeMusic == true)
+                {
+                    m_bMusicPlaying = !m_bMusicPlaying;
+                    m_bCanChangeMusic = false;
+                }
+                if (gamePadState.Buttons.Y == ButtonState.Released) m_bCanChangeMusic = true;
+                
+                switch (m_bMusicPlaying)
+                {
+                    case true:
+                        if (MediaPlayer.State == MediaState.Paused) MediaPlayer.Resume();
+                        break;
+                    case false:
+                        MediaPlayer.Pause();
+                        break;
+                }
             }
 
             //Keyboard
@@ -192,6 +211,8 @@ namespace XNA_ENGINE.Game
             spriteBatch.DrawString(m_DebugFont, "Up and down: Z/S", new Vector2(15, yPos += offset), Color.Green);
             spriteBatch.DrawString(m_DebugFont, "Shoot: Spacebar", new Vector2(15, yPos += offset), Color.Green);
             spriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
+
+            spriteBatch.DrawString(m_DebugFont, "DO NOT CONNECT CONTROLLER WHEN USING KEYBOARD!", new Vector2(15, yPos += offset + 10), Color.Green);
             
         }
 
