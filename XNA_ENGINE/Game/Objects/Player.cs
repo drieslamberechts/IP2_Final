@@ -18,7 +18,7 @@ namespace IP2_Xna_Template.Objects
         public Rectangle m_Rectangle;
 
         Bullet[] m_Bullets;
-        static int MAX_BULLETS = 10;
+        static int MAX_BULLETS = 20;
         int currentBullets = 0;
         Boolean m_CanCreateBullet = true;
 
@@ -99,7 +99,7 @@ namespace IP2_Xna_Template.Objects
                 {
                     if (m_Bullets[t] != null)
                     {
-                        if (m_Bullets[t].GetPosition().X >= GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width) m_Bullets[t] = null;
+                        if (m_Bullets[t].GetPosition().X >= 1280) m_Bullets[t] = null;
                     }
                 }
 

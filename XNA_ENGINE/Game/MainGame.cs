@@ -39,6 +39,7 @@ namespace XNA_ENGINE.Game
         {
             // TODO: Add your initialization logic here
             SceneManager.AddGameScene(new GameSceneConcept1(Content));
+            SceneManager.AddGameScene(new PauseScreen(Content));
             SceneManager.AddGameScene(new WoutScene());
             SceneManager.AddGameScene(new DriesScene());
             SceneManager.AddGameScene(new GameSpriteDemo());
