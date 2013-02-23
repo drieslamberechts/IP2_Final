@@ -23,6 +23,7 @@ namespace IP2_Xna_Template.Objects
         static int MAX_BULLETS = 20;
         int currentBullets = 0;
         Boolean m_CanCreateBullet = true;
+        Boolean m_bUsingController = false;
 
         // Methods
         public Player(ContentManager content)
@@ -45,8 +46,11 @@ namespace IP2_Xna_Template.Objects
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
             KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
 
+            if (gamePadState.IsConnected) m_bUsingController = true;
+            else m_bUsingController = false;
+
             //GamePad
-            if (gamePadState.IsConnected)
+            if (m_bUsingController)
             {
                 // UP or DOWN  Movement
                 if (gamePadState.ThumbSticks.Left.Y > 0)
@@ -90,11 +94,24 @@ namespace IP2_Xna_Template.Objects
                     // Because the Loop would otherwise make 10 Bullets at a time you have to set a boolean which enables or
                     // diables the creation of bullets
                     // When the Shoot-Button (A) is released this variable is set to true so another bullet can be created
-                    m_CanCreateBullet = false;
+                      m_CanCreateBullet = false;
                 }
 
-                if (gamePadState.Buttons.A == ButtonState.Released && gamePadState.IsConnected) m_CanCreateBullet = true;
-                if (keyboardState[Keys.Space] == KeyState.Up && !gamePadState.IsConnected) m_CanCreateBullet = true;
+                switch (m_bUsingController)
+                {
+                    case true:
+                        if (gamePadState.Buttons.A == ButtonState.Released) 
+                            m_CanCreateBullet = true;
+                        break;
+
+                    case false:
+                        if (keyboardState[Keys.Space] == KeyState.Up) 
+                            m_CanCreateBullet = true;
+                        break;
+                }
+
+                //if (gamePadState.Buttons.A == ButtonState.Released && gamePadState.IsConnected) m_CanCreateBullet = true;
+                //if (keyboardState[Keys.Space] == KeyState.Up && !gamePadState.IsConnected) m_CanCreateBullet = true;
             
                 // Delete Bullets
                 // Bullets get deleted when they aren't rendered on the screen (if they are to far in the X-position so they are out of the screen)
