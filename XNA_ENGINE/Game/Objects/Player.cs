@@ -91,8 +91,9 @@ namespace IP2_Xna_Template.Objects
                     m_CanCreateBullet = false;
                 }
 
-                if (gamePadState.Buttons.A == ButtonState.Released || keyboardState[Keys.Space] == KeyState.Up) m_CanCreateBullet = true;
-
+                if (gamePadState.Buttons.A == ButtonState.Released && gamePadState.IsConnected) m_CanCreateBullet = true;
+                if (keyboardState[Keys.Space] == KeyState.Up) m_CanCreateBullet = true;
+            
                 // Delete Bullets
                 // Bullets get deleted when they aren't rendered on the screen (if they are to far in the X-position so they are out of the screen)
                 for (int t = 0; t < MAX_BULLETS; ++t)

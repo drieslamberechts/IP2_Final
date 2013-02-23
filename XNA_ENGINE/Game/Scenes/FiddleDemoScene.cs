@@ -16,7 +16,7 @@ namespace XNA_ENGINE.Game.Scenes
     public class FiddleDemoScene:GameScene
     {
         //Create Box
-        private GameSprite m_Box,m_Hero;
+        private GameSprite m_Box;//,m_Hero;
         private GameButton m_TestButton;
        // private GameH
        // private GridBox m_TestGridBox;

@@ -33,10 +33,18 @@ namespace XNA_ENGINE.Game
         // Music
         Song song;
 
+        //DebugScreen
+        SpriteFont m_DebugFont;
+        Boolean m_bShowDebugScreen = true;
+
+
+        KeyboardState m_OldKeyboardState;
+
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
         {
             Content = content;
+            m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
         public override void Initialize()
@@ -56,6 +64,10 @@ namespace XNA_ENGINE.Game
             // Set Up Music
             song = Content.Load<Song>("Music");
             MediaPlayer.Play(song);
+            MediaPlayer.Volume = 0.05f;
+
+            // Set the old state of the keyboard
+            m_OldKeyboardState = Keyboard.GetState(PlayerIndex.One);
 
             base.Initialize();
         }
@@ -87,6 +99,8 @@ namespace XNA_ENGINE.Game
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
             KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
 
+
+            //GamePad
             if (gamePadState.IsConnected)
             {
                 if (gamePadState.Buttons.Start == ButtonState.Pressed && m_bCanSwitchScene)
@@ -99,8 +113,7 @@ namespace XNA_ENGINE.Game
                     m_bCanSwitchScene = true;
             }
 
-
-
+            //Keyboard
             if (keyboardState[Keys.P] == KeyState.Down && m_bCanSwitchScene)
             {
                 SceneManager.SetActiveScene("PauseScreen");
@@ -110,10 +123,26 @@ namespace XNA_ENGINE.Game
             if (keyboardState[Keys.P] == KeyState.Up && !m_bCanSwitchScene)
                 m_bCanSwitchScene = true;
 
+            //Debug
+            if (keyboardState.IsKeyDown(Keys.D))
+            {
+                // If not down last update, key has just been pressed.
+                if (!m_OldKeyboardState.IsKeyDown(Keys.D))
+                {
+                    m_bShowDebugScreen = !m_bShowDebugScreen;
+                }
+            }
+            else if (m_OldKeyboardState.IsKeyDown(Keys.D))
+            {
+                // Key was down last update, but not down now, so
+                // it has just been released.
+            }
+
             // CREATE ENEMIES BASED ON THE POSITION OF THE CAMERA
             // THIS WILL INCREASE PREFORMANCE.
             // ALSO DELETE ENEMIES WHO ARE TO TE LEFT OF THE CAMERA AND AREN'T RENDERED ANYMORE
 
+            m_OldKeyboardState = keyboardState;
             base.Update(renderContext);
         }
 
@@ -131,6 +160,10 @@ namespace XNA_ENGINE.Game
 
             // Enemies
             if (m_Enemy != null) m_Enemy.Draw(spriteBatch);
+
+            //DebugScreen
+            if (m_bShowDebugScreen) DrawDebugScreen();
+
             spriteBatch.End();
 
             base.Draw2D(renderContext, drawBefore3D);
@@ -139,6 +172,19 @@ namespace XNA_ENGINE.Game
         public override void Draw3D(RenderContext renderContext)
         {
             base.Draw3D(renderContext);
+        }
+
+        private void DrawDebugScreen()
+        {
+            int yPos = 0;
+            int offset = 15;
+            spriteBatch.DrawString(m_DebugFont,"DEBUG:", new Vector2(10, yPos += offset), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "Heroposition: (" + m_Player.m_Rectangle.X.ToString() + ", " + m_Player.m_Rectangle.Y.ToString() + ")", new Vector2(15, yPos += offset), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "INSTRUCTIONS:", new Vector2(10, yPos += offset+10), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "Disbale debug: D", new Vector2(15, yPos += offset), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "Up and down: Z/S", new Vector2(15, yPos += offset), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "Shoot: Spacebar", new Vector2(15, yPos += offset), Color.Green);
+            spriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
         }
 
         //...

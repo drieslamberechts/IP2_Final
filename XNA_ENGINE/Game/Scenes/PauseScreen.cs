@@ -9,6 +9,7 @@ using System.Text;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
 
+
 namespace XNA_ENGINE.Game
 {
     class PauseScreen : GameScene
@@ -23,13 +24,16 @@ namespace XNA_ENGINE.Game
             : base("PauseScreen")
         {
             Content = content;
-            spritefont = Content.Load<SpriteFont>("menufont");
+            spritefont = Content.Load<SpriteFont>("Fonts/menufont");
         }
 
         public override void Update(RenderContext renderContext)
         {
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+            KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
+
+            //GamePad
             if (gamePadState.IsConnected)
             {
                 if (gamePadState.Buttons.Start == ButtonState.Pressed && m_bCanSwitchScene)
@@ -41,6 +45,16 @@ namespace XNA_ENGINE.Game
                 if (gamePadState.Buttons.Start == ButtonState.Released && !m_bCanSwitchScene)
                     m_bCanSwitchScene = true;
             }
+
+            //Keyboard
+            if (keyboardState[Keys.P] == KeyState.Down && m_bCanSwitchScene)
+            {
+                SceneManager.SetActiveScene("GameSceneConcept1");
+                m_bCanSwitchScene = false;
+            }
+
+            if (keyboardState[Keys.P] == KeyState.Up && !m_bCanSwitchScene)
+                m_bCanSwitchScene = true;
 
             base.Update(renderContext);
         }
