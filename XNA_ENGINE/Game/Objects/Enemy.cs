@@ -16,20 +16,26 @@ namespace IP2_Xna_Template.Objects
         Texture2D m_TexEnemy;
         Rectangle m_RectEnemy;
 
+        Vector2 m_MovingPosition = new Vector2(0, 0);
+
         // Methods
-        public Enemy(ContentManager content)
+        public Enemy(ContentManager content, Vector2 startPosition)
         {
             Content = content;
+            m_RectEnemy = new Rectangle((int)startPosition.X, (int)startPosition.Y, 100, 100);
         }
 
         public void Initialize()
         {
-            m_TexEnemy = Content.Load<Texture2D>("ball");
-            m_RectEnemy = new Rectangle(800, 350, 64, 64);
+            m_TexEnemy = Content.Load<Texture2D>("enemy");
         }
 
         public void Update()
-        { }
+        {
+            // Waving Movement
+            m_RectEnemy.Y += (int)m_MovingPosition.Y;
+        
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

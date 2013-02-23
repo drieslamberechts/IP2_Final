@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Engine;
 using IP2_Xna_Template.Objects;
+using Microsoft.Xna.Framework.Media;
 
 namespace XNA_ENGINE.Game
 {
@@ -29,6 +30,9 @@ namespace XNA_ENGINE.Game
         Enemy m_Enemy;
         Bullet[] m_Bullets;
 
+        // Music
+        Song song;
+
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
         {
@@ -42,12 +46,16 @@ namespace XNA_ENGINE.Game
             m_Player.Initialize();
 
             // Create an Enemy
-            m_Enemy = new Enemy(Content);
+            m_Enemy = new Enemy(Content, new Vector2(800, 450));
             m_Enemy.Initialize();
 
             // Create Background
             m_TexBackground = Content.Load<Texture2D>("Backgrounds/PrimaryBackground");
             m_RectBackground = new Rectangle(0, 0, 1280, 720);
+
+            // Set Up Music
+            song = Content.Load<Song>("Music");
+            MediaPlayer.Play(song);
 
             base.Initialize();
         }

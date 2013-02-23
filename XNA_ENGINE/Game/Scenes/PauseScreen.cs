@@ -1,6 +1,4 @@
-﻿using IP2_Xna_Engine;
-using IP2_Xna_Engine.Scenegraph;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XNA_ENGINE.Engine;
+using XNA_ENGINE.Engine.Scenegraph;
 
-namespace IP2_Xna_Template.Scenes
+namespace XNA_ENGINE.Game
 {
     class PauseScreen : GameScene
     {
@@ -34,7 +34,7 @@ namespace IP2_Xna_Template.Scenes
             {
                 if (gamePadState.Buttons.Start == ButtonState.Pressed && m_bCanSwitchScene)
                 {
-                    SceneManager.SetActiveScene("MainScene");
+                    SceneManager.SetActiveScene("GameSceneConcept1");
                     m_bCanSwitchScene = false;
                 }
 
