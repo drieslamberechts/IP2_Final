@@ -96,8 +96,10 @@ namespace XNA_ENGINE.Game
             }
 
            // Vector3 camPos = new Vector3(renderContext.Camera.WorldPosition.X,renderContext.Camera.WorldPosition.Y,renderContext.Camera.WorldPosition.Z);
-          //  camPos.X += 5;
-          //  renderContext.Camera.Translate(camPos);
+           // camPos.X += 5;
+           // renderContext.Camera.Translate(camPos);
+
+           // renderContext.Camera.LocalPosition.X = 10;// += 10;
 
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
