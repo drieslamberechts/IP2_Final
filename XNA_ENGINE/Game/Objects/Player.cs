@@ -23,7 +23,6 @@ namespace IP2_Xna_Template.Objects
         static int MAX_BULLETS = 20;
         int currentBullets = 0;
         Boolean m_CanCreateBullet = true;
-        Boolean m_bUsingController = false;
 
         // Methods
         public Player(ContentManager content)
@@ -43,85 +42,15 @@ namespace IP2_Xna_Template.Objects
 
         public void Update()
         {
-            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-            KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
-
-            if (gamePadState.IsConnected) m_bUsingController = true;
-            else m_bUsingController = false;
-
-            //GamePad
-            if (m_bUsingController)
+            // Delete Bullets
+            // Bullets get deleted when they aren't rendered on the screen (if they are to far in the X-position so they are out of the screen)
+            for (int t = 0; t < MAX_BULLETS; ++t)
             {
-                // UP or DOWN  Movement
-                if (gamePadState.ThumbSticks.Left.Y > 0)
-                    m_Rectangle.Y -= 3;
-                if (gamePadState.ThumbSticks.Left.Y < 0)
-                    m_Rectangle.Y += 3;
+                if (m_Bullets[t] != null)
+                {
+                    if (m_Bullets[t].GetPosition().X >= 1280) m_Bullets[t] = null;
+                }
             }
-
-            //Keyboard
-            if (keyboardState[Keys.Z] == KeyState.Down)
-                m_Rectangle.Y -= 3;
-            if (keyboardState[Keys.S] == KeyState.Down)
-                m_Rectangle.Y += 3;
-
-
-            //------------------------------------------------------------------
-            // BULLETS
-            //------------------------------------------------------------------
-                // Create A Bullet
-                if (gamePadState.Buttons.A == ButtonState.Pressed || keyboardState[Keys.Space] == KeyState.Down)
-                {
-                    if (m_CanCreateBullet)
-                    {
-                        if (currentBullets < MAX_BULLETS)
-                        {
-                            // Check for the first place that is empty in the bullet array (maximum of 10 bullets in the scene)
-                            for (int t = 0; t < MAX_BULLETS; ++t)
-                            {
-                                if (m_Bullets[t] == null)
-                                {
-                                    // Create the bullet and go out the for loop
-                                    m_Bullets[t] = new Bullet(Content);
-                                    m_Bullets[t].m_Position = new Vector2(m_Rectangle.X + 110, m_Rectangle.Y + 35);
-                                    m_Bullets[t].InitializePos();
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    // Because the Loop would otherwise make 10 Bullets at a time you have to set a boolean which enables or
-                    // diables the creation of bullets
-                    // When the Shoot-Button (A) is released this variable is set to true so another bullet can be created
-                      m_CanCreateBullet = false;
-                }
-
-                switch (m_bUsingController)
-                {
-                    case true:
-                        if (gamePadState.Buttons.A == ButtonState.Released) 
-                            m_CanCreateBullet = true;
-                        break;
-
-                    case false:
-                        if (keyboardState[Keys.Space] == KeyState.Up) 
-                            m_CanCreateBullet = true;
-                        break;
-                }
-
-                //if (gamePadState.Buttons.A == ButtonState.Released && gamePadState.IsConnected) m_CanCreateBullet = true;
-                //if (keyboardState[Keys.Space] == KeyState.Up && !gamePadState.IsConnected) m_CanCreateBullet = true;
-            
-                // Delete Bullets
-                // Bullets get deleted when they aren't rendered on the screen (if they are to far in the X-position so they are out of the screen)
-                for (int t = 0; t < MAX_BULLETS; ++t)
-                {
-                    if (m_Bullets[t] != null)
-                    {
-                        if (m_Bullets[t].GetPosition().X >= 1280) m_Bullets[t] = null;
-                    }
-                }
 
             // UPDATE POSITION BULLETS
             for (int t = 0; t < MAX_BULLETS; ++t)
@@ -150,10 +79,40 @@ namespace IP2_Xna_Template.Objects
             }
         }
 
+        public void FireBullet()
+        {
+            if (m_CanCreateBullet)
+            {
+                if (currentBullets < MAX_BULLETS)
+                {
+                    // Check for the first place that is empty in the bullet array (maximum of 10 bullets in the scene)
+                    for (int t = 0; t < MAX_BULLETS; ++t)
+                    {
+                        if (m_Bullets[t] == null)
+                        {
+                            // Create the bullet and go out the for loop
+                            m_Bullets[t] = new Bullet(Content);
+                            m_Bullets[t].m_Position = new Vector2(m_Rectangle.X + 110, m_Rectangle.Y + 35);
+                            m_Bullets[t].InitializePos();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Because the Loop would otherwise make 10 Bullets at a time you have to set a boolean which enables or
+            // diables the creation of bullets
+            // When the Shoot-Button (A) is released this variable is set to true so another bullet can be created
+            m_CanCreateBullet = false;
+        }
+
         // GET FUNCTIONS
         public Bullet[] GetBullets() { return m_Bullets; }
-
         public Rectangle GetPosition() { return m_Rectangle; }
+
+        // SET FUNCTIONS
+        public void SetPosition(int posX, int posY) { m_Rectangle.X = posX; m_Rectangle.Y = posY; }
+        public void SetCanCreateBullet(bool value) { m_CanCreateBullet = value; }
 
     }
 }

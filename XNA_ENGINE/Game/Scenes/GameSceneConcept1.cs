@@ -60,6 +60,9 @@ namespace XNA_ENGINE.Game
         private double m_TimeIntervalBeat = 0;
         private double m_TimeBetweenEachSpawnBeat = 0.6;
 
+        // Controller bool
+        Boolean m_bUsingController = false;
+
 
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
@@ -99,6 +102,9 @@ namespace XNA_ENGINE.Game
             // Update The Game Objects
             m_Player.Update();
 
+            //Handle all player input
+            HandleInput(renderContext);
+
             // Update the spawntiming
             m_TimeIntervalTarget += (double)renderContext.GameTime.ElapsedGameTime.Milliseconds/1000;
             if (m_TimeIntervalTarget >= m_TimeBetweenEachSpawnTarget)
@@ -125,13 +131,50 @@ namespace XNA_ENGINE.Game
             HandleBeats(renderContext);
 
             //Scroll background
-            m_RectBackground.Offset(new Point(-(int)m_BackgroundScrollSpeed, 0));
-            if (m_RectBackground.Left <= -1280) m_RectBackground.Offset(new Point(1280, 0));
+            m_RectBackground.Offset(-(int)m_BackgroundScrollSpeed, 0);
+            if (m_RectBackground.Left <= -1280) m_RectBackground.Offset(1280, 0);
+
+            
+            base.Update(renderContext);
+        }
+
+        public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
+        {
+            // Draw Game Objects
+            // Background
+            renderContext.SpriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
+
+            Rectangle rectangle;
+            rectangle = m_RectBackground;
+            rectangle.Offset(1280, 0);
+            renderContext.SpriteBatch.Draw(m_TexBackground, rectangle, Color.White);
+
+            // Player & Possible Bullets
+            m_Player.Draw(renderContext);
 
 
+            // Targets
+            DrawTargets(renderContext);
+
+            // Beats
+            DrawBeats(renderContext);
+
+            // DebugScreen
+            if (m_bShowDebugScreen) DrawDebugScreen(renderContext);
+
+            base.Draw2D(renderContext, drawBefore3D);
+        }
+
+        public override void Draw3D(RenderContext renderContext)
+        {
+            base.Draw3D(renderContext);
+        }
+
+        private void HandleInput(RenderContext renderContext)
+        {
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
             GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-            KeyboardState keyboardState = Keyboard.GetState(PlayerIndex.One);
+            KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
 
             //GamePad
             if (gamePadState.IsConnected)
@@ -151,7 +194,7 @@ namespace XNA_ENGINE.Game
                     m_bCanChangeMusic = false;
                 }
                 if (gamePadState.Buttons.Y == ButtonState.Released) m_bCanChangeMusic = true;
-                
+
                 switch (m_bMusicPlaying)
                 {
                     case true:
@@ -188,44 +231,49 @@ namespace XNA_ENGINE.Game
                 // it has just been released.
             }
 
-            // CREATE ENEMIES BASED ON THE POSITION OF THE CAMERA
-            // THIS WILL INCREASE PREFORMANCE.
-            // ALSO DELETE ENEMIES WHO ARE TO TE LEFT OF THE CAMERA AND AREN'T RENDERED ANYMORE
+
+            /*-----------------------------------------*/
+            /*---------------PLAYER--------------------*/
+            /*-----------------------------------------*/
+            if (gamePadState.IsConnected) m_bUsingController = true;
+            else m_bUsingController = false;
+
+            Rectangle playerPos = m_Player.GetPosition();
+
+            //GamePad
+            if (m_bUsingController)
+            {
+                // UP or DOWN  Movement
+                if (gamePadState.ThumbSticks.Left.Y > 0)
+                    m_Player.SetPosition(playerPos.X, playerPos.Y - 3);
+                if (gamePadState.ThumbSticks.Left.Y < 0)
+                    m_Player.SetPosition(playerPos.X, playerPos.Y +3);
+            }
+
+            //Keyboard
+            if (keyboardState[Keys.Z] == KeyState.Down)
+                m_Player.SetPosition(playerPos.X, playerPos.Y - 3);
+            if (keyboardState[Keys.S] == KeyState.Down)
+                m_Player.SetPosition(playerPos.X, playerPos.Y + 3);
+
+            // Fire a bullet
+            if (gamePadState.Buttons.A == ButtonState.Pressed || keyboardState[Keys.Space] == KeyState.Down)
+                m_Player.FireBullet();
+
+            switch (m_bUsingController)
+            {
+                case true:
+                    if (gamePadState.Buttons.A == ButtonState.Released)
+                        m_Player.SetCanCreateBullet(true);
+                    break;
+
+                case false:
+                    if (keyboardState[Keys.Space] == KeyState.Up)
+                        m_Player.SetCanCreateBullet(true);
+                    break;
+            }
 
             m_OldKeyboardState = keyboardState;
-            base.Update(renderContext);
-        }
-
-        public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
-        {
-            // Draw Game Objects
-            // Background
-            renderContext.SpriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
-
-            Rectangle rectangle;
-            rectangle = m_RectBackground;
-            rectangle.Offset(new Point(1280, 0));
-            renderContext.SpriteBatch.Draw(m_TexBackground, rectangle, Color.White);
-
-            // Player & Possible Bullets
-            m_Player.Draw(renderContext);
-
-
-            // Targets
-            DrawTargets(renderContext);
-
-            // Beats
-            DrawBeats(renderContext);
-
-            // DebugScreen
-            if (m_bShowDebugScreen) DrawDebugScreen(renderContext);
-
-            base.Draw2D(renderContext, drawBefore3D);
-        }
-
-        public override void Draw3D(RenderContext renderContext)
-        {
-            base.Draw3D(renderContext);
         }
 
         private void DrawDebugScreen(RenderContext renderContext)
@@ -234,6 +282,7 @@ namespace XNA_ENGINE.Game
             int offset = 15;
 
             renderContext.SpriteBatch.DrawString(m_DebugFont, "DEBUG:", new Vector2(10, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Framerate: " + 1000.0/(double)renderContext.GameTime.ElapsedGameTime.Milliseconds, new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "HeroPosition: " + m_Player.m_Rectangle.Location.ToString(), new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraWorldPosition: " + renderContext.Camera.WorldPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraLocalPosition: " + renderContext.Camera.LocalPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
@@ -248,6 +297,7 @@ namespace XNA_ENGINE.Game
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
         }
 
+        //TARGETS functions
         private void HandleTargets(RenderContext renderContext)
         {
             m_Bullets = m_Player.GetBullets();
@@ -286,10 +336,7 @@ namespace XNA_ENGINE.Game
             {
                 m_TargetList.Remove(target);
             }
-
-
         }
-
         private void DrawTargets(RenderContext renderContext)
         {
             foreach (Target target in m_TargetList)
@@ -298,6 +345,7 @@ namespace XNA_ENGINE.Game
             }
         }
 
+        //BEATS functions
         private void HandleBeats(RenderContext renderContext)
         {
             m_Bullets = m_Player.GetBullets();
@@ -331,7 +379,6 @@ namespace XNA_ENGINE.Game
                 m_BeatList.Remove(beats);
             }
         }
-
         private void DrawBeats(RenderContext renderContext)
         {
             foreach (MusicBeat beat in m_BeatList)

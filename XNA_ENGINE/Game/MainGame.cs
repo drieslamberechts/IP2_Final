@@ -58,8 +58,7 @@ namespace XNA_ENGINE.Game
             //SceneManager.SetActiveScene("GoingWildDemo");
             //SceneManager.SetActiveScene("GameSpriteDemo");
             
-            
-
+           
             SceneManager.Initialize();
 
             IsMouseVisible = true;
