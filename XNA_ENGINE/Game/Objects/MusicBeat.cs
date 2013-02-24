@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using XNA_ENGINE.Engine;
+
 namespace XNA_ENGINE.Game.Objects
 {
     class MusicBeat
@@ -35,9 +37,15 @@ namespace XNA_ENGINE.Game.Objects
  
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(RenderContext renderContext)
         {
-
+            renderContext.SpriteBatch.Draw(m_TexBeat, m_RectBeat, Color.White);
         }
+
+        // GET FUNTIONS
+        public Rectangle GetPosition() { return m_RectBeat; }
+
+        // SET FUNTIONS
+        public void OffsetPosition(int xPos, int yPos) { m_RectBeat.Offset(xPos, yPos); }
     }
 }

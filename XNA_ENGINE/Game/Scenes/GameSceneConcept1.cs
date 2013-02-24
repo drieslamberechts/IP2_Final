@@ -105,8 +105,6 @@ namespace XNA_ENGINE.Game
             //Scroll and destroy targets
             HandleTargets(renderContext);
 
-
-
             //Scroll background
             m_RectBackground.Offset(new Point(-(int)m_BackgroundScrollSpeed, 0));
             if (m_RectBackground.Left <= -1280) m_RectBackground.Offset(new Point(1280, 0));
@@ -234,6 +232,8 @@ namespace XNA_ENGINE.Game
 
             foreach (Target target in m_TargetList)
             {
+                target.Update(renderContext);
+
                 //Move the enemies
                 target.OffsetPosition(-(int)m_BackgroundScrollSpeed, 0);
 
@@ -262,6 +262,8 @@ namespace XNA_ENGINE.Game
             {
                 m_TargetList.Remove(target);
             }
+
+
         }
 
         private void DrawTargets(RenderContext renderContext)
