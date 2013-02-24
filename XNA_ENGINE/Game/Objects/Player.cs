@@ -153,5 +153,7 @@ namespace IP2_Xna_Template.Objects
         // GET FUNCTIONS
         public Bullet[] GetBullets() { return m_Bullets; }
 
+        public Rectangle GetPosition() { return m_Rectangle; }
+
     }
 }

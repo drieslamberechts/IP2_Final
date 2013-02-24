@@ -12,6 +12,8 @@ using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Engine.Objects;
 
+using XNA_ENGINE.Game.Objects;
+
 using IP2_Xna_Template.Objects;
 using Microsoft.Xna.Framework.Media;
 
@@ -33,6 +35,7 @@ namespace XNA_ENGINE.Game
         Bullet[] m_Bullets;
 
         private List<Target> m_TargetList = new List<Target>();
+        private List<MusicBeat> m_BeatList = new List<MusicBeat>();
 
         // Music
         Song song;
@@ -49,9 +52,14 @@ namespace XNA_ENGINE.Game
         // Scroll speed of level
         float m_BackgroundScrollSpeed = 5;
 
-        // Time interval for spawning enemies
-        private double m_TimeIntervalEnemies = 0;
-        private double m_TimeBetweenEachSpawn = 0.8;
+        // Time interval for spawning targets
+        private double m_TimeIntervalTarget = 0;
+        private double m_TimeBetweenEachSpawnTarget = 0.8;
+
+        // Time interval for spawning beats
+        private double m_TimeIntervalBeat = 0;
+        private double m_TimeBetweenEachSpawnBeat = 0.6;
+
 
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
@@ -92,18 +100,29 @@ namespace XNA_ENGINE.Game
             m_Player.Update();
 
             // Update the spawntiming
-            m_TimeIntervalEnemies += (double)renderContext.GameTime.ElapsedGameTime.Milliseconds/1000;
-            if (m_TimeIntervalEnemies >= m_TimeBetweenEachSpawn)
+            m_TimeIntervalTarget += (double)renderContext.GameTime.ElapsedGameTime.Milliseconds/1000;
+            if (m_TimeIntervalTarget >= m_TimeBetweenEachSpawnTarget)
             {
                 Random random = new Random();
                 int randomNumber = random.Next(50, 500);
 
-                m_TimeIntervalEnemies = 0;
+                m_TimeIntervalTarget = 0;
+
                 m_TargetList.Add(new Target(Content, new Vector2(1400, randomNumber)));
+            }
+
+            m_TimeIntervalBeat += (double)renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000;
+            if (m_TimeIntervalBeat >= m_TimeBetweenEachSpawnBeat)
+            {
+                m_TimeIntervalBeat = 0;
+                m_BeatList.Add(new MusicBeat(Content, new Vector2(1300, 500)));
             }
 
             //Scroll and destroy targets
             HandleTargets(renderContext);
+
+            //Scroll and destroy beats
+            HandleBeats(renderContext);
 
             //Scroll background
             m_RectBackground.Offset(new Point(-(int)m_BackgroundScrollSpeed, 0));
@@ -191,10 +210,14 @@ namespace XNA_ENGINE.Game
             // Player & Possible Bullets
             m_Player.Draw(renderContext);
 
+
             // Targets
             DrawTargets(renderContext);
 
-            //DebugScreen
+            // Beats
+            DrawBeats(renderContext);
+
+            // DebugScreen
             if (m_bShowDebugScreen) DrawDebugScreen(renderContext);
 
             base.Draw2D(renderContext, drawBefore3D);
@@ -214,8 +237,9 @@ namespace XNA_ENGINE.Game
             renderContext.SpriteBatch.DrawString(m_DebugFont, "HeroPosition: " + m_Player.m_Rectangle.Location.ToString(), new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraWorldPosition: " + renderContext.Camera.WorldPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "CameraLocalPosition: " + renderContext.Camera.LocalPosition.ToString(), new Vector2(15, yPos += offset), Color.Green);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Time Interval: " + m_TimeIntervalEnemies.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Time Interval: " + m_TimeIntervalTarget.ToString(), new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "TargetCount: " + m_TargetList.Count.ToString(), new Vector2(15, yPos += offset), Color.Green);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "BeatCount: " + m_BeatList.Count.ToString(), new Vector2(15, yPos += offset), Color.Green);
             
             renderContext.SpriteBatch.DrawString(m_DebugFont, "INSTRUCTIONS:", new Vector2(10, yPos += offset + 10), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Disbale debug: D", new Vector2(15, yPos += offset), Color.Green);
@@ -271,6 +295,48 @@ namespace XNA_ENGINE.Game
             foreach (Target target in m_TargetList)
             {
                 if (target != null) target.Draw(renderContext);
+            }
+        }
+
+        private void HandleBeats(RenderContext renderContext)
+        {
+            m_Bullets = m_Player.GetBullets();
+
+            List<MusicBeat> beatsToDelete = new List<MusicBeat>();
+
+            foreach (MusicBeat beat in m_BeatList)
+            {
+                beat.Update(renderContext);
+
+                //Move the enemies
+                beat.OffsetPosition(-(int)m_BackgroundScrollSpeed, 0);
+
+                //Delete the enemy if it reached the end of the screen
+                if (beat.GetPosition().X < -200) beatsToDelete.Add(beat);
+
+                //Go over all bullets and check collision with the enemy
+   
+                // Check intersection based on rectangles
+                if (m_Player.GetPosition().Intersects(beat.GetPosition()))
+                {
+                    // Delete both Objects if they hit
+                    // Add to list the objects that need to be deleted
+                    beatsToDelete.Add(beat);
+                }
+            }
+
+            //Delete the enemies
+            foreach (MusicBeat beats in beatsToDelete)
+            {
+                m_BeatList.Remove(beats);
+            }
+        }
+
+        private void DrawBeats(RenderContext renderContext)
+        {
+            foreach (MusicBeat beat in m_BeatList)
+            {
+                if (beat != null) beat.Draw(renderContext);
             }
         }
         //...

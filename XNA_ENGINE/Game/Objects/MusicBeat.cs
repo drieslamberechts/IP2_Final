@@ -8,7 +8,7 @@ using System.Text;
 
 using XNA_ENGINE.Engine;
 
-namespace XNA_ENGINE.Game.Objects
+namespace IP2_Xna_Template.Objects
 {
     class MusicBeat
     {
@@ -24,7 +24,7 @@ namespace XNA_ENGINE.Game.Objects
             Content = content;
 
             m_TexBeat = Content.Load<Texture2D>("buttonBeat");
-            m_RectBeat = new Rectangle((int)position.X, (int)position.Y, (int)m_TexBeat.Width, (int)m_TexBeat.Height);
+            m_RectBeat = new Rectangle((int)position.X, (int)position.Y, (int)m_TexBeat.Width/5, (int)m_TexBeat.Height/5);
         }
 
         public void Initialize()
@@ -32,7 +32,7 @@ namespace XNA_ENGINE.Game.Objects
             
         }
 
-        public void Update()
+        public void Update(RenderContext renderContext)
         {
  
         }
