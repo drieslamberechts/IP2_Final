@@ -24,12 +24,38 @@ namespace XNA_ENGINE.Game
 {
     public class GameSceneConcept2 : GameScene
     {
+        enum PlayerInput
+        {
+            GoUp,
+            GoDown,
+            Shoot
+        }
+
         private ContentManager Content;
+        private InputManager m_InputManager;
 
         public GameSceneConcept2(ContentManager content)
             : base("GameSceneConcept2")
         {
             Content = content;
+            m_InputManager = new InputManager();
+
+            InputAction GoUp = new InputAction((int)PlayerInput.GoUp, TriggerState.Down);
+            GoUp.KeyButton = Keys.Z;
+            GoUp.GamePadButton = Buttons.LeftThumbstickUp;
+
+            InputAction GoDown = new InputAction((int)PlayerInput.GoDown, TriggerState.Down);
+            GoDown.KeyButton = Keys.S;
+            GoDown.GamePadButton = Buttons.LeftThumbstickDown;
+
+            InputAction Shoot = new InputAction((int)PlayerInput.Shoot, TriggerState.Pressed);
+            Shoot.KeyButton = Keys.Space;
+            Shoot.GamePadButton = Buttons.RightTrigger;
+
+            m_InputManager.MapAction(GoUp);
+            m_InputManager.MapAction(GoDown);
+            m_InputManager.MapAction(Shoot);
+
         }
 
         public override void Initialize()
@@ -46,16 +72,32 @@ namespace XNA_ENGINE.Game
 
         public override void LoadContent(ContentManager contentManager)
         {
+            
             base.LoadContent(contentManager);
         }
 
         public override void Update(RenderContext renderContext)
         {
+            m_InputManager.Update();
+
+            if (m_InputManager.GetAction((int)PlayerInput.GoUp).IsTriggered)
+                System.Console.WriteLine("Up");
+
+            if (m_InputManager.GetAction((int)PlayerInput.GoDown).IsTriggered)
+                System.Console.WriteLine("Down");
+
+            if (m_InputManager.GetAction((int)PlayerInput.Shoot).IsTriggered)
+                System.Console.WriteLine("Shoot");
+
             base.Update(renderContext);
         }
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
+
+            //MouseStateEx.IsButtonDown(MouseButtons.LeftButton)
+          //  Debug2D.DrawRectangle(new Rectangle(20, 20, 100, 100), Color.Black);
+
             base.Draw2D(renderContext, drawBefore3D);
         }
 
