@@ -18,6 +18,7 @@ using XNA_ENGINE.Game.Objects;
 
 using IP2_Xna_Template.Objects;
 using Microsoft.Xna.Framework.Media;
+using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game
 {
@@ -59,7 +60,10 @@ namespace XNA_ENGINE.Game
 
         public override void Initialize()
         {
-            Debug2D.LoadContent(Content);
+            // Add Interaction Scene for later use
+            var scene = new InteractionScene(Content);
+            SceneManager.AddGameScene(scene);
+
             base.Initialize();
         }
 

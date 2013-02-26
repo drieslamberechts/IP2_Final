@@ -46,7 +46,7 @@ namespace XNA_ENGINE.Game
             SceneManager.AddGameScene(new WoutScene());
 
 
-            SceneManager.SetActiveScene("GameSceneConcept1");
+            SceneManager.SetActiveScene("GameSceneConcept2");
             //SceneManager.SetActiveScene("GameSceneConcept2");
             //SceneManager.SetActiveScene("WoutScene");
             //SceneManager.SetActiveScene("DriesScene");
@@ -110,7 +110,7 @@ namespace XNA_ENGINE.Game
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D3))
                 SceneManager.SetActiveScene("WoutScene");
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D4))
-                SceneManager.SetActiveScene("DriesScene");
+                SceneManager.SetActiveScene("InteractionScene");
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D5))
                 SceneManager.SetActiveScene("FiddleDemoScene");
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D6))
