@@ -100,6 +100,7 @@
     <Compile Include="Engine\Scenegraph\GameObject3D.cs" />
     <Compile Include="Engine\Scenegraph\GameScene.cs" />
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
+    <Compile Include="Game\Scenes\GameSceneConcept2.cs" />
     <Compile Include="Game\MainGame.cs" />
     <Compile Include="Game\Objects\Bullet.cs" />
     <Compile Include="Game\Objects\Target.cs" />
