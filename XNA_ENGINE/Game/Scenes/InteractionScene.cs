@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace XNA_ENGINE.Game.Scenes
         public InteractionScene()
             :base("InteractionScene")
         {
-            Content = Content;
+            Content = content;
         }
     }
 }
