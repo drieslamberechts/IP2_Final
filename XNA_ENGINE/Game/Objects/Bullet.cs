@@ -20,6 +20,8 @@ namespace IP2_Xna_Template.Objects
 
         public Vector2 m_Position;
 
+        Boolean m_bHomingMissile = false;
+
         // Methods
         public Bullet(ContentManager content)
         {
@@ -32,9 +34,17 @@ namespace IP2_Xna_Template.Objects
             m_RectBullet = new Rectangle((int)m_Position.X, (int)m_Position.Y, 30, 7);
         }
 
-        public void Update()
+        public void Update(int posX, int posY)
         {
-            m_RectBullet.X += 10;
+            m_RectBullet.X += posX;
+            m_RectBullet.Y += posY;
+            
+            if (m_bHomingMissile)
+            {
+                if (m_RectBullet.X <= posX) m_RectBullet.X += 10;
+                if (m_RectBullet.Y >= posY) m_RectBullet.Y -= 10;
+                else if (m_RectBullet.Y <= posY) m_RectBullet.Y += 10;
+            }
         }
 
         public void Draw(RenderContext renderContext)
@@ -45,5 +55,10 @@ namespace IP2_Xna_Template.Objects
         // GET FUNCTIONS
         // Returns Rectangle (Check Position or Collisions)
         public Rectangle GetPosition() { return m_RectBullet; }
+        public bool IsHomingMissile() { return m_bHomingMissile; }
+
+        // SET FUNCIONS
+        // Sets the bullet to a homing missile
+        public void SetHomingMissile() { m_bHomingMissile = true; }
     }
 }

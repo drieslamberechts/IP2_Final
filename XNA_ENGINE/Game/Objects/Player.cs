@@ -23,6 +23,9 @@ namespace IP2_Xna_Template.Objects
         static int MAX_BULLETS = 20;
         int currentBullets = 0;
         Boolean m_CanCreateBullet = true;
+        int m_PositionLastBullet;
+
+        Rectangle m_PositionTarget;
 
         // Methods
         public Player(ContentManager content)
@@ -55,9 +58,11 @@ namespace IP2_Xna_Template.Objects
             // UPDATE POSITION BULLETS
             for (int t = 0; t < MAX_BULLETS; ++t)
             {
+                // Check if the bullet is a Homing Missile
                 if (m_Bullets[t] != null)
                 {
-                    m_Bullets[t].Update();
+                    if (!m_Bullets[t].IsHomingMissile()) m_Bullets[t].Update(10, 0);
+                    else m_Bullets[t].Update(m_PositionTarget.X, m_PositionTarget.Y);
                 }
             }
         }
@@ -94,6 +99,7 @@ namespace IP2_Xna_Template.Objects
                             m_Bullets[t] = new Bullet(Content);
                             m_Bullets[t].m_Position = new Vector2(m_Rectangle.X + 110, m_Rectangle.Y + 35);
                             m_Bullets[t].InitializePos();
+                            m_PositionLastBullet = t;
                             break;
                         }
                     }
@@ -109,10 +115,12 @@ namespace IP2_Xna_Template.Objects
         // GET FUNCTIONS
         public Bullet[] GetBullets() { return m_Bullets; }
         public Rectangle GetPosition() { return m_Rectangle; }
+        public int GetLastBullet() { return m_PositionLastBullet; }
 
         // SET FUNCTIONS
         public void SetPosition(int posX, int posY) { m_Rectangle.X = posX; m_Rectangle.Y = posY; }
         public void SetCanCreateBullet(bool value) { m_CanCreateBullet = value; }
+        public void SetPositionTarget(int posX, int posY) { m_PositionTarget.X = posX; m_PositionTarget.Y = posY; }
 
     }
 }

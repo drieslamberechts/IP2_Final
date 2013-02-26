@@ -30,6 +30,9 @@ namespace XNA_ENGINE.Game
         Texture2D m_TexBackground;
         Rectangle m_RectBackground;
 
+        // Controls
+        GamePadState gamePadState;
+
         // Game Objects
         Player m_Player;
         Bullet[] m_Bullets;
@@ -99,8 +102,9 @@ namespace XNA_ENGINE.Game
 
         public override void Update(RenderContext renderContext)
         {
-            // Update The Game Objects
+            // Update The Game Objects from Player
             m_Player.Update();
+            SetPositionClosestTarget();
 
             //Handle all player input
             HandleInput(renderContext);
@@ -172,8 +176,9 @@ namespace XNA_ENGINE.Game
 
         private void HandleInput(RenderContext renderContext)
         {
+            gamePadState = GamePad.GetState(PlayerIndex.One);
+
             // CHECK FOR EXTRA PRESSED BUTTONS (PAUSE BUTTON, ...)
-            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
 
             //GamePad
@@ -315,7 +320,7 @@ namespace XNA_ENGINE.Game
                 if (target.GetPosition().X < -200) targetsToDelete.Add(target);
 
                 //Go over all bullets and check collision with the enemy
-                for (int t = 0; t < 10; ++t)
+                for (int t = 0; t < 20; ++t)
                 {
                     if (m_Bullets[t] != null && target != null)
                     {
@@ -324,7 +329,7 @@ namespace XNA_ENGINE.Game
                         {
                             // Delete both Objects if they hit
                             // Add to list the objects that need to be deleted
-                            targetsToDelete.Add(target);
+                              targetsToDelete.Add(target);
                             m_Bullets[t] = null;
                         }
                     }
@@ -364,12 +369,21 @@ namespace XNA_ENGINE.Game
 
                 //Go over all bullets and check collision with the enemy
    
-                // Check intersection based on rectangles
-                if (m_Player.GetPosition().Intersects(beat.GetPosition()))
+                // Delete beats if they aren't triggered and are behind the player
+                if (beat.GetPosition().X + beat.GetPosition().Width < 0)
                 {
                     // Delete both Objects if they hit
                     // Add to list the objects that need to be deleted
                     beatsToDelete.Add(beat);
+                }
+
+                // Delete the beat if the player is able to shoot on the beat of the music
+                if (m_Player.GetPosition().Intersects(beat.GetPosition()) && (gamePadState.Buttons.A == ButtonState.Pressed || m_OldKeyboardState.IsKeyDown(Keys.Space)))
+                {
+                    beatsToDelete.Add(beat);
+
+                    // Sets the last created bullet shot to Homing Missile
+                    m_Player.GetBullets().ElementAt<Bullet>(m_Player.GetLastBullet()).SetHomingMissile();
                 }
             }
 
@@ -386,6 +400,21 @@ namespace XNA_ENGINE.Game
                 if (beat != null) beat.Draw(renderContext);
             }
         }
-        //...
+
+        private void SetPositionClosestTarget()
+        {
+            Rectangle bufferPos;
+            bufferPos = new Rectangle(300, 0, 1, 1);
+
+            foreach (Target target in m_TargetList)
+            {
+                if (target.GetPosition().X < 200 && target.GetPosition().X >= 100)
+                {
+                    bufferPos = target.GetPosition();
+                    m_Player.SetPositionTarget(bufferPos.X, bufferPos.Y);
+                    break;
+                }
+            }
+        }
     }
 }
