@@ -12,6 +12,8 @@ using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Engine.Objects;
 
+using XNA_ENGINE.Engine.Helpers;
+
 using XNA_ENGINE.Game.Objects;
 
 using IP2_Xna_Template.Objects;

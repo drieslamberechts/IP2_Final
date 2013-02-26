@@ -46,8 +46,8 @@ namespace XNA_ENGINE.Game
             SceneManager.AddGameScene(new WoutScene());
 
 
-            //SceneManager.SetActiveScene("GameSceneConcept1");
-            SceneManager.SetActiveScene("GameSceneConcept2");
+            SceneManager.SetActiveScene("GameSceneConcept1");
+            //SceneManager.SetActiveScene("GameSceneConcept2");
             //SceneManager.SetActiveScene("WoutScene");
             //SceneManager.SetActiveScene("DriesScene");
             //SceneManager.SetActiveScene("FiddleDemoScene");
