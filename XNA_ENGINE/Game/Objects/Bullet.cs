@@ -12,6 +12,7 @@ namespace IP2_Xna_Template.Objects
 {
     class Bullet
     {
+        //test
         // Variables
         ContentManager Content;
 
