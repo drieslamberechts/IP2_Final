@@ -66,6 +66,10 @@ namespace XNA_ENGINE.Game
         // Controller bool
         Boolean m_bUsingController = false;
 
+        // ScoreStuff
+        private double m_Accuracy;
+        private double m_TotalScore;
+
 
         public GameSceneConcept1(ContentManager content)
             : base("GameSceneConcept1")
@@ -263,7 +267,10 @@ namespace XNA_ENGINE.Game
 
             // Fire a bullet
             if (gamePadState.Buttons.A == ButtonState.Pressed || keyboardState[Keys.Space] == KeyState.Down)
+            {
                 m_Player.FireBullet();
+            }
+                
 
             switch (m_bUsingController)
             {
@@ -300,6 +307,12 @@ namespace XNA_ENGINE.Game
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Up and down: Z/S", new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Shoot: Spacebar", new Vector2(15, yPos += offset), Color.Green);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Pause game: P", new Vector2(15, yPos += offset), Color.Green);
+
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Accuracy: " + m_Accuracy, new Vector2(200,m_Player.GetPosition().Y-20), Color.Yellow);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Score: " + m_TotalScore, new Vector2(200, m_Player.GetPosition().Y - 35), Color.Yellow);
+            
+            
+
         }
 
         //TARGETS functions
@@ -329,7 +342,7 @@ namespace XNA_ENGINE.Game
                         {
                             // Delete both Objects if they hit
                             // Add to list the objects that need to be deleted
-                              targetsToDelete.Add(target);
+                            targetsToDelete.Add(target);
                             m_Bullets[t] = null;
                         }
                     }
@@ -367,7 +380,7 @@ namespace XNA_ENGINE.Game
                 //Delete the enemy if it reached the end of the screen
                 if (beat.GetPosition().X < -200) beatsToDelete.Add(beat);
 
-                //Go over all bullets and check collision with the enemy
+                //Go over all bullets and check collisionz with the enemy
    
                 // Delete beats if they aren't triggered and are behind the player
                 if (beat.GetPosition().X + beat.GetPosition().Width < 0)
@@ -380,10 +393,21 @@ namespace XNA_ENGINE.Game
                 // Delete the beat if the player is able to shoot on the beat of the music
                 if (m_Player.GetPosition().Intersects(beat.GetPosition()) && (gamePadState.Buttons.A == ButtonState.Pressed || m_OldKeyboardState.IsKeyDown(Keys.Space)))
                 {
+                    m_Accuracy = ((m_Player.GetPosition().X+140 - beat.GetPosition().X)-100)*-1;
+
+                    m_TotalScore += m_Accuracy;
+
                     beatsToDelete.Add(beat);
 
                     // Sets the last created bullet shot to Homing Missile
-                    m_Player.GetBullets().ElementAt<Bullet>(m_Player.GetLastBullet()).SetHomingMissile();
+                    Bullet latestBullet = m_Player.GetBullets().ElementAt<Bullet>(m_Player.GetLastBullet());
+                    if (latestBullet != null)
+                    {
+                        Target targetToFollow = GetNearestTarget(latestBullet);
+
+                        latestBullet.SetHomingMissile(targetToFollow);
+                    }
+                        
                 }
             }
 
@@ -416,5 +440,36 @@ namespace XNA_ENGINE.Game
                 }
             }
         }
+
+        private Target GetNearestTarget(Bullet bullet)
+        { 
+            Target returnTarget;
+            returnTarget = m_TargetList.ElementAt<Target>(0);
+
+            Vector2 posBullet;
+            posBullet.X = bullet.GetPosition().X + bullet.GetPosition().Width;
+            posBullet.Y = bullet.GetPosition().Y + bullet.GetPosition().Height;
+
+            Vector2 oldDistance;
+            oldDistance.X = 10000;
+            oldDistance.Y = 10000;
+            Vector2 posTarget;
+
+            foreach (Target target in m_TargetList)
+            {
+                posTarget.X = target.GetPosition().X;
+                posTarget.Y = target.GetPosition().Y;
+
+                if ((posBullet - posTarget).Length() < oldDistance.Length())
+                {
+                    oldDistance = posBullet - posTarget;
+                    returnTarget = target;
+                }
+            }
+
+            return returnTarget;
+        }
     }
+
+    
 }
