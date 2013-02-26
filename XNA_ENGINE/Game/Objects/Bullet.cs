@@ -40,7 +40,7 @@ namespace IP2_Xna_Template.Objects
         {
             m_RectBullet.X += posX;
             m_RectBullet.Y += posY;
-            
+
             if (m_bHomingMissile)
             {
                 Vector2 bulletVec = ConvertRectangleToVector2(m_RectBullet);

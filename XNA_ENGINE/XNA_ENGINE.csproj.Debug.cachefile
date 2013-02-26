@@ -4,6 +4,8 @@ Content\Hero_Spritesheet.xnb
 Content\MovableBox.xnb
 Content\StaticBox.xnb
 Content\HeroBox.xnb
+Content\Vampire.xnb
+Content\Vampire_Diffuse_0.xnb
 Content\TestSmiley.xnb
 Content\protag.xnb
 Content\protagtransparant.xnb
@@ -13,11 +15,9 @@ Content\ball.xnb
 Content\bullet.xnb
 Content\player.xnb
 Content\enemy.xnb
+Content\Music.xnb
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
-Content\Music.xnb
-Content\Vampire_Diffuse_0.xnb
-Content\Vampire.xnb
 Content\buttonBeat.xnb
 Content\cloud.xnb
 Content\Diamond.xnb
