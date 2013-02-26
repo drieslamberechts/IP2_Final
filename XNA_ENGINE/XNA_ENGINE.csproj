@@ -108,12 +108,8 @@
     <Compile Include="Game\Objects\MusicBeat.cs" />
     <Compile Include="Game\Objects\Player.cs" />
     <Compile Include="Game\Objects\TutorialClasses\Background.cs" />
-    <Compile Include="Game\Scenes\DriesScene.cs" />
-    <Compile Include="Game\Scenes\FiddleDemoScene.cs" />
-    <Compile Include="Game\Scenes\GameAnimatedSpriteDemo.cs" />
     <Compile Include="Game\Scenes\GameSceneConcept1.cs" />
-    <Compile Include="Game\Scenes\GameSpriteDemo.cs" />
-    <Compile Include="Game\Scenes\GoingWildDemo.cs" />
+    <Compile Include="Game\Scenes\InteractionScene.cs" />
     <Compile Include="Game\Scenes\PauseScreen.cs" />
     <Compile Include="Game\Scenes\WoutScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
