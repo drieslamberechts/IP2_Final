@@ -61,8 +61,11 @@ namespace XNA_ENGINE.Game
         public override void Initialize()
         {
             // Add Interaction Scene for later use
+            // -------------------------------------
             var scene = new InteractionScene(Content);
             SceneManager.AddGameScene(scene);
+            //scene.Initialize(20, 220);
+            //SceneManager.SetActiveScene("InteractionScene");
 
             base.Initialize();
         }
