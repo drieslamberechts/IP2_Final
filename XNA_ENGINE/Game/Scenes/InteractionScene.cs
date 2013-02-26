@@ -10,9 +10,10 @@ namespace XNA_ENGINE.Game.Scenes
     class InteractionScene : GameScene
     {
         // Variables
+        private ContentManager Content;
 
         // Methods
-        public InteractionScene()
+        public InteractionScene(ContentManager content)
             :base("InteractionScene")
         {
             Content = content;
