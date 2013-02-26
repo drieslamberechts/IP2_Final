@@ -60,15 +60,20 @@ namespace XNA_ENGINE.Game
 
         public override void Initialize()
         {
+<<<<<<< HEAD
+            Debug2D.LoadContent(Content);
+=======
             // Add Interaction Scene for later use
             var scene = new InteractionScene(Content);
             SceneManager.AddGameScene(scene);
 
+>>>>>>> 4c5780b6f56fb26c06863780a9414c2436c2b76b
             base.Initialize();
         }
 
         public override void LoadContent(ContentManager contentManager)
         {
+            
             base.LoadContent(contentManager);
         }
 
