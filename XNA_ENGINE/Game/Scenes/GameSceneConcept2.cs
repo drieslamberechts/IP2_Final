@@ -28,7 +28,8 @@ namespace XNA_ENGINE.Game
     {
         enum PlayerInput
         {
-            ClickTile
+            ClickTile,
+            RightClickTile
         }
 
         private const int GRID_ROW_LENGTH = 30;
@@ -36,9 +37,6 @@ namespace XNA_ENGINE.Game
         private const int GRID_OFFSET = 25;
         private const int SCREEN_OFFSET_HORIZONTAL = 50;
         private const int SCREEN_OFFSET_VERTICAL = 50;
-
-
-      //  private GridTile[][] m_GridField = new GridTile[GRID_ROW_LENGTH][];
 
         private List<List<GridTile>> m_GridField;
 
@@ -60,7 +58,12 @@ namespace XNA_ENGINE.Game
             Click.MouseButton = MouseButtons.LeftButton;
             Click.GamePadButton = Buttons.X;
 
+            InputAction RightClick = new InputAction((int)PlayerInput.RightClickTile, TriggerState.Pressed);
+            RightClick.MouseButton = MouseButtons.RightButton;
+            RightClick.GamePadButton = Buttons.B;
+
             m_InputManager.MapAction(Click);
+            m_InputManager.MapAction(RightClick);
 
             m_GridField = new List<List<GridTile>>();
 
@@ -100,6 +103,7 @@ namespace XNA_ENGINE.Game
                     AddSceneObject(gridTile.GetSprite(6));
                     AddSceneObject(gridTile.GetSprite(7));
                     AddSceneObject(gridTile.GetSprite(8));
+                    AddSceneObject(gridTile.GetSprite(9));
                 }
             }
 
@@ -129,13 +133,27 @@ namespace XNA_ENGINE.Game
                     gridTile.Update();
                     if (m_InputManager.GetAction((int)PlayerInput.ClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(),mousePos) )
                     {
-                        //gridTile.SetTileType(GridTile.TileType.Normal);
+                        ReturnSelected().SetSelector(false);
                         gridTile.SetSelector(true);
 
                         int rowIndex = ((int)gridTile.GetPosition().Y-SCREEN_OFFSET_VERTICAL)/GRID_OFFSET;
                         int columnIndex = ((int)gridTile.GetPosition().X - SCREEN_OFFSET_HORIZONTAL) / GRID_OFFSET; ;
                         System.Diagnostics.Trace.WriteLine(" m_GridField[" + columnIndex + "]" + "[" + rowIndex + "].SetTileType(GridTile.TileType.Normal);");
                     }
+
+                    if (m_InputManager.GetAction((int)PlayerInput.RightClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(), mousePos))
+                    {
+                        GridTile selectedGridTile = ReturnSelected();
+
+                        if (selectedGridTile != m_GridField[0][0] && selectedGridTile.GetArmy())
+                        {
+                            selectedGridTile.SetArmy(false);
+                            gridTile.SetArmy(true);
+                            selectedGridTile.SetSelector(false);
+                            gridTile.SetSelector(true);
+                        }
+                    }
+
                 }
             }
 
@@ -162,6 +180,21 @@ namespace XNA_ENGINE.Game
             if (pos.X + GRID_OFFSET < mousePos.X) return false;
             if (pos.Y + GRID_OFFSET < mousePos.Y) return false;
             return true;
+        }
+
+        private GridTile ReturnSelected()
+        {
+            foreach (var gridTileList in m_GridField)
+            {
+                foreach (var gridTile in gridTileList)
+                {
+                    if (gridTile.IsSelected()) return gridTile;
+
+                }
+            }
+
+            return m_GridField[0][0];
+
         }
 
         private void InitGrid()
@@ -543,6 +576,7 @@ namespace XNA_ENGINE.Game
             m_GridField[12][24].SetSettlement(GridTile.Settlement.Blue);
             m_GridField[24][25].SetSettlement(GridTile.Settlement.Yellow);
 
+            m_GridField[15][11].SetArmy(true);
         }
     }
 

@@ -17,6 +17,7 @@ namespace XNA_ENGINE.Game.Objects.Concept2
     {
         public enum TileType { Normal, Inactive, Dummy1, Dummy2 };
         public enum Settlement { None, Green, Red, Yellow, Blue };
+        public enum Army { Green1 };
 
         private GameSprite m_NormalTile;
         private GameSprite m_InactiveTile;
@@ -30,7 +31,10 @@ namespace XNA_ENGINE.Game.Objects.Concept2
 
         private static GameSprite m_Selector;
 
+        private static GameSprite m_GreenArmy1;
+
         private bool m_IsSelected = false;
+        private bool m_HasArmy = false;
 
         private Vector2 m_Position;
 
@@ -62,6 +66,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
 
             m_Selector =new GameSprite("Selector");
 
+            m_GreenArmy1 = new GameSprite("GreenArmy");
+
             UpdateTypes();
         }
 
@@ -88,6 +94,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                 return m_YellowSettlement;
             if (id == 7)
                 return m_BlueSettlement;
+            if (id == 8)
+                return m_GreenArmy1;
 
             return m_Selector;
         }
@@ -193,6 +201,31 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                 m_IsSelected = false;
                 m_Selector.CanDraw = false;
             }
+        }
+
+        public void SetArmy(bool value)
+        {
+            if (value)
+            {
+                m_HasArmy = true;
+                m_GreenArmy1.CanDraw = true;
+                m_GreenArmy1.Translate(m_Position);
+            }
+            else
+            {
+                m_HasArmy = false;
+                m_GreenArmy1.CanDraw = false;
+            }
+        }
+
+        public bool IsSelected()
+        {
+            return m_IsSelected;
+        }
+
+        public bool GetArmy()
+        {
+            return m_HasArmy;
         }
     }
 }
