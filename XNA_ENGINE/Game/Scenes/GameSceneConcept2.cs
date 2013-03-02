@@ -28,9 +28,7 @@ namespace XNA_ENGINE.Game
     {
         enum PlayerInput
         {
-            GoUp,
-            GoDown,
-            Shoot
+            ClickTile
         }
 
         private const int GRID_ROW_LENGTH = 30;
@@ -58,21 +56,11 @@ namespace XNA_ENGINE.Game
             //INPUT
             m_InputManager = new InputManager();
 
-            InputAction GoUp = new InputAction((int)PlayerInput.GoUp, TriggerState.Down);
-            GoUp.KeyButton = Keys.Z;
-            GoUp.GamePadButton = Buttons.LeftThumbstickUp;
+            InputAction Click = new InputAction((int)PlayerInput.ClickTile, TriggerState.Pressed);
+            Click.MouseButton = MouseButtons.LeftButton;
+            Click.GamePadButton = Buttons.X;
 
-            InputAction GoDown = new InputAction((int)PlayerInput.GoDown, TriggerState.Down);
-            GoDown.KeyButton = Keys.S;
-            GoDown.GamePadButton = Buttons.LeftThumbstickDown;
-
-            InputAction Shoot = new InputAction((int)PlayerInput.Shoot, TriggerState.Pressed);
-            Shoot.KeyButton = Keys.Space;
-            Shoot.GamePadButton = Buttons.RightTrigger;
-
-            m_InputManager.MapAction(GoUp);
-            m_InputManager.MapAction(GoDown);
-            m_InputManager.MapAction(Shoot);
+            m_InputManager.MapAction(Click);
 
             m_GridField = new List<List<GridTile>>();
 
@@ -94,17 +82,17 @@ namespace XNA_ENGINE.Game
             // -------------------------------------
             var interactionScene = new InteractionScene(Content);
             SceneManager.AddGameScene(interactionScene);
-            //interactionScene.Initialize(20, 220);
-            //SceneManager.SetActiveScene("InteractionScene");
+
+            //TILES
             foreach (var gridTileList in m_GridField)
             {
                 foreach (var gridTile in gridTileList)
                 {
                     gridTile.Initialize();
-                    gridTile.GetSprite(0).CanDraw = true;
-                    gridTile.GetSprite(1).CanDraw = false;
-                    AddSceneObject(gridTile.GetSprite(0));
-                    AddSceneObject(gridTile.GetSprite(1));
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Normal));
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Inactive));
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Dummy1));
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Dummy2));
                 }
             }
             base.Initialize();
@@ -119,22 +107,28 @@ namespace XNA_ENGINE.Game
         {
             //INPUT
             m_InputManager.Update();
-            if (m_InputManager.GetAction((int)PlayerInput.GoUp).IsTriggered)
-                System.Console.WriteLine("Up");
+            //if (m_InputManager.GetAction((int) PlayerInput.ClickTile).IsTriggered)
 
-            if (m_InputManager.GetAction((int)PlayerInput.GoDown).IsTriggered)
-                System.Console.WriteLine("Down");
-
-            if (m_InputManager.GetAction((int)PlayerInput.Shoot).IsTriggered)
-                System.Console.WriteLine("Shoot");
+                //TILES
+            Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
+         //   mousePos
+            Console.WriteLine("MousePos" + mousePos);
 
             foreach (var gridTileList in m_GridField)
             {
                 foreach (var gridTile in gridTileList)
                 {
                     gridTile.Update();
+                    if (GridHitTest(gridTile.GetPosition(), mousePos)) Console.WriteLine("HIT");
+
+                    if (m_InputManager.GetAction((int)PlayerInput.ClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(),mousePos) )
+                    {
+                        gridTile.SetType(GridTile.TileType.Inactive);
+                    }
                 }
             }
+
+
 
             base.Update(renderContext);
         }
@@ -147,6 +141,16 @@ namespace XNA_ENGINE.Game
         public override void Draw3D(RenderContext renderContext)
         {
             base.Draw3D(renderContext);
+        }
+
+        private bool GridHitTest(Vector2 pos, Vector2 mousePos)
+        {
+
+            if (pos.X > mousePos.X) return false;
+            if (pos.Y > mousePos.Y) return false;
+            if (pos.X + GRID_OFFSET < mousePos.X) return false;
+            if (pos.Y + GRID_OFFSET < mousePos.Y) return false;
+            return true;
         }
     }
 
