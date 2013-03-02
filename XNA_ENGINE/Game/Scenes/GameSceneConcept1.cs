@@ -90,7 +90,7 @@ namespace XNA_ENGINE.Game
 
             // Set Up Music
             song = Content.Load<Song>("Music");
-            MediaPlayer.Play(song);
+          //  MediaPlayer.Play(song);
             MediaPlayer.Volume = 0.05f;
 
             // Set the old state of the keyboard

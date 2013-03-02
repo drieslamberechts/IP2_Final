@@ -167,8 +167,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="megaman.png">
-      <Name>megaman</Name>
+    <Compile Include="GreenTile.png">
+      <Name>GreenTile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="GreyTile.png">
+      <Name>GreyTile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="OrangeTile.png">
+      <Name>OrangeTile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="RedTile.png">
+      <Name>RedTile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
