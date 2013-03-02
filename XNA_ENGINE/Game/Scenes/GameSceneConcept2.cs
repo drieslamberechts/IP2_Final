@@ -99,8 +99,10 @@ namespace XNA_ENGINE.Game
                     AddSceneObject(gridTile.GetSprite(5));
                     AddSceneObject(gridTile.GetSprite(6));
                     AddSceneObject(gridTile.GetSprite(7));
+                    AddSceneObject(gridTile.GetSprite(8));
                 }
             }
+
             InitGrid();
 
 
@@ -127,11 +129,11 @@ namespace XNA_ENGINE.Game
                     gridTile.Update();
                     if (m_InputManager.GetAction((int)PlayerInput.ClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(),mousePos) )
                     {
-                        gridTile.SetTileType(GridTile.TileType.Normal);
+                        //gridTile.SetTileType(GridTile.TileType.Normal);
+                        gridTile.SetSelector(true);
+
                         int rowIndex = ((int)gridTile.GetPosition().Y-SCREEN_OFFSET_VERTICAL)/GRID_OFFSET;
                         int columnIndex = ((int)gridTile.GetPosition().X - SCREEN_OFFSET_HORIZONTAL) / GRID_OFFSET; ;
-
-                        //Console.WriteLine("[" + columnIndex + "]" + "[" + rowIndex + "]");
                         System.Diagnostics.Trace.WriteLine(" m_GridField[" + columnIndex + "]" + "[" + rowIndex + "].SetTileType(GridTile.TileType.Normal);");
                     }
                 }

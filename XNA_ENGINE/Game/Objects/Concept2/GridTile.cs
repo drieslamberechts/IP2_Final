@@ -23,10 +23,14 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         private GameSprite m_DummyTile1;
         private GameSprite m_DummyTile2;
 
-        private static GameSprite m_GreenSettlement;
-        private static GameSprite m_RedSettlement;
-        private static GameSprite m_YellowSettlement;
-        private static GameSprite m_BlueSettlement;
+        private GameSprite m_GreenSettlement;
+        private GameSprite m_RedSettlement;
+        private GameSprite m_YellowSettlement;
+        private GameSprite m_BlueSettlement;
+
+        private static GameSprite m_Selector;
+
+        private bool m_IsSelected = false;
 
         private Vector2 m_Position;
 
@@ -56,6 +60,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             m_YellowSettlement = new GameSprite("YellowSettlement");
             m_BlueSettlement = new GameSprite("BlueSettlement");
 
+            m_Selector =new GameSprite("Selector");
+
             UpdateTypes();
         }
 
@@ -80,8 +86,10 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                 return m_RedSettlement;
             if (id == 6)
                 return m_YellowSettlement;
+            if (id == 7)
+                return m_BlueSettlement;
 
-            return m_BlueSettlement;
+            return m_Selector;
         }
 
         public void SetTileType(TileType type)
@@ -122,6 +130,11 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             m_InactiveTile.CanDraw = false;
             m_DummyTile1.CanDraw = false;
             m_DummyTile2.CanDraw = false;
+
+            m_GreenSettlement.CanDraw = false;
+            m_RedSettlement.CanDraw = false;
+            m_YellowSettlement.CanDraw = false;
+            m_BlueSettlement.CanDraw = false;
 
             switch (m_Type)
             {
@@ -165,6 +178,21 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         public Vector2 GetPosition()
         {
             return m_Position;
+        }
+
+        public void SetSelector(bool value)
+        {
+            if (value)
+            {
+                m_IsSelected = true;
+                m_Selector.CanDraw = true;
+                m_Selector.Translate(m_Position);
+            }
+            else
+            {
+                m_IsSelected = false;
+                m_Selector.CanDraw = false;
+            }
         }
     }
 }
