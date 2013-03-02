@@ -64,8 +64,8 @@ namespace XNA_ENGINE.Game
             // -------------------------------------
             var interactionScene = new InteractionScene(Content);
             SceneManager.AddGameScene(interactionScene);
-            //interactionScene.Initialize(20, 220);
-            //SceneManager.SetActiveScene("InteractionScene");
+            interactionScene.Initialize(2, 2);
+            SceneManager.SetActiveScene("InteractionScene");
 
             base.Initialize();
         }

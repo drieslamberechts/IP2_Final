@@ -39,13 +39,13 @@ namespace XNA_ENGINE.Game.Scenes
             m_Attackers = attackers;
             m_Defenders = defenders;
 
-            m_TexAttackers = m_Content.Load<Texture2D>("");
-            m_TexDefenders = m_Content.Load<Texture2D>("");
-            m_TexBackground = m_Content.Load<Texture2D>("");
+            m_TexAttackers = m_Content.Load<Texture2D>("megaman");
+            m_TexDefenders = m_Content.Load<Texture2D>("megaman");
+            m_TexBackground = m_Content.Load<Texture2D>("Backgrounds/PrimaryBackground");
 
             m_RectAttackers = new Rectangle(0, 0, m_TexAttackers.Width, m_TexAttackers.Height);
-            m_RectDefenders = new Rectangle(0, 0, m_TexDefenders.Width, m_RectDefenders.Height);
-            m_RectBackground = new Rectangle(0, 0, m_TexBackground.Width, m_RectBackground.Height);
+            m_RectDefenders = new Rectangle(0, 0, m_TexDefenders.Width, m_TexDefenders.Height);
+            m_RectBackground = new Rectangle(0, 0, 1280, 720);
 
             ThrowDice();
         }
@@ -59,6 +59,9 @@ namespace XNA_ENGINE.Game.Scenes
         // Draw
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
+            // Draw Background
+            renderContext.SpriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
+
             //---------------------------------
             // INFO ABOUT ENCOUNTER
             //---------------------------------
@@ -79,13 +82,11 @@ namespace XNA_ENGINE.Game.Scenes
             //---------------------------------
             // ACTUAL DRAWING
             //---------------------------------
-            // Draw Background
-            renderContext.SpriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
 
             // Draw Attackers
             for (int t = 0; t < m_Attackers; ++t)
             {
-                m_RectAttackers.X = 300 + ((m_RectAttackers.Width + 30) * t);
+                m_RectAttackers.X = 200 + ((m_RectAttackers.Width + 30) * t);
                 m_RectAttackers.Y = 100;
                 renderContext.SpriteBatch.Draw(m_TexAttackers, m_RectAttackers, Color.White);
             }
@@ -93,8 +94,8 @@ namespace XNA_ENGINE.Game.Scenes
             // Draw Defenders
             for (int t = 0; t < m_Defenders; ++t)
             {
-                m_RectDefenders.X = 300 + ((m_RectDefenders.Width + 30) * t);
-                m_RectDefenders.Y = 500;
+                m_RectDefenders.X = 200 + ((m_RectDefenders.Width + 30) * t);
+                m_RectDefenders.Y = 400;
                 renderContext.SpriteBatch.Draw(m_TexDefenders, m_RectDefenders, Color.White);
             }
         }

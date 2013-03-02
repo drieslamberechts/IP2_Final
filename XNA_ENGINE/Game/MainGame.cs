@@ -40,7 +40,7 @@ namespace XNA_ENGINE.Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            SceneManager.AddGameScene(new GameSceneConcept1(Content));
+            //SceneManager.AddGameScene(new GameSceneConcept1(Content));
             SceneManager.AddGameScene(new GameSceneConcept2(Content));
             SceneManager.AddGameScene(new PauseScreen(Content));
             SceneManager.AddGameScene(new WoutScene());
