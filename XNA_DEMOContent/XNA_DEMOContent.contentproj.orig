@@ -167,10 +167,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Include="megaman.png">
-      <Name>megaman</Name>
-=======
     <Compile Include="GreenTile.png">
       <Name>GreenTile</Name>
       <Importer>TextureImporter</Importer>
@@ -188,7 +184,40 @@
     </Compile>
     <Compile Include="RedTile.png">
       <Name>RedTile</Name>
->>>>>>> efb49197827c7f4f6769e28edcddcab0cb252638
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="megaman.png">
+      <Name>megaman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="Backgrounds\background.jpg">
+      <Name>background</Name>
+=======
+    <Compile Include="BlueSettlement.png">
+      <Name>BlueSettlement</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="GreenSettlement.png">
+      <Name>GreenSettlement</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="RedSettlement.png">
+      <Name>RedSettlement</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="YellowSettlement.png">
+      <Name>YellowSettlement</Name>
+>>>>>>> ae0c490e6985df518ebcce83e449abf8f8a7a6f9
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

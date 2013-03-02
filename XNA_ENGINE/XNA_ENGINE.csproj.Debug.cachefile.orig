@@ -19,12 +19,17 @@ Content\Diamond.xnb
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
 Content\Music.xnb
-<<<<<<< HEAD
-Content\megaman.xnb
-=======
 Content\GreenTile.xnb
 Content\GreyTile.xnb
 Content\OrangeTile.xnb
 Content\RedTile.xnb
->>>>>>> efb49197827c7f4f6769e28edcddcab0cb252638
+Content\megaman.xnb
+<<<<<<< HEAD
+Content\Backgrounds\background.xnb
+=======
+Content\BlueSettlement.xnb
+Content\GreenSettlement.xnb
+Content\RedSettlement.xnb
+Content\YellowSettlement.xnb
+>>>>>>> ae0c490e6985df518ebcce83e449abf8f8a7a6f9
 Content\Music.wma
