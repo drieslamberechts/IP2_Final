@@ -82,7 +82,7 @@ namespace XNA_ENGINE.Game
             // -------------------------------------
             var interactionScene = new InteractionScene(Content);
             SceneManager.AddGameScene(interactionScene);
-            //interactionScene.Initialize(2, 2);
+            //interactionScene.Initialize(1, 3);
             //SceneManager.SetActiveScene("InteractionScene");
 
             //TILES

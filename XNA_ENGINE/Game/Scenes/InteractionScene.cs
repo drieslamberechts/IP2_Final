@@ -18,6 +18,7 @@ namespace XNA_ENGINE.Game.Scenes
         readonly SpriteFont m_DebugFont;
         int m_Attackers;
         int m_Defenders;
+        private bool m_bDrawText = false;
 
         private Texture2D m_TexAttackers, m_TexDefenders, m_TexBackground;
         private Rectangle m_RectAttackers, m_RectDefenders, m_RectBackground;
@@ -41,19 +42,28 @@ namespace XNA_ENGINE.Game.Scenes
 
             m_TexAttackers = m_Content.Load<Texture2D>("megaman");
             m_TexDefenders = m_Content.Load<Texture2D>("megaman");
-            m_TexBackground = m_Content.Load<Texture2D>("Backgrounds/PrimaryBackground");
+            m_TexBackground = m_Content.Load<Texture2D>("Backgrounds/background");
 
             m_RectAttackers = new Rectangle(0, 0, m_TexAttackers.Width, m_TexAttackers.Height);
             m_RectDefenders = new Rectangle(0, 0, m_TexDefenders.Width, m_TexDefenders.Height);
             m_RectBackground = new Rectangle(0, 0, 1400, 1000);
 
-            ThrowDice();
+            
         }
 
         // Update
         public override void Update(RenderContext renderContext)
         {
+            if (m_Attackers > 0 && m_Defenders > 0)
+            {
+                ThrowDice();
+                Die();
+            }
 
+            if (m_Attackers == 0 || m_Defenders == 0)
+            {
+                m_bDrawText = true;
+            }
         }
 
         // Draw
@@ -78,6 +88,11 @@ namespace XNA_ENGINE.Game.Scenes
             renderContext.SpriteBatch.DrawString(m_DebugFont, "-- Outcome Dice --", new Vector2(10, 130), Color.White);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Attackers throw: " + Convert.ToString(m_AttackersDice), new Vector2(10, 145), Color.White);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Defenders throw: " + Convert.ToString(m_DefendersDice), new Vector2(10, 160), Color.White);
+
+            if (m_bDrawText)
+                renderContext.SpriteBatch.DrawString(m_DebugFont,
+                                                     "Attackers: " + Convert.ToString(m_Attackers) + " | Defenders: " +
+                                                     Convert.ToString(m_Defenders), new Vector2(10, 900), Color.White);
 
             //---------------------------------
             // ACTUAL DRAWING
@@ -115,8 +130,27 @@ namespace XNA_ENGINE.Game.Scenes
         private void ThrowDice()
         {
             var random = new Random();
-            m_AttackersDice = random.Next(0, 6);
-            m_DefendersDice = random.Next(0, 6);
+
+            for (int t = 0; t < m_Attackers; ++t)
+            {
+                int attackersDice = random.Next(1, 6);
+                if (attackersDice > m_AttackersDice)
+                    m_AttackersDice = attackersDice;
+            }
+
+            for (int t = 0; t < m_Defenders; ++t)
+            {
+                int defendersDice = random.Next(1, 6);
+                if (defendersDice > m_DefendersDice)
+                    m_DefendersDice = defendersDice;
+            }
+        }
+
+        private void Die()
+        {
+            if (m_DefendersDice > m_AttackersDice) m_Attackers--;
+            else if (m_DefendersDice == m_AttackersDice) m_Attackers--;
+            else m_Defenders--;
         }
     }
 }
