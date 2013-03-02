@@ -16,19 +16,27 @@ namespace XNA_ENGINE.Game.Objects.Concept2
     public class GridTile
     {
         public enum TileType { Normal, Inactive, Dummy1, Dummy2 };
+        public enum Settlement { None, Green, Red, Yellow, Blue };
 
         private GameSprite m_NormalTile;
         private GameSprite m_InactiveTile;
         private GameSprite m_DummyTile1;
         private GameSprite m_DummyTile2;
 
+        private static GameSprite m_GreenSettlement;
+        private static GameSprite m_RedSettlement;
+        private static GameSprite m_YellowSettlement;
+        private static GameSprite m_BlueSettlement;
+
         private Vector2 m_Position;
 
         TileType m_Type;
+        Settlement m_Settlement;
 
         public GridTile(TileType tileType, Vector2 positon)
         {
             m_Type = tileType;
+            m_Settlement = Settlement.None;
             m_Position = positon;
         }
 
@@ -43,7 +51,12 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             m_DummyTile2 = new GameSprite("GreenTile");
             m_DummyTile2.Translate(m_Position.X, m_Position.Y);
 
-            UpdateTileType();
+            m_GreenSettlement = new GameSprite("GreenSettlement");
+            m_RedSettlement = new GameSprite("RedSettlement");
+            m_YellowSettlement = new GameSprite("YellowSettlement");
+            m_BlueSettlement = new GameSprite("BlueSettlement");
+
+            UpdateTypes();
         }
 
         public void Update()
@@ -51,31 +64,64 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             
         }
 
-        public GameSprite GetSprite(TileType id)
+        public GameSprite GetSprite(int id)
         {
-            if (id == TileType.Normal)
+            if (id == 0)
                 return m_NormalTile;
-            if (id == TileType.Inactive)
+            if (id == 1)
                 return m_InactiveTile;
-            if (id == TileType.Dummy1)
+            if (id == 2)
                 return m_DummyTile1;
-            
-            return m_DummyTile2;
+            if (id == 3)
+                return m_DummyTile2;
+            if (id == 4)
+                return m_GreenSettlement;
+            if (id == 5)
+                return m_RedSettlement;
+            if (id == 6)
+                return m_YellowSettlement;
+
+            return m_BlueSettlement;
         }
 
-        public void SetType(TileType type)
+        public void SetTileType(TileType type)
         {
             m_Type = type;
-            UpdateTileType();
+            UpdateTypes();
         }
 
-        public void UpdateTileType()
+        public void SetSettlement(Settlement type)
+        {
+            m_Settlement = type;
+
+            switch (type)
+            {
+                case Settlement.Green:
+                    m_GreenSettlement.Translate(m_Position.X, m_Position.Y);
+                    break;
+
+                case Settlement.Red:
+                    m_RedSettlement.Translate(m_Position.X, m_Position.Y);
+                    break;
+
+                case Settlement.Yellow:
+                    m_YellowSettlement.Translate(m_Position.X, m_Position.Y);
+                    break;
+
+                case Settlement.Blue:
+                    m_BlueSettlement.Translate(m_Position.X, m_Position.Y);
+                    break;
+            }
+
+            UpdateTypes();
+        }
+
+        public void UpdateTypes()
         {
             m_NormalTile.CanDraw = false;
             m_InactiveTile.CanDraw = false;
             m_DummyTile1.CanDraw = false;
             m_DummyTile2.CanDraw = false;
-
 
             switch (m_Type)
             {
@@ -93,6 +139,25 @@ namespace XNA_ENGINE.Game.Objects.Concept2
 
                 case TileType.Dummy2:
                     m_DummyTile2.CanDraw = true;
+                    break;
+            }
+
+            switch (m_Settlement)
+            {
+                case Settlement.Green:
+                    m_GreenSettlement.CanDraw = true;
+                    break;
+
+                case Settlement.Red:
+                    m_RedSettlement.CanDraw = true;
+                    break;
+
+                case Settlement.Yellow:
+                    m_YellowSettlement.CanDraw = true;
+                    break;
+
+                case Settlement.Blue:
+                    m_BlueSettlement.CanDraw = true;
                     break;
             }
         }
