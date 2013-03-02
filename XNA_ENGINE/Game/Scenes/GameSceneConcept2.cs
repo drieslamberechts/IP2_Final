@@ -20,6 +20,8 @@ using IP2_Xna_Template.Objects;
 using Microsoft.Xna.Framework.Media;
 using XNA_ENGINE.Game.Scenes;
 
+using XNA_ENGINE.Game.Objects.Concept2;
+
 namespace XNA_ENGINE.Game
 {
     public class GameSceneConcept2 : GameScene
@@ -31,13 +33,29 @@ namespace XNA_ENGINE.Game
             Shoot
         }
 
+        private const int GRID_ROW_LENGTH = 30;
+        private const int GRID_COLUMN_LENGTH = 30;
+        private const int GRID_OFFSET = 25;
+        private const int SCREEN_OFFSET_HORIZONTAL = 50;
+        private const int SCREEN_OFFSET_VERTICAL = 50;
+
+
+      //  private GridTile[][] m_GridField = new GridTile[GRID_ROW_LENGTH][];
+
+        private List<List<GridTile>> m_GridField;
+
         private ContentManager Content;
         private InputManager m_InputManager;
+
+
 
         public GameSceneConcept2(ContentManager content)
             : base("GameSceneConcept2")
         {
+            //CONTENT
             Content = content;
+
+            //INPUT
             m_InputManager = new InputManager();
 
             InputAction GoUp = new InputAction((int)PlayerInput.GoUp, TriggerState.Down);
@@ -56,6 +74,18 @@ namespace XNA_ENGINE.Game
             m_InputManager.MapAction(GoDown);
             m_InputManager.MapAction(Shoot);
 
+            m_GridField = new List<List<GridTile>>();
+
+            //GENERATE GRIDFIELD
+            for (int i = 0; i < GRID_ROW_LENGTH; i++)
+            {
+                List<GridTile> tempList = new List<GridTile>();
+                for (int j = 0; j < GRID_COLUMN_LENGTH; j++)
+                {
+                    tempList.Add(new GridTile(GridTile.TileType.Normal, new Vector2((i * GRID_OFFSET) + SCREEN_OFFSET_HORIZONTAL, (j * GRID_OFFSET) + SCREEN_OFFSET_VERTICAL)));
+                }
+                m_GridField.Add(tempList);
+            }
         }
 
         public override void Initialize()
@@ -66,7 +96,17 @@ namespace XNA_ENGINE.Game
             SceneManager.AddGameScene(interactionScene);
             //interactionScene.Initialize(20, 220);
             //SceneManager.SetActiveScene("InteractionScene");
-
+            foreach (var gridTileList in m_GridField)
+            {
+                foreach (var gridTile in gridTileList)
+                {
+                    gridTile.Initialize();
+                    gridTile.GetSprite(0).CanDraw = true;
+                    gridTile.GetSprite(1).CanDraw = false;
+                    AddSceneObject(gridTile.GetSprite(0));
+                    AddSceneObject(gridTile.GetSprite(1));
+                }
+            }
             base.Initialize();
         }
 
@@ -77,8 +117,8 @@ namespace XNA_ENGINE.Game
 
         public override void Update(RenderContext renderContext)
         {
+            //INPUT
             m_InputManager.Update();
-
             if (m_InputManager.GetAction((int)PlayerInput.GoUp).IsTriggered)
                 System.Console.WriteLine("Up");
 
@@ -88,15 +128,19 @@ namespace XNA_ENGINE.Game
             if (m_InputManager.GetAction((int)PlayerInput.Shoot).IsTriggered)
                 System.Console.WriteLine("Shoot");
 
+            foreach (var gridTileList in m_GridField)
+            {
+                foreach (var gridTile in gridTileList)
+                {
+                    gridTile.Update();
+                }
+            }
+
             base.Update(renderContext);
         }
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
-
-            //MouseStateEx.IsButtonDown(MouseButtons.LeftButton)
-          //  Debug2D.DrawRectangle(new Rectangle(20, 20, 100, 100), Color.Black);
-
             base.Draw2D(renderContext, drawBefore3D);
         }
 

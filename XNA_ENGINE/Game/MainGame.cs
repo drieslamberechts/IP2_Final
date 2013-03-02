@@ -23,8 +23,8 @@ namespace XNA_ENGINE.Game
             Window.Title = "IP2";
 
             // Dries Test
-            graphics.PreferredBackBufferHeight = 720;
-            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 1000;
+            graphics.PreferredBackBufferWidth = 1400;
             graphics.ApplyChanges();
             // End Dries Test
 
