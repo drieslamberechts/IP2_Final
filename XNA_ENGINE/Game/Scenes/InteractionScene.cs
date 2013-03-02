@@ -19,6 +19,7 @@ namespace XNA_ENGINE.Game.Scenes
         int m_Attackers;
         int m_Defenders;
         private bool m_bDrawText = false;
+        private int m_Countdown = 200;
 
         private Texture2D m_TexAttackers, m_TexDefenders, m_TexBackground;
         private Rectangle m_RectAttackers, m_RectDefenders, m_RectBackground;
@@ -64,6 +65,9 @@ namespace XNA_ENGINE.Game.Scenes
             {
                 m_bDrawText = true;
             }
+
+            if (m_bDrawText) m_Countdown--;
+            if (m_Countdown == 0) SceneManager.SetActiveScene("GameSceneConcept2");
         }
 
         // Draw
