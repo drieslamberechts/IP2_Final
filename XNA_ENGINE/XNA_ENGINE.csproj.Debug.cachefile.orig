@@ -4,8 +4,27 @@ Content\Hero_Spritesheet.xnb
 Content\MovableBox.xnb
 Content\StaticBox.xnb
 Content\HeroBox.xnb
-Content\Vampire.xnb
-Content\Vampire_Diffuse_0.xnb
 Content\TestSmiley.xnb
 Content\protag.xnb
 Content\protagtransparant.xnb
+Content\Backgrounds\ParallaxStars.xnb
+Content\Backgrounds\PrimaryBackground.xnb
+Content\ball.xnb
+Content\bullet.xnb
+Content\player.xnb
+Content\enemy.xnb
+Content\buttonBeat.xnb
+Content\cloud.xnb
+Content\Diamond.xnb
+Content\Fonts\menufont.xnb
+Content\Fonts\DebugFont.xnb
+Content\Music.xnb
+<<<<<<< HEAD
+Content\megaman.xnb
+=======
+Content\GreenTile.xnb
+Content\GreyTile.xnb
+Content\OrangeTile.xnb
+Content\RedTile.xnb
+>>>>>>> efb49197827c7f4f6769e28edcddcab0cb252638
+Content\Music.wma

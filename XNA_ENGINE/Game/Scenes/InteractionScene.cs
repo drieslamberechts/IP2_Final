@@ -45,7 +45,7 @@ namespace XNA_ENGINE.Game.Scenes
 
             m_RectAttackers = new Rectangle(0, 0, m_TexAttackers.Width, m_TexAttackers.Height);
             m_RectDefenders = new Rectangle(0, 0, m_TexDefenders.Width, m_TexDefenders.Height);
-            m_RectBackground = new Rectangle(0, 0, 1280, 720);
+            m_RectBackground = new Rectangle(0, 0, 1400, 1000);
 
             ThrowDice();
         }

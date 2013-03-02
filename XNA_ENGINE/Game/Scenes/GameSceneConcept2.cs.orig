@@ -20,91 +20,142 @@ using IP2_Xna_Template.Objects;
 using Microsoft.Xna.Framework.Media;
 using XNA_ENGINE.Game.Scenes;
 
+using XNA_ENGINE.Game.Objects.Concept2;
+
 namespace XNA_ENGINE.Game
 {
     public class GameSceneConcept2 : GameScene
     {
         enum PlayerInput
         {
-            GoUp,
-            GoDown,
-            Shoot
+            ClickTile
         }
+
+        private const int GRID_ROW_LENGTH = 30;
+        private const int GRID_COLUMN_LENGTH = 30;
+        private const int GRID_OFFSET = 25;
+        private const int SCREEN_OFFSET_HORIZONTAL = 50;
+        private const int SCREEN_OFFSET_VERTICAL = 50;
+
+
+      //  private GridTile[][] m_GridField = new GridTile[GRID_ROW_LENGTH][];
+
+        private List<List<GridTile>> m_GridField;
 
         private ContentManager Content;
         private InputManager m_InputManager;
 
+
+
         public GameSceneConcept2(ContentManager content)
             : base("GameSceneConcept2")
         {
+            //CONTENT
             Content = content;
+
+            //INPUT
             m_InputManager = new InputManager();
 
-            InputAction GoUp = new InputAction((int)PlayerInput.GoUp, TriggerState.Down);
-            GoUp.KeyButton = Keys.Z;
-            GoUp.GamePadButton = Buttons.LeftThumbstickUp;
+            InputAction Click = new InputAction((int)PlayerInput.ClickTile, TriggerState.Pressed);
+            Click.MouseButton = MouseButtons.LeftButton;
+            Click.GamePadButton = Buttons.X;
 
-            InputAction GoDown = new InputAction((int)PlayerInput.GoDown, TriggerState.Down);
-            GoDown.KeyButton = Keys.S;
-            GoDown.GamePadButton = Buttons.LeftThumbstickDown;
+            m_InputManager.MapAction(Click);
 
-            InputAction Shoot = new InputAction((int)PlayerInput.Shoot, TriggerState.Pressed);
-            Shoot.KeyButton = Keys.Space;
-            Shoot.GamePadButton = Buttons.RightTrigger;
+            m_GridField = new List<List<GridTile>>();
 
-            m_InputManager.MapAction(GoUp);
-            m_InputManager.MapAction(GoDown);
-            m_InputManager.MapAction(Shoot);
-
+            //GENERATE GRIDFIELD
+            for (int i = 0; i < GRID_ROW_LENGTH; i++)
+            {
+                List<GridTile> tempList = new List<GridTile>();
+                for (int j = 0; j < GRID_COLUMN_LENGTH; j++)
+                {
+                    tempList.Add(new GridTile(GridTile.TileType.Normal, new Vector2((i * GRID_OFFSET) + SCREEN_OFFSET_HORIZONTAL, (j * GRID_OFFSET) + SCREEN_OFFSET_VERTICAL)));
+                }
+                m_GridField.Add(tempList);
+            }
         }
 
         public override void Initialize()
         {
-<<<<<<< HEAD
-            Debug2D.LoadContent(Content);
-=======
             // Add Interaction Scene for later use
-            var scene = new InteractionScene(Content);
-            SceneManager.AddGameScene(scene);
+            // -------------------------------------
+            var interactionScene = new InteractionScene(Content);
+            SceneManager.AddGameScene(interactionScene);
+<<<<<<< HEAD
+            interactionScene.Initialize(2, 2);
+            SceneManager.SetActiveScene("InteractionScene");
+=======
+>>>>>>> efb49197827c7f4f6769e28edcddcab0cb252638
 
->>>>>>> 4c5780b6f56fb26c06863780a9414c2436c2b76b
+            //TILES
+            foreach (var gridTileList in m_GridField)
+            {
+                foreach (var gridTile in gridTileList)
+                {
+                    gridTile.Initialize();
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Normal));
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Inactive));
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Dummy1));
+                    AddSceneObject(gridTile.GetSprite(GridTile.TileType.Dummy2));
+                }
+            }
             base.Initialize();
         }
 
         public override void LoadContent(ContentManager contentManager)
         {
-            
             base.LoadContent(contentManager);
         }
 
         public override void Update(RenderContext renderContext)
         {
+            //INPUT
             m_InputManager.Update();
+            //if (m_InputManager.GetAction((int) PlayerInput.ClickTile).IsTriggered)
 
-            if (m_InputManager.GetAction((int)PlayerInput.GoUp).IsTriggered)
-                System.Console.WriteLine("Up");
+                //TILES
+            Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
+         //   mousePos
+            Console.WriteLine("MousePos" + mousePos);
 
-            if (m_InputManager.GetAction((int)PlayerInput.GoDown).IsTriggered)
-                System.Console.WriteLine("Down");
+            foreach (var gridTileList in m_GridField)
+            {
+                foreach (var gridTile in gridTileList)
+                {
+                    gridTile.Update();
+                    if (GridHitTest(gridTile.GetPosition(), mousePos)) Console.WriteLine("HIT");
 
-            if (m_InputManager.GetAction((int)PlayerInput.Shoot).IsTriggered)
-                System.Console.WriteLine("Shoot");
+                    if (m_InputManager.GetAction((int)PlayerInput.ClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(),mousePos) )
+                    {
+                        gridTile.SetType(GridTile.TileType.Inactive);
+                    }
+                }
+            }
+
+
 
             base.Update(renderContext);
         }
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
-
-            //MouseStateEx.IsButtonDown(MouseButtons.LeftButton)
-          //  Debug2D.DrawRectangle(new Rectangle(20, 20, 100, 100), Color.Black);
-
             base.Draw2D(renderContext, drawBefore3D);
         }
 
         public override void Draw3D(RenderContext renderContext)
         {
             base.Draw3D(renderContext);
+        }
+
+        private bool GridHitTest(Vector2 pos, Vector2 mousePos)
+        {
+
+            if (pos.X > mousePos.X) return false;
+            if (pos.Y > mousePos.Y) return false;
+            if (pos.X + GRID_OFFSET < mousePos.X) return false;
+            if (pos.Y + GRID_OFFSET < mousePos.Y) return false;
+            return true;
         }
     }
 
