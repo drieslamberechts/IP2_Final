@@ -82,8 +82,8 @@ namespace XNA_ENGINE.Game
             // -------------------------------------
             var interactionScene = new InteractionScene(Content);
             SceneManager.AddGameScene(interactionScene);
-            interactionScene.Initialize(2, 2);
-            SceneManager.SetActiveScene("InteractionScene");
+            //interactionScene.Initialize(2, 2);
+            //SceneManager.SetActiveScene("InteractionScene");
 
             //TILES
             foreach (var gridTileList in m_GridField)
