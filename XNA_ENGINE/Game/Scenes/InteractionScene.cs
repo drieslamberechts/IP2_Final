@@ -14,12 +14,13 @@ namespace XNA_ENGINE.Game.Scenes
         // Variables
         // ------------------------------
         private readonly ContentManager m_Content;
+        private const int COUTNDOWNDURATION = 200;
 
         readonly SpriteFont m_DebugFont;
         int m_Attackers;
         int m_Defenders;
         private bool m_bDrawText = false;
-        private int m_Countdown = 200;
+        private int m_Countdown;
 
         private Texture2D m_TexAttackers, m_TexDefenders, m_TexBackground;
         private Rectangle m_RectAttackers, m_RectDefenders, m_RectBackground;
@@ -38,6 +39,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         public void Initialize(int attackers, int defenders)
         {
+            m_Countdown = COUTNDOWNDURATION;
+
             m_Attackers = attackers;
             m_Defenders = defenders;
 
@@ -64,7 +67,7 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             if (m_bDrawText) m_Countdown--;
-            if (m_Countdown == 0) SceneManager.SetActiveScene("GameSceneConcept2");
+            if (m_Countdown <= 0) SceneManager.SetActiveScene("GameSceneConcept2");
         }
 
         // Draw

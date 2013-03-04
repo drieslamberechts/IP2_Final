@@ -118,5 +118,10 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         {
             return m_SelectedTile;
         }
+
+        public int GetSelectedMode()
+        {
+            return m_ModeSelected;
+        }
     }
 }

@@ -44,6 +44,9 @@ namespace XNA_ENGINE.Game.Objects.Concept2
 
         private Army m_Army = null;
 
+        private int m_RowPos;
+        private int m_ColumnPos;
+
         private GameSprite m_NormalTile;
         private GameSprite m_InactiveTile;
         private GameSprite m_DummyTile1;
@@ -65,8 +68,11 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         private TileType m_Type;
         private Settlement m_Settlement;
 
-        public GridTile(TileType tileType, Vector2 positon)
+        public GridTile(TileType tileType, Vector2 positon, int rowPos, int columnPos)
         {
+            m_RowPos = rowPos;
+            m_ColumnPos = columnPos;
+
             m_Type = tileType;
             m_Settlement = Settlement.None;
             m_Position = positon;
@@ -241,6 +247,16 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         public TileType GetTileType()
         {
             return m_Type;
+        }
+
+        public int GetRow()
+        {
+            return m_RowPos;
+        }
+
+        public int GetColumn()
+        {
+            return m_ColumnPos;
         }
     }
 }

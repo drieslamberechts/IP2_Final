@@ -47,6 +47,11 @@ namespace XNA_ENGINE.Game
         
         private Army m_ArmyGreen1;
         private Army m_ArmyRed1;
+        private Army m_ArmyRed2;
+        private Army m_ArmyBlue1;
+        private Army m_ArmyYellow1;
+
+        private InteractionScene m_InteractionScene; 
 
         public GameSceneConcept2(ContentManager content)
             : base("GameSceneConcept2")
@@ -76,7 +81,7 @@ namespace XNA_ENGINE.Game
                 List<GridTile> tempList = new List<GridTile>();
                 for (int j = 0; j < GRID_COLUMN_LENGTH; j++)
                 {
-                    tempList.Add(new GridTile(GridTile.TileType.Inactive, new Vector2((i * GRID_OFFSET) + SCREEN_OFFSET_HORIZONTAL, (j * GRID_OFFSET) + SCREEN_OFFSET_VERTICAL)));
+                    tempList.Add(new GridTile(GridTile.TileType.Inactive, new Vector2((i * GRID_OFFSET) + SCREEN_OFFSET_HORIZONTAL, (j * GRID_OFFSET) + SCREEN_OFFSET_VERTICAL),i,j));
                 }
                 m_GridField.Add(tempList);
             }
@@ -84,13 +89,17 @@ namespace XNA_ENGINE.Game
             //ARMIES
             m_ArmyGreen1 = new Army(Army.ArmyType.Green);
             m_ArmyRed1 = new Army(Army.ArmyType.Red);
+            m_ArmyRed2 = new Army(Army.ArmyType.Red);
+            m_ArmyBlue1 = new Army(Army.ArmyType.Blue);
+            m_ArmyYellow1 = new Army(Army.ArmyType.Yellow);
         }
 
         public override void Initialize()
         {
             // Add Interaction Scene for later use
             // -------------------------------------
-
+            m_InteractionScene = new InteractionScene(Content);
+            SceneManager.AddGameScene(m_InteractionScene);
 
             //TILES
             foreach (var gridTileList in m_GridField)
@@ -108,17 +117,24 @@ namespace XNA_ENGINE.Game
                     AddSceneObject(gridTile.GetSprite(7));
                     AddSceneObject(gridTile.GetSprite(8));
                     AddSceneObject(gridTile.GetSprite(9));
-
                 }
             }
+
+            //MENU
+            m_Menu = new Menu(Content);
+
+            //ARMIES
             m_ArmyGreen1.Initialize();
             m_ArmyRed1.Initialize();
-            
-            // Menu
-            m_Menu = new Menu(Content);
+            m_ArmyRed2.Initialize();
+            m_ArmyBlue1.Initialize();
+            m_ArmyYellow1.Initialize();
 
             AddSceneObject(m_ArmyGreen1.GetSprite());
             AddSceneObject(m_ArmyRed1.GetSprite());
+            AddSceneObject(m_ArmyRed2.GetSprite());
+            AddSceneObject(m_ArmyBlue1.GetSprite());
+            AddSceneObject(m_ArmyYellow1.GetSprite());
 
             InitGrid();
 
@@ -137,10 +153,13 @@ namespace XNA_ENGINE.Game
 
             // UPDATE MENU
             m_Menu.Update(renderContext, m_InputManager);
-            
+
             //TILES
             Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
             GridTile selectedGridTile = ReturnSelected();
+
+            m_Menu.GetSelectedMode();
+            m_Menu.GetSelectedTile();
 
             foreach (var gridTileList in m_GridField)
             {
@@ -149,12 +168,33 @@ namespace XNA_ENGINE.Game
                     gridTile.Update();
                     if (m_InputManager.GetAction((int)PlayerInput.ClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(), mousePos) && gridTile.GetTileType() != GridTile.TileType.Inactive)
                     {
-                        selectedGridTile.SetSelector(false);
-                        gridTile.SetSelector(true);
+                        if (m_Menu.GetSelectedMode() == 0)
+                        {
+                            selectedGridTile.SetSelector(false);
+                            gridTile.SetSelector(true);
+                        }
 
+                        if (m_Menu.GetSelectedMode() == 1)
+                        {
+                            selectedGridTile.SetSelector(false);
+
+                            switch (m_Menu.GetSelectedTile())
+                            {
+                                case 1:
+                                    gridTile.SetTileType(GridTile.TileType.Normal);
+                                    break;
+                                case 2:
+                                    gridTile.SetTileType(GridTile.TileType.Dummy1);
+                                    break;
+                                case 3:
+                                    gridTile.SetTileType(GridTile.TileType.Dummy2);
+                                    break;
+                            } 
+                        }
+                        
                         //DEBUG
-                        int rowIndex = ((int)gridTile.GetPosition().Y-SCREEN_OFFSET_VERTICAL)/GRID_OFFSET;
-                        int columnIndex = ((int)gridTile.GetPosition().X - SCREEN_OFFSET_HORIZONTAL) / GRID_OFFSET; ;
+                        int rowIndex = gridTile.GetRow();
+                        int columnIndex = gridTile.GetColumn();
                         System.Diagnostics.Trace.WriteLine(" m_GridField[" + columnIndex + "]" + "[" + rowIndex + "].SetTileType(GridTile.TileType.Normal);");
                     }
 
@@ -162,15 +202,16 @@ namespace XNA_ENGINE.Game
                     {
                         if (gridTile.GetTileType() != GridTile.TileType.Inactive && selectedGridTile.GetArmy() != null)
                         {
-                            MoveArmy(selectedGridTile.GetArmy(), gridTile);
-                          
-                            var interactionScene = new InteractionScene(Content);
-                            SceneManager.AddGameScene(interactionScene);
-                            interactionScene.Initialize(1, 3);
-                            SceneManager.SetActiveScene("InteractionScene");
-
+                            MoveArmy(selectedGridTile.GetArmy(), gridTile, selectedGridTile);
+                            
                             selectedGridTile.SetSelector(false);
                             gridTile.SetSelector(true);
+
+                            if(CheckSurroundingTilesForArmies(gridTile)!=null)
+                            {
+                                m_InteractionScene.Initialize(1, 3);
+                                SceneManager.SetActiveScene("InteractionScene");
+                            }
                         }
                     }
                 }
@@ -215,10 +256,38 @@ namespace XNA_ENGINE.Game
             return m_GridField[0][0];
         }
 
-        private void MoveArmy(Army targetArmy, GridTile destTile)
+        private void MoveArmy(Army targetArmy, GridTile destTile, GridTile fromTile)
         {
+            fromTile.SetArmy(null);
             targetArmy.SetTile(destTile);
             destTile.SetArmy(targetArmy);
+        }
+
+        private Army CheckSurroundingTilesForArmies(GridTile gridTile)
+        {
+            int rowIndex = gridTile.GetRow();
+            int columnIndex = gridTile.GetColumn();
+
+            if (m_GridField[rowIndex - 1][columnIndex].GetArmy() != null)
+                return m_GridField[rowIndex - 1][columnIndex].GetArmy();
+            if (m_GridField[rowIndex - 1][columnIndex + 1].GetArmy() != null)
+                return m_GridField[rowIndex - 1][columnIndex + 1].GetArmy();
+            if (m_GridField[rowIndex - 1][columnIndex - 1].GetArmy() != null)
+                return m_GridField[rowIndex - 1][columnIndex - 1].GetArmy();
+
+            if (m_GridField[rowIndex + 1][columnIndex].GetArmy() != null)
+                return m_GridField[rowIndex + 1][columnIndex].GetArmy();
+            if (m_GridField[rowIndex + 1][columnIndex + 1].GetArmy() != null)
+                return m_GridField[rowIndex + 1][columnIndex + 1].GetArmy();
+            if (m_GridField[rowIndex + 1][columnIndex - 1].GetArmy() != null)
+                return m_GridField[rowIndex + 1][columnIndex - 1].GetArmy();
+
+            if (m_GridField[rowIndex][columnIndex + 1].GetArmy() != null)
+                return m_GridField[rowIndex][columnIndex + 1].GetArmy();
+            if (m_GridField[rowIndex][columnIndex - 1].GetArmy() != null)
+                return m_GridField[rowIndex][columnIndex - 1].GetArmy();
+
+            return null;
         }
 
         private void InitGrid()
@@ -594,16 +663,26 @@ namespace XNA_ENGINE.Game
             m_GridField[23][26].SetTileType(GridTile.TileType.Normal);
             m_GridField[25][26].SetTileType(GridTile.TileType.Normal);
 
-
             m_GridField[14][11].SetSettlement(GridTile.Settlement.Green);
             m_GridField[9][3].SetSettlement(GridTile.Settlement.Red);
             m_GridField[12][24].SetSettlement(GridTile.Settlement.Blue);
             m_GridField[24][25].SetSettlement(GridTile.Settlement.Yellow);
 
+
             m_ArmyGreen1.SetTile(m_GridField[14][12]);
             m_GridField[14][12].SetArmy(m_ArmyGreen1);
+
             m_ArmyRed1.SetTile(m_GridField[9][4]);
             m_GridField[9][4].SetArmy(m_ArmyRed1);
+
+            m_ArmyRed2.SetTile(m_GridField[8][5]);
+            m_GridField[8][5].SetArmy(m_ArmyRed2);
+
+            m_ArmyBlue1.SetTile(m_GridField[12][23]);
+            m_GridField[12][23].SetArmy(m_ArmyBlue1);
+
+            m_ArmyYellow1.SetTile(m_GridField[24][24]);
+            m_GridField[24][24].SetArmy(m_ArmyYellow1);
         }
     }
 }
