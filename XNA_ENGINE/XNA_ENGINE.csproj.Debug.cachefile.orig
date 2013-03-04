@@ -24,12 +24,24 @@ Content\GreyTile.xnb
 Content\OrangeTile.xnb
 Content\RedTile.xnb
 Content\megaman.xnb
-<<<<<<< HEAD
-Content\Backgrounds\background.xnb
-=======
 Content\BlueSettlement.xnb
 Content\GreenSettlement.xnb
 Content\RedSettlement.xnb
 Content\YellowSettlement.xnb
->>>>>>> ae0c490e6985df518ebcce83e449abf8f8a7a6f9
+Content\GreenArmy.xnb
+Content\Selector.xnb
+<<<<<<< HEAD
+Content\BlueArmy.xnb
+Content\RedArmy.xnb
+Content\YellowArmy.xnb
+=======
+Content\switch.xnb
+Content\tile1.xnb
+Content\tile2.xnb
+Content\tile3.xnb
+Content\tile4.xnb
+Content\attack.xnb
+Content\defend.xnb
+Content\gather.xnb
+>>>>>>> d589278243c00ccf26cf4b31c74f86b86df8e04e
 Content\Music.wma

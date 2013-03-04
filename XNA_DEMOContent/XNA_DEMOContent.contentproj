@@ -218,11 +218,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Backgrounds\background.jpg">
-      <Name>background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GreenArmy.png">
@@ -239,6 +234,9 @@
   <ItemGroup>
     <Compile Include="BlueArmy.png">
       <Name>BlueArmy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="switch.jpg">
       <Name>switch</Name>
       <Importer>TextureImporter</Importer>
@@ -246,6 +244,9 @@
     </Compile>
     <Compile Include="RedArmy.png">
       <Name>RedArmy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="tile1.jpg">
       <Name>tile1</Name>
       <Importer>TextureImporter</Importer>
@@ -253,12 +254,16 @@
     </Compile>
     <Compile Include="YellowArmy.png">
       <Name>YellowArmy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="tile2.jpg">
       <Name>tile2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
     <Compile Include="tile3.jpg">
       <Name>tile3</Name>
       <Importer>TextureImporter</Importer>
