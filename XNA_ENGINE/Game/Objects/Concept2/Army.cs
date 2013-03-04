@@ -72,6 +72,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         {
             m_ActiveGridTile = tile;
             m_Position = tile.GetPosition();
+            m_ArmySprite.Translate(m_Position);
+            m_ArmySprite.CanDraw = true;
         }
 
         public GridTile GetActiveTile()

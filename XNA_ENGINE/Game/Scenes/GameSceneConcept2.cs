@@ -48,7 +48,6 @@ namespace XNA_ENGINE.Game
         private Army m_ArmyGreen1;
         private Army m_ArmyRed1;
 
-
         public GameSceneConcept2(ContentManager content)
             : base("GameSceneConcept2")
         {
@@ -121,8 +120,6 @@ namespace XNA_ENGINE.Game
             // Menu
             m_Menu = new Menu(Content);
 
-            
-
             AddSceneObject(m_ArmyGreen1.GetSprite());
             AddSceneObject(m_ArmyRed1.GetSprite());
 
@@ -174,11 +171,8 @@ namespace XNA_ENGINE.Game
                             gridTile.SetSelector(true);
                         }
                     }
-
                 }
             }
-
-
 
             base.Update(renderContext);
         }
@@ -600,10 +594,8 @@ namespace XNA_ENGINE.Game
             m_GridField[12][24].SetSettlement(GridTile.Settlement.Blue);
             m_GridField[24][25].SetSettlement(GridTile.Settlement.Yellow);
 
-            m_ArmyGreen1.SetTile(m_GridField[14][11]);
-            m_ArmyRed1.SetTile(m_GridField[9][3]);
-
+            m_ArmyGreen1.SetTile(m_GridField[14][12]);
+            m_ArmyRed1.SetTile(m_GridField[9][4]);
         }
     }
-
 }
