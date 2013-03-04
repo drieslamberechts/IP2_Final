@@ -43,7 +43,7 @@ namespace XNA_ENGINE.Game
         private ContentManager Content;
         private InputManager m_InputManager;
 
-
+        private Menu m_Menu;
 
         public GameSceneConcept2(ContentManager content)
             : base("GameSceneConcept2")
@@ -107,6 +107,9 @@ namespace XNA_ENGINE.Game
                 }
             }
 
+            // Menu
+            m_Menu = new Menu(Content);
+
             InitGrid();
 
 
@@ -122,6 +125,9 @@ namespace XNA_ENGINE.Game
         {
             //INPUT
             m_InputManager.Update();
+
+            // UPDATE MENU
+            m_Menu.Update(renderContext, m_InputManager);
             
             //TILES
             Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
@@ -157,13 +163,14 @@ namespace XNA_ENGINE.Game
                 }
             }
 
-
-
             base.Update(renderContext);
         }
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
+            // DrawGUI
+            m_Menu.Draw(renderContext);
+
             base.Draw2D(renderContext, drawBefore3D);
         }
 
@@ -579,5 +586,4 @@ namespace XNA_ENGINE.Game
             m_GridField[15][11].SetArmy(true);
         }
     }
-
 }
