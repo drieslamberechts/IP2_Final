@@ -24,7 +24,6 @@ Content\GreyTile.xnb
 Content\OrangeTile.xnb
 Content\RedTile.xnb
 Content\megaman.xnb
-Content\Backgrounds\background.xnb
 Content\BlueSettlement.xnb
 Content\GreenSettlement.xnb
 Content\RedSettlement.xnb
@@ -32,4 +31,7 @@ Content\YellowSettlement.xnb
 Content\Backgrounds\background.xnb
 Content\GreenArmy.xnb
 Content\Selector.xnb
+Content\BlueArmy.xnb
+Content\RedArmy.xnb
+Content\YellowArmy.xnb
 Content\Music.wma

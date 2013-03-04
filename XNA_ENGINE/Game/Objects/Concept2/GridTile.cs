@@ -15,9 +15,34 @@ namespace XNA_ENGINE.Game.Objects.Concept2
 {
     public class GridTile
     {
-        public enum TileType { Normal, Inactive, Dummy1, Dummy2 };
-        public enum Settlement { None, Green, Red, Yellow, Blue };
-        public enum Army { Green1 };
+        public enum TileType
+        {
+            Normal,
+            Inactive,
+            Dummy1,
+            Dummy2
+        };
+
+        public enum Settlement
+        {
+            None,
+            Green,
+            Red,
+            Yellow,
+            Blue
+        };
+
+        public enum ArmyType
+        {
+            None,
+            Green1,
+            Red1,
+            Red2,
+            Blue1,
+            Yellow1
+        };
+
+        private Army m_Army = null;
 
         private GameSprite m_NormalTile;
         private GameSprite m_InactiveTile;
@@ -31,15 +56,14 @@ namespace XNA_ENGINE.Game.Objects.Concept2
 
         private static GameSprite m_Selector;
 
-        private static GameSprite m_GreenArmy1;
+        private ArmyType m_ActiveArmy = ArmyType.None;
 
         private bool m_IsSelected = false;
-        private bool m_HasArmy = false;
 
         private Vector2 m_Position;
 
-        TileType m_Type;
-        Settlement m_Settlement;
+        private TileType m_Type;
+        private Settlement m_Settlement;
 
         public GridTile(TileType tileType, Vector2 positon)
         {
@@ -64,16 +88,14 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             m_YellowSettlement = new GameSprite("YellowSettlement");
             m_BlueSettlement = new GameSprite("BlueSettlement");
 
-            m_Selector =new GameSprite("Selector");
-
-            m_GreenArmy1 = new GameSprite("GreenArmy");
+            m_Selector = new GameSprite("Selector");
 
             UpdateTypes();
         }
 
         public void Update()
         {
-            
+
         }
 
         public GameSprite GetSprite(int id)
@@ -94,8 +116,6 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                 return m_YellowSettlement;
             if (id == 7)
                 return m_BlueSettlement;
-            if (id == 8)
-                return m_GreenArmy1;
 
             return m_Selector;
         }
@@ -203,29 +223,19 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             }
         }
 
-        public void SetArmy(bool value)
-        {
-            if (value)
-            {
-                m_HasArmy = true;
-                m_GreenArmy1.CanDraw = true;
-                m_GreenArmy1.Translate(m_Position);
-            }
-            else
-            {
-                m_HasArmy = false;
-                m_GreenArmy1.CanDraw = false;
-            }
-        }
-
         public bool IsSelected()
         {
             return m_IsSelected;
         }
 
-        public bool GetArmy()
+        public void SetArmy(Army army)
         {
-            return m_HasArmy;
+            m_Army = army;
+        }
+
+        public Army GetArmy()
+        {
+            return m_Army;
         }
     }
 }

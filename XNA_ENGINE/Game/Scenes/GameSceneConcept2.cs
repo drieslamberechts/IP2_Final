@@ -43,6 +43,8 @@ namespace XNA_ENGINE.Game
         private ContentManager Content;
         private InputManager m_InputManager;
 
+        private Army m_ArmyGreen1;
+        private Army m_ArmyRed1;
 
 
         public GameSceneConcept2(ContentManager content)
@@ -77,6 +79,10 @@ namespace XNA_ENGINE.Game
                 }
                 m_GridField.Add(tempList);
             }
+
+            //ARMIES
+            m_ArmyGreen1 = new Army(Army.ArmyType.Green);
+            m_ArmyRed1 = new Army(Army.ArmyType.Red);
         }
 
         public override void Initialize()
@@ -103,12 +109,16 @@ namespace XNA_ENGINE.Game
                     AddSceneObject(gridTile.GetSprite(6));
                     AddSceneObject(gridTile.GetSprite(7));
                     AddSceneObject(gridTile.GetSprite(8));
-                    AddSceneObject(gridTile.GetSprite(9));
                 }
             }
 
-            InitGrid();
+            m_ArmyGreen1.Initialize();
+            m_ArmyRed1.Initialize();
 
+            AddSceneObject(m_ArmyGreen1.GetSprite());
+            AddSceneObject(m_ArmyRed1.GetSprite());
+
+            InitGrid();
 
             base.Initialize();
         }
@@ -136,6 +146,7 @@ namespace XNA_ENGINE.Game
                         ReturnSelected().SetSelector(false);
                         gridTile.SetSelector(true);
 
+                        //DEBUG
                         int rowIndex = ((int)gridTile.GetPosition().Y-SCREEN_OFFSET_VERTICAL)/GRID_OFFSET;
                         int columnIndex = ((int)gridTile.GetPosition().X - SCREEN_OFFSET_HORIZONTAL) / GRID_OFFSET; ;
                         System.Diagnostics.Trace.WriteLine(" m_GridField[" + columnIndex + "]" + "[" + rowIndex + "].SetTileType(GridTile.TileType.Normal);");
@@ -145,15 +156,12 @@ namespace XNA_ENGINE.Game
                     {
                         GridTile selectedGridTile = ReturnSelected();
 
-                        if (selectedGridTile != m_GridField[0][0] && selectedGridTile.GetArmy())
+                        if (selectedGridTile != m_GridField[0][0])
                         {
-                            selectedGridTile.SetArmy(false);
-                            gridTile.SetArmy(true);
                             selectedGridTile.SetSelector(false);
                             gridTile.SetSelector(true);
                         }
                     }
-
                 }
             }
 
@@ -194,7 +202,6 @@ namespace XNA_ENGINE.Game
             }
 
             return m_GridField[0][0];
-
         }
 
         private void InitGrid()
@@ -576,7 +583,9 @@ namespace XNA_ENGINE.Game
             m_GridField[12][24].SetSettlement(GridTile.Settlement.Blue);
             m_GridField[24][25].SetSettlement(GridTile.Settlement.Yellow);
 
-            m_GridField[15][11].SetArmy(true);
+            m_ArmyGreen1.SetTile(m_GridField[14][11]);
+            m_ArmyRed1.SetTile(m_GridField[9][3]);
+
         }
     }
 
