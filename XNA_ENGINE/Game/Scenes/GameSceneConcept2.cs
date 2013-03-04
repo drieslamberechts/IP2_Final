@@ -90,10 +90,7 @@ namespace XNA_ENGINE.Game
         {
             // Add Interaction Scene for later use
             // -------------------------------------
-            var interactionScene = new InteractionScene(Content);
-            SceneManager.AddGameScene(interactionScene);
-            //interactionScene.Initialize(1, 3);
-            //SceneManager.SetActiveScene("InteractionScene");
+
 
             //TILES
             foreach (var gridTileList in m_GridField)
@@ -143,15 +140,16 @@ namespace XNA_ENGINE.Game
             
             //TILES
             Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
+            GridTile selectedGridTile = ReturnSelected();
 
             foreach (var gridTileList in m_GridField)
             {
                 foreach (var gridTile in gridTileList)
                 {
                     gridTile.Update();
-                    if (m_InputManager.GetAction((int)PlayerInput.ClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(),mousePos) )
+                    if (m_InputManager.GetAction((int)PlayerInput.ClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(), mousePos) && gridTile.GetTileType() != GridTile.TileType.Inactive)
                     {
-                        ReturnSelected().SetSelector(false);
+                        selectedGridTile.SetSelector(false);
                         gridTile.SetSelector(true);
 
                         //DEBUG
@@ -162,11 +160,15 @@ namespace XNA_ENGINE.Game
 
                     if (m_InputManager.GetAction((int)PlayerInput.RightClickTile).IsTriggered && GridHitTest(gridTile.GetPosition(), mousePos))
                     {
-                        GridTile selectedGridTile = ReturnSelected();
-
-                        if (selectedGridTile != m_GridField[0][0])
+                        if (gridTile.GetTileType() != GridTile.TileType.Inactive && selectedGridTile.GetArmy() != null)
                         {
-                            
+                            MoveArmy(selectedGridTile.GetArmy(), gridTile);
+                          
+                            var interactionScene = new InteractionScene(Content);
+                            SceneManager.AddGameScene(interactionScene);
+                            interactionScene.Initialize(1, 3);
+                            SceneManager.SetActiveScene("InteractionScene");
+
                             selectedGridTile.SetSelector(false);
                             gridTile.SetSelector(true);
                         }
@@ -207,12 +209,16 @@ namespace XNA_ENGINE.Game
                 foreach (var gridTile in gridTileList)
                 {
                     if (gridTile.IsSelected()) return gridTile;
-
                 }
             }
 
             return m_GridField[0][0];
+        }
 
+        private void MoveArmy(Army targetArmy, GridTile destTile)
+        {
+            targetArmy.SetTile(destTile);
+            destTile.SetArmy(targetArmy);
         }
 
         private void InitGrid()
@@ -595,7 +601,9 @@ namespace XNA_ENGINE.Game
             m_GridField[24][25].SetSettlement(GridTile.Settlement.Yellow);
 
             m_ArmyGreen1.SetTile(m_GridField[14][12]);
+            m_GridField[14][12].SetArmy(m_ArmyGreen1);
             m_ArmyRed1.SetTile(m_GridField[9][4]);
+            m_GridField[9][4].SetArmy(m_ArmyRed1);
         }
     }
 }

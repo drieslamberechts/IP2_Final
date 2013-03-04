@@ -237,5 +237,10 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         {
             return m_Army;
         }
+
+        public TileType GetTileType()
+        {
+            return m_Type;
+        }
     }
 }
