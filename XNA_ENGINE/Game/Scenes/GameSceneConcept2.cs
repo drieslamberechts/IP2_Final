@@ -43,6 +43,8 @@ namespace XNA_ENGINE.Game
         private ContentManager Content;
         private InputManager m_InputManager;
 
+        private Menu m_Menu;
+        
         private Army m_ArmyGreen1;
         private Army m_ArmyRed1;
 
@@ -109,11 +111,17 @@ namespace XNA_ENGINE.Game
                     AddSceneObject(gridTile.GetSprite(6));
                     AddSceneObject(gridTile.GetSprite(7));
                     AddSceneObject(gridTile.GetSprite(8));
+                    AddSceneObject(gridTile.GetSprite(9));
+
                 }
             }
-
             m_ArmyGreen1.Initialize();
             m_ArmyRed1.Initialize();
+            
+            // Menu
+            m_Menu = new Menu(Content);
+
+            
 
             AddSceneObject(m_ArmyGreen1.GetSprite());
             AddSceneObject(m_ArmyRed1.GetSprite());
@@ -132,6 +140,9 @@ namespace XNA_ENGINE.Game
         {
             //INPUT
             m_InputManager.Update();
+
+            // UPDATE MENU
+            m_Menu.Update(renderContext, m_InputManager);
             
             //TILES
             Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
@@ -158,10 +169,12 @@ namespace XNA_ENGINE.Game
 
                         if (selectedGridTile != m_GridField[0][0])
                         {
+                            
                             selectedGridTile.SetSelector(false);
                             gridTile.SetSelector(true);
                         }
                     }
+
                 }
             }
 
@@ -172,6 +185,9 @@ namespace XNA_ENGINE.Game
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
+            // DrawGUI
+            m_Menu.Draw(renderContext);
+
             base.Draw2D(renderContext, drawBefore3D);
         }
 
@@ -202,6 +218,7 @@ namespace XNA_ENGINE.Game
             }
 
             return m_GridField[0][0];
+
         }
 
         private void InitGrid()
