@@ -37,12 +37,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
-      <Project>{FDC4EB6B-4FC3-45DC-8E17-7F560C58CD0C}</Project>
-      <Name>SkinnedModelPipeline</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="WhitePixel.bmp">
       <Name>WhitePixel</Name>
       <Importer>TextureImporter</Importer>
@@ -54,13 +48,6 @@
       <Name>Hero_Spritesheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Vampire.x">
-      <Name>Vampire</Name>
-      <Importer>XImporter</Importer>
-      <Processor>SkinnedModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>

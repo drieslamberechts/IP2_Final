@@ -19,7 +19,7 @@
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\Wout\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -91,7 +91,6 @@
     <Compile Include="Engine\Helpers\Extensions.cs" />
     <Compile Include="Engine\Objects\GameHitRegion2D.cs" />
     <Compile Include="Engine\Helpers\InputManager.cs" />
-    <Compile Include="Engine\Objects\GameAnimatedModel.cs" />
     <Compile Include="Engine\Objects\GameAnimatedSprite.cs" />
     <Compile Include="Engine\Objects\GameButton.cs" />
     <Compile Include="Engine\Objects\GameModel.cs" />
@@ -111,7 +110,6 @@
     <Compile Include="Game\Scenes\DriesScene.cs" />
     <Compile Include="Game\Scenes\FiddleDemoScene.cs" />
     <Compile Include="Game\Scenes\GameAnimatedSpriteDemo.cs" />
-    <Compile Include="Game\Scenes\GameModelDemo.cs" />
     <Compile Include="Game\Scenes\GameSceneConcept1.cs" />
     <Compile Include="Game\Scenes\GameSpriteDemo.cs" />
     <Compile Include="Game\Scenes\GoingWildDemo.cs" />
@@ -154,10 +152,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SkinnedModelData\SkinnedModelData.csproj">
-      <Project>{3899FB5E-0ED8-4606-81D5-4053C24C52AF}</Project>
-      <Name>SkinnedModelData</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XNA_DEMOContent\XNA_DEMOContent.contentproj">
       <Project>{019DE630-5711-48FA-8AE7-C0C67A910398}</Project>
       <Name>XNA_DEMOContent %28Content%29</Name>

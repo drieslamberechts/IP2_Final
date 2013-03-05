@@ -44,7 +44,6 @@ namespace XNA_ENGINE.Game
             SceneManager.AddGameScene(new DriesScene());
             SceneManager.AddGameScene(new GameSpriteDemo());
             SceneManager.AddGameScene(new GameAnimatedSpriteDemo());
-            SceneManager.AddGameScene(new GameModelDemo());
             SceneManager.AddGameScene(new GoingWildDemo());
             SceneManager.AddGameScene(new FiddleDemoScene());
 
@@ -115,8 +114,6 @@ namespace XNA_ENGINE.Game
                 SceneManager.SetActiveScene("FiddleDemoScene");
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D5))
                 SceneManager.SetActiveScene("GameAnimatedSpriteDemo");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D6))
-                SceneManager.SetActiveScene("GameModelDemo");
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D7))
                 SceneManager.SetActiveScene("GoingWildDemo");
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D8))
