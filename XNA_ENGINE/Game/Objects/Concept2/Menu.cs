@@ -70,31 +70,28 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                 else m_ModeSelected = 1;
             }
 
-            if (m_NrOfTiles > 0)
+            if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
             {
-                if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
-                {
-                 //   m_NrOfTiles--;
-                    m_SelectedTile = 1;
-                }
-                else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
-                         CheckHitButton(mousePos, m_RectTile2))
-                {
-                 //   m_NrOfTiles--;
-                    m_SelectedTile = 2;
-                }
-                else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
-                         CheckHitButton(mousePos, m_RectTile3))
-                {
-                  //  m_NrOfTiles--;
-                    m_SelectedTile = 3;
-                }
-                else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
-                         CheckHitButton(mousePos, m_RectTile4))
-                {
-                  ///  m_NrOfTiles--;
-                    m_SelectedTile = 4;
-                }
+                //   m_NrOfTiles--;
+                m_SelectedTile = 1;
+            }
+            else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
+                        CheckHitButton(mousePos, m_RectTile2))
+            {
+                //   m_NrOfTiles--;
+                m_SelectedTile = 2;
+            }
+            else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
+                        CheckHitButton(mousePos, m_RectTile3))
+            {
+                //  m_NrOfTiles--;
+                m_SelectedTile = 3;
+            }
+            else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
+                        CheckHitButton(mousePos, m_RectTile4))
+            {
+                ///  m_NrOfTiles--;
+                m_SelectedTile = 4;
             }
         }
 
