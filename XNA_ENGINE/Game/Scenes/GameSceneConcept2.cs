@@ -182,12 +182,15 @@ namespace XNA_ENGINE.Game
                             {
                                 case 1:
                                     gridTile.SetTileType(GridTile.TileType.Normal);
+                                    m_Menu.SetNrOfTiles(-1);
                                     break;
                                 case 2:
                                     gridTile.SetTileType(GridTile.TileType.Dummy1);
+                                    m_Menu.SetNrOfTiles(-1);
                                     break;
                                 case 3:
                                     gridTile.SetTileType(GridTile.TileType.Dummy2);
+                                    m_Menu.SetNrOfTiles(-1);
                                     break;
                             } 
                         }
