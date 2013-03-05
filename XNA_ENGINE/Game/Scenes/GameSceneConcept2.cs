@@ -164,10 +164,12 @@ namespace XNA_ENGINE.Game
             Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
             GridTile selectedGridTile = ReturnSelected();
 
-            if (selectedGridTile.GetArmy() == null) m_ArmyStats = "";
+            if (selectedGridTile.GetArmy() == null || selectedGridTile.GetArmy().GetActive() == false) m_ArmyStats = "";
             else
             {
-                m_ArmyStats = "Armysize: " + selectedGridTile.GetArmy().GetArmySize() + "  Bonustile: " + selectedGridTile.GetArmy().GetBonusTile() + "  Negativetile: " + selectedGridTile.GetArmy().GetNegativeTile();
+                m_ArmyStats = "Armysize: " + selectedGridTile.GetArmy().GetArmySize() + 
+                                "  Bonustile: " + selectedGridTile.GetArmy().GetBonusTile() + 
+                                "  Negativetile: " + selectedGridTile.GetArmy().GetNegativeTile();
             }
 
             m_Menu.GetSelectedMode();
@@ -224,10 +226,9 @@ namespace XNA_ENGINE.Game
 
                             Army surroundingArmy = CheckSurroundingTilesForArmies(gridTile);
 
-                            if (surroundingArmy != null)
+                            if (surroundingArmy != null && surroundingArmy.GetActive() == true)
                             {
-
-                                m_InteractionScene.Initialize(m_ArmyGreen1, surroundingArmy);
+                                m_InteractionScene.Initialize(m_ArmyGreen1, surroundingArmy, m_Menu);
                                 SceneManager.SetActiveScene("InteractionScene");
                             }
                         }

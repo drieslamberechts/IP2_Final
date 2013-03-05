@@ -36,6 +36,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         private GridTile.TileType m_BonusTile;
         private GridTile.TileType m_NegativeTile;
 
+        private GridTile.TileType m_ActiveTileType;
+
 
         public Army(ArmyType armyType)
         {
@@ -44,6 +46,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
 
         public void Initialize()
         {
+            m_ActiveTileType = GridTile.TileType.Normal;
+
             switch (m_Type)
             {
                 case ArmyType.Green:

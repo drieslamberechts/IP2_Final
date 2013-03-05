@@ -32,6 +32,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         private bool m_Finished;
 
+        private Menu m_Menu;
+
         // ------------------------------
         // Methods
         // ------------------------------
@@ -42,8 +44,10 @@ namespace XNA_ENGINE.Game.Scenes
             m_DebugFont = m_Content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
-        public void Initialize(Army attackers, Army defenders)
+        public void Initialize(Army attackers, Army defenders, Menu menu)
         {
+            m_Menu = menu;
+
             m_Finished = false;
             m_Countdown = COUTNDOWNDURATION;
 
@@ -79,6 +83,7 @@ namespace XNA_ENGINE.Game.Scenes
                 {
                     m_ArmyDefenders.SetActive(false);
                     m_ArmyAttackers.AddArmySize(2);
+                    m_Menu.SetNrOfTiles(3);
                 }
 
                 if (m_Attackers == 0)
@@ -157,20 +162,24 @@ namespace XNA_ENGINE.Game.Scenes
             for (int t = 0; t < m_Attackers; ++t)
             {
                 int attackersDice = random.Next(1, 6);
-              //  if (attackersDice > m_AttackersDice)
-                    m_AttackersDice = attackersDice;
+                 m_AttackersDice = attackersDice;
             }
 
             for (int t = 0; t < m_Defenders; ++t)
             {
                 int defendersDice = random.Next(1, 6);
-              //  if (defendersDice > m_DefendersDice)
-                    m_DefendersDice = defendersDice;
+                 m_DefendersDice = defendersDice;
             }
         }
 
         private void Die()
         {
+            if (m_ArmyAttackers.GetBonusTile() == m_ArmyAttackers.GetActiveTile().GetTileType()) ++m_AttackersDice;
+            else if (m_ArmyAttackers.GetNegativeTile() == m_ArmyAttackers.GetActiveTile().GetTileType()) --m_AttackersDice;
+
+            if (m_ArmyDefenders.GetBonusTile() == m_ArmyDefenders.GetActiveTile().GetTileType()) ++m_DefendersDice;
+            else if (m_ArmyDefenders.GetNegativeTile() == m_ArmyDefenders.GetActiveTile().GetTileType()) --m_DefendersDice;
+
             if (m_DefendersDice >= m_AttackersDice) m_Attackers--;
             else m_Defenders--;
         }
