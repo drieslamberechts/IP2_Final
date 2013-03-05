@@ -51,6 +51,10 @@ namespace XNA_ENGINE.Game
         private Army m_ArmyBlue1;
         private Army m_ArmyYellow1;
 
+        private string m_ArmyStats;
+
+        private SpriteFont m_DebugFont;
+
         private InteractionScene m_InteractionScene; 
 
         public GameSceneConcept2(ContentManager content)
@@ -58,6 +62,8 @@ namespace XNA_ENGINE.Game
         {
             //CONTENT
             Content = content;
+
+            m_DebugFont = content.Load<SpriteFont>("Fonts/DebugFont");
 
             //INPUT
             m_InputManager = new InputManager();
@@ -158,6 +164,12 @@ namespace XNA_ENGINE.Game
             Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
             GridTile selectedGridTile = ReturnSelected();
 
+            if (selectedGridTile.GetArmy() == null) m_ArmyStats = "";
+            else
+            {
+                m_ArmyStats = "Armysize: " + selectedGridTile.GetArmy().GetArmySize() + "  Bonustile: " + selectedGridTile.GetArmy().GetBonusTile() + "  Negativetile: " + selectedGridTile.GetArmy().GetNegativeTile();
+            }
+
             m_Menu.GetSelectedMode();
             m_Menu.GetSelectedTile();
 
@@ -185,11 +197,11 @@ namespace XNA_ENGINE.Game
                                     m_Menu.SetNrOfTiles(-1);
                                     break;
                                 case 2:
-                                    gridTile.SetTileType(GridTile.TileType.Dummy1);
+                                    gridTile.SetTileType(GridTile.TileType.Red);
                                     m_Menu.SetNrOfTiles(-1);
                                     break;
                                 case 3:
-                                    gridTile.SetTileType(GridTile.TileType.Dummy2);
+                                    gridTile.SetTileType(GridTile.TileType.Green);
                                     m_Menu.SetNrOfTiles(-1);
                                     break;
                             } 
@@ -210,9 +222,12 @@ namespace XNA_ENGINE.Game
                             selectedGridTile.SetSelector(false);
                             gridTile.SetSelector(true);
 
-                            if(CheckSurroundingTilesForArmies(gridTile)!=null)
+                            Army surroundingArmy = CheckSurroundingTilesForArmies(gridTile);
+
+                            if (surroundingArmy != null)
                             {
-                                m_InteractionScene.Initialize(1, 3);
+
+                                m_InteractionScene.Initialize(m_ArmyGreen1, surroundingArmy);
                                 SceneManager.SetActiveScene("InteractionScene");
                             }
                         }
@@ -227,6 +242,8 @@ namespace XNA_ENGINE.Game
         {
             // DrawGUI
             m_Menu.Draw(renderContext);
+
+            renderContext.SpriteBatch.DrawString(m_DebugFont,m_ArmyStats,new Vector2(700,0),Color.Black);
 
             base.Draw2D(renderContext, drawBefore3D);
         }

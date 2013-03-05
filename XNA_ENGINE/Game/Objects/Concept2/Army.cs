@@ -29,6 +29,14 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         private GridTile m_ActiveGridTile;
         private ArmyType m_Type;
 
+        private int m_ArmySize;
+
+        private bool m_Active = true;
+
+        private GridTile.TileType m_BonusTile;
+        private GridTile.TileType m_NegativeTile;
+
+
         public Army(ArmyType armyType)
         {
             m_Type = armyType;
@@ -40,15 +48,27 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             {
                 case ArmyType.Green:
                     m_ArmySprite = new GameSprite("GreenArmy");
+                    m_ArmySize = 4;
+                    m_BonusTile = GridTile.TileType.Green;
+                    m_NegativeTile = GridTile.TileType.Red;
                     break;
                 case ArmyType.Red:
                     m_ArmySprite = new GameSprite("RedArmy");
+                    m_ArmySize = 3;
+                    m_BonusTile = GridTile.TileType.Red;
+                    m_NegativeTile = GridTile.TileType.Green;
                     break;
                 case ArmyType.Blue:
                     m_ArmySprite = new GameSprite("BlueArmy");
+                    m_ArmySize = 5;
+                    m_BonusTile = GridTile.TileType.Red;
+                    m_NegativeTile = GridTile.TileType.Green;
                     break;
                 case ArmyType.Yellow:
                     m_ArmySprite = new GameSprite("YellowArmy");
+                    m_ArmySize = 2;
+                    m_BonusTile = GridTile.TileType.Red;
+                    m_NegativeTile = GridTile.TileType.Green;
                     break;
             }
         }
@@ -79,6 +99,37 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         public GridTile GetActiveTile()
         {
             return m_ActiveGridTile;
+        }
+
+        public int GetArmySize()
+        {
+            return m_ArmySize;
+        }
+
+        public void AddArmySize(int size)
+        {
+            m_ArmySize += size;
+        }
+
+        public void SetActive(bool value)
+        {
+            m_Active = value;
+            m_ArmySprite.CanDraw = value;
+        }
+
+        public bool GetActive()
+        {
+            return m_Active;
+        }
+
+        public GridTile.TileType GetBonusTile()
+        {
+            return m_BonusTile;
+        }
+
+        public GridTile.TileType GetNegativeTile()
+        {
+            return m_NegativeTile;
         }
     }
 }

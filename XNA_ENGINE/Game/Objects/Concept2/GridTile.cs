@@ -19,8 +19,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         {
             Normal,
             Inactive,
-            Dummy1,
-            Dummy2
+            Red,
+            Green
         };
 
         public enum Settlement
@@ -180,11 +180,11 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                     m_InactiveTile.CanDraw = true;
                     break;
 
-                case TileType.Dummy1:
+                case TileType.Red:
                     m_DummyTile1.CanDraw = true;
                     break;
 
-                case TileType.Dummy2:
+                case TileType.Green:
                     m_DummyTile2.CanDraw = true;
                     break;
             }

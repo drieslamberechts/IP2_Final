@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Objects.Concept2;
 
 namespace XNA_ENGINE.Game.Scenes
 {
@@ -14,7 +15,7 @@ namespace XNA_ENGINE.Game.Scenes
         // Variables
         // ------------------------------
         private readonly ContentManager m_Content;
-        private const int COUTNDOWNDURATION = 200;
+        private const int COUTNDOWNDURATION = 400;
 
         readonly SpriteFont m_DebugFont;
         int m_Attackers;
@@ -27,6 +28,10 @@ namespace XNA_ENGINE.Game.Scenes
 
         private int m_AttackersDice, m_DefendersDice;
 
+        private Army m_ArmyAttackers, m_ArmyDefenders;
+
+        private bool m_Finished;
+
         // ------------------------------
         // Methods
         // ------------------------------
@@ -37,12 +42,16 @@ namespace XNA_ENGINE.Game.Scenes
             m_DebugFont = m_Content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
-        public void Initialize(int attackers, int defenders)
+        public void Initialize(Army attackers, Army defenders)
         {
+            m_Finished = false;
             m_Countdown = COUTNDOWNDURATION;
 
-            m_Attackers = attackers;
-            m_Defenders = defenders;
+            m_ArmyAttackers = attackers;
+            m_ArmyDefenders = defenders;
+
+            m_Attackers = attackers.GetArmySize();
+            m_Defenders = defenders.GetArmySize();
 
             m_TexAttackers = m_Content.Load<Texture2D>("megaman");
             m_TexDefenders = m_Content.Load<Texture2D>("megaman");
@@ -61,9 +70,22 @@ namespace XNA_ENGINE.Game.Scenes
                 Die();
             }
 
-            if (m_Attackers == 0 || m_Defenders == 0)
+            if (m_Finished == false && (m_Attackers == 0 || m_Defenders == 0))
             {
+                m_Finished = true;
                 m_bDrawText = true;
+
+                if (m_Defenders == 0)
+                {
+                    m_ArmyDefenders.SetActive(false);
+                    m_ArmyAttackers.AddArmySize(2);
+                }
+
+                if (m_Attackers == 0)
+                {
+                    m_ArmyAttackers.SetActive(false);
+                    m_ArmyDefenders.AddArmySize(2);
+                }
             }
 
             if (m_bDrawText) m_Countdown--;
@@ -135,22 +157,21 @@ namespace XNA_ENGINE.Game.Scenes
             for (int t = 0; t < m_Attackers; ++t)
             {
                 int attackersDice = random.Next(1, 6);
-                if (attackersDice > m_AttackersDice)
+              //  if (attackersDice > m_AttackersDice)
                     m_AttackersDice = attackersDice;
             }
 
             for (int t = 0; t < m_Defenders; ++t)
             {
                 int defendersDice = random.Next(1, 6);
-                if (defendersDice > m_DefendersDice)
+              //  if (defendersDice > m_DefendersDice)
                     m_DefendersDice = defendersDice;
             }
         }
 
         private void Die()
         {
-            if (m_DefendersDice > m_AttackersDice) m_Attackers--;
-            else if (m_DefendersDice == m_AttackersDice) m_Attackers--;
+            if (m_DefendersDice >= m_AttackersDice) m_Attackers--;
             else m_Defenders--;
         }
     }
