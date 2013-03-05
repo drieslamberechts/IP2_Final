@@ -22,13 +22,16 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         private ContentManager Content;
         private Texture2D m_TexMode, m_TexTile1, m_TexTile2, m_TexTile3, m_TexTile4, m_TexAttack, m_TexDefend, m_TexGather;
         private Rectangle m_RectMode, m_RectTile1, m_RectTile2, m_RectTile3, m_RectTile4, m_RectAttack, m_RectDefend, m_RectGather;
+        private int m_NrOfTiles;
 
         public int m_ModeSelected = 0;
         private int m_SelectedTile = 0;
+        private SpriteFont m_DebugFont;
 
-        public Menu(ContentManager content)
+        public Menu(ContentManager content, int nrOfTiles)
         {
             Content = content;
+            m_NrOfTiles = nrOfTiles;
 
             m_TexMode = Content.Load<Texture2D>("switch");
             m_TexTile1 = Content.Load<Texture2D>("tile1");
@@ -50,6 +53,8 @@ namespace XNA_ENGINE.Game.Objects.Concept2
             m_RectDefend = new Rectangle(140, 900, m_TexDefend.Width, m_TexDefend.Height);
             m_RectGather = new Rectangle(250, 900, m_TexGather.Width, m_TexGather.Height);
 
+            m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
+
             InputAction Click = new InputAction((int)PlayerInput.Click, TriggerState.Pressed);
             Click.MouseButton = MouseButtons.LeftButton;
             Click.GamePadButton = Buttons.X;
@@ -65,21 +70,31 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                 else m_ModeSelected = 1;
             }
 
-            if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
+            if (m_NrOfTiles > 0)
             {
-                m_SelectedTile = 1;
-            }
-            else if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
-            {
-                m_SelectedTile = 2;
-            }
-            else if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile3))
-            {
-                m_SelectedTile = 3;
-            }
-            else if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
-            {
-                m_SelectedTile = 4;
+                if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
+                {
+                    m_NrOfTiles--;
+                    m_SelectedTile = 1;
+                }
+                else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
+                         CheckHitButton(mousePos, m_RectTile2))
+                {
+                    m_NrOfTiles--;
+                    m_SelectedTile = 2;
+                }
+                else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
+                         CheckHitButton(mousePos, m_RectTile3))
+                {
+                    m_NrOfTiles--;
+                    m_SelectedTile = 3;
+                }
+                else if (inputManager.GetAction((int) PlayerInput.Click).IsTriggered &&
+                         CheckHitButton(mousePos, m_RectTile4))
+                {
+                    m_NrOfTiles--;
+                    m_SelectedTile = 4;
+                }
             }
         }
 
@@ -87,6 +102,7 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         public void Draw(RenderContext renderContext)
         {
             renderContext.SpriteBatch.Draw(m_TexMode, m_RectMode, Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Number Of Tiles Available: " + m_NrOfTiles, new Vector2(10, 25), Color.White);
 
             if (m_ModeSelected == 1)
             {
@@ -122,6 +138,16 @@ namespace XNA_ENGINE.Game.Objects.Concept2
         public int GetSelectedMode()
         {
             return m_ModeSelected;
+        }
+
+        public int GetNrOfTiles()
+        {
+            return m_NrOfTiles;
+        }
+
+        public void SetNrOfTiles(int addNr)
+        {
+            m_NrOfTiles += addNr;
         }
     }
 }

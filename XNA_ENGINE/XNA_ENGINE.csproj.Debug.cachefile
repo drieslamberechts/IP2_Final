@@ -30,9 +30,6 @@ Content\RedSettlement.xnb
 Content\YellowSettlement.xnb
 Content\GreenArmy.xnb
 Content\Selector.xnb
-Content\BlueArmy.xnb
-Content\RedArmy.xnb
-Content\YellowArmy.xnb
 Content\switch.xnb
 Content\tile1.xnb
 Content\tile2.xnb
@@ -41,4 +38,7 @@ Content\tile4.xnb
 Content\attack.xnb
 Content\defend.xnb
 Content\gather.xnb
+Content\BlueArmy.xnb
+Content\RedArmy.xnb
+Content\YellowArmy.xnb
 Content\Music.wma

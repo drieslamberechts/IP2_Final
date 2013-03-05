@@ -121,7 +121,7 @@ namespace XNA_ENGINE.Game
             }
 
             //MENU
-            m_Menu = new Menu(Content);
+            m_Menu = new Menu(Content, 15);
 
             //ARMIES
             m_ArmyGreen1.Initialize();
