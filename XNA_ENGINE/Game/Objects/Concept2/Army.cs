@@ -58,19 +58,19 @@ namespace XNA_ENGINE.Game.Objects.Concept2
                     break;
                 case ArmyType.Red:
                     m_ArmySprite = new GameSprite("RedArmy");
-                    m_ArmySize = 3;
+                    m_ArmySize = 4;
                     m_BonusTile = GridTile.TileType.Red;
                     m_NegativeTile = GridTile.TileType.Green;
                     break;
                 case ArmyType.Blue:
                     m_ArmySprite = new GameSprite("BlueArmy");
-                    m_ArmySize = 5;
+                    m_ArmySize = 9;
                     m_BonusTile = GridTile.TileType.Red;
                     m_NegativeTile = GridTile.TileType.Green;
                     break;
                 case ArmyType.Yellow:
                     m_ArmySprite = new GameSprite("YellowArmy");
-                    m_ArmySize = 2;
+                    m_ArmySize = 3;
                     m_BonusTile = GridTile.TileType.Red;
                     m_NegativeTile = GridTile.TileType.Green;
                     break;
