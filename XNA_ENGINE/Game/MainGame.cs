@@ -38,10 +38,9 @@ namespace XNA_ENGINE.Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            SceneManager.AddGameScene(new GameSceneConcept2(Content));
-            SceneManager.AddGameScene(new PauseScreen(Content));
+            SceneManager.AddGameScene(new FinalScene(Content));
 
-            SceneManager.SetActiveScene("GameSceneConcept2");
+            SceneManager.SetActiveScene("FinalScene");
 
             SceneManager.Initialize();
 
