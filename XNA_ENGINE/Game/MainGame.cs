@@ -38,23 +38,11 @@ namespace XNA_ENGINE.Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //SceneManager.AddGameScene(new GameSceneConcept1(Content));
             SceneManager.AddGameScene(new GameSceneConcept2(Content));
             SceneManager.AddGameScene(new PauseScreen(Content));
-            SceneManager.AddGameScene(new WoutScene());
-
 
             SceneManager.SetActiveScene("GameSceneConcept2");
-            //SceneManager.SetActiveScene("GameSceneConcept2");
-            //SceneManager.SetActiveScene("WoutScene");
-            //SceneManager.SetActiveScene("DriesScene");
-            //SceneManager.SetActiveScene("FiddleDemoScene");
-            //SceneManager.SetActiveScene("GameAnimatedSpriteDemo");
-            //SceneManager.SetActiveScene("GameModelDemo");
-            //SceneManager.SetActiveScene("GoingWildDemo");
-            //SceneManager.SetActiveScene("GameSpriteDemo");
-            
-           
+
             SceneManager.Initialize();
 
             IsMouseVisible = true;
