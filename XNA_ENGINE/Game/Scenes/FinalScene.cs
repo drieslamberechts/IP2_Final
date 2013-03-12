@@ -20,7 +20,6 @@ using Microsoft.Xna.Framework.Media;
 using XNA_ENGINE.Game.Scenes;
 
 using XNA_ENGINE.Game.Objects.Concept2;
-using XNA_ENGINE.Engine.Scenegraph;
 
 namespace XNA_ENGINE.Game.Scenes
 {

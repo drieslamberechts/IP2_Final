@@ -21,8 +21,9 @@ namespace XNA_ENGINE.Game
             Window.Title = "IP2";
 
             // Dries Test
-            graphics.PreferredBackBufferHeight = 1000;
-            graphics.PreferredBackBufferWidth = 1400;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+            //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             // End Dries Test
 
@@ -89,21 +90,8 @@ namespace XNA_ENGINE.Game
 
             //Change the active scene
             if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D1))
-                SceneManager.SetActiveScene("GameSceneConcept1");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D2))
-                SceneManager.SetActiveScene("GameSceneConcept2");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D3))
-                SceneManager.SetActiveScene("WoutScene");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D4))
-                SceneManager.SetActiveScene("InteractionScene");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D5))
-                SceneManager.SetActiveScene("FiddleDemoScene");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D6))
-                SceneManager.SetActiveScene("GameAnimatedSpriteDemo");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D7))
-                SceneManager.SetActiveScene("GoingWildDemo");
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D8))
-                SceneManager.SetActiveScene("GameSpriteDemo");
+                SceneManager.SetActiveScene("FinalScene");
+       
 
             // TODO: Add your update logic here
             SceneManager.Update(gameTime);
