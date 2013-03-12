@@ -22,8 +22,6 @@ using XNA_ENGINE.Game.Scenes;
 
 using XNA_ENGINE.Game.Objects.Concept2;
 
-//test
-
 namespace XNA_ENGINE.Game
 {
     public class GameSceneConcept2 : GameScene
