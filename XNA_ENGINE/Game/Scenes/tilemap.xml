@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<tiles>
+<tilemap>
 	<tile>
-		<position>0,0</position>
+		<positionX>0</positionX>
+    <positionY>0</positionY>
 		<type>normal</type>
 		<settlement>null</settlement>
 	</tile>
 	<tile>
-		<position>0,1</position>
-		<type>normal</type>
+		<positionX>1</positionX>
+    <positionY>0</positionY>
+    <type>normal</type>
 		<settlement>null</settlement>
 	</tile>
 	<tile>
-		<position>0,2</position>
+		<positionX>2</positionX>
+    <positionY>0</positionY>
 		<type>normal</type>
 		<settlement>green</settlement>
 	</tile>
 	<tile>
-		<position>0,3</position>
+		<positionX>3</positionX>
+    <positionY>0</positionY>
 		<type>normal</type>
 		<settlement>null</settlement>
 	</tile>
 	<tile>
-		<position>0,4</position>
+		<positionX>4</positionX>
+    <positionY>0</positionY>
 		<type>normal</type>
 		<settlement>red</settlement>
 	</tile>
 	<tile>
-		<position>0,5</position>
+		<positionX>5</positionX>
+    <positionY>0</positionY>
 		<type>normal</type>
 		<settlement>null</settlement>
 	</tile>
-</tiles>
+</tilemap>

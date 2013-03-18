@@ -14,7 +14,7 @@ namespace XNA_ENGINE.Engine.Helpers
 
         public BaseCamera()
         {
-            //Projection = Matrix.CreateOrthographic(800, 480, 0.1f, 300);
+            Projection = Matrix.CreateOrthographic(1280, 720, 0.1f, 10000f);
             Projection = Matrix.CreatePerspectiveFieldOfView((float)Math.PI/4.0f, 800.0f/480.0f, 0.1f, 2000.0f);
         }
 
