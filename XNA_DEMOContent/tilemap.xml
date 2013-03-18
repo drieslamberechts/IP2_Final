@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tiles>
+	<tile>
+		<position>0,0</position>
+		<type>normal</type>
+		<settlement>null</settlement>
+	</tile>
+	<tile>
+		<position>0,1</position>
+		<type>normal</type>
+		<settlement>null</settlement>
+	</tile>
+	<tile>
+		<position>0,2</position>
+		<type>normal</type>
+		<settlement>green</settlement>
+	</tile>
+	<tile>
+		<position>0,3</position>
+		<type>normal</type>
+		<settlement>null</settlement>
+	</tile>
+	<tile>
+		<position>0,4</position>
+		<type>normal</type>
+		<settlement>red</settlement>
+	</tile>
+	<tile>
+		<position>0,5</position>
+		<type>normal</type>
+		<settlement>null</settlement>
+	</tile>
+</tiles>
