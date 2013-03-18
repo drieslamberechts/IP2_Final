@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine.Helpers;
+using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Engine.Scenegraph

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Helpers;
+using XNA_ENGINE.Game.Objects;
 
 namespace XNA_ENGINE.Engine
 {
