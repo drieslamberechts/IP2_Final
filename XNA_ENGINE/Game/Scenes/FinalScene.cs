@@ -25,12 +25,30 @@ namespace XNA_ENGINE.Game.Scenes
 {
     class FinalScene : GameScene
     {
+        private GridTile m_TestTile;
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
         {
-            //CONTENT
-           
+
+        }
+
+        public override void Initialize()
+        {
+            m_TestTile = new GridTile(this);
+
+
+            //Set the camera a bit backwards
+            SceneManager.RenderContext.Camera.Translate(300, 300, 300);
+            SceneManager.RenderContext.Camera.Rotate(-40, 45, 0);
+
+            base.Initialize();
+        }
+
+        public override void Update(Engine.RenderContext renderContext)
+        {
+        
+            base.Update(renderContext);
         }
 
     }
