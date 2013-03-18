@@ -44,6 +44,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\tile_Template.X">
+      <Name>tile_Template</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
     <Compile Include="metal.jpg">
       <Name>metal</Name>
       <Importer>TextureImporter</Importer>

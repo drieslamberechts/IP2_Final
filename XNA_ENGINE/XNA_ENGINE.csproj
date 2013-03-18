@@ -107,7 +107,6 @@
     <Compile Include="Engine\Scenegraph\GameScene.cs" />
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
     <Compile Include="Game\Managers\GridFieldManager.cs" />
-    <Compile Include="Game\Objects\Army.cs" />
     <Compile Include="Game\MainGame.cs" />
     <Compile Include="Game\Objects\GridTile.cs" />
     <Compile Include="Game\Objects\GameModel.cs" />
