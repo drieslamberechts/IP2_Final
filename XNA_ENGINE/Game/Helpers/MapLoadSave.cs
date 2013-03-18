@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XNA_ENGINE.Game.Helpers
 {
-    class MapLoader
+    class MapLoadSave
     {
     }
 }
