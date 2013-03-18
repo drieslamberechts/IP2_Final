@@ -22,8 +22,8 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridFieldManager(GameScene pGameScene)
         {
-            m_GridField = new List<List<GridTile>>();
             //GENERATE GRIDFIELD
+            m_GridField = new List<List<GridTile>>();
             for (int i = 0; i < GRID_ROW_LENGTH; ++i)
             {
                 List<GridTile> tempList = new List<GridTile>();
@@ -48,9 +48,16 @@ namespace XNA_ENGINE.Game.Managers
             
         }
 
-        public void Update()
+        public void Update(Engine.RenderContext renderContext)
         {
-
+            //Iterate over every GridTile
+            for (int i = 0; i < GRID_ROW_LENGTH; ++i)
+            {
+                for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
+                {
+                    m_GridField[i][j].Update(renderContext);
+                }
+            }
         }
 
     }

@@ -18,6 +18,8 @@ namespace XNA_ENGINE.Game.Objects
         private GameModel m_TileModel;
         private int m_Row, m_Column;
 
+        private bool m_Selected { get; set; }
+
         public GridTile(GameScene pGameScene, Vector3 position, int row, int column)
         {            
             m_TileModel = new GameModel("Models/tile_Template");
@@ -26,6 +28,8 @@ namespace XNA_ENGINE.Game.Objects
 
             m_Row = row;
             m_Column = column;
+
+            m_Selected = true;
         }
 
         public void Initialize()
@@ -33,9 +37,10 @@ namespace XNA_ENGINE.Game.Objects
             
         }
 
-        public void Update()
+        public void Update(Engine.RenderContext renderContext)
         {
-
+            if (m_Selected)
+                m_TileModel.Rotate(0, 45.0f * (float)renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
         }
     }
 }

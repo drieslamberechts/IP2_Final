@@ -79,6 +79,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Update(RenderContext renderContext)
         {
+            GridFieldManager.GetInstance(this).Update(renderContext);
+
             base.Update(renderContext);
         }
 
