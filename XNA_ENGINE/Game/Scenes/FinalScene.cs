@@ -47,6 +47,7 @@ namespace XNA_ENGINE.Game.Scenes
             // ------------------------------------------
             // OPEN AND READ XML FILE
             // ------------------------------------------
+            // the file must be available in the Debug (or release) folder
             System.IO.Stream stream = TitleContainer.OpenStream("tilemap.xml");
 
             XDocument doc = XDocument.Load(stream);

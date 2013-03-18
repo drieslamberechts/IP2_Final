@@ -30,7 +30,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://localhost/XNA_ENGINE/</UpdateUrl>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -107,22 +107,18 @@
     <Compile Include="Engine\Scenegraph\GameScene.cs" />
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
 <<<<<<< HEAD
+    <Compile Include="Game\Objects\Camera.cs" />
     <Compile Include="Game\Objects\Concept2\Army.cs" />
-=======
-    <Compile Include="Game\Objects\Concept2\Menu.cs" />
->>>>>>> d589278243c00ccf26cf4b31c74f86b86df8e04e
-    <Compile Include="Game\Scenes\GameSceneConcept2.cs" />
     <Compile Include="Game\MainGame.cs" />
-    <Compile Include="Game\Objects\Bullet.cs" />
-    <Compile Include="Game\Objects\Target.cs" />
     <Compile Include="Game\Objects\Concept2\GridTile.cs" />
-    <Compile Include="Game\Objects\MusicBeat.cs" />
-    <Compile Include="Game\Objects\Player.cs" />
-    <Compile Include="Game\Objects\TutorialClasses\Background.cs" />
-    <Compile Include="Game\Scenes\GameSceneConcept1.cs" />
-    <Compile Include="Game\Scenes\InteractionScene.cs" />
-    <Compile Include="Game\Scenes\PauseScreen.cs" />
-    <Compile Include="Game\Scenes\WoutScene.cs" />
+    <Compile Include="Game\Objects\GameModel.cs" />
+=======
+    <Compile Include="Game\Managers\GridFieldManager.cs" />
+    <Compile Include="Game\Objects\Army.cs" />
+    <Compile Include="Game\MainGame.cs" />
+    <Compile Include="Game\Objects\GridTile.cs" />
+>>>>>>> 6a7da83a63dd0edeee33546ac83212898323aae6
+    <Compile Include="Game\Scenes\FinalScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
@@ -169,6 +165,7 @@
   <ItemGroup>
     <None Include="XNA_ENGINE_TemporaryKey.pfx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
