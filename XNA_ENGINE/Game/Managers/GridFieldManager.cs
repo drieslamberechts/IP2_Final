@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
 
 namespace XNA_ENGINE.Game.Managers
@@ -15,13 +16,17 @@ namespace XNA_ENGINE.Game.Managers
 
         private List<List<GridTile>> m_GridField;
 
-        private const int GRID_ROW_LENGTH = 30;
-        private const int GRID_COLUMN_LENGTH = 30;
-        private const int GRID_OFFSET = 65;
+        private int GRID_ROW_LENGTH = 30;
+        private int GRID_COLUMN_LENGTH = 30;
+       // private int GRID_OFFSET = 64;
 
 
         private GridFieldManager(GameScene pGameScene)
         {
+            //LOAD GRIDFIELD
+            LoadGridField(pGameScene, "tilemap.xml");
+
+            /*
             //GENERATE GRIDFIELD
             m_GridField = new List<List<GridTile>>();
             for (int i = 0; i < GRID_ROW_LENGTH; ++i)
@@ -32,7 +37,7 @@ namespace XNA_ENGINE.Game.Managers
                     tempList.Add(new GridTile(pGameScene, new Vector3((i * GRID_OFFSET),0,(j * GRID_OFFSET)), i,j));
                 }
                 m_GridField.Add(tempList);
-            }
+            }*/
         }
 
         static public GridFieldManager GetInstance(GameScene pGameScene)
@@ -58,6 +63,20 @@ namespace XNA_ENGINE.Game.Managers
                     m_GridField[i][j].Update(renderContext);
                 }
             }
+        }
+
+        public void LoadGridField(GameScene pGameScene, string XMLFile)
+        {
+            m_GridField = MapLoadSave.GetInstance().LoadMap(XMLFile, pGameScene);
+
+            //Count columns and rows
+            int rows = m_GridField.Count(list => true);
+            int columns = m_GridField[0].Count(tile => true);
+
+            System.Diagnostics.Debug.WriteLine("Rows: " + rows + " Columns: " + columns);
+
+            GRID_ROW_LENGTH = rows;
+            GRID_COLUMN_LENGTH = rows;
         }
 
     }

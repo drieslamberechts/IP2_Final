@@ -18,16 +18,20 @@ namespace XNA_ENGINE.Game.Objects
         private GameModel m_TileModel;
         private int m_Row, m_Column;
 
+        private static float GRIDWIDTH = 64;
+        private static float GRIDDEPTH = 64;
+      //  private static float GRIDHEIGHT = 32;
+
         private bool m_Selected { get; set; }
 
-        public GridTile(GameScene pGameScene, Vector3 position, int row, int column)
-        {            
-            m_TileModel = new GameModel("Models/tile_Template");
-            m_TileModel.Translate(position);
-            pGameScene.AddSceneObject(m_TileModel);
-
+        public GridTile(GameScene pGameScene, int row, int column)
+        {
             m_Row = row;
             m_Column = column;
+
+            m_TileModel = new GameModel("Models/tile_Template");
+            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, 0, GRIDDEPTH * m_Column));
+            pGameScene.AddSceneObject(m_TileModel);
 
             m_Selected = true;
         }
