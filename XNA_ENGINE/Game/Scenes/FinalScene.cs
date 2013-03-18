@@ -22,31 +22,27 @@ using XNA_ENGINE.Game.Objects;
 using Microsoft.Xna.Framework.Media;
 using XNA_ENGINE.Game.Scenes;
 
-using XNA_ENGINE.Game.Objects.Concept2;
+using XNA_ENGINE.Game.Managers;
+
 using GameModel = XNA_ENGINE.Engine.Objects.GameModel;
 
 namespace XNA_ENGINE.Game.Scenes
 {
     class FinalScene : GameScene
-    {
-        private GridTile m_TestTile;
-        
-        
+    {   
         List<Tile> m_Tiles; 
-        Model myModel;
 
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
         {
             //CONTENT
-            myModel = content.Load<Model>("ship2");
         }
 
         public override void Initialize()
         {
-            //Create a test GridTile
-            m_TestTile = new GridTile(this);
+            //Initialize the GridFieldManager
+            GridFieldManager.GetInstance(this).Initialize();
          
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
@@ -93,24 +89,6 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw3D(RenderContext renderContext)
         {
-            Matrix[] modelTransforms = new Matrix[myModel.Bones.Count];
-
-            //draw model
-            Matrix worldMatrix = Matrix.CreateScale(0.01f, 0.01f, 0.01f);
-            myModel.CopyAbsoluteBoneTransformsTo(modelTransforms);
-
-            foreach (ModelMesh mesh in myModel.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.EnableDefaultLighting();
-                    effect.World = modelTransforms[mesh.ParentBone.Index] * worldMatrix;
-                    effect.View = renderContext.Camera.View;
-                    effect.Projection = renderContext.Camera.Projection;
-                }
-                mesh.Draw();
-            }
-
             base.Draw3D(renderContext);
         }
     }
