@@ -23,7 +23,7 @@ namespace XNA_ENGINE.Engine.Scenegraph
         public GameObject3D Parent { get; private set; }
         public List<GameObject3D> Children { get; private set; }
 
-        protected Matrix WorldMatrix;
+        protected Matrix WorldMatrix { get; private set; }
 
         private BoundingBox? _relativeBoundingBox;
         public BoundingBox? BoundingBox { get; protected set; }

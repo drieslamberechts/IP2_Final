@@ -24,6 +24,8 @@ using XNA_ENGINE.Game.Scenes;
 
 using XNA_ENGINE.Game.Managers;
 
+
+
 using GameModel = XNA_ENGINE.Engine.Objects.GameModel;
 
 namespace XNA_ENGINE.Game.Scenes
@@ -82,6 +84,22 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Update(RenderContext renderContext)
         {
+            Viewport vp = renderContext.GraphicsDevice.Viewport;
+            Vector3 pos1 = vp.Unproject(new Vector3(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y, 0),
+                renderContext.Camera.Projection,
+                renderContext.Camera.View,
+                renderContext.Camera.GetWorldMatrix());
+            Vector3 pos2 = vp.Unproject(new Vector3(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y, 1),
+                renderContext.Camera.Projection,
+                renderContext.Camera.View,
+                renderContext.Camera.GetWorldMatrix());
+            Vector3 dir = Vector3.Normalize(pos2 - pos1);
+
+
+            System.Diagnostics.Debug.WriteLine("" + dir.ToString());
+
+
+
             // Handle Input
             HandleInput(renderContext);
 

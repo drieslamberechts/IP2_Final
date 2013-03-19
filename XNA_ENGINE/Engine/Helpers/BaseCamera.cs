@@ -27,5 +27,10 @@ namespace XNA_ENGINE.Engine.Helpers
 
             View = Matrix.CreateLookAt(WorldPosition, (WorldPosition + lookAt), Vector3.Up);
         }
+
+        public Matrix GetWorldMatrix()
+        {
+            return WorldMatrix;
+        }
     }
 }
