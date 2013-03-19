@@ -18,8 +18,8 @@ namespace XNA_ENGINE.Game.Objects
         private GameModel m_TileModel;
         private int m_Row, m_Column;
 
-        private static float GRIDWIDTH = 64;
-        private static float GRIDDEPTH = 64;
+        private static float GRIDWIDTH = 65;
+        private static float GRIDDEPTH = 65;
       //  private static float GRIDHEIGHT = 32;
 
         private bool m_Selected { get; set; }
