@@ -125,7 +125,7 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
-            // Show FPS
+            // Show FPS 2
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + FPS, new Vector2(10, 10), Color.White);
 
             base.Draw2D(renderContext, drawBefore3D);
