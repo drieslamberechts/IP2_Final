@@ -156,6 +156,17 @@ namespace XNA_ENGINE.Engine.Scenegraph
             return Children.FirstOrDefault(child => child.HitTest(gameObj)) != null;
         }
 
+        public bool HitTest(Ray ray)
+        {
+            if (BoundingBox.Value.Intersects(ray) != null)
+            {
+                System.Diagnostics.Debug.WriteLine("" + BoundingBox.Value.Intersects(ray).ToString());
+                return true;
+            }
+
+            return false;
+        }
+
         public virtual void Initialize()
         {
             Children.ForEach(child => child.Initialize());
