@@ -30,7 +30,10 @@ namespace XNA_ENGINE.Game.Scenes
 {
     class FinalScene : GameScene
     {   
-        List<Tile> m_Tiles; 
+        List<Tile> m_Tiles;
+
+        // Controls
+        GamePadState gamePadState;
 
 
         public FinalScene(ContentManager content)
@@ -79,6 +82,9 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Update(RenderContext renderContext)
         {
+            // Handles input from keyboard and Controller
+            HandleInput(renderContext);
+
             base.Update(renderContext);
         }
 
@@ -90,6 +96,37 @@ namespace XNA_ENGINE.Game.Scenes
         public override void Draw3D(RenderContext renderContext)
         {
             base.Draw3D(renderContext);
+        }
+
+        private void HandleInput(RenderContext renderContext)
+        {
+            // Handle GamePad Input
+            gamePadState = GamePad.GetState(PlayerIndex.One);
+
+            //GamePad
+            if (gamePadState.IsConnected)
+            {
+                if (gamePadState.ThumbSticks.Left.Y > 0)
+                    renderContext.Camera.LocalPosition += new Vector3(0, 0, -10 * gamePadState.ThumbSticks.Left.Y);
+                if (gamePadState.ThumbSticks.Left.X < 0)
+                    renderContext.Camera.LocalPosition += new Vector3(10 * gamePadState.ThumbSticks.Left.X, 0, 0);
+                if (gamePadState.ThumbSticks.Left.Y < 0)
+                    renderContext.Camera.LocalPosition += new Vector3(0, 0, -10 * gamePadState.ThumbSticks.Left.Y);
+                if (gamePadState.ThumbSticks.Left.X > 0)
+                    renderContext.Camera.LocalPosition += new Vector3(10 * gamePadState.ThumbSticks.Left.X, 0, 0);
+            }
+
+            // Handle Keyboard Input
+            KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
+
+            if (keyboardState[Keys.Z] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(0, 0, -10);
+            if (keyboardState[Keys.Q] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(-10, 0, 0);
+            if (keyboardState[Keys.S] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(0, 0, 10);
+            if (keyboardState[Keys.D] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(10, 0, 0);
         }
     }
 
