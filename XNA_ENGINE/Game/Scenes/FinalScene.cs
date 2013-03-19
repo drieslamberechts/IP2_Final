@@ -82,6 +82,9 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Update(RenderContext renderContext)
         {
+            // Handle Input
+            HandleInput(renderContext);
+
             GridFieldManager.GetInstance(this).Update(renderContext);
 
 

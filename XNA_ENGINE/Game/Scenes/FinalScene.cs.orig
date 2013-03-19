@@ -22,47 +22,40 @@ using XNA_ENGINE.Game.Objects;
 using Microsoft.Xna.Framework.Media;
 using XNA_ENGINE.Game.Scenes;
 
-using XNA_ENGINE.Game.Objects.Concept2;
+using XNA_ENGINE.Game.Managers;
+
 using GameModel = XNA_ENGINE.Engine.Objects.GameModel;
 
 namespace XNA_ENGINE.Game.Scenes
 {
     class FinalScene : GameScene
-    {
-<<<<<<< HEAD
-        private GridTile m_TestTile;
-=======
-        Model myModel;
+    {   
         List<Tile> m_Tiles;
 
-        // Load XML file
-        private Stream m_XmlFile;
->>>>>>> e13422f4fe50d086d270b880b3d83557a9503eff
+        // Controls
+        GamePadState gamePadState;
+
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
         {
-<<<<<<< HEAD
-
-=======
             //CONTENT
-            myModel = content.Load<Model>("ship2");
->>>>>>> e13422f4fe50d086d270b880b3d83557a9503eff
         }
 
         public override void Initialize()
         {
-<<<<<<< HEAD
-            m_TestTile = new GridTile(this);
-
-
-            //Set the camera a bit backwards
+            //Initialize the GridFieldManager
+            GridFieldManager.GetInstance(this).Initialize();
+         
+            //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
-            SceneManager.RenderContext.Camera.Rotate(-40, 45, 0);
-=======
+            SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
+
+
             // ------------------------------------------
             // OPEN AND READ XML FILE
             // ------------------------------------------
+            // the file must be available in the Debug (or release) folder
             System.IO.Stream stream = TitleContainer.OpenStream("tilemap.xml");
 
             XDocument doc = XDocument.Load(stream);
@@ -70,32 +63,32 @@ namespace XNA_ENGINE.Game.Scenes
             m_Tiles = new List<Tile>();
 
             m_Tiles = (from tile in doc.Descendants("tile")
-                     select new Tile()
-                     {
-                         position = new Vector2(Convert.ToInt32(tile.Element("positionX").Value), Convert.ToInt32(tile.Element("positionY").Value)),
-                         type = Convert.ToString(tile.Element("type").Value),
-                         settlement = Convert.ToString(tile.Element("settlement").Value)
-                     }).ToList();
+                       select new Tile()
+                       {
+                           position = new Vector2(Convert.ToInt32(tile.Element("positionX").Value), Convert.ToInt32(tile.Element("positionY").Value)),
+                           type = Convert.ToString(tile.Element("type").Value),
+                           settlement = Convert.ToString(tile.Element("settlement").Value)
+                       }).ToList();
 
             // Test if the xml reader worked (and it does)
-            System.Diagnostics.Debug.WriteLine("Count: " + m_Tiles.ElementAt(0).type);
+            System.Diagnostics.Debug.WriteLine("Type: " + m_Tiles.ElementAt(0).type);
             // ------------------------------------------
             // END READING XML FILE
             // ------------------------------------------
 
->>>>>>> e13422f4fe50d086d270b880b3d83557a9503eff
 
             base.Initialize();
         }
 
-<<<<<<< HEAD
-        public override void Update(Engine.RenderContext renderContext)
-        {
-        
-            base.Update(renderContext);
-=======
         public override void Update(RenderContext renderContext)
         {
+<<<<<<< HEAD
+            // Handles input from keyboard and Controller
+            HandleInput(renderContext);
+=======
+            GridFieldManager.GetInstance(this).Update(renderContext);
+>>>>>>> d8aad3f2921ec74254c4445f6b55d916d36475c8
+
             base.Update(renderContext);
         }
 
@@ -106,26 +99,38 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw3D(RenderContext renderContext)
         {
-            Matrix[] modelTransforms = new Matrix[myModel.Bones.Count];
+            base.Draw3D(renderContext);
+        }
 
-            //draw model
-            Matrix worldMatrix = Matrix.CreateScale(0.01f, 0.01f, 0.01f);
-            myModel.CopyAbsoluteBoneTransformsTo(modelTransforms);
+        private void HandleInput(RenderContext renderContext)
+        {
+            // Handle GamePad Input
+            gamePadState = GamePad.GetState(PlayerIndex.One);
 
-            foreach (ModelMesh mesh in myModel.Meshes)
+            //GamePad
+            if (gamePadState.IsConnected)
             {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.EnableDefaultLighting();
-                    effect.World = modelTransforms[mesh.ParentBone.Index] * worldMatrix;
-                    effect.View = renderContext.Camera.View;
-                    effect.Projection = renderContext.Camera.Projection;
-                }
-                mesh.Draw();
+                if (gamePadState.ThumbSticks.Left.Y > 0)
+                    renderContext.Camera.LocalPosition += new Vector3(0, 0, -10 * gamePadState.ThumbSticks.Left.Y);
+                if (gamePadState.ThumbSticks.Left.X < 0)
+                    renderContext.Camera.LocalPosition += new Vector3(10 * gamePadState.ThumbSticks.Left.X, 0, 0);
+                if (gamePadState.ThumbSticks.Left.Y < 0)
+                    renderContext.Camera.LocalPosition += new Vector3(0, 0, -10 * gamePadState.ThumbSticks.Left.Y);
+                if (gamePadState.ThumbSticks.Left.X > 0)
+                    renderContext.Camera.LocalPosition += new Vector3(10 * gamePadState.ThumbSticks.Left.X, 0, 0);
             }
 
-            base.Draw3D(renderContext);
->>>>>>> e13422f4fe50d086d270b880b3d83557a9503eff
+            // Handle Keyboard Input
+            KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
+
+            if (keyboardState[Keys.Z] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(0, 0, -10);
+            if (keyboardState[Keys.Q] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(-10, 0, 0);
+            if (keyboardState[Keys.S] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(0, 0, 10);
+            if (keyboardState[Keys.D] == KeyState.Down)
+                renderContext.Camera.LocalPosition += new Vector3(10, 0, 0);
         }
     }
 
