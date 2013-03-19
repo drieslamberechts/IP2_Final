@@ -49,7 +49,7 @@ namespace XNA_ENGINE.Game.Scenes
          
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
-            SceneManager.RenderContext.Camera.Rotate(-45, 45, 150);
+            SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
 
 
             // ------------------------------------------
@@ -71,7 +71,7 @@ namespace XNA_ENGINE.Game.Scenes
                        }).ToList();
 
             // Test if the xml reader worked (and it does)
-            System.Diagnostics.Debug.WriteLine("Count: " + m_Tiles.ElementAt(0).type);
+            System.Diagnostics.Debug.WriteLine("Type: " + m_Tiles.ElementAt(0).type);
             // ------------------------------------------
             // END READING XML FILE
             // ------------------------------------------
@@ -82,8 +82,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Update(RenderContext renderContext)
         {
-            // Handles input from keyboard and Controller
-            HandleInput(renderContext);
+            GridFieldManager.GetInstance(this).Update(renderContext);
+
 
             base.Update(renderContext);
         }

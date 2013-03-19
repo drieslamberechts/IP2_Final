@@ -18,14 +18,22 @@ namespace XNA_ENGINE.Game.Objects
         private GameModel m_TileModel;
         private int m_Row, m_Column;
 
-        public GridTile(GameScene pGameScene, Vector3 position, int row, int column)
-        {            
-            m_TileModel = new GameModel("Models/tile_Template");
-            m_TileModel.Translate(position);
-            pGameScene.AddSceneObject(m_TileModel);
+        private static float GRIDWIDTH = 64;
+        private static float GRIDDEPTH = 64;
+      //  private static float GRIDHEIGHT = 32;
 
+        private bool m_Selected { get; set; }
+
+        public GridTile(GameScene pGameScene, int row, int column)
+        {
             m_Row = row;
             m_Column = column;
+
+            m_TileModel = new GameModel("Models/tile_Template");
+            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, 0, GRIDDEPTH * m_Column));
+            pGameScene.AddSceneObject(m_TileModel);
+
+            m_Selected = true;
         }
 
         public void Initialize()
@@ -33,9 +41,10 @@ namespace XNA_ENGINE.Game.Objects
             
         }
 
-        public void Update()
+        public void Update(Engine.RenderContext renderContext)
         {
-
+            if (m_Selected)
+                m_TileModel.Rotate(0, 45.0f * (float)renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
         }
     }
 }
