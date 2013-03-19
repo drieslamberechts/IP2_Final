@@ -16,7 +16,7 @@ using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Engine.Objects;
 
 using XNA_ENGINE.Engine.Helpers;
-
+using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
 
 using Microsoft.Xna.Framework.Media;
@@ -51,6 +51,9 @@ namespace XNA_ENGINE.Game.Scenes
         {
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
+
+            // Generate a new Map
+            MapLoadSave.GetInstance().GenerateMap(this);
          
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);

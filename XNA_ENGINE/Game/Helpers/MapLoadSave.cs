@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Scenegraph;
@@ -15,9 +17,15 @@ namespace XNA_ENGINE.Game.Helpers
         //Singleton implementation
         private static MapLoadSave m_MapLoadSave;
 
+        // Generate a new Map
+        private const int MAX_HEIGHT = 30;
+        private const int MAX_WIDTH = 30;
+
+        private GridTile[,] m_GridField;
+
         private MapLoadSave()
         {
-
+            m_GridField = new GridTile[MAX_WIDTH, MAX_HEIGHT];
         }
 
         static public MapLoadSave GetInstance()
@@ -55,9 +63,71 @@ namespace XNA_ENGINE.Game.Helpers
             return gridField;
         }
 
-        public void SaveMap(List<List<GridTile>> gridField)
+        public void GenerateMap(GameScene pGameScene)
         {
-            //NOT IMPLEMENTED YET
+            // Map:
+            // Width = 30
+            // Height = 30
+            List<GridTile> addTest = new List<GridTile>();
+
+            for (int height = 0; height < MAX_HEIGHT; ++height)
+            {
+                for (int width = 0; width < MAX_WIDTH; ++width)
+                {
+                    addTest.Add(new GridTile(pGameScene, width, height));
+                }
+            }
+
+            // Add Tiles to the right grid and give them the right attributes.
+            int teller = 0;
+
+            for (int height = 0; height < MAX_HEIGHT; ++height)
+            {
+                for (int width = 0; width < MAX_WIDTH; ++width)
+                {
+                    m_GridField[width,height] = addTest.ElementAt(teller);
+
+                    // Set the tile type (normal, tribe,...)
+                    m_GridField[width,height].SetTileType("normal");
+
+                    // Use a color to create a new Tribe (none, green, red, blue,...)
+                    m_GridField[width,height].SetTileSettlement("none");
+
+                    teller++;
+                }
+            }
+
+            // Save to XML file
+            SaveMap();
+        }
+
+        public void SaveMap()
+        {
+            var xmlFile = new FileStream("GeneratedTileMap.xml", FileMode.OpenOrCreate, FileAccess.Write);
+            var writer = new StreamWriter(xmlFile);
+
+            writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+            writer.WriteLine("<tilemap>");
+
+            for (int height = 0; height < MAX_HEIGHT; ++height)
+            {
+                for (int width = 0; width < MAX_WIDTH; ++width)
+                {
+                    writer.WriteLine("<tile>");
+
+                    writer.WriteLine("\t<positionX>" + width + "</positionX>");
+                    writer.WriteLine("\t<positionY>" + height + "</positionY>");
+                    writer.WriteLine("\t<type>" + m_GridField[height, width].GetTileType() + "</type>");
+                    writer.WriteLine("\t<settlement>" + m_GridField[height, width].GetTileSettlement() + "</settlement>");
+
+                    writer.WriteLine("</tile>");
+                }
+            }
+
+            writer.WriteLine("</tilemap>");
+
+            writer.Close();
+            xmlFile.Close();
         }
     }
 }
