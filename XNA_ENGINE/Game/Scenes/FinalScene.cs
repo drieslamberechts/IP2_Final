@@ -29,12 +29,17 @@ using GameModel = XNA_ENGINE.Engine.Objects.GameModel;
 namespace XNA_ENGINE.Game.Scenes
 {
     class FinalScene : GameScene
-    {   
+    {
+        enum PlayerInput
+        {
+            ClickTile,
+            RightClickTile
+        }
+
         List<Tile> m_Tiles;
 
         // Controls
         GamePadState gamePadState;
-
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
@@ -130,6 +135,9 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.Camera.LocalPosition += new Vector3(0, 0, 10);
             if (keyboardState[Keys.D] == KeyState.Down)
                 renderContext.Camera.LocalPosition += new Vector3(10, 0, 0);
+
+            // Handle Mouse Input
+            Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
         }
     }
 

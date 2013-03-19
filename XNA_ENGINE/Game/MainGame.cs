@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Scenes;
@@ -12,6 +13,13 @@ namespace XNA_ENGINE.Game
     /// </summary>
     public class MainGame : Microsoft.Xna.Framework.Game
     {
+        enum PlayerInput
+        {
+            TapKey
+        }
+
+        private InputManager m_InputManager;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -22,8 +30,8 @@ namespace XNA_ENGINE.Game
             Window.Title = "IP2";
 
             // Dries Test
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2;
             //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             // End Dries Test
@@ -47,6 +55,15 @@ namespace XNA_ENGINE.Game
             SceneManager.Initialize();
 
             IsMouseVisible = true;
+
+            //INPUT
+            m_InputManager = new InputManager();
+
+            // Initialize InputAction to switch Screen
+            InputAction Tap = new InputAction((int) PlayerInput.TapKey, TriggerState.Pressed);
+            Tap.KeyButton = Keys.F;
+
+            m_InputManager.MapAction(Tap);
 
             base.Initialize();
         }
@@ -96,6 +113,28 @@ namespace XNA_ENGINE.Game
 
             // TODO: Add your update logic here
             SceneManager.Update(gameTime);
+
+            //-----------------------------------------------
+            // SWITCH TO FULLSCREEN OR WINDOWED
+            //-----------------------------------------------
+            //INPUT
+            m_InputManager.Update();
+
+            if (m_InputManager.GetAction((int)PlayerInput.TapKey).IsTriggered && graphics.IsFullScreen == false)
+            {
+                graphics.IsFullScreen = true;
+                graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                graphics.ApplyChanges();
+            }
+
+            else if (m_InputManager.GetAction((int)PlayerInput.TapKey).IsTriggered && graphics.IsFullScreen)
+            {
+                graphics.IsFullScreen = false;
+                graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2;
+                graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2;
+                graphics.ApplyChanges();
+            }
 
             base.Update(gameTime);
         }
