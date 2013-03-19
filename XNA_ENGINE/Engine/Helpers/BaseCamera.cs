@@ -14,8 +14,8 @@ namespace XNA_ENGINE.Engine.Helpers
 
         public BaseCamera()
         {
-            Projection = Matrix.CreateOrthographic(1280, 720, 0.1f, 10000f);
-            //Projection = Matrix.CreatePerspectiveFieldOfView((float)Math.PI/4.0f, 800.0f/480.0f, 0.1f, 2000.0f);
+            //Projection = Matrix.CreateOrthographic(1280, 720, 0.1f, 10000f);
+            Projection = Matrix.CreatePerspectiveFieldOfView((float)Math.PI/4.0f, 800.0f/480.0f, 0.1f, 2000.0f);
         }
 
         public override void Update(RenderContext renderContext)
@@ -26,6 +26,11 @@ namespace XNA_ENGINE.Engine.Helpers
             lookAt.Normalize();
 
             View = Matrix.CreateLookAt(WorldPosition, (WorldPosition + lookAt), Vector3.Up);
+        }
+
+        public Matrix GetWorldMatrix()
+        {
+            return WorldMatrix;
         }
     }
 }

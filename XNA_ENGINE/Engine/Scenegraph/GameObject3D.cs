@@ -23,7 +23,7 @@ namespace XNA_ENGINE.Engine.Scenegraph
         public GameObject3D Parent { get; private set; }
         public List<GameObject3D> Children { get; private set; }
 
-        protected Matrix WorldMatrix;
+        protected Matrix WorldMatrix { get; private set; }
 
         private BoundingBox? _relativeBoundingBox;
         public BoundingBox? BoundingBox { get; protected set; }
@@ -154,6 +154,17 @@ namespace XNA_ENGINE.Engine.Scenegraph
 
             //Check this_Object's children with other_Object
             return Children.FirstOrDefault(child => child.HitTest(gameObj)) != null;
+        }
+
+        public bool HitTest(Ray ray)
+        {
+            if (BoundingBox.Value.Intersects(ray) != null)
+            {
+                System.Diagnostics.Debug.WriteLine("" + BoundingBox.Value.Intersects(ray).ToString());
+                return true;
+            }
+
+            return false;
         }
 
         public virtual void Initialize()

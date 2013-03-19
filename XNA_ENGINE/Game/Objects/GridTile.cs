@@ -20,7 +20,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private static float GRIDWIDTH = 65;
         private static float GRIDDEPTH = 65;
-      //  private static float GRIDHEIGHT = 32;
+        //  private static float GRIDHEIGHT = 32;
 
         private string m_TileType;
         private string m_TileSettlement;
@@ -33,10 +33,13 @@ namespace XNA_ENGINE.Game.Objects
             m_Column = column;
 
             m_TileModel = new GameModel("Models/tile_Template");
-            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, 0, GRIDDEPTH * m_Column));
+            m_TileModel.Translate(new Vector3(GRIDWIDTH*m_Row, 0, GRIDDEPTH*m_Column));
             pGameScene.AddSceneObject(m_TileModel);
 
             m_Selected = false;
+
+            m_TileModel.CreateBoundingBox(GRIDWIDTH, 32, GRIDDEPTH,new Vector3(0,16,0));
+            m_TileModel.DrawBoundingBox = true;
         }
 
         public void Initialize()
@@ -47,11 +50,18 @@ namespace XNA_ENGINE.Game.Objects
         public void Update(Engine.RenderContext renderContext)
         {
             if (m_Selected)
-                m_TileModel.Rotate(0, 45.0f * (float)renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
+                m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
         }
 
         public void SetTileType(string type)
         {
+            if (m_TileModel.HitTest(ray))
+            {
+                m_Selected = true;
+                System.Diagnostics.Debug.WriteLine(m_Row.ToString() + "," + m_Column.ToString() );
+
+                return true;
+            }
             m_TileType = type;
         }
 
@@ -60,7 +70,7 @@ namespace XNA_ENGINE.Game.Objects
             return m_TileType;
         }
 
-        public void SetTileSettlement(string type)
+            return false;
         {
             m_TileSettlement = type;
         }

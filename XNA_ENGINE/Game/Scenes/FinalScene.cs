@@ -24,6 +24,8 @@ using XNA_ENGINE.Game.Scenes;
 
 using XNA_ENGINE.Game.Managers;
 
+
+
 using GameModel = XNA_ENGINE.Engine.Objects.GameModel;
 
 namespace XNA_ENGINE.Game.Scenes
@@ -32,14 +34,15 @@ namespace XNA_ENGINE.Game.Scenes
     {
         enum PlayerInput
         {
-            ClickTile,
-            RightClickTile
+            LeftClick
         }
 
         List<Tile> m_Tiles;
 
         // Controls
         GamePadState gamePadState;
+        private InputManager m_InputManager;
+
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
@@ -49,6 +52,13 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            //Input manager + inputs
+            m_InputManager = new InputManager();
+
+            InputAction LeftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
+            LeftClick.MouseButton = MouseButtons.LeftButton;
+            m_InputManager.MapAction(LeftClick);
+
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
 
@@ -95,7 +105,6 @@ namespace XNA_ENGINE.Game.Scenes
 
             GridFieldManager.GetInstance(this).Update(renderContext);
 
-
             base.Update(renderContext);
         }
 
@@ -111,6 +120,39 @@ namespace XNA_ENGINE.Game.Scenes
 
         private void HandleInput(RenderContext renderContext)
         {
+            //Update inputManager
+            m_InputManager.Update();
+
+            // Handle Mouse Input
+            Vector2 mPos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
+
+            //Raycast to grid
+            if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
+            {
+                Viewport vp = renderContext.GraphicsDevice.Viewport;
+                Vector3 pos1 = vp.Unproject(new Vector3(mPos.X, mPos.Y, 0),
+                    renderContext.Camera.Projection,
+                    renderContext.Camera.View,
+                    renderContext.Camera.GetWorldMatrix());
+                Vector3 pos2 = vp.Unproject(new Vector3(mPos.X, mPos.Y, 1),
+                    renderContext.Camera.Projection,
+                    renderContext.Camera.View,
+                    renderContext.Camera.GetWorldMatrix());
+                Vector3 dir = Vector3.Normalize(pos2 - pos1);
+                //dir = -renderContext.Camera.View.Forward;
+
+                System.Diagnostics.Debug.WriteLine("" + dir.ToString());
+
+                Ray ray = new Ray(renderContext.Camera.WorldPosition, dir);
+
+                GridFieldManager.GetInstance(this).HitTestField(ray);
+
+               /* System.Diagnostics.Debug.WriteLine("" + dir.ToString() + 
+                    renderContext.Camera.Projection.ToString() + 
+                    renderContext.Camera.View.ToString() + 
+                    renderContext.Camera.GetWorldMatrix().ToString());*/
+            }
+
             // Handle GamePad Input
             gamePadState = GamePad.GetState(PlayerIndex.One);
 
@@ -138,9 +180,6 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.Camera.LocalPosition += new Vector3(0, 0, 10);
             if (keyboardState[Keys.D] == KeyState.Down)
                 renderContext.Camera.LocalPosition += new Vector3(10, 0, 0);
-
-            // Handle Mouse Input
-            Vector2 mousePos = new Vector2(renderContext.Input.CurrentMouseState.X,renderContext.Input.CurrentMouseState.Y);
         }
     }
 

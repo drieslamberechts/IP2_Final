@@ -25,7 +25,6 @@ namespace XNA_ENGINE.Game.Managers
         {
             //LOAD GRIDFIELD
            // LoadGridField(pGameScene, "tilemap.xml");
-
             
             //GENERATE GRIDFIELD
             m_GridField = new List<List<GridTile>>();
@@ -77,6 +76,20 @@ namespace XNA_ENGINE.Game.Managers
 
             GRID_ROW_LENGTH = rows;
             GRID_COLUMN_LENGTH = rows;
+        }
+
+        public bool HitTestField(Ray ray)
+        {
+            //Iterate over every GridTile
+            for (int i = 0; i < GRID_ROW_LENGTH; ++i)
+            {
+                for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
+                {
+                    if (m_GridField[i][j].HitTest(ray))
+                        return true;
+                }
+            }
+            return false;
         }
 
     }
