@@ -44,7 +44,11 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Initialize()
         {
+<<<<<<< HEAD
             m_TileType = "normal";
+=======
+
+>>>>>>> e1b1fb261a2d7ef18c487222beab5918944fe784
         }
 
         public void Update(Engine.RenderContext renderContext)
@@ -58,10 +62,11 @@ namespace XNA_ENGINE.Game.Objects
             if (m_TileModel.HitTest(ray))
             {
                 m_Selected = true;
-                System.Diagnostics.Debug.WriteLine(m_Row.ToString() + "," + m_Column.ToString());
+                System.Diagnostics.Debug.WriteLine(m_Row.ToString() + "," + m_Column.ToString() );
 
                 return true;
             }
+
             return false;
         }
 
