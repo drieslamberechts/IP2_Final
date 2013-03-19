@@ -14,7 +14,7 @@ namespace XNA_ENGINE.Game.Managers
         //Singleton implementation
         private static GridFieldManager m_GridFieldManager;
 
-        private List<List<GridTile>> m_GridField;
+        private GridTile[,] m_GridField;
 
         private int GRID_ROW_LENGTH = 30;
         private int GRID_COLUMN_LENGTH = 30;
@@ -23,8 +23,11 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridFieldManager(GameScene pGameScene)
         {
-            //LOAD GRIDFIELD
-           // LoadGridField(pGameScene, "tilemap.xml");
+            // Generate a new Map
+            m_GridField = MapLoadSave.GetInstance().GenerateMap(pGameScene);
+
+            /*//LOAD GRIDFIELD
+            LoadGridField(pGameScene, "tilemap.xml");
             
             //GENERATE GRIDFIELD
             m_GridField = new List<List<GridTile>>();
@@ -36,7 +39,7 @@ namespace XNA_ENGINE.Game.Managers
                     tempList.Add(new GridTile(pGameScene, i, j));
                 }
                 m_GridField.Add(tempList);
-            }
+            }*/
         }
 
         static public GridFieldManager GetInstance(GameScene pGameScene)
@@ -59,7 +62,7 @@ namespace XNA_ENGINE.Game.Managers
             {
                 for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
                 {
-                    m_GridField[i][j].Update(renderContext);
+                    m_GridField[i,j].Update(renderContext);
                 }
             }
         }
@@ -69,13 +72,13 @@ namespace XNA_ENGINE.Game.Managers
             m_GridField = MapLoadSave.GetInstance().LoadMap(XMLFile, pGameScene);
 
             //Count columns and rows
-            int rows = m_GridField.Count(list => true);
-            int columns = m_GridField[0].Count(tile => true);
+            //int rows = m_GridField.Count(list => true);
+            //int columns = m_GridField[0].Count(tile => true);
 
-            System.Diagnostics.Debug.WriteLine("Rows: " + rows + " Columns: " + columns);
+            //System.Diagnostics.Debug.WriteLine("Rows: " + rows + " Columns: " + columns);
 
-            GRID_ROW_LENGTH = rows;
-            GRID_COLUMN_LENGTH = rows;
+           // GRID_ROW_LENGTH = rows;
+            //GRID_COLUMN_LENGTH = rows;
         }
 
         public bool HitTestField(Ray ray)
@@ -85,7 +88,7 @@ namespace XNA_ENGINE.Game.Managers
             {
                 for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
                 {
-                    if (m_GridField[i][j].HitTest(ray))
+                    if (m_GridField[i,j].HitTest(ray))
                         return true;
                 }
             }

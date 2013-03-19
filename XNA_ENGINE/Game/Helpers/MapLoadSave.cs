@@ -21,11 +21,9 @@ namespace XNA_ENGINE.Game.Helpers
         private const int MAX_HEIGHT = 30;
         private const int MAX_WIDTH = 30;
 
-        private GridTile[,] m_GridField;
-
         private MapLoadSave()
         {
-            m_GridField = new GridTile[MAX_WIDTH, MAX_HEIGHT];
+            //m_GridField = new GridTile[MAX_WIDTH, MAX_HEIGHT];
         }
 
         static public MapLoadSave GetInstance()
@@ -36,19 +34,9 @@ namespace XNA_ENGINE.Game.Helpers
             return m_MapLoadSave;
         }
 
-        public List<List<GridTile>> LoadMap(string XMLFile, GameScene pGameScene)
+        public GridTile[,] LoadMap(string XMLFile, GameScene pGameScene)
         {
-            List<List<GridTile>> gridField = new List<List<GridTile>>();
-            List<GridTile> addTest = new List<GridTile>();
-            addTest.Add(new GridTile(pGameScene,0,0));
-            addTest.Add(new GridTile(pGameScene, 1, 0));
-            addTest.Add(new GridTile(pGameScene, 2, 0));
-            gridField.Add(addTest);
-            addTest.Clear();
-            addTest.Add(new GridTile(pGameScene, 0, 1));
-            addTest.Add(new GridTile(pGameScene, 1, 1));
-            gridField.Add(addTest);
-
+            GridTile[,] gridField = new GridTile[MAX_WIDTH, MAX_HEIGHT];
             System.IO.Stream stream = TitleContainer.OpenStream(XMLFile);
             XDocument doc = XDocument.Load(stream);
             /*
@@ -60,11 +48,14 @@ namespace XNA_ENGINE.Game.Helpers
                            settlement = Convert.ToString(tile.Element("settlement").Value)*/
                 //       }).ToList();*/
 
+            //return gridField;
+
             return gridField;
         }
 
-        public void GenerateMap(GameScene pGameScene)
+        public GridTile[,] GenerateMap(GameScene pGameScene)
         {
+            GridTile[,] gridField = new GridTile[MAX_WIDTH, MAX_HEIGHT]; ;
             // Map:
             // Width = 30
             // Height = 30
@@ -85,23 +76,25 @@ namespace XNA_ENGINE.Game.Helpers
             {
                 for (int width = 0; width < MAX_WIDTH; ++width)
                 {
-                    m_GridField[width,height] = addTest.ElementAt(teller);
+                    gridField[width, height] = addTest.ElementAt(teller);
 
                     // Set the tile type (normal, tribe,...)
-                    m_GridField[width,height].SetTileType("normal");
+                    gridField[width, height].SetTileType("normal");
 
                     // Use a color to create a new Tribe (none, green, red, blue,...)
-                    m_GridField[width,height].SetTileSettlement("none");
+                    gridField[width, height].SetTileSettlement("none");
 
                     teller++;
                 }
             }
 
             // Save to XML file
-            SaveMap();
+            SaveMap(gridField);
+
+            return gridField;
         }
 
-        public void SaveMap()
+        public void SaveMap(GridTile[,] gridField)
         {
             var xmlFile = new FileStream("GeneratedTileMap.xml", FileMode.OpenOrCreate, FileAccess.Write);
             var writer = new StreamWriter(xmlFile);
@@ -117,8 +110,8 @@ namespace XNA_ENGINE.Game.Helpers
 
                     writer.WriteLine("\t<positionX>" + width + "</positionX>");
                     writer.WriteLine("\t<positionY>" + height + "</positionY>");
-                    writer.WriteLine("\t<type>" + m_GridField[height, width].GetTileType() + "</type>");
-                    writer.WriteLine("\t<settlement>" + m_GridField[height, width].GetTileSettlement() + "</settlement>");
+                    writer.WriteLine("\t<type>" + gridField[height, width].GetTileType() + "</type>");
+                    writer.WriteLine("\t<settlement>" + gridField[height, width].GetTileSettlement() + "</settlement>");
 
                     writer.WriteLine("</tile>");
                 }
