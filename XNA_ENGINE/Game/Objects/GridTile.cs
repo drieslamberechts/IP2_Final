@@ -33,7 +33,7 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, 0, GRIDDEPTH * m_Column));
             pGameScene.AddSceneObject(m_TileModel);
 
-            m_Selected = true;
+            m_Selected = false;
         }
 
         public void Initialize()

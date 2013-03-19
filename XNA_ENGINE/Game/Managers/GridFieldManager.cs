@@ -18,15 +18,15 @@ namespace XNA_ENGINE.Game.Managers
 
         private int GRID_ROW_LENGTH = 30;
         private int GRID_COLUMN_LENGTH = 30;
-       // private int GRID_OFFSET = 64;
+        private int GRID_OFFSET = 64;
 
 
         private GridFieldManager(GameScene pGameScene)
         {
             //LOAD GRIDFIELD
-            LoadGridField(pGameScene, "tilemap.xml");
+           // LoadGridField(pGameScene, "tilemap.xml");
 
-            /*
+            
             //GENERATE GRIDFIELD
             m_GridField = new List<List<GridTile>>();
             for (int i = 0; i < GRID_ROW_LENGTH; ++i)
@@ -34,10 +34,10 @@ namespace XNA_ENGINE.Game.Managers
                 List<GridTile> tempList = new List<GridTile>();
                 for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
                 {
-                    tempList.Add(new GridTile(pGameScene, new Vector3((i * GRID_OFFSET),0,(j * GRID_OFFSET)), i,j));
+                    tempList.Add(new GridTile(pGameScene, i, j));
                 }
                 m_GridField.Add(tempList);
-            }*/
+            }
         }
 
         static public GridFieldManager GetInstance(GameScene pGameScene)
