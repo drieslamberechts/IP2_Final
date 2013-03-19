@@ -68,9 +68,6 @@ namespace XNA_ENGINE.Game.Scenes
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
-
-            // Generate a new Map
-            MapLoadSave.GetInstance().GenerateMap(this);
          
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
