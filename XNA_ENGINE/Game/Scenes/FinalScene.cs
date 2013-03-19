@@ -42,12 +42,19 @@ namespace XNA_ENGINE.Game.Scenes
         // Controls
         GamePadState gamePadState;
         private InputManager m_InputManager;
+        private float elapseTime;
+        private int frameCounter;
+        private int FPS;
+        private SpriteFont m_DebugFont;
 
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
         {
             //CONTENT
+
+            // FONT
+            m_DebugFont = content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
         public override void Initialize()
@@ -100,6 +107,17 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Update(RenderContext renderContext)
         {
+            // FPS
+            elapseTime += (float)renderContext.GameTime.ElapsedGameTime.TotalSeconds;
+            frameCounter++;
+
+            if (elapseTime > 1)
+            {
+                FPS = frameCounter;
+                frameCounter = 0;
+                elapseTime = 0;
+            }
+
             // Handle Input
             HandleInput(renderContext);
 
@@ -110,6 +128,9 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
+            // Show FPS
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + FPS, new Vector2(10, 10), Color.White);
+
             base.Draw2D(renderContext, drawBefore3D);
         }
 
