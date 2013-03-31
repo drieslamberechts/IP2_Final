@@ -37,8 +37,6 @@ namespace XNA_ENGINE.Game.Scenes
             LeftClick
         }
 
-        List<Tile> m_Tiles;
-
         // Controls
         GamePadState gamePadState;
         private InputManager m_InputManager;
@@ -46,9 +44,6 @@ namespace XNA_ENGINE.Game.Scenes
         private int frameCounter;
         private int FPS;
         private SpriteFont m_DebugFont;
-
-        // Players
-        Player m_Player;
 
 
         public FinalScene(ContentManager content)
@@ -76,10 +71,7 @@ namespace XNA_ENGINE.Game.Scenes
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
 
-            // Player
-            m_Player = new Player();
-
-
+            /*
             // ------------------------------------------
             // OPEN AND READ XML FILE
             // ------------------------------------------
@@ -103,7 +95,7 @@ namespace XNA_ENGINE.Game.Scenes
             // ------------------------------------------
             // END READING XML FILE
             // ------------------------------------------
-
+            */
 
             base.Initialize();
         }
@@ -134,9 +126,6 @@ namespace XNA_ENGINE.Game.Scenes
             // Show FPS 2
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + FPS, new Vector2(10, 10), Color.White);
 
-            // SHOW RESOURCES
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + m_Player.GetResources()[0].ToString() + "     Food: " + m_Player.GetResources()[1].ToString() + "     Money: " + m_Player.GetResources()[2].ToString(), new Vector2(400, 10), Color.White);
-
             base.Draw2D(renderContext, drawBefore3D);
         }
 
@@ -155,31 +144,8 @@ namespace XNA_ENGINE.Game.Scenes
 
             //Raycast to grid
             if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
-            {
-                Viewport vp = renderContext.GraphicsDevice.Viewport;
-                Vector3 pos1 = vp.Unproject(new Vector3(mPos.X, mPos.Y, 0),
-                    renderContext.Camera.Projection,
-                    renderContext.Camera.View,
-                    renderContext.Camera.GetWorldMatrix());
-                Vector3 pos2 = vp.Unproject(new Vector3(mPos.X, mPos.Y, 1),
-                    renderContext.Camera.Projection,
-                    renderContext.Camera.View,
-                    renderContext.Camera.GetWorldMatrix());
-                Vector3 dir = Vector3.Normalize(pos2 - pos1);
-                //dir = -renderContext.Camera.View.Forward;
-
-                System.Diagnostics.Debug.WriteLine("" + dir.ToString());
-
-                Ray ray = new Ray(renderContext.Camera.WorldPosition, dir);
-
-                GridFieldManager.GetInstance(this).HitTestField(ray);
-
-               /* System.Diagnostics.Debug.WriteLine("" + dir.ToString() + 
-                    renderContext.Camera.Projection.ToString() + 
-                    renderContext.Camera.View.ToString() + 
-                    renderContext.Camera.GetWorldMatrix().ToString());*/
-            }
-
+                GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
+            
             // Handle GamePad Input
             gamePadState = GamePad.GetState(PlayerIndex.One);
 
@@ -208,12 +174,36 @@ namespace XNA_ENGINE.Game.Scenes
             if (keyboardState[Keys.D] == KeyState.Down)
                 renderContext.Camera.LocalPosition += new Vector3(10, 0, 0);
         }
-    }
+        public Ray CalculateCursorRay(RenderContext renderContext)
+        {
+            Matrix view = renderContext.Camera.View;
+            Matrix projection = renderContext.Camera.Projection;
 
-    public class Tile
-    {
-        public Vector2 position { get; set; }
-        public string type { get; set; }
-        public string settlement { get; set; }
+            int mouseX = renderContext.Input.CurrentMouseState.X;
+            int mouseY = renderContext.Input.CurrentMouseState.Y;
+
+            // create 2 positions in screenspace using the cursor position. 0 is as
+            // close as possible to the camera, 1 is as far away as possible.
+            Vector3 nearSource = new Vector3(mouseX, mouseY, 0f);
+            Vector3 farSource = new Vector3(mouseX, mouseY, 1f);
+
+            // use Viewport.Unproject to tell what those two screen space positions
+            // would be in world space. we'll need the projection matrix and view
+            // matrix, which we have saved as member variables. We also need a world
+            // matrix, which can just be identity.
+            Vector3 nearPoint = renderContext.GraphicsDevice.Viewport.Unproject(nearSource,
+                projection, view, Matrix.Identity);
+
+            Vector3 farPoint = renderContext.GraphicsDevice.Viewport.Unproject(farSource,
+                projection, view, Matrix.Identity);
+
+            // find the direction vector that goes from the nearPoint to the farPoint
+            // and normalize it....
+            Vector3 direction = farPoint - nearPoint;
+            direction.Normalize();
+
+            // and then create a new ray using nearPoint as the source.
+            return new Ray(nearPoint, direction);
+        }
     }
 }

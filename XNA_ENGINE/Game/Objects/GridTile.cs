@@ -58,8 +58,7 @@ namespace XNA_ENGINE.Game.Objects
             if (m_TileModel.HitTest(ray))
             {
                 m_Selected = true;
-                System.Diagnostics.Debug.WriteLine(m_Row.ToString() + "," + m_Column.ToString());
-
+                System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
                 return true;
             }
             return false;
