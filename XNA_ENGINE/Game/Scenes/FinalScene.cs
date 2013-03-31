@@ -47,6 +47,9 @@ namespace XNA_ENGINE.Game.Scenes
         private int FPS;
         private SpriteFont m_DebugFont;
 
+        // Players
+        Player m_Player;
+
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
@@ -72,6 +75,9 @@ namespace XNA_ENGINE.Game.Scenes
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
+
+            // Player
+            m_Player = new Player();
 
 
             // ------------------------------------------
@@ -127,6 +133,9 @@ namespace XNA_ENGINE.Game.Scenes
         {
             // Show FPS 2
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + FPS, new Vector2(10, 10), Color.White);
+
+            // SHOW RESOURCES
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + m_Player.GetResources()[0].ToString() + "     Food: " + m_Player.GetResources()[1].ToString() + "     Money: " + m_Player.GetResources()[2].ToString(), new Vector2(400, 10), Color.White);
 
             base.Draw2D(renderContext, drawBefore3D);
         }
