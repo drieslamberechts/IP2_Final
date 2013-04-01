@@ -18,8 +18,7 @@ namespace XNA_ENGINE.Game.Managers
 
         private int GRID_ROW_LENGTH = 30;
         private int GRID_COLUMN_LENGTH = 30;
-        private int GRID_OFFSET = 64;
-
+       // private int GRID_OFFSET = 64;
 
         private GridFieldManager(GameScene pGameScene)
         {

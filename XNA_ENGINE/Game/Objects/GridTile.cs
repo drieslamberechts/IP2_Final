@@ -18,8 +18,8 @@ namespace XNA_ENGINE.Game.Objects
         private GameModel m_TileModel;
         private int m_Row, m_Column;
 
-        private static float GRIDWIDTH = 65;
-        private static float GRIDDEPTH = 65;
+        private static float GRIDWIDTH = 64;
+        private static float GRIDDEPTH = 64;
         //  private static float GRIDHEIGHT = 32;
 
         private string m_TileType;
@@ -31,14 +31,16 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_Row = row;
             m_Column = column;
+            Random random = new Random();
+            int yOffset = random.Next(0, 0); //No offset at the moment, change this value to give it an yOffset
 
             m_TileModel = new GameModel("Models/tile_Template");
-            m_TileModel.Translate(new Vector3(GRIDWIDTH*m_Row, 0, GRIDDEPTH*m_Column));
+            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
             pGameScene.AddSceneObject(m_TileModel);
 
             m_Selected = false;
 
-            m_TileModel.CreateBoundingBox(GRIDWIDTH, 32, GRIDDEPTH,new Vector3(0,16,0));
+            m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, 32 + yOffset, 0));
             m_TileModel.DrawBoundingBox = true;
         }
 
@@ -51,13 +53,17 @@ namespace XNA_ENGINE.Game.Objects
         {
             if (m_Selected)
                 m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
+/*            if (m_Selected)
+                m_TileModel.SetColor(new Vector3(0.5f,1,1));
+            else
+                m_TileModel.SetColor(new Vector3(0.0f, 1, 0.0f));*/
         }
 
         public bool HitTest(Ray ray)
         {
             if (m_TileModel.HitTest(ray))
             {
-                m_Selected = true;
+                m_Selected = !m_Selected;
                 System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
                 return true;
             }

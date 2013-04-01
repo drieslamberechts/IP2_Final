@@ -149,30 +149,39 @@ namespace XNA_ENGINE.Game.Scenes
             // Handle GamePad Input
             gamePadState = GamePad.GetState(PlayerIndex.One);
 
+            //Camera Vectors
+            Vector3 forwardVecCam = GetForwardVectorOfQuaternion(renderContext.Camera.LocalRotation);
+            forwardVecCam.Y = 0;
+            forwardVecCam.Normalize();
+            Vector3 rightVecCam = GetRightVectorOfQuaternion(renderContext.Camera.LocalRotation);
+            rightVecCam.Y = 0;
+            rightVecCam.Normalize();
+
             //GamePad
+            //THIS MIGHT NOT WORK DRIES, fidle around with the - and + of the vectors, also the right vector isn't totally right.
             if (gamePadState.IsConnected)
             {
                 if (gamePadState.ThumbSticks.Left.Y > 0)
-                    renderContext.Camera.LocalPosition += new Vector3(0, 0, -10 * gamePadState.ThumbSticks.Left.Y);
+                    renderContext.Camera.LocalPosition += -forwardVecCam * gamePadState.ThumbSticks.Left.Y;
                 if (gamePadState.ThumbSticks.Left.X < 0)
-                    renderContext.Camera.LocalPosition += new Vector3(10 * gamePadState.ThumbSticks.Left.X, 0, 0);
+                    renderContext.Camera.LocalPosition += rightVecCam * gamePadState.ThumbSticks.Left.X;
                 if (gamePadState.ThumbSticks.Left.Y < 0)
-                    renderContext.Camera.LocalPosition += new Vector3(0, 0, -10 * gamePadState.ThumbSticks.Left.Y);
+                    renderContext.Camera.LocalPosition += forwardVecCam * gamePadState.ThumbSticks.Left.Y;
                 if (gamePadState.ThumbSticks.Left.X > 0)
-                    renderContext.Camera.LocalPosition += new Vector3(10 * gamePadState.ThumbSticks.Left.X, 0, 0);
+                    renderContext.Camera.LocalPosition += -rightVecCam * gamePadState.ThumbSticks.Left.X;
             }
 
             // Handle Keyboard Input
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
 
             if (keyboardState[Keys.Z] == KeyState.Down)
-                renderContext.Camera.LocalPosition += new Vector3(0, 0, -10);
+                renderContext.Camera.LocalPosition += -forwardVecCam * 10;
             if (keyboardState[Keys.Q] == KeyState.Down)
-                renderContext.Camera.LocalPosition += new Vector3(-10, 0, 0);
+                renderContext.Camera.LocalPosition += rightVecCam * 10;
             if (keyboardState[Keys.S] == KeyState.Down)
-                renderContext.Camera.LocalPosition += new Vector3(0, 0, 10);
+                renderContext.Camera.LocalPosition += forwardVecCam * 10;
             if (keyboardState[Keys.D] == KeyState.Down)
-                renderContext.Camera.LocalPosition += new Vector3(10, 0, 0);
+                renderContext.Camera.LocalPosition += -rightVecCam * 10;
         }
         public Ray CalculateCursorRay(RenderContext renderContext)
         {
@@ -205,5 +214,28 @@ namespace XNA_ENGINE.Game.Scenes
             // and then create a new ray using nearPoint as the source.
             return new Ray(nearPoint, direction);
         }
+    
+        //Quaternion conversion helpers
+        public Vector3 GetForwardVectorOfQuaternion(Quaternion q) 
+        {
+            return new Vector3(2 * (q.X * q.Z + q.W * q.Y),
+                            2 * (q.Y * q.X - q.W * q.X),
+                            1 - 2 * (q.X * q.X + q.Y * q.Y));
+        }
+        public Vector3 GetUpVectorOfQuaternion(Quaternion q) 
+        {
+            return new Vector3(2 * (q.X * q.Y - q.W * q.Z),
+                            1 - 2 * (q.X * q.Z + q.Z * q.Z),
+                            2 * (q.Y * q.Z + q.W * q.X));
+        }
+        public Vector3 GetRightVectorOfQuaternion(Quaternion q) 
+        {
+            return new Vector3(1 - 2 * (q.Y * q.Y + q.Z * q.Z),
+                2 * (q.X * q.Y + q.W * q.Z),
+                2 * (q.X * q.Z - q.W * q.Y));
+        }
+
     }
 }
+
+

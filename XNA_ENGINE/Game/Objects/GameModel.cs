@@ -37,15 +37,29 @@ namespace XNA_ENGINE.Game.Objects
                 {
                     effect.EnableDefaultLighting();
                     effect.View = renderContext.Camera.View;
-                    effect.Projection =
-                    renderContext.Camera.Projection;
+                    effect.Projection = renderContext.Camera.Projection;
                     effect.World = transforms[mesh.ParentBone.Index] * WorldMatrix;
                 }
 
                 mesh.Draw();
             }
-            
+
             base.Draw(renderContext);
+        }
+
+        public void SetTexture(Texture2D texture)
+        {
+            foreach (ModelMesh mesh in _model.Meshes)
+            {
+                foreach (BasicEffect effect in mesh.Effects)
+                {
+                    effect.Texture = texture;
+                    // effect.FogEnabled = true;
+                    //effect.EmissiveColor = color;
+
+                    // effect.DiffuseColor = color;
+                }
+            }
         }
     }
 }
