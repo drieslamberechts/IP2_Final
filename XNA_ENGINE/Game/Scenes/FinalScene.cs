@@ -183,6 +183,7 @@ namespace XNA_ENGINE.Game.Scenes
             if (keyboardState[Keys.D] == KeyState.Down)
                 renderContext.Camera.LocalPosition += -rightVecCam * 10;
         }
+
         public Ray CalculateCursorRay(RenderContext renderContext)
         {
             Matrix view = renderContext.Camera.View;
@@ -237,5 +238,3 @@ namespace XNA_ENGINE.Game.Scenes
 
     }
 }
-
-
