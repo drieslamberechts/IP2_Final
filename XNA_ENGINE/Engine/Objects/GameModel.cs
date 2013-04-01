@@ -28,6 +28,8 @@ namespace XNA_ENGINE.Engine.Objects
 
         public override void Draw(RenderContext renderContext)
         {
+            if (m_Hide) return;
+
             var transforms = new Matrix[_model.Bones.Count];
             _model.CopyAbsoluteBoneTransformsTo(transforms);
 

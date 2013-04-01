@@ -17,12 +17,15 @@ namespace XNA_ENGINE.Game.Objects
     public class GridTile
     {
         private GameModel m_TileModel;
-        private GameModel m_SettlementModel;
+        private static GameModel m_SettlementModel1;
+        private static GameModel m_SettlementModel2;
+        private static GameModel m_SettlementModel3;
+        private GameModel m_SettlementDisplayModel;
         private int m_Row, m_Column;
 
         private static float GRIDWIDTH = 64;
         private static float GRIDDEPTH = 64;
-        //  private static float GRIDHEIGHT = 32;
+        private static float GRIDHEIGHT = 32;
         private const int YOFFSETMIN = -5;
         private const int YOFFSETMAX = 5;
 
@@ -33,7 +36,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private GameScene m_GameScene;
 
-        public GridTile(GameScene pGameScene, int column, int row)
+        public GridTile(GameScene pGameScene, int row, int column)
         {
             m_Column = column;
             m_Row = row;
@@ -51,17 +54,36 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
             m_GameScene.AddSceneObject(m_TileModel);
 
-            m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, +32, 0));
+            m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
             m_TileModel.DrawBoundingBox = true;
 
             m_TileType = "normal";
+
+
+            //SETTLEMENTSTESTS
+            m_SettlementModel1 = new GameModel("Models/settlement_TestSettlementBlue");
+            m_SettlementModel2 = new GameModel("Models/settlement_TestSettlementGold");
+            m_SettlementModel3 = new GameModel("Models/settlement_TestSettlementRed");
+            /*
+            m_SettlementDisplayModel = m_SettlementModel1;
+            Vector3 pos = m_TileModel.WorldPosition;
+            pos.Y += 32;
+            m_SettlementDisplayModel.Translate(pos);
+            m_GameScene.AddSceneObject(m_SettlementDisplayModel);
+            */
+            m_SettlementDisplayModel = m_SettlementModel1;
+            m_SettlementDisplayModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
+            m_SettlementDisplayModel.CanDraw = true;
+            m_TileModel.AddChild(m_SettlementDisplayModel);
         }
 
         public void Update(Engine.RenderContext renderContext)
         {
             if (m_Selected)
                 m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
-/*            if (m_Selected)
+
+            
+        /*  if (m_Selected)
                 m_TileModel.SetColor(new Vector3(0.5f,1,1));
             else
                 m_TileModel.SetColor(new Vector3(0.0f, 1, 0.0f));*/

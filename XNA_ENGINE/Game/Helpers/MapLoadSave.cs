@@ -70,11 +70,10 @@ namespace XNA_ENGINE.Game.Helpers
             }
 
             // Add Tiles to the right grid and give them the right attributes.
-            int teller = 0;
-
-            for (int height = 0; height < MAX_HEIGHT; ++height)
+            
+            for (int height = 0, teller = 0; height < MAX_HEIGHT; ++height)
             {
-                for (int width = 0; width < MAX_WIDTH; ++width)
+                for (int width = 0; width < MAX_WIDTH; ++width, ++ teller)
                 {
                     gridField[width, height] = addTest.ElementAt(teller);
 
@@ -83,8 +82,6 @@ namespace XNA_ENGINE.Game.Helpers
 
                     // Use a color to create a new Tribe (none, green, red, blue,...)
                     gridField[width, height].SetTileSettlement("none");
-
-                    teller++;
                 }
             }
 
