@@ -20,6 +20,8 @@ namespace XNA_ENGINE.Game.Managers
         private int GRID_COLUMN_LENGTH = 30;
        // private int GRID_OFFSET = 64;
 
+        private Random m_Random;
+
         private GridFieldManager(GameScene pGameScene)
         {
             // Generate a new Map
@@ -51,7 +53,16 @@ namespace XNA_ENGINE.Game.Managers
 
         public void Initialize()
         {
-            
+            m_Random = new Random();
+
+            //Iterate over every GridTile
+            for (int i = 0; i < GRID_ROW_LENGTH; ++i)
+            {
+                for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
+                {
+                    m_GridField[i, j].Initialize();
+                }
+            }
         }
 
         public void Update(Engine.RenderContext renderContext)
@@ -80,7 +91,7 @@ namespace XNA_ENGINE.Game.Managers
             //GRID_COLUMN_LENGTH = rows;
         }
 
-        public bool HitTestField(Ray ray)
+        public GridTile HitTestField(Ray ray)
         {
             //Iterate over every GridTile
             for (int i = 0; i < GRID_ROW_LENGTH; ++i)
@@ -88,11 +99,15 @@ namespace XNA_ENGINE.Game.Managers
                 for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
                 {
                     if (m_GridField[i,j].HitTest(ray))
-                        return true;
+                        return m_GridField[i, j];
                 }
             }
-            return false;
+            return null;
         }
 
+        public Random Random
+        {
+            get { return m_Random; }
+        }
     }
 }

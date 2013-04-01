@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
 
 
@@ -16,36 +17,43 @@ namespace XNA_ENGINE.Game.Objects
     public class GridTile
     {
         private GameModel m_TileModel;
+        private GameModel m_SettlementModel;
         private int m_Row, m_Column;
 
         private static float GRIDWIDTH = 64;
         private static float GRIDDEPTH = 64;
         //  private static float GRIDHEIGHT = 32;
+        private const int YOFFSETMIN = -5;
+        private const int YOFFSETMAX = 5;
 
         private string m_TileType;
         private string m_TileSettlement;
 
-        private bool m_Selected { get; set; }
+        private bool m_Selected;
 
-        public GridTile(GameScene pGameScene, int row, int column)
+        private GameScene m_GameScene;
+
+        public GridTile(GameScene pGameScene, int column, int row)
         {
-            m_Row = row;
             m_Column = column;
-            Random random = new Random();
-            int yOffset = random.Next(0, 0); //No offset at the moment, change this value to give it an yOffset
-
-            m_TileModel = new GameModel("Models/tile_Template");
-            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
-            pGameScene.AddSceneObject(m_TileModel);
+            m_Row = row;
 
             m_Selected = false;
 
-            m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, 32 + yOffset, 0));
-            m_TileModel.DrawBoundingBox = true;
+            m_GameScene = pGameScene;
         }
 
         public void Initialize()
         {
+            int yOffset = GridFieldManager.GetInstance(m_GameScene).Random.Next(YOFFSETMIN, YOFFSETMAX);
+
+            m_TileModel = new GameModel("Models/tile_Template");
+            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
+            m_GameScene.AddSceneObject(m_TileModel);
+
+            m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, +32, 0));
+            m_TileModel.DrawBoundingBox = true;
+
             m_TileType = "normal";
         }
 
@@ -63,7 +71,6 @@ namespace XNA_ENGINE.Game.Objects
         {
             if (m_TileModel.HitTest(ray))
             {
-                m_Selected = !m_Selected;
                 System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
                 return true;
             }
@@ -88,6 +95,19 @@ namespace XNA_ENGINE.Game.Objects
         public string GetTileSettlement()
         {
             return m_TileSettlement;
+        }
+
+        public bool Selected
+        {
+            get
+            {
+                return m_Selected;
+            }
+
+            set
+            {
+                m_Selected = value;
+            } 
         }
     }
 }

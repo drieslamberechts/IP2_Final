@@ -37,6 +37,13 @@ namespace XNA_ENGINE.Game.Scenes
             LeftClick
         }
 
+        private enum BuildSelection
+        {
+            BuildingAwesome,
+            BuildingStupid,
+            BuildingOutOfInspiration
+        }
+
         // Controls
         GamePadState gamePadState;
         private InputManager m_InputManager;
@@ -45,6 +52,7 @@ namespace XNA_ENGINE.Game.Scenes
         private int FPS;
         private SpriteFont m_DebugFont;
 
+        private BuildSelection m_BuildSelection;
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
@@ -57,6 +65,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            m_BuildSelection = BuildSelection.BuildingAwesome;
+
             //Input manager + inputs
             m_InputManager = new InputManager();
 
@@ -126,6 +136,10 @@ namespace XNA_ENGINE.Game.Scenes
             // Show FPS 2
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + FPS, new Vector2(10, 10), Color.White);
 
+            // Show Selection
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + m_BuildSelection, new Vector2(10, 30), Color.Black);
+            
+
             base.Draw2D(renderContext, drawBefore3D);
         }
 
@@ -138,18 +152,40 @@ namespace XNA_ENGINE.Game.Scenes
         {
             //Update inputManager
             m_InputManager.Update();
+      
+
+            // Handle Keyboard Input
+            KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
+            // Handle GamePad Input
+            gamePadState = GamePad.GetState(PlayerIndex.One);
+
 
             // Handle Mouse Input
             Vector2 mPos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
 
             //Raycast to grid
+            GridTile hittedTile = null;
             if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
-                GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
-            
-            // Handle GamePad Input
-            gamePadState = GamePad.GetState(PlayerIndex.One);
+                hittedTile = GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
 
-            //Camera Vectors
+            if (hittedTile != null)
+            {
+                hittedTile.Selected = true;
+            }
+            
+            //Selection of what to build
+            if (keyboardState[Keys.U] == KeyState.Down)
+                m_BuildSelection = BuildSelection.BuildingAwesome;
+            
+            if (keyboardState[Keys.I] == KeyState.Down)
+                m_BuildSelection = BuildSelection.BuildingStupid;
+            
+            if (keyboardState[Keys.O] == KeyState.Down)            
+                m_BuildSelection = BuildSelection.BuildingOutOfInspiration;
+
+
+            //CAMERA
+            //Camera Vectors     
             Vector3 forwardVecCam = GetForwardVectorOfQuaternion(renderContext.Camera.LocalRotation);
             forwardVecCam.Y = 0;
             forwardVecCam.Normalize();
@@ -157,6 +193,7 @@ namespace XNA_ENGINE.Game.Scenes
             rightVecCam.Y = 0;
             rightVecCam.Normalize();
 
+            
             //GamePad
             //THIS MIGHT NOT WORK DRIES, fidle around with the - and + of the vectors, also the right vector isn't totally right.
             if (gamePadState.IsConnected)
@@ -171,8 +208,7 @@ namespace XNA_ENGINE.Game.Scenes
                     renderContext.Camera.LocalPosition += -rightVecCam * gamePadState.ThumbSticks.Left.X;
             }
 
-            // Handle Keyboard Input
-            KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
+
 
             if (keyboardState[Keys.Z] == KeyState.Down)
                 renderContext.Camera.LocalPosition += -forwardVecCam * 10;
@@ -235,6 +271,5 @@ namespace XNA_ENGINE.Game.Scenes
                 2 * (q.X * q.Y + q.W * q.Z),
                 2 * (q.X * q.Z - q.W * q.Y));
         }
-
     }
 }
