@@ -12,12 +12,43 @@ namespace XNA_ENGINE.Game.Objects
         const int FOOD = 1;
         const int MONEY = 2;
 
-        private Resources m_Resources;
+        private const int LOW_WOOD = 10;
+        private const int LOW_FOOD = 10;
+        private const int LOW_MONEY = 10;
+
+        private readonly Resources m_Resources;
+
+        // AI
+        private AI m_Ai;
+        private bool m_bIsAI;
 
         // METHODS
-        public Player()
+        public Player(bool isAI)
         {
+            m_bIsAI = isAI;
+
             m_Resources = new Resources();
+        }
+
+        public void Update()
+        {
+            if (m_bIsAI)
+            {
+                // -------------------------
+                // AI UPDATE
+                // -------------------------
+                if (m_Resources.GetResources()[WOOD] <= LOW_WOOD)
+                {
+                    // Search for resources
+                    m_Ai.Scout();
+                }
+
+                // need to be able to get current tile for army
+            }
+            else
+            {
+                // REGULAR UPDATES
+            }
         }
 
         public List<float> GetResources()

@@ -44,12 +44,17 @@ namespace XNA_ENGINE.Game.Scenes
             BuildingOutOfInspiration
         }
 
+        private ContentManager m_Content;
+
+        // Menu
+        private Menu m_Menu;
+
         // Controls
-        GamePadState gamePadState;
+        GamePadState m_GamePadState;
         private InputManager m_InputManager;
-        private float elapseTime;
-        private int frameCounter;
-        private int FPS;
+        private float m_ElapseTime;
+        private int m_FrameCounter;
+        private int m_Fps;
         private SpriteFont m_DebugFont;
 
         private BuildSelection m_BuildSelection;
@@ -58,6 +63,7 @@ namespace XNA_ENGINE.Game.Scenes
             : base("FinalScene")
         {
             //CONTENT
+            m_Content = content;
 
             // FONT
             m_DebugFont = content.Load<SpriteFont>("Fonts/DebugFont");
@@ -70,9 +76,9 @@ namespace XNA_ENGINE.Game.Scenes
             //Input manager + inputs
             m_InputManager = new InputManager();
 
-            InputAction LeftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
-            LeftClick.MouseButton = MouseButtons.LeftButton;
-            m_InputManager.MapAction(LeftClick);
+            InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
+            leftClick.MouseButton = MouseButtons.LeftButton;
+            m_InputManager.MapAction(leftClick);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
@@ -80,6 +86,9 @@ namespace XNA_ENGINE.Game.Scenes
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
+
+            // Menu
+            m_Menu = new Menu(m_Content, 15);
 
             /*
             // ------------------------------------------
@@ -113,15 +122,18 @@ namespace XNA_ENGINE.Game.Scenes
         public override void Update(RenderContext renderContext)
         {
             // FPS
-            elapseTime += (float)renderContext.GameTime.ElapsedGameTime.TotalSeconds;
-            frameCounter++;
+            m_ElapseTime += (float)renderContext.GameTime.ElapsedGameTime.TotalSeconds;
+            m_FrameCounter++;
 
-            if (elapseTime > 1)
+            if (m_ElapseTime > 1)
             {
-                FPS = frameCounter;
-                frameCounter = 0;
-                elapseTime = 0;
+                m_Fps = m_FrameCounter;
+                m_FrameCounter = 0;
+                m_ElapseTime = 0;
             }
+
+            // UPDATE MENU
+            m_Menu.Update(renderContext, m_InputManager);
 
             // Handle Input
             HandleInput(renderContext);
@@ -134,11 +146,13 @@ namespace XNA_ENGINE.Game.Scenes
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
             // Show FPS 2
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + FPS, new Vector2(10, 10), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
+
+            // DrawGUI
+            m_Menu.Draw(renderContext);
 
             // Show Selection
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + m_BuildSelection, new Vector2(10, 30), Color.Black);
-            
 
             base.Draw2D(renderContext, drawBefore3D);
         }
@@ -152,16 +166,15 @@ namespace XNA_ENGINE.Game.Scenes
         {
             //Update inputManager
             m_InputManager.Update();
-      
 
             // Handle Keyboard Input
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
             // Handle GamePad Input
-            gamePadState = GamePad.GetState(PlayerIndex.One);
+            m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
 
             // Handle Mouse Input
-            Vector2 mPos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
+            var mPos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
 
             //Raycast to grid
             GridTile hittedTile = null;
@@ -196,16 +209,16 @@ namespace XNA_ENGINE.Game.Scenes
             
             //GamePad
             //THIS MIGHT NOT WORK DRIES, fidle around with the - and + of the vectors, also the right vector isn't totally right.
-            if (gamePadState.IsConnected)
+            if (m_GamePadState.IsConnected)
             {
-                if (gamePadState.ThumbSticks.Left.Y > 0)
-                    renderContext.Camera.LocalPosition += -forwardVecCam * gamePadState.ThumbSticks.Left.Y;
-                if (gamePadState.ThumbSticks.Left.X < 0)
-                    renderContext.Camera.LocalPosition += rightVecCam * gamePadState.ThumbSticks.Left.X;
-                if (gamePadState.ThumbSticks.Left.Y < 0)
-                    renderContext.Camera.LocalPosition += forwardVecCam * gamePadState.ThumbSticks.Left.Y;
-                if (gamePadState.ThumbSticks.Left.X > 0)
-                    renderContext.Camera.LocalPosition += -rightVecCam * gamePadState.ThumbSticks.Left.X;
+                if (m_GamePadState.ThumbSticks.Left.Y > 0)
+                    renderContext.Camera.LocalPosition += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y;
+                if (m_GamePadState.ThumbSticks.Left.X < 0)
+                    renderContext.Camera.LocalPosition += rightVecCam * m_GamePadState.ThumbSticks.Left.X;
+                if (m_GamePadState.ThumbSticks.Left.Y < 0)
+                    renderContext.Camera.LocalPosition += forwardVecCam * m_GamePadState.ThumbSticks.Left.Y;
+                if (m_GamePadState.ThumbSticks.Left.X > 0)
+                    renderContext.Camera.LocalPosition += -rightVecCam * m_GamePadState.ThumbSticks.Left.X;
             }
 
 
@@ -230,8 +243,8 @@ namespace XNA_ENGINE.Game.Scenes
 
             // create 2 positions in screenspace using the cursor position. 0 is as
             // close as possible to the camera, 1 is as far away as possible.
-            Vector3 nearSource = new Vector3(mouseX, mouseY, 0f);
-            Vector3 farSource = new Vector3(mouseX, mouseY, 1f);
+            var nearSource = new Vector3(mouseX, mouseY, 0f);
+            var farSource = new Vector3(mouseX, mouseY, 1f);
 
             // use Viewport.Unproject to tell what those two screen space positions
             // would be in world space. we'll need the projection matrix and view

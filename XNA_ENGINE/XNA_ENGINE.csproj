@@ -109,8 +109,10 @@
     <Compile Include="Game\Helpers\MapLoadSave.cs" />
     <Compile Include="Game\Managers\GridFieldManager.cs" />
     <Compile Include="Game\MainGame.cs" />
+    <Compile Include="Game\Objects\AI.cs" />
     <Compile Include="Game\Objects\GridTile.cs" />
     <Compile Include="Game\Objects\GameModel.cs" />
+    <Compile Include="Game\Objects\Menu.cs" />
     <Compile Include="Game\Objects\Player.cs" />
     <Compile Include="Game\Scenes\FinalScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
