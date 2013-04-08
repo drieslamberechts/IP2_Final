@@ -56,12 +56,6 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.DrawBoundingBox = true;
 
             m_TileType = "normal";
-
-            //SETTLEMENTSTESTS
-            m_SettlementDisplayModel = new GameModel("Models/settlement_TestSettlementBlue"); ;
-            m_SettlementDisplayModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
-            m_SettlementDisplayModel.CanDraw = true;
-            m_TileModel.AddChild(m_SettlementDisplayModel);
         }
 
         public void Update(Engine.RenderContext renderContext)
@@ -99,16 +93,17 @@ namespace XNA_ENGINE.Game.Objects
                     break;
                 case Menu.ModeSelected.Gather:
                     break;
-                case Menu.ModeSelected.Tile1:
+                case Menu.ModeSelected.TileBlue:
                     ChangeChildModel("Models/settlement_TestSettlementBlue");
                     break;
-                case Menu.ModeSelected.Tile2:
+                case Menu.ModeSelected.TileGold:
                     ChangeChildModel("Models/settlement_TestSettlementGold");
                     break;
-                case Menu.ModeSelected.Tile3:
+                case Menu.ModeSelected.TileRed:
                     ChangeChildModel("Models/settlement_TestSettlementRed");
                     break;
-                case Menu.ModeSelected.Tile4:
+                case Menu.ModeSelected.Delete:
+                    ChangeChildModel();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -118,12 +113,18 @@ namespace XNA_ENGINE.Game.Objects
         private void ChangeChildModel(string asset)
         {
             GameModel newModel = new GameModel(asset);
-           // newModel.WorldPosition = m_TileModel.Children[0].WorldPosition;
             newModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
             newModel.CanDraw = true;
             newModel.LoadContent(FinalScene.GetContentManager());
             m_TileModel.RemoveChild(m_SettlementDisplayModel);
+
+            m_SettlementDisplayModel = newModel;
             m_TileModel.AddChild(newModel);
+        }
+
+        private void ChangeChildModel()
+        {
+            m_TileModel.RemoveChild(m_SettlementDisplayModel);
         }
 
         public void SetTileType(string type)

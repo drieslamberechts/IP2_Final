@@ -22,18 +22,18 @@ namespace XNA_ENGINE.Game.Objects
         private ContentManager Content;
 
         private readonly Texture2D m_TexSwitch,
-                                   m_TexTile1,
-                                   m_TexTile2,
-                                   m_TexTile3,
+                                   m_TexTileBlue,
+                                   m_TexTileGold,
+                                   m_TexTileRed,
                                    m_TexTile4,
                                    m_TexAttack,
                                    m_TexDefend,
                                    m_TexGather;
 
         private Rectangle m_RectSwitch,
-                          m_RectTile1,
-                          m_RectTile2,
-                          m_RectTile3,
+                          m_RectTileBlue,
+                          m_RectTileGold,
+                          m_RectTileRed,
                           m_RectTile4,
                           m_RectAttack,
                           m_RectDefend,
@@ -50,10 +50,10 @@ namespace XNA_ENGINE.Game.Objects
             Attack,
             Defend,
             Gather,
-            Tile1,
-            Tile2,
-            Tile3,
-            Tile4
+            TileBlue,
+            TileGold,
+            TileRed,
+            Delete
         }
 
         private SubMenuSelected m_ModeSelected = SubMenuSelected.MoveMode;
@@ -74,9 +74,9 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TexSwitch = Content.Load<Texture2D>("switch");
 
-            m_TexTile1 = Content.Load<Texture2D>("tile1");
-            m_TexTile2 = Content.Load<Texture2D>("tile2");
-            m_TexTile3 = Content.Load<Texture2D>("tile3");
+            m_TexTileBlue = Content.Load<Texture2D>("Tile1");
+            m_TexTileGold = Content.Load<Texture2D>("Tile2");
+            m_TexTileRed = Content.Load<Texture2D>("Tile3");
             m_TexTile4 = Content.Load<Texture2D>("tile4");
 
             m_TexAttack = Content.Load<Texture2D>("attack");
@@ -109,27 +109,27 @@ namespace XNA_ENGINE.Game.Objects
             switch (m_ModeSelected)
             {
                 case SubMenuSelected.BuildMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileBlue))
                     {
-                        m_SelectedTile = ModeSelected.Tile1;
+                        m_SelectedTile = ModeSelected.TileBlue;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileGold))
                     {
-                        m_SelectedTile = ModeSelected.Tile2;
+                        m_SelectedTile = ModeSelected.TileGold;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile3))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileRed))
                     {
-                        m_SelectedTile = ModeSelected.Tile3;
+                        m_SelectedTile = ModeSelected.TileRed;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
                     {
-                        m_SelectedTile = ModeSelected.Tile4;
+                        m_SelectedTile = ModeSelected.Delete;
                         return true;
                     }
                     break;
@@ -165,12 +165,12 @@ namespace XNA_ENGINE.Game.Objects
             m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,
                                        m_TexSwitch.Height);
 
-            m_RectTile1 = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile1.Width,
-                                        m_TexTile1.Height);
-            m_RectTile2 = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile2.Width,
-                                        m_TexTile2.Height);
-            m_RectTile3 = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile3.Width,
-                                        m_TexTile3.Height);
+            m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,
+                                        m_TexTileBlue.Height);
+            m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,
+                                        m_TexTileGold.Height);
+            m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,
+                                        m_TexTileRed.Height);
             m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,
                                         m_TexTile4.Height);
 
@@ -186,9 +186,9 @@ namespace XNA_ENGINE.Game.Objects
 
             if (m_ModeSelected == SubMenuSelected.BuildMode)
             {
-                renderContext.SpriteBatch.Draw(m_TexTile1, m_RectTile1, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexTile2, m_RectTile2, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexTile3, m_RectTile3, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexTileBlue, m_RectTileBlue, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexTileGold, m_RectTileGold, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexTileRed, m_RectTileRed, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexTile4, m_RectTile4, Color.White);
             }
             else if (m_ModeSelected == SubMenuSelected.MoveMode)
