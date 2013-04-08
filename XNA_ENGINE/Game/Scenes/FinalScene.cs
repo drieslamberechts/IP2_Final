@@ -38,7 +38,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         // Controls
         GamePadState m_GamePadState;
-        private InputManager m_InputManager;
+        private static InputManager m_InputManager;
+
         private float m_ElapseTime;
         private int m_FrameCounter;
         private int m_Fps;
@@ -136,7 +137,7 @@ namespace XNA_ENGINE.Game.Scenes
             Menu.GetInstance().Draw(renderContext);
 
             // Show Selection
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedTile(), new Vector2(10, 30), Color.Black);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.Black);
 
             base.Draw2D(renderContext, drawBefore3D);
         }
@@ -190,19 +191,38 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.Camera.LocalPosition += -rightVecCam * 10;
 
             //Handle menu //If menu is hit don't do the grid test
-            if (Menu.GetInstance().HandleInput(renderContext, m_InputManager)) return;
+            if (Menu.GetInstance().HandleInput(renderContext)) return;
 
             //Raycast to grid
-            if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
+            if (IsMouseInScreen(renderContext))
                 GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
+        }
+
+        public static bool IsMouseInScreen(RenderContext renderContext)
+        {
+            int x = renderContext.Input.CurrentMouseState.X;
+            if (x < 0) return false;
+
+            int y = renderContext.Input.CurrentMouseState.Y;
+            if (y < 0) return false;
+
+            Viewport vp = renderContext.GraphicsDevice.Viewport;
+            if (x > vp.Width) return false;
+            if (y > vp.Height) return false;
+
+            return true;
         }
 
         public static ContentManager GetContentManager()
         {
             return m_Content;
         }
+        public static InputManager GetInputManager()
+        {
+            return m_InputManager;
+        }
 
-        public Ray CalculateCursorRay(RenderContext renderContext)
+        public static Ray CalculateCursorRay(RenderContext renderContext)
         {
             Matrix view = renderContext.Camera.View;
             Matrix projection = renderContext.Camera.Projection;
@@ -235,19 +255,19 @@ namespace XNA_ENGINE.Game.Scenes
         }
     
         //Quaternion conversion helpers
-        public Vector3 GetForwardVectorOfQuaternion(Quaternion q) 
+        public static Vector3 GetForwardVectorOfQuaternion(Quaternion q) 
         {
             return new Vector3(2 * (q.X * q.Z + q.W * q.Y),
                             2 * (q.Y * q.X - q.W * q.X),
                             1 - 2 * (q.X * q.X + q.Y * q.Y));
         }
-        public Vector3 GetUpVectorOfQuaternion(Quaternion q) 
+        public static Vector3 GetUpVectorOfQuaternion(Quaternion q) 
         {
             return new Vector3(2 * (q.X * q.Y - q.W * q.Z),
                             1 - 2 * (q.X * q.Z + q.Z * q.Z),
                             2 * (q.Y * q.Z + q.W * q.X));
         }
-        public Vector3 GetRightVectorOfQuaternion(Quaternion q) 
+        public static Vector3 GetRightVectorOfQuaternion(Quaternion q) 
         {
             return new Vector3(1 - 2 * (q.Y * q.Y + q.Z * q.Z),
                 2 * (q.X * q.Y + q.W * q.Z),

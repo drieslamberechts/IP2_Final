@@ -24,8 +24,8 @@ namespace XNA_ENGINE.Game.Objects
         private static float GRIDWIDTH = 64;
         private static float GRIDDEPTH = 64;
         private static float GRIDHEIGHT = 32;
-        private const int YOFFSETMIN = -5;
-        private const int YOFFSETMAX = 5;
+        private const int YOFFSETMIN = 0;
+        private const int YOFFSETMAX = 15;
 
         private string m_TileType;
         private string m_TileSettlement;
@@ -53,7 +53,7 @@ namespace XNA_ENGINE.Game.Objects
             m_GameScene.AddSceneObject(m_TileModel);
 
             m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
-            m_TileModel.DrawBoundingBox = true;
+            m_TileModel.DrawBoundingBox = false;
 
             m_TileType = "normal";
         }
@@ -62,11 +62,22 @@ namespace XNA_ENGINE.Game.Objects
         {
             if (m_Selected)
                 m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
+            else
+                m_TileModel.Rotate(0, 0.0f, 0);
 
-            /*if (m_Selected)
+           /* 
+            if (m_Selected)
                 m_TileModel.SetColor(new Vector3(0.5f,1,1));
             else
-                m_TileModel.SetColor(new Vector3(0.0f, 1, 0.0f));*/
+                m_TileModel.SetColor(new Vector3(0, 0.5f, 0));*/
+
+            if (m_Selected)
+                m_TileModel.SetTexture(FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture"));
+           // else
+          //      m_TileModel.SetColor(new Vector3(0, 0.5f, 0));
+
+
+            m_Selected = false;
         }
 
         public bool HitTest(Ray ray)
@@ -83,30 +94,44 @@ namespace XNA_ENGINE.Game.Objects
         //Code to execute on hit with mouse
         private void OnHit()
         {
-            Menu.ModeSelected selectedTile = Menu.GetInstance().GetSelectedTile();
-
-            switch (selectedTile)
+            //What mode is there selected in the menu to build?
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+            
+            //Get the inputmanager
+            var inputManager = FinalScene.GetInputManager();
+            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
             {
-                case Menu.ModeSelected.Attack:
-                    break;
-                case Menu.ModeSelected.Defend:
-                    break;
-                case Menu.ModeSelected.Gather:
-                    break;
-                case Menu.ModeSelected.TileBlue:
-                    ChangeChildModel("Models/settlement_TestSettlementBlue");
-                    break;
-                case Menu.ModeSelected.TileGold:
-                    ChangeChildModel("Models/settlement_TestSettlementGold");
-                    break;
-                case Menu.ModeSelected.TileRed:
-                    ChangeChildModel("Models/settlement_TestSettlementRed");
-                    break;
-                case Menu.ModeSelected.Delete:
-                    ChangeChildModel();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                switch (selectedMode)
+                {
+                    case Menu.ModeSelected.Attack:
+                        break;
+                    case Menu.ModeSelected.Defend:
+                        break;
+                    case Menu.ModeSelected.Gather:
+                        break;
+                    case Menu.ModeSelected.TileBlue:
+                        ChangeChildModel("Models/settlement_TestSettlementBlue");
+                        break;
+                    case Menu.ModeSelected.TileGold:
+                        ChangeChildModel("Models/settlement_TestSettlementGold");
+                        break;
+                    case Menu.ModeSelected.TileRed:
+                        ChangeChildModel("Models/settlement_TestSettlementRed");
+                        break;
+                    case Menu.ModeSelected.Delete:
+                        ChangeChildModel();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            if(inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+            {
+
+            }
+            else
+            {
+                m_Selected = true;
             }
         }
 
@@ -153,7 +178,6 @@ namespace XNA_ENGINE.Game.Objects
             {
                 return m_Selected;
             }
-
             set
             {
                 m_Selected = value;

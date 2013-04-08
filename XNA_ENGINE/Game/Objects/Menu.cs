@@ -57,7 +57,7 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         private SubMenuSelected m_ModeSelected = SubMenuSelected.MoveMode;
-        private ModeSelected m_SelectedTile = ModeSelected.Attack;
+        private ModeSelected m_SelectedMode = ModeSelected.Attack;
         private readonly SpriteFont m_DebugFont;
 
         //Singleton implementation
@@ -95,9 +95,10 @@ namespace XNA_ENGINE.Game.Objects
            
         }
 
-        public bool HandleInput(RenderContext renderContext,InputManager inputManager)
+        public bool HandleInput(RenderContext renderContext)
         {
             var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
+            var inputManager = FinalScene.GetInputManager();
 
             if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
             {
@@ -111,44 +112,44 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.BuildMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileBlue))
                     {
-                        m_SelectedTile = ModeSelected.TileBlue;
+                        m_SelectedMode = ModeSelected.TileBlue;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileGold))
                     {
-                        m_SelectedTile = ModeSelected.TileGold;
+                        m_SelectedMode = ModeSelected.TileGold;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileRed))
                     {
-                        m_SelectedTile = ModeSelected.TileRed;
+                        m_SelectedMode = ModeSelected.TileRed;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
                     {
-                        m_SelectedTile = ModeSelected.Delete;
+                        m_SelectedMode = ModeSelected.Delete;
                         return true;
                     }
                     break;
                 case SubMenuSelected.MoveMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
-                        m_SelectedTile = ModeSelected.Attack;
+                        m_SelectedMode = ModeSelected.Attack;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDefend))
                     {
-                        m_SelectedTile = ModeSelected.Defend;
+                        m_SelectedMode = ModeSelected.Defend;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectGather))
                     {
-                        m_SelectedTile = ModeSelected.Gather;
+                        m_SelectedMode = ModeSelected.Gather;
                         return true;
                     }
                     break;
@@ -210,9 +211,9 @@ namespace XNA_ENGINE.Game.Objects
             return false;
         }
 
-        public ModeSelected GetSelectedTile()
+        public ModeSelected GetSelectedMode()
         {
-            return m_SelectedTile;
+            return m_SelectedMode;
         }
     }
 }
