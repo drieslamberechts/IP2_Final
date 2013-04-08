@@ -177,8 +177,8 @@ namespace XNA_ENGINE.Game.Scenes
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
-            //-------------------
-            //CAMERA movement
+            //CAMERA
+            #region Camera
             //Camera Vectors
             //forward
             Vector3 forwardVecCam = GetForwardVectorOfQuaternion(renderContext.Camera.LocalRotation);
@@ -190,8 +190,6 @@ namespace XNA_ENGINE.Game.Scenes
             rotMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(-90));
             rightVecCam = Vector3.Transform(forwardVecCam, rotMatrix);
             rightVecCam.Normalize();
-
-            System.Diagnostics.Debug.WriteLine(forwardVecCam +"  " + rightVecCam);
 
             //Gamepad
             if (m_GamePadState.IsConnected)
@@ -222,46 +220,53 @@ namespace XNA_ENGINE.Game.Scenes
             int mouseX = renderContext.Input.CurrentMouseState.X;
             int mouseY = renderContext.Input.CurrentMouseState.Y;
 
-            //Mouse
+            //MOUSE
+            #region Mouse
             if (isMouseInScreen)
             {
                 int offset = 5;
 
                 Viewport vp = renderContext.GraphicsDevice.Viewport;
 
-                if (mouseX < offset) m_CameraTargetPos += rightVecCam * scrollStrength;
-                if (mouseY < offset) m_CameraTargetPos += -forwardVecCam * scrollStrength;
+                if (mouseX < offset) m_CameraTargetPos += rightVecCam*scrollStrength;
+                if (mouseY < offset) m_CameraTargetPos += -forwardVecCam*scrollStrength;
 
-                if (mouseX > vp.Width - offset) m_CameraTargetPos += -rightVecCam * scrollStrength;
-                if (mouseY > vp.Height - offset) m_CameraTargetPos += forwardVecCam * scrollStrength;
+                if (mouseX > vp.Width - offset) m_CameraTargetPos += -rightVecCam*scrollStrength;
+                if (mouseY > vp.Height - offset) m_CameraTargetPos += forwardVecCam*scrollStrength;
             }
 
             //Mouse wheel move
             if (m_InputManager.IsActionTriggered((int) PlayerInput.ScrollWheelDown))
             {
-                m_CameraTargetPos += rightVecCam * (mouseX - renderContext.Input.OldMouseState.X) * (float)m_CameraScale * 1.33f; //magic numbers
-                m_CameraTargetPos += -forwardVecCam * (mouseY - renderContext.Input.OldMouseState.Y) * (float)m_CameraScale * 1.8f; //magic number
+                m_CameraTargetPos += rightVecCam*(mouseX - renderContext.Input.OldMouseState.X)*(float) m_CameraScale*
+                                     1.33f; //magic numbers
+                m_CameraTargetPos += -forwardVecCam*(mouseY - renderContext.Input.OldMouseState.Y)*(float) m_CameraScale*
+                                     1.8f; //magic number
             }
 
             //Move the actual camera with the vector
-            renderContext.Camera.LocalPosition += (m_CameraTargetPos - renderContext.Camera.LocalPosition) / 5; //Change the value to fiddle with the speed of the smooth transition
+            renderContext.Camera.LocalPosition += (m_CameraTargetPos - renderContext.Camera.LocalPosition)/5;
+                //Change the value to fiddle with the speed of the smooth transition
 
             //Zoom in and out camera
             double mouseScrollDifference = (double) m_InputManager.CurrentMouseState.ScrollWheelValue -
                                            (double) m_InputManager.OldMouseState.ScrollWheelValue;
 
-            double newCameraScaleTarget = m_CameraScaleTarget + mouseScrollDifference * ZOOMSTRENGTH * -1;
+            double newCameraScaleTarget = m_CameraScaleTarget + mouseScrollDifference*ZOOMSTRENGTH*-1;
             if (newCameraScaleTarget < CAMERAZOOMMIN)
                 newCameraScaleTarget = CAMERAZOOMMIN;
             if (newCameraScaleTarget > CAMERAZOOMMAX)
                 newCameraScaleTarget = CAMERAZOOMMAX;
             m_CameraScaleTarget = newCameraScaleTarget;
 
-            m_CameraScale += (m_CameraScaleTarget - m_CameraScale)/10; //Change the value to fiddle with the speed of the smooth transition
+            m_CameraScale += (m_CameraScaleTarget - m_CameraScale)/10;
+                //Change the value to fiddle with the speed of the smooth transition
 
             renderContext.Camera.Projection = CalculateProjectionMatrixOrthographic(renderContext);
-            //---------------------
 
+            #endregion
+            #endregion
+            
             //Handle menu //If menu is hit don't do the grid test
             if (Menu.GetInstance().HandleInput(renderContext)) return;
 

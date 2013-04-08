@@ -24,16 +24,12 @@ namespace XNA_ENGINE.Game.Objects
         {
             _model = contentManager.Load<Model>(_assetFile);
             base.LoadContent(contentManager);
-
-          //  _model.Meshes.ElementAt(0).Effects.ElementAt(0) = _model.Meshes.ElementAt(0).Effects.ElementAt(0).Clone();
             /*
             foreach (ModelMesh mesh in _model.Meshes)
             {
-                foreach (BasicEffect effect in mesh.Effects)
+                foreach (ModelMeshPart part in mesh.MeshParts)
                 {
-                    
-
-                    effect = effect.Clone();
+                    part.Effect = part.Effect.Clone();
                 }
             }*/
         }
@@ -78,14 +74,9 @@ namespace XNA_ENGINE.Game.Objects
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-
                     effect.DiffuseColor = new Vector3(1, 1, 1);
                     effect.TextureEnabled = true;
-                    //effect.DiffuseColor = new Vector3(1,1,1);
                     effect.Texture = texture;
-                    //effect.FogEnabled = true;
-                    //effect.EmissiveColor = color;
-                    //effect.DiffuseColor = color;
                 }
             }
         }
