@@ -37,13 +37,6 @@ namespace XNA_ENGINE.Game.Scenes
             LeftClick
         }
 
-        private enum BuildSelection
-        {
-            BuildingAwesome,
-            BuildingStupid,
-            BuildingOutOfInspiration
-        }
-
         private ContentManager m_Content;
 
         // Controls
@@ -53,8 +46,6 @@ namespace XNA_ENGINE.Game.Scenes
         private int m_FrameCounter;
         private int m_Fps;
         private SpriteFont m_DebugFont;
-
-        private BuildSelection m_BuildSelection;
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
@@ -68,8 +59,6 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
-            m_BuildSelection = BuildSelection.BuildingAwesome;
-
             //Input manager + inputs
             m_InputManager = new InputManager();
 
@@ -147,7 +136,7 @@ namespace XNA_ENGINE.Game.Scenes
             Menu.GetInstance(m_Content).Draw(renderContext);
 
             // Show Selection
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + m_BuildSelection, new Vector2(10, 30), Color.Black);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance(m_Content).GetSelectedTile(), new Vector2(10, 30), Color.Black);
 
             base.Draw2D(renderContext, drawBefore3D);
         }
@@ -167,15 +156,6 @@ namespace XNA_ENGINE.Game.Scenes
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
-            //Selection of what to build
-            if (keyboardState[Keys.U] == KeyState.Down)
-                m_BuildSelection = BuildSelection.BuildingAwesome;
-
-            if (keyboardState[Keys.I] == KeyState.Down)
-                m_BuildSelection = BuildSelection.BuildingStupid;
-
-            if (keyboardState[Keys.O] == KeyState.Down)
-                m_BuildSelection = BuildSelection.BuildingOutOfInspiration;
 
             //CAMERA
             //Camera Vectors

@@ -82,8 +82,7 @@ namespace XNA_ENGINE.Game.Objects
             if (m_Selected)
                 m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
 
-            
-        /*  if (m_Selected)
+            /*if (m_Selected)
                 m_TileModel.SetColor(new Vector3(0.5f,1,1));
             else
                 m_TileModel.SetColor(new Vector3(0.0f, 1, 0.0f));*/
