@@ -15,7 +15,7 @@ namespace XNA_ENGINE.Game
     {
         enum PlayerInput
         {
-            TapKey
+            FullScreen
         }
 
         private InputManager m_InputManager;
@@ -60,7 +60,7 @@ namespace XNA_ENGINE.Game
             m_InputManager = new InputManager();
 
             // Initialize InputAction to switch Screen
-            InputAction Tap = new InputAction((int) PlayerInput.TapKey, TriggerState.Pressed);
+            InputAction Tap = new InputAction((int)PlayerInput.FullScreen, TriggerState.Pressed);
             Tap.KeyButton = Keys.F;
 
             m_InputManager.MapAction(Tap);
@@ -120,7 +120,7 @@ namespace XNA_ENGINE.Game
             //INPUT
             m_InputManager.Update();
 
-            if (m_InputManager.GetAction((int)PlayerInput.TapKey).IsTriggered && graphics.IsFullScreen == false)
+            if (m_InputManager.GetAction((int)PlayerInput.FullScreen).IsTriggered && graphics.IsFullScreen == false)
             {
                 graphics.IsFullScreen = true;
                 graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -128,7 +128,7 @@ namespace XNA_ENGINE.Game
                 graphics.ApplyChanges();
             }
 
-            else if (m_InputManager.GetAction((int)PlayerInput.TapKey).IsTriggered && graphics.IsFullScreen)
+            else if (m_InputManager.GetAction((int)PlayerInput.FullScreen).IsTriggered && graphics.IsFullScreen)
             {
                 graphics.IsFullScreen = false;
                 graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2;

@@ -31,7 +31,9 @@ namespace XNA_ENGINE.Game.Scenes
         public enum PlayerInput
         {
             LeftClick,
-            RightClick
+            RightClick,
+            ScrollUp,
+            ScrollDown
         }
 
         private static ContentManager m_Content;
@@ -44,6 +46,14 @@ namespace XNA_ENGINE.Game.Scenes
         private int m_FrameCounter;
         private int m_Fps;
         private SpriteFont m_DebugFont;
+
+        private const double CAMERAZOOMMIN = 0.4;
+        private const double CAMERAZOOMMAX = 1.5;
+        private const double ZOOMSTRENGTH = 0.001;
+        private const double CAMERASTARTSCALE = 1.0;
+        private double m_CameraScale = CAMERASTARTSCALE;
+        private double m_CameraScaleTarget = CAMERASTARTSCALE;
+        private Vector3 m_CameraTargetPos;
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
@@ -63,17 +73,24 @@ namespace XNA_ENGINE.Game.Scenes
 
             InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
             InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
+            InputAction scrollUp = new InputAction((int)PlayerInput.ScrollUp, TriggerState.Down);
+
             leftClick.MouseButton = MouseButtons.LeftButton;
             rightClick.MouseButton = MouseButtons.RightButton;
+            scrollUp.MouseButton = MouseButtons.MiddleButton;
+            
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
+            m_InputManager.MapAction(scrollUp);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
          
             //Adjust the camera position
-            SceneManager.RenderContext.Camera.Translate(300, 300, 300);
+            SceneManager.RenderContext.Camera.Translate(800, 1000, 800);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
+
+            m_CameraTargetPos = SceneManager.RenderContext.Camera.LocalPosition;
 
             /*
             // ------------------------------------------
@@ -152,12 +169,17 @@ namespace XNA_ENGINE.Game.Scenes
             //Update inputManager
             m_InputManager.Update();
 
+            //Check if the mouse is in the screen
+            bool isMouseInScreen = false;
+            if (IsMouseInScreen(renderContext)) isMouseInScreen = true;
+
             // Handle Keyboard Input
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
-            //CAMERA
+            //-------------------
+            //CAMERA movement
             //Camera Vectors
             Vector3 forwardVecCam = GetForwardVectorOfQuaternion(renderContext.Camera.LocalRotation);
             forwardVecCam.Y = 0;
@@ -166,35 +188,71 @@ namespace XNA_ENGINE.Game.Scenes
             rightVecCam.Y = 0;
             rightVecCam.Normalize();
 
-            
-            //GamePad
-            //THIS MIGHT NOT WORK DRIES, fidle around with the - and + of the vectors, also the right vector isn't totally right.
+            //Gamepad
             if (m_GamePadState.IsConnected)
             {
                 if (m_GamePadState.ThumbSticks.Left.Y > 0)
-                    renderContext.Camera.LocalPosition += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y;
+                    m_CameraTargetPos += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
                 if (m_GamePadState.ThumbSticks.Left.X < 0)
-                    renderContext.Camera.LocalPosition += rightVecCam * m_GamePadState.ThumbSticks.Left.X;
+                    m_CameraTargetPos += rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
                 if (m_GamePadState.ThumbSticks.Left.Y < 0)
-                    renderContext.Camera.LocalPosition += forwardVecCam * m_GamePadState.ThumbSticks.Left.Y;
+                    m_CameraTargetPos += forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
                 if (m_GamePadState.ThumbSticks.Left.X > 0)
-                    renderContext.Camera.LocalPosition += -rightVecCam * m_GamePadState.ThumbSticks.Left.X;
+                    m_CameraTargetPos += -rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
             }
 
+
+            //Keyboard
+            float scrollStrength = 10*(float) m_CameraScale;
+
             if (keyboardState[Keys.Z] == KeyState.Down)
-                renderContext.Camera.LocalPosition += -forwardVecCam * 10;
-            if (keyboardState[Keys.Q] == KeyState.Down)
-                renderContext.Camera.LocalPosition += rightVecCam * 10;
+                m_CameraTargetPos += -forwardVecCam * scrollStrength;
             if (keyboardState[Keys.S] == KeyState.Down)
-                renderContext.Camera.LocalPosition += forwardVecCam * 10;
+                m_CameraTargetPos += forwardVecCam * scrollStrength;
+            if (keyboardState[Keys.Q] == KeyState.Down)
+                m_CameraTargetPos += rightVecCam * scrollStrength;
             if (keyboardState[Keys.D] == KeyState.Down)
-                renderContext.Camera.LocalPosition += -rightVecCam * 10;
+                m_CameraTargetPos += -rightVecCam * scrollStrength;
+
+            //Mouse
+            if (isMouseInScreen)
+            {
+                int offset = 5;
+
+                int x = renderContext.Input.CurrentMouseState.X;
+                int y = renderContext.Input.CurrentMouseState.Y;
+                Viewport vp = renderContext.GraphicsDevice.Viewport;
+
+                if (x < offset) m_CameraTargetPos += rightVecCam * scrollStrength;
+                if (y < offset) m_CameraTargetPos += -forwardVecCam * scrollStrength;
+
+                if (x > vp.Width - offset) m_CameraTargetPos += -rightVecCam * scrollStrength;
+                if (y > vp.Height - offset) m_CameraTargetPos += forwardVecCam * scrollStrength;
+            }
+
+            renderContext.Camera.LocalPosition += (m_CameraTargetPos - renderContext.Camera.LocalPosition) / 5; //Change the value to fiddle with the speed of the smooth transition
+
+            //Zoom in and out camera
+            double mouseScrollDifference = (double) m_InputManager.CurrentMouseState.ScrollWheelValue -
+                                           (double) m_InputManager.OldMouseState.ScrollWheelValue;
+
+            double newCameraScaleTarget = m_CameraScaleTarget + mouseScrollDifference * ZOOMSTRENGTH * -1;
+            if (newCameraScaleTarget < CAMERAZOOMMIN)
+                newCameraScaleTarget = CAMERAZOOMMIN;
+            if (newCameraScaleTarget > CAMERAZOOMMAX)
+                newCameraScaleTarget = CAMERAZOOMMAX;
+            m_CameraScaleTarget = newCameraScaleTarget;
+
+            m_CameraScale += (m_CameraScaleTarget - m_CameraScale)/10; //Change the value to fiddle with the speed of the smooth transition
+
+            renderContext.Camera.Projection = CalculateProjectionMatrixOrthographic();
+            //---------------------
 
             //Handle menu //If menu is hit don't do the grid test
             if (Menu.GetInstance().HandleInput(renderContext)) return;
 
             //Raycast to grid
-            if (IsMouseInScreen(renderContext))
+            if (isMouseInScreen)
                 GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
         }
 
@@ -220,6 +278,11 @@ namespace XNA_ENGINE.Game.Scenes
         public static InputManager GetInputManager()
         {
             return m_InputManager;
+        }
+
+        public Matrix CalculateProjectionMatrixOrthographic()
+        {
+            return Matrix.CreateOrthographic(1280 * (float)m_CameraScale, 720 * (float)m_CameraScale, 0.1f, 10000f);
         }
 
         public static Ray CalculateCursorRay(RenderContext renderContext)
