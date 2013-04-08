@@ -46,9 +46,6 @@ namespace XNA_ENGINE.Game.Scenes
 
         private ContentManager m_Content;
 
-        // Menu
-        private Menu m_Menu;
-
         // Controls
         GamePadState m_GamePadState;
         private InputManager m_InputManager;
@@ -87,8 +84,6 @@ namespace XNA_ENGINE.Game.Scenes
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
 
-            // Menu
-            m_Menu = new Menu(m_Content, 15);
 
             /*
             // ------------------------------------------
@@ -133,7 +128,7 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             // UPDATE MENU
-            m_Menu.Update(renderContext);
+            Menu.GetInstance(m_Content).Update(renderContext);
 
             // Handle Input
             HandleInput(renderContext);
@@ -149,7 +144,7 @@ namespace XNA_ENGINE.Game.Scenes
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
 
             // DrawGUI
-            m_Menu.Draw(renderContext);
+            Menu.GetInstance(m_Content).Draw(renderContext);
 
             // Show Selection
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + m_BuildSelection, new Vector2(10, 30), Color.Black);
@@ -216,7 +211,7 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.Camera.LocalPosition += -rightVecCam * 10;
 
             //Handle menu //If menu is hit don't do the grid test
-            if (m_Menu.HandleInput(renderContext, m_InputManager)) return;
+            if (Menu.GetInstance(m_Content).HandleInput(renderContext, m_InputManager)) return;
 
             //Raycast to grid
             GridTile hittedTile = null;

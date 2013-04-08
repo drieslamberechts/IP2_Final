@@ -20,6 +20,8 @@ namespace XNA_ENGINE.Game.Objects
             RightClick
         }
 
+        private static Menu m_Menu;
+
         private ContentManager Content;
 
         private readonly Texture2D m_TexMode,
@@ -46,10 +48,16 @@ namespace XNA_ENGINE.Game.Objects
         private int m_SelectedTile = 0;
         private readonly SpriteFont m_DebugFont;
 
-        public Menu(ContentManager content, int nrOfTiles)
+        static public Menu GetInstance(ContentManager content)
+        {
+            if (m_Menu == null)
+                m_Menu = new Menu(content);
+            return m_Menu;
+        }
+
+        private Menu(ContentManager content)
         {
             Content = content;
-            m_NrOfTiles = nrOfTiles;
 
             m_TexMode = Content.Load<Texture2D>("switch");
             m_TexTile1 = Content.Load<Texture2D>("tile1");
