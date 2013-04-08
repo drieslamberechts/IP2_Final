@@ -32,8 +32,7 @@ namespace XNA_ENGINE.Game.Scenes
         {
             LeftClick,
             RightClick,
-            ScrollUp,
-            ScrollDown
+            ScrollWheelDown
         }
 
         private static ContentManager m_Content;
@@ -73,15 +72,15 @@ namespace XNA_ENGINE.Game.Scenes
 
             InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
             InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
-            InputAction scrollUp = new InputAction((int)PlayerInput.ScrollUp, TriggerState.Down);
+            InputAction scrollWheelDown = new InputAction((int)PlayerInput.ScrollWheelDown, TriggerState.Down);
 
             leftClick.MouseButton = MouseButtons.LeftButton;
             rightClick.MouseButton = MouseButtons.RightButton;
-            scrollUp.MouseButton = MouseButtons.MiddleButton;
+            scrollWheelDown.MouseButton = MouseButtons.MiddleButton;
             
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
-            m_InputManager.MapAction(scrollUp);
+            m_InputManager.MapAction(scrollWheelDown);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
@@ -181,12 +180,18 @@ namespace XNA_ENGINE.Game.Scenes
             //-------------------
             //CAMERA movement
             //Camera Vectors
+            //forward
             Vector3 forwardVecCam = GetForwardVectorOfQuaternion(renderContext.Camera.LocalRotation);
             forwardVecCam.Y = 0;
             forwardVecCam.Normalize();
-            Vector3 rightVecCam = GetRightVectorOfQuaternion(renderContext.Camera.LocalRotation);
-            rightVecCam.Y = 0;
+            //right
+            Vector3 rightVecCam;
+            Matrix rotMatrix;
+            rotMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(-90));
+            rightVecCam = Vector3.Transform(forwardVecCam, rotMatrix);
             rightVecCam.Normalize();
+
+            System.Diagnostics.Debug.WriteLine(forwardVecCam +"  " + rightVecCam);
 
             //Gamepad
             if (m_GamePadState.IsConnected)
@@ -214,22 +219,31 @@ namespace XNA_ENGINE.Game.Scenes
             if (keyboardState[Keys.D] == KeyState.Down)
                 m_CameraTargetPos += -rightVecCam * scrollStrength;
 
+            int mouseX = renderContext.Input.CurrentMouseState.X;
+            int mouseY = renderContext.Input.CurrentMouseState.Y;
+
             //Mouse
             if (isMouseInScreen)
             {
                 int offset = 5;
 
-                int x = renderContext.Input.CurrentMouseState.X;
-                int y = renderContext.Input.CurrentMouseState.Y;
                 Viewport vp = renderContext.GraphicsDevice.Viewport;
 
-                if (x < offset) m_CameraTargetPos += rightVecCam * scrollStrength;
-                if (y < offset) m_CameraTargetPos += -forwardVecCam * scrollStrength;
+                if (mouseX < offset) m_CameraTargetPos += rightVecCam * scrollStrength;
+                if (mouseY < offset) m_CameraTargetPos += -forwardVecCam * scrollStrength;
 
-                if (x > vp.Width - offset) m_CameraTargetPos += -rightVecCam * scrollStrength;
-                if (y > vp.Height - offset) m_CameraTargetPos += forwardVecCam * scrollStrength;
+                if (mouseX > vp.Width - offset) m_CameraTargetPos += -rightVecCam * scrollStrength;
+                if (mouseY > vp.Height - offset) m_CameraTargetPos += forwardVecCam * scrollStrength;
             }
 
+            //Mouse wheel move
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.ScrollWheelDown))
+            {
+                m_CameraTargetPos += rightVecCam * (mouseX - renderContext.Input.OldMouseState.X) * (float)m_CameraScale * 1.33f; //magic numbers
+                m_CameraTargetPos += -forwardVecCam * (mouseY - renderContext.Input.OldMouseState.Y) * (float)m_CameraScale * 1.8f; //magic number
+            }
+
+            //Move the actual camera with the vector
             renderContext.Camera.LocalPosition += (m_CameraTargetPos - renderContext.Camera.LocalPosition) / 5; //Change the value to fiddle with the speed of the smooth transition
 
             //Zoom in and out camera
@@ -245,7 +259,7 @@ namespace XNA_ENGINE.Game.Scenes
 
             m_CameraScale += (m_CameraScaleTarget - m_CameraScale)/10; //Change the value to fiddle with the speed of the smooth transition
 
-            renderContext.Camera.Projection = CalculateProjectionMatrixOrthographic();
+            renderContext.Camera.Projection = CalculateProjectionMatrixOrthographic(renderContext);
             //---------------------
 
             //Handle menu //If menu is hit don't do the grid test
@@ -280,9 +294,10 @@ namespace XNA_ENGINE.Game.Scenes
             return m_InputManager;
         }
 
-        public Matrix CalculateProjectionMatrixOrthographic()
+        public Matrix CalculateProjectionMatrixOrthographic(RenderContext renderContext)
         {
-            return Matrix.CreateOrthographic(1280 * (float)m_CameraScale, 720 * (float)m_CameraScale, 0.1f, 10000f);
+            float aspectRatio = (float)renderContext.GraphicsDevice.Viewport.Width/(float)renderContext.GraphicsDevice.Viewport.Height;
+            return Matrix.CreateOrthographic((720 * aspectRatio) * (float)m_CameraScale, 720 * (float)m_CameraScale, 0.1f, 10000f);
         }
 
         public static Ray CalculateCursorRay(RenderContext renderContext)
@@ -323,18 +338,6 @@ namespace XNA_ENGINE.Game.Scenes
             return new Vector3(2 * (q.X * q.Z + q.W * q.Y),
                             2 * (q.Y * q.X - q.W * q.X),
                             1 - 2 * (q.X * q.X + q.Y * q.Y));
-        }
-        public static Vector3 GetUpVectorOfQuaternion(Quaternion q) 
-        {
-            return new Vector3(2 * (q.X * q.Y - q.W * q.Z),
-                            1 - 2 * (q.X * q.Z + q.Z * q.Z),
-                            2 * (q.Y * q.Z + q.W * q.X));
-        }
-        public static Vector3 GetRightVectorOfQuaternion(Quaternion q) 
-        {
-            return new Vector3(1 - 2 * (q.Y * q.Y + q.Z * q.Z),
-                2 * (q.X * q.Y + q.W * q.Z),
-                2 * (q.X * q.Z - q.W * q.Y));
         }
     }
 }
