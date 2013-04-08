@@ -13,7 +13,7 @@ namespace XNA_ENGINE.Game.Objects
     class GameModel : GameObject3D
     {
         private readonly string _assetFile;
-        private Model _model;
+        private Model _model { get; set; }
 
         public GameModel(string assetFile)
         {
@@ -47,6 +47,20 @@ namespace XNA_ENGINE.Game.Objects
             base.Draw(renderContext);
         }
 
+        public Model Model
+        {
+            get
+            {
+                return _model;
+            }
+
+            set
+            {
+                _model = value;
+            }
+        }
+
+        /*
         public void SetTexture(Texture2D texture)
         {
             foreach (ModelMesh mesh in _model.Meshes)
@@ -61,5 +75,6 @@ namespace XNA_ENGINE.Game.Objects
                 }
             }
         }
+        */
     }
 }

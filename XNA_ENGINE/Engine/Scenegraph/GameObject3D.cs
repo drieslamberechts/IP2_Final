@@ -126,7 +126,6 @@ namespace XNA_ENGINE.Engine.Scenegraph
             LocalRotation = Quaternion.CreateFromYawPitchRoll(MathHelper.ToRadians(yaw), MathHelper.ToRadians(pitch), MathHelper.ToRadians(roll));
         }
 
-
         public void CreateBoundingBox(float width, float height, float depth, Vector3 offset)
         {
             var max = new Vector3(width / 2.0f, height / 2.0f, depth / 2.0f);
@@ -159,10 +158,7 @@ namespace XNA_ENGINE.Engine.Scenegraph
         public bool HitTest(Ray ray)
         {
             if (BoundingBox.Value.Intersects(ray) != null)
-            {
-                System.Diagnostics.Debug.WriteLine("" + BoundingBox.Value.Intersects(ray).ToString());
                 return true;
-            }
 
             return false;
         }
@@ -220,7 +216,6 @@ namespace XNA_ENGINE.Engine.Scenegraph
             
             if (CanDraw && DrawBoundingBox && BoundingBox.HasValue)
                 BoundingBox.Value.Draw(renderContext, Color.Red);
-       
         }
     }
 }

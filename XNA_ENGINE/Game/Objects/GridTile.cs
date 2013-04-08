@@ -10,6 +10,7 @@ using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
+using XNA_ENGINE.Game.Scenes;
 
 
 namespace XNA_ENGINE.Game.Objects
@@ -17,9 +18,6 @@ namespace XNA_ENGINE.Game.Objects
     public class GridTile
     {
         private GameModel m_TileModel;
-        private static GameModel m_SettlementModel1;
-        private static GameModel m_SettlementModel2;
-        private static GameModel m_SettlementModel3;
         private GameModel m_SettlementDisplayModel;
         private int m_Row, m_Column;
 
@@ -59,19 +57,8 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TileType = "normal";
 
-
             //SETTLEMENTSTESTS
-            m_SettlementModel1 = new GameModel("Models/settlement_TestSettlementBlue");
-            m_SettlementModel2 = new GameModel("Models/settlement_TestSettlementGold");
-            m_SettlementModel3 = new GameModel("Models/settlement_TestSettlementRed");
-            /*
-            m_SettlementDisplayModel = m_SettlementModel1;
-            Vector3 pos = m_TileModel.WorldPosition;
-            pos.Y += 32;
-            m_SettlementDisplayModel.Translate(pos);
-            m_GameScene.AddSceneObject(m_SettlementDisplayModel);
-            */
-            m_SettlementDisplayModel = m_SettlementModel1;
+            m_SettlementDisplayModel = new GameModel("Models/settlement_TestSettlementBlue"); ;
             m_SettlementDisplayModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
             m_SettlementDisplayModel.CanDraw = true;
             m_TileModel.AddChild(m_SettlementDisplayModel);
@@ -93,9 +80,50 @@ namespace XNA_ENGINE.Game.Objects
             if (m_TileModel.HitTest(ray))
             {
                 System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
+                OnHit();
                 return true;
             }
             return false;
+        }
+
+        //Code to execute on hit with mouse
+        private void OnHit()
+        {
+            Menu.ModeSelected selectedTile = Menu.GetInstance().GetSelectedTile();
+
+            switch (selectedTile)
+            {
+                case Menu.ModeSelected.Attack:
+                    break;
+                case Menu.ModeSelected.Defend:
+                    break;
+                case Menu.ModeSelected.Gather:
+                    break;
+                case Menu.ModeSelected.Tile1:
+                    ChangeChildModel("Models/settlement_TestSettlementBlue");
+                    break;
+                case Menu.ModeSelected.Tile2:
+                    ChangeChildModel("Models/settlement_TestSettlementGold");
+                    break;
+                case Menu.ModeSelected.Tile3:
+                    ChangeChildModel("Models/settlement_TestSettlementRed");
+                    break;
+                case Menu.ModeSelected.Tile4:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void ChangeChildModel(string asset)
+        {
+            GameModel newModel = new GameModel(asset);
+           // newModel.WorldPosition = m_TileModel.Children[0].WorldPosition;
+            newModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
+            newModel.CanDraw = true;
+            newModel.LoadContent(FinalScene.GetContentManager());
+            m_TileModel.RemoveChild(m_SettlementDisplayModel);
+            m_TileModel.AddChild(newModel);
         }
 
         public void SetTileType(string type)

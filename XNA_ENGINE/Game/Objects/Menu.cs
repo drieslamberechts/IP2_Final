@@ -9,16 +9,12 @@ using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
     internal class Menu
     {
-        private enum PlayerInput
-        {
-            Click,
-            RightClick
-        }
 
         //Object that holds the menu
         private static Menu m_Menu;
@@ -65,16 +61,16 @@ namespace XNA_ENGINE.Game.Objects
         private readonly SpriteFont m_DebugFont;
 
         //Singleton implementation
-        static public Menu GetInstance(ContentManager content)
+        static public Menu GetInstance()
         {
             if (m_Menu == null)
-                m_Menu = new Menu(content);
+                m_Menu = new Menu();
             return m_Menu;
         }
 
-        private Menu(ContentManager content)
+        private Menu()
         {
-            Content = content;
+            Content = FinalScene.GetContentManager();
 
             m_TexSwitch = Content.Load<Texture2D>("switch");
 
@@ -89,7 +85,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
 
-            var click = new InputAction((int) PlayerInput.Click, TriggerState.Pressed);
+            var click = new InputAction((int) FinalScene.PlayerInput.LeftClick, TriggerState.Pressed);
             click.MouseButton = MouseButtons.LeftButton;
             click.GamePadButton = Buttons.X;
         }
@@ -103,7 +99,7 @@ namespace XNA_ENGINE.Game.Objects
         {
             var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
 
-            if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
+            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
             {
                 if (m_ModeSelected == SubMenuSelected.MoveMode) m_ModeSelected = SubMenuSelected.BuildMode;
                 else m_ModeSelected = SubMenuSelected.MoveMode;
@@ -113,44 +109,44 @@ namespace XNA_ENGINE.Game.Objects
             switch (m_ModeSelected)
             {
                 case SubMenuSelected.BuildMode:
-                    if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
                     {
                         m_SelectedTile = ModeSelected.Tile1;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
                     {
                         m_SelectedTile = ModeSelected.Tile2;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile3))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile3))
                     {
                         m_SelectedTile = ModeSelected.Tile3;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
                     {
                         m_SelectedTile = ModeSelected.Tile4;
                         return true;
                     }
                     break;
                 case SubMenuSelected.MoveMode:
-                    if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
                         m_SelectedTile = ModeSelected.Attack;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectDefend))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDefend))
                     {
                         m_SelectedTile = ModeSelected.Defend;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectGather))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectGather))
                     {
                         m_SelectedTile = ModeSelected.Gather;
                         return true;

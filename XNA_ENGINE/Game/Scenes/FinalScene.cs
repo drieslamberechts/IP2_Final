@@ -6,8 +6,8 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using XNA_ENGINE;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
@@ -24,20 +24,17 @@ using XNA_ENGINE.Game.Scenes;
 
 using XNA_ENGINE.Game.Managers;
 
-
-
-using GameModel = XNA_ENGINE.Engine.Objects.GameModel;
-
 namespace XNA_ENGINE.Game.Scenes
 {
     class FinalScene : GameScene
     {
-        enum PlayerInput
+        public enum PlayerInput
         {
-            LeftClick
+            LeftClick,
+            RightClick
         }
 
-        private ContentManager m_Content;
+        private static ContentManager m_Content;
 
         // Controls
         GamePadState m_GamePadState;
@@ -57,14 +54,18 @@ namespace XNA_ENGINE.Game.Scenes
             m_DebugFont = content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
+
         public override void Initialize()
         {
             //Input manager + inputs
             m_InputManager = new InputManager();
 
             InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
+            InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
             leftClick.MouseButton = MouseButtons.LeftButton;
+            rightClick.MouseButton = MouseButtons.RightButton;
             m_InputManager.MapAction(leftClick);
+            m_InputManager.MapAction(rightClick);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
@@ -72,7 +73,6 @@ namespace XNA_ENGINE.Game.Scenes
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(300, 300, 300);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
-
 
             /*
             // ------------------------------------------
@@ -117,7 +117,7 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             // UPDATE MENU
-            Menu.GetInstance(m_Content).Update(renderContext);
+            Menu.GetInstance().Update(renderContext);
 
             // Handle Input
             HandleInput(renderContext);
@@ -133,10 +133,10 @@ namespace XNA_ENGINE.Game.Scenes
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
 
             // DrawGUI
-            Menu.GetInstance(m_Content).Draw(renderContext);
+            Menu.GetInstance().Draw(renderContext);
 
             // Show Selection
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance(m_Content).GetSelectedTile(), new Vector2(10, 30), Color.Black);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedTile(), new Vector2(10, 30), Color.Black);
 
             base.Draw2D(renderContext, drawBefore3D);
         }
@@ -155,7 +155,6 @@ namespace XNA_ENGINE.Game.Scenes
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
-
 
             //CAMERA
             //Camera Vectors
@@ -191,16 +190,16 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.Camera.LocalPosition += -rightVecCam * 10;
 
             //Handle menu //If menu is hit don't do the grid test
-            if (Menu.GetInstance(m_Content).HandleInput(renderContext, m_InputManager)) return;
+            if (Menu.GetInstance().HandleInput(renderContext, m_InputManager)) return;
 
             //Raycast to grid
-            GridTile hittedTile = null;
             if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
-                hittedTile = GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
+                GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
+        }
 
-            if (hittedTile != null)
-                hittedTile.Selected = true;
-
+        public static ContentManager GetContentManager()
+        {
+            return m_Content;
         }
 
         public Ray CalculateCursorRay(RenderContext renderContext)
