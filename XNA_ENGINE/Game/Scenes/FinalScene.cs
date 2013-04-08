@@ -133,7 +133,7 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             // UPDATE MENU
-            m_Menu.Update(renderContext, m_InputManager);
+            m_Menu.Update(renderContext);
 
             // Handle Input
             HandleInput(renderContext);
@@ -172,33 +172,18 @@ namespace XNA_ENGINE.Game.Scenes
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
-
-            // Handle Mouse Input
-            var mPos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
-
-            //Raycast to grid
-            GridTile hittedTile = null;
-            if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
-                hittedTile = GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
-
-            if (hittedTile != null)
-            {
-                hittedTile.Selected = true;
-            }
-            
             //Selection of what to build
             if (keyboardState[Keys.U] == KeyState.Down)
                 m_BuildSelection = BuildSelection.BuildingAwesome;
-            
+
             if (keyboardState[Keys.I] == KeyState.Down)
                 m_BuildSelection = BuildSelection.BuildingStupid;
-            
-            if (keyboardState[Keys.O] == KeyState.Down)            
+
+            if (keyboardState[Keys.O] == KeyState.Down)
                 m_BuildSelection = BuildSelection.BuildingOutOfInspiration;
 
-
             //CAMERA
-            //Camera Vectors     
+            //Camera Vectors
             Vector3 forwardVecCam = GetForwardVectorOfQuaternion(renderContext.Camera.LocalRotation);
             forwardVecCam.Y = 0;
             forwardVecCam.Normalize();
@@ -221,8 +206,6 @@ namespace XNA_ENGINE.Game.Scenes
                     renderContext.Camera.LocalPosition += -rightVecCam * m_GamePadState.ThumbSticks.Left.X;
             }
 
-
-
             if (keyboardState[Keys.Z] == KeyState.Down)
                 renderContext.Camera.LocalPosition += -forwardVecCam * 10;
             if (keyboardState[Keys.Q] == KeyState.Down)
@@ -231,6 +214,18 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.Camera.LocalPosition += forwardVecCam * 10;
             if (keyboardState[Keys.D] == KeyState.Down)
                 renderContext.Camera.LocalPosition += -rightVecCam * 10;
+
+            //Handle menu //If menu is hit don't do the grid test
+            if (m_Menu.HandleInput(renderContext, m_InputManager)) return;
+
+            //Raycast to grid
+            GridTile hittedTile = null;
+            if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
+                hittedTile = GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
+
+            if (hittedTile != null)
+                hittedTile.Selected = true;
+
         }
 
         public Ray CalculateCursorRay(RenderContext renderContext)

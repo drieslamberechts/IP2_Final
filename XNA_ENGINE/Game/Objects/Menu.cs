@@ -12,17 +12,34 @@ using XNA_ENGINE.Engine.Scenegraph;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class Menu
+    internal class Menu
     {
-        enum PlayerInput
+        private enum PlayerInput
         {
             Click,
             RightClick
         }
 
         private ContentManager Content;
-        private readonly Texture2D m_TexMode, m_TexTile1, m_TexTile2, m_TexTile3, m_TexTile4, m_TexAttack, m_TexDefend, m_TexGather;
-        private Rectangle m_RectMode, m_RectTile1, m_RectTile2, m_RectTile3, m_RectTile4, m_RectAttack, m_RectDefend, m_RectGather;
+
+        private readonly Texture2D m_TexMode,
+                                   m_TexTile1,
+                                   m_TexTile2,
+                                   m_TexTile3,
+                                   m_TexTile4,
+                                   m_TexAttack,
+                                   m_TexDefend,
+                                   m_TexGather;
+
+        private Rectangle m_RectMode,
+                          m_RectTile1,
+                          m_RectTile2,
+                          m_RectTile3,
+                          m_RectTile4,
+                          m_RectAttack,
+                          m_RectDefend,
+                          m_RectGather;
+
         private int m_NrOfTiles;
 
         public int m_ModeSelected = 0;
@@ -46,12 +63,17 @@ namespace XNA_ENGINE.Game.Objects
 
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
 
-            var click = new InputAction((int)PlayerInput.Click, TriggerState.Pressed);
+            var click = new InputAction((int) PlayerInput.Click, TriggerState.Pressed);
             click.MouseButton = MouseButtons.LeftButton;
             click.GamePadButton = Buttons.X;
         }
 
-        public void Update(RenderContext renderContext, InputManager inputManager)
+        public void Update(RenderContext renderContext)
+        {
+           
+        }
+
+        public bool HandleInput(RenderContext renderContext,InputManager inputManager)
         {
             var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
 
@@ -59,52 +81,64 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (m_ModeSelected == 1) m_ModeSelected = 0;
                 else m_ModeSelected = 1;
+                return true;
             }
 
             if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
             {
-                //   m_NrOfTiles--;
                 m_SelectedTile = 1;
+                return true;
             }
-            else if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered &&
-                        CheckHitButton(mousePos, m_RectTile2))
+
+            if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
             {
-                //   m_NrOfTiles--;
                 m_SelectedTile = 2;
+                return true;
             }
-            else if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered &&
-                        CheckHitButton(mousePos, m_RectTile3))
+
+            if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile3))
             {
-                //  m_NrOfTiles--;
                 m_SelectedTile = 3;
+                return true;
             }
-            else if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered &&
-                        CheckHitButton(mousePos, m_RectTile4))
+
+            if (inputManager.GetAction((int)PlayerInput.Click).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
             {
-                // m_NrOfTiles--;
                 m_SelectedTile = 4;
+                return true;
             }
+
+            return false;
         }
 
         // Draw
         public void Draw(RenderContext renderContext)
         {
-            m_RectMode = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexMode.Width, m_TexMode.Height);
-            m_RectTile1 = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile1.Width, m_TexTile1.Height);
-            m_RectTile2 = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile2.Width, m_TexTile2.Height);
-            m_RectTile3 = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile3.Width, m_TexTile3.Height);
-            m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width, m_TexTile4.Height);
+            m_RectMode = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexMode.Width,
+                                       m_TexMode.Height);
+            m_RectTile1 = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile1.Width,
+                                        m_TexTile1.Height);
+            m_RectTile2 = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile2.Width,
+                                        m_TexTile2.Height);
+            m_RectTile3 = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile3.Width,
+                                        m_TexTile3.Height);
+            m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,
+                                        m_TexTile4.Height);
 
-            m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width, m_TexAttack.Height);
-            m_RectDefend = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexDefend.Width, m_TexDefend.Height);
-            m_RectGather = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexGather.Width, m_TexGather.Height);
+            m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,
+                                         m_TexAttack.Height);
+            m_RectDefend = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexDefend.Width,
+                                         m_TexDefend.Height);
+            m_RectGather = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexGather.Width,
+                                         m_TexGather.Height);
 
             // INFO:
             // ----------
             // - Clicking the buttons is also accessing the tiles beneath the menu
 
             renderContext.SpriteBatch.Draw(m_TexMode, m_RectMode, Color.White);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Number Of Tiles Available: " + m_NrOfTiles, new Vector2(10, 50), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Number Of Tiles Available: " + m_NrOfTiles,
+                                                 new Vector2(10, 50), Color.White);
 
             if (m_ModeSelected == 1)
             {
