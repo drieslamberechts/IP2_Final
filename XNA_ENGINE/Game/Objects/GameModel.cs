@@ -77,76 +77,34 @@ namespace XNA_ENGINE.Game.Objects
         //Setters and getters
         public Model Model
         {
-            get
-            {
-                return _model;
-            }
-
-            set
-            {
-                _model = value;
-            }
+            get{return _model;}
+            set{_model = value;}
         }
         public bool UseTexture
         {
-            get
-            {
-                return m_UseTexture;
-            }
-
-            set
-            {
-                m_UseTexture = value;
-            }
+            get{return m_UseTexture;}
+            set{m_UseTexture = value;}
         }
         public Texture2D Texture2D
         {
-            get
-            {
-                return m_Texture;
-            }
-
-            set
-            {
-                m_Texture = value;
-            }
+            get{return m_Texture;}
+            set{m_Texture = value;}
         }
         public bool Selected
         {
-            get
-            {
-                return m_Selected;
-            }
-
-            set
-            {
-                m_Selected = value;
-            }
+            get{return m_Selected;}
+            set{ m_Selected = value;}
         }
         
         public Vector3 DiffuseColor
         {
-            get
-            {
-                return m_DiffuseColor;
-            }
-
-            set
-            {
-                m_DiffuseColor = value;
-            }
+            get{return m_DiffuseColor;}
+            set{ m_DiffuseColor = value;}
         }
         public float Alpha
         {
-            get
-            {
-                return m_Alpha;
-            }
-
-            set
-            {
-                m_Alpha = value;
-            }
+            get{return m_Alpha;}
+            set{ m_Alpha = value;}
         }
 
         public void SetTexture(Texture2D texture)

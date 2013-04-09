@@ -32,7 +32,8 @@ namespace XNA_ENGINE.Game.Scenes
         {
             LeftClick,
             RightClick,
-            ScrollWheelDown
+            ScrollWheelDown,
+            ToggleCreativeMode
         }
 
         private static ContentManager m_Content;
@@ -73,14 +74,17 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
             InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
             InputAction scrollWheelDown = new InputAction((int)PlayerInput.ScrollWheelDown, TriggerState.Down);
+            InputAction toggleCreativeMode = new InputAction((int)PlayerInput.ToggleCreativeMode, TriggerState.Pressed);
 
             leftClick.MouseButton = MouseButtons.LeftButton;
             rightClick.MouseButton = MouseButtons.RightButton;
             scrollWheelDown.MouseButton = MouseButtons.MiddleButton;
+            toggleCreativeMode.KeyButton = Keys.C;
             
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
             m_InputManager.MapAction(scrollWheelDown);
+            m_InputManager.MapAction(toggleCreativeMode);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
@@ -126,10 +130,13 @@ namespace XNA_ENGINE.Game.Scenes
             // DrawGUI
             Menu.GetInstance().Draw(renderContext);
 
-            // Show Selection
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.Black);
-
             base.Draw2D(renderContext, drawBefore3D);
+
+            // Show Selection
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.White);
+
+            // Creative mode
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Creative mode: " + GridFieldManager.GetInstance(this).CreativeMode, new Vector2(10, 50), Color.White);
         }
 
         public override void Draw3D(RenderContext renderContext)
@@ -143,11 +150,14 @@ namespace XNA_ENGINE.Game.Scenes
             m_InputManager.Update();
 
             //Check if the mouse is in the screen
-            bool isMouseInScreen = false;
-            if (IsMouseInScreen(renderContext)) isMouseInScreen = true;
+            bool isMouseInScreen = IsMouseInScreen(renderContext);
 
             // Handle Keyboard Input
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
+
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleCreativeMode))
+                GridFieldManager.GetInstance(this).CreativeMode = !GridFieldManager.GetInstance(this).CreativeMode;
+
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
@@ -311,7 +321,7 @@ namespace XNA_ENGINE.Game.Scenes
             return new Ray(nearPoint, direction);
         }
     
-        //Quaternion conversion helpers
+        //Quaternion conversion helper
         public static Vector3 GetForwardVectorOfQuaternion(Quaternion q) 
         {
             return new Vector3(2 * (q.X * q.Z + q.W * q.Y),

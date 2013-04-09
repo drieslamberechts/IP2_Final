@@ -52,8 +52,6 @@ namespace XNA_ENGINE.Game.Helpers
                            settlement = Convert.ToString(tile.Element("settlement").Value)*/
                 //       }).ToList();*/
 
-            //return gridField;
-
             return gridField;
         }
 
@@ -61,8 +59,6 @@ namespace XNA_ENGINE.Game.Helpers
         {
             GridTile[,] gridField = new GridTile[MAX_WIDTH, MAX_HEIGHT]; ;
             // Map:
-            // Width = 30
-            // Height = 30
             List<GridTile> addTest = new List<GridTile>();
 
             for (int height = 0; height < MAX_HEIGHT; ++height)
@@ -75,7 +71,6 @@ namespace XNA_ENGINE.Game.Helpers
             }
 
             // Add Tiles to the right grid and give them the right attributes.
-            
             for (int height = 0, teller = 0; height < MAX_HEIGHT; ++height)
             {
                 for (int width = 0; width < MAX_WIDTH; ++width, ++ teller)
@@ -140,7 +135,7 @@ namespace XNA_ENGINE.Game.Helpers
     }
 }
 
-/*
+            /*
             // ------------------------------------------
             // OPEN AND READ XML FILE
             // ------------------------------------------
@@ -163,4 +158,5 @@ namespace XNA_ENGINE.Game.Helpers
             System.Diagnostics.Debug.WriteLine("Count: " + m_Tiles.ElementAt(0).type);
             // ------------------------------------------
             // END READING XML FILE
-            // -----------------------------------------*/
+            // -----------------------------------------
+            */

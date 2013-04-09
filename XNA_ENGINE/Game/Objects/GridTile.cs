@@ -19,11 +19,11 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GameModel m_TileModel;
         private GameModel m_SettlementDisplayModel;
-        private int m_Row, m_Column;
+        private readonly int m_Row,m_Column;
 
-        private static float GRIDWIDTH = 64;
-        private static float GRIDDEPTH = 64;
-        private static float GRIDHEIGHT = 32;
+        private const float GRIDWIDTH = 64;
+        private const float GRIDDEPTH = 64;
+        private const float GRIDHEIGHT = 32;
         private const int YOFFSETMIN = 0;
         private const int YOFFSETMAX = 15;
 
@@ -32,7 +32,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private bool m_Selected;
 
-        private GameScene m_GameScene;
+        private readonly GameScene m_GameScene;
 
         public enum TileType
         {
@@ -63,7 +63,7 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.DrawBoundingBox = false;
         }
 
-        public void Update(Engine.RenderContext renderContext)
+        public void Update(RenderContext renderContext)
         {
            // m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
             switch (m_TileType)
@@ -114,6 +114,8 @@ namespace XNA_ENGINE.Game.Objects
         //Code to execute on hit with mouse
         private void OnHit()
         {
+            bool creativeMode = GridFieldManager.GetInstance(m_GameScene).CreativeMode;
+
             //What mode is there selected in the menu to build?
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
             
@@ -145,14 +147,13 @@ namespace XNA_ENGINE.Game.Objects
                         throw new ArgumentOutOfRangeException();
                 }
             }
+
             if(inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
             {
 
             }
-            else
-            {
-                m_Selected = true;
-            }
+
+            m_Selected = true;
         }
 
         private void ChangeChildModel(string asset)
@@ -194,14 +195,8 @@ namespace XNA_ENGINE.Game.Objects
 
         public bool Selected
         {
-            get
-            {
-                return m_Selected;
-            }
-            set
-            {
-                m_Selected = value;
-            } 
+            get{return m_Selected;}
+            set{m_Selected = value;} 
         }
     }
 }

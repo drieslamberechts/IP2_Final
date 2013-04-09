@@ -16,14 +16,16 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridTile[,] m_GridField;
 
-        private int GRID_ROW_LENGTH = 30;
-        private int GRID_COLUMN_LENGTH = 30;
-       // private int GRID_OFFSET = 64;
+        private const int GRID_ROW_LENGTH = 40;
+        private const int GRID_COLUMN_LENGTH = 40;
+
+        // private int GRID_OFFSET = 64;
 
         private Random m_Random;
 
         private GridFieldManager(GameScene pGameScene)
         {
+            CreativeMode = false;
             // Generate a new Map
             m_GridField = MapLoadSave.GetInstance().GenerateMap(pGameScene);
 
@@ -87,7 +89,7 @@ namespace XNA_ENGINE.Game.Managers
 
             //System.Diagnostics.Debug.WriteLine("Rows: " + rows + " Columns: " + columns);
 
-           // GRID_ROW_LENGTH = rows;
+            //GRID_ROW_LENGTH = rows;
             //GRID_COLUMN_LENGTH = rows;
         }
 
@@ -109,5 +111,7 @@ namespace XNA_ENGINE.Game.Managers
         {
             get { return m_Random; }
         }
+
+        public bool CreativeMode { get; set; }
     }
 }
