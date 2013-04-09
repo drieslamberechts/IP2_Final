@@ -27,12 +27,19 @@ namespace XNA_ENGINE.Game.Objects
         private const int YOFFSETMIN = 0;
         private const int YOFFSETMAX = 15;
 
-        private string m_TileType;
+        private TileType m_TileType = TileType.Normal;
         private string m_TileSettlement;
 
         private bool m_Selected;
 
         private GameScene m_GameScene;
+
+        public enum TileType
+        {
+            Normal,
+            Water,
+            Cliff
+        }
 
         public GridTile(GameScene pGameScene, int row, int column)
         {
@@ -54,17 +61,29 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
             m_TileModel.DrawBoundingBox = false;
-
-            m_TileType = "normal";
         }
 
         public void Update(Engine.RenderContext renderContext)
         {
+            switch (m_TileType)
+            {
+                case TileType.Normal:
+                    m_TileModel.DiffuseColor = new Vector3(0.0f,0.5f,0.0f);
+                    break;
+                case TileType.Water:
+                    m_TileModel.DiffuseColor = new Vector3(0.0f, 0.0f, 0.5f);
+                    break;
+                case TileType.Cliff:
+                    m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             if (m_Selected)
             {
-
-              //  m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
-              //  m_TileModel.UseTexture = true;
+                //m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
+                //m_TileModel.UseTexture = true;
                 m_TileModel.Selected = true;
                 if (m_SettlementDisplayModel != null)
                     m_SettlementDisplayModel.Selected = true;
@@ -74,7 +93,7 @@ namespace XNA_ENGINE.Game.Objects
                 m_TileModel.Selected = false;
                 if (m_SettlementDisplayModel != null)
                     m_SettlementDisplayModel.Selected = false;
-              //  m_TileModel.UseTexture = false;
+                //m_TileModel.UseTexture = false;
             }
            
             m_Selected = false;
@@ -152,12 +171,12 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.RemoveChild(m_SettlementDisplayModel);
         }
 
-        public void SetTileType(string type)
+        public void SetTileType(TileType type)
         {
             m_TileType = type;
         }
 
-        public string GetTileType()
+        public TileType GetTileType()
         {
             return m_TileType;
         }

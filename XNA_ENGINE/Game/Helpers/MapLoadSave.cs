@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Scenes;
 
@@ -18,11 +19,14 @@ namespace XNA_ENGINE.Game.Helpers
         private static MapLoadSave m_MapLoadSave;
 
         // Generate a new Map
-        private const int MAX_HEIGHT = 30;
-        private const int MAX_WIDTH = 30;
+        private const int MAX_HEIGHT = 40;
+        private const int MAX_WIDTH = 40;
+
+        private Random m_Random;
 
         private MapLoadSave()
         {
+            m_Random = new Random();
             //m_GridField = new GridTile[MAX_WIDTH, MAX_HEIGHT];
         }
 
@@ -65,7 +69,8 @@ namespace XNA_ENGINE.Game.Helpers
             {
                 for (int width = 0; width < MAX_WIDTH; ++width)
                 {
-                    addTest.Add(new GridTile(pGameScene, width, height));
+                    GridTile tileToAdd = new GridTile(pGameScene, width, height);
+                    addTest.Add(tileToAdd);
                 }
             }
 
@@ -78,7 +83,20 @@ namespace XNA_ENGINE.Game.Helpers
                     gridField[width, height] = addTest.ElementAt(teller);
 
                     // Set the tile type (normal, tribe,...)
-                    gridField[width, height].SetTileType("normal");
+                    switch (m_Random.Next(0, 3))
+                    {
+                        case 0:
+                            gridField[width, height].SetTileType(GridTile.TileType.Normal);
+                            break;
+                        case 1:
+                            gridField[width, height].SetTileType(GridTile.TileType.Cliff);
+                            break;
+                        case 2:
+                            gridField[width, height].SetTileType(GridTile.TileType.Water);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
 
                     // Use a color to create a new Tribe (none, green, red, blue,...)
                     gridField[width, height].SetTileSettlement("none");

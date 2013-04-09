@@ -91,32 +91,6 @@ namespace XNA_ENGINE.Game.Scenes
 
             m_CameraTargetPos = SceneManager.RenderContext.Camera.LocalPosition;
 
-            /*
-            // ------------------------------------------
-            // OPEN AND READ XML FILE
-            // ------------------------------------------
-            // the file must be available in the Debug (or release) folder
-            System.IO.Stream stream = TitleContainer.OpenStream("tilemap.xml");
-
-            XDocument doc = XDocument.Load(stream);
-
-            m_Tiles = new List<Tile>();
-
-            m_Tiles = (from tile in doc.Descendants("tile")
-                       select new Tile()
-                       {
-                           position = new Vector2(Convert.ToInt32(tile.Element("positionX").Value), Convert.ToInt32(tile.Element("positionY").Value)),
-                           type = Convert.ToString(tile.Element("type").Value),
-                           settlement = Convert.ToString(tile.Element("settlement").Value)
-                       }).ToList();
-
-            // Test if the xml reader worked (and it does)
-            System.Diagnostics.Debug.WriteLine("Type: " + m_Tiles.ElementAt(0).type);
-            // ------------------------------------------
-            // END READING XML FILE
-            // ------------------------------------------
-            */
-
             base.Initialize();
         }
 

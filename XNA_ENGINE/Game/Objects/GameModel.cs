@@ -18,6 +18,7 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_UseTexture { get; set; }
         private Texture2D m_Texture { get; set; }
         private bool m_Selected { get; set; }
+        private Vector3 m_DiffuseColor { get; set; }
 
 
         public GameModel(string assetFile)
@@ -52,7 +53,9 @@ namespace XNA_ENGINE.Game.Objects
                     effect.View = renderContext.Camera.View;
                     effect.Projection = renderContext.Camera.Projection;
                     effect.World = transforms[mesh.ParentBone.Index] * WorldMatrix;
-
+                    
+                    effect.DiffuseColor = m_DiffuseColor;
+                    
                     //Texture
                     if (m_UseTexture)
                     {
@@ -130,6 +133,18 @@ namespace XNA_ENGINE.Game.Objects
             set
             {
                 m_Selected = value;
+            }
+        }
+        public Vector3 DiffuseColor
+        {
+            get
+            {
+                return m_DiffuseColor;
+            }
+
+            set
+            {
+                m_DiffuseColor = value;
             }
         }
 
