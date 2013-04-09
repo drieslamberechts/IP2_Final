@@ -18,8 +18,9 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_UseTexture { get; set; }
         private Texture2D m_Texture { get; set; }
         private bool m_Selected { get; set; }
-        private Vector3 m_DiffuseColor { get; set; }
 
+        private Vector3 m_DiffuseColor { get; set; }
+        private float m_Alpha { get; set; }
 
         public GameModel(string assetFile)
         {
@@ -31,13 +32,9 @@ namespace XNA_ENGINE.Game.Objects
             _model = contentManager.Load<Model>(_assetFile);
             base.LoadContent(contentManager);
             
-          /*  foreach (ModelMesh mesh in _model.Meshes)
-            {
-                foreach (ModelMeshPart part in mesh.MeshParts)
-                {
-                    part.Effect = part.Effect.Clone();
-                }
-            }*/
+            m_Alpha = 1;
+            m_UseTexture = false;
+            m_DiffuseColor = new Vector3(0,0,0);
         }
 
         public override void Draw(RenderContext renderContext)
@@ -53,31 +50,22 @@ namespace XNA_ENGINE.Game.Objects
                     effect.View = renderContext.Camera.View;
                     effect.Projection = renderContext.Camera.Projection;
                     effect.World = transforms[mesh.ParentBone.Index] * WorldMatrix;
-                    
-                    effect.DiffuseColor = m_DiffuseColor;
-                    
+
                     //Texture
-                    if (m_UseTexture)
-                    {
-                       // effect.DiffuseColor = new Vector3(1, 1, 1);
-                      //  effect.TextureEnabled = true;
-                      //  effect.Texture = m_Texture;
-                    }
-                    else
-                    {
-                       // effect.DiffuseColor = new Vector3(0.345098f,0.694118f,0.105882f);
-                      //  effect.TextureEnabled = false;
-                    }
+                    if (m_Texture != null)
+                        effect.Texture = m_Texture;
+                    effect.TextureEnabled = m_UseTexture;
+
+                    //Diffuse
+                    effect.DiffuseColor = m_DiffuseColor;
+                    //Alpha
+                    effect.Alpha = m_Alpha;
 
                     //Selecetd
                     if (m_Selected)
-                    {
                         effect.EmissiveColor = new Vector3(0.1f, 0.1f, 0.1f);
-                    }
                     else
-                    {
                         effect.EmissiveColor = new Vector3(0.0f, 0.0f, 0.0f);
-                    }
                 }
 
                 mesh.Draw();
@@ -86,7 +74,7 @@ namespace XNA_ENGINE.Game.Objects
             base.Draw(renderContext);
         }
 
-        //Sets and gets
+        //Setters and getters
         public Model Model
         {
             get
@@ -135,6 +123,7 @@ namespace XNA_ENGINE.Game.Objects
                 m_Selected = value;
             }
         }
+        
         public Vector3 DiffuseColor
         {
             get
@@ -145,6 +134,18 @@ namespace XNA_ENGINE.Game.Objects
             set
             {
                 m_DiffuseColor = value;
+            }
+        }
+        public float Alpha
+        {
+            get
+            {
+                return m_Alpha;
+            }
+
+            set
+            {
+                m_Alpha = value;
             }
         }
 

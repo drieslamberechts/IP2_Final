@@ -65,6 +65,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(Engine.RenderContext renderContext)
         {
+           // m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
             switch (m_TileType)
             {
                 case TileType.Normal:
@@ -73,7 +74,7 @@ namespace XNA_ENGINE.Game.Objects
                 case TileType.Water:
                     m_TileModel.DiffuseColor = new Vector3(0.0f, 0.0f, 0.5f);
                     break;
-                case TileType.Cliff:
+                case TileType.Cliff: 
                     m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
                     break;
                 default:
