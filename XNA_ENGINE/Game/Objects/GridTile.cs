@@ -61,26 +61,22 @@ namespace XNA_ENGINE.Game.Objects
         public void Update(Engine.RenderContext renderContext)
         {
             if (m_Selected)
-                m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
+            {
+
+              //  m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
+              //  m_TileModel.UseTexture = true;
+                m_TileModel.Selected = true;
+                if (m_SettlementDisplayModel != null)
+                    m_SettlementDisplayModel.Selected = true;
+            }
             else
-                m_TileModel.Rotate(0, 0.0f, 0);
-
-           /* 
-            if (m_Selected)
-                m_TileModel.SetColor(new Vector3(0.5f,1,1));
-            else
-                m_TileModel.SetColor(new Vector3(0, 0.5f, 0));*/
-
-            if (m_Selected)
-                m_TileModel.SetTexture(FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture"));
-            else
-                m_TileModel.UseTexture = false;
-
-
-           // else
-          //      m_TileModel.SetColor(new Vector3(0, 0.5f, 0));
-
-
+            {
+                m_TileModel.Selected = false;
+                if (m_SettlementDisplayModel != null)
+                    m_SettlementDisplayModel.Selected = false;
+              //  m_TileModel.UseTexture = false;
+            }
+           
             m_Selected = false;
         }
 
