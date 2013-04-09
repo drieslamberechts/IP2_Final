@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
@@ -14,6 +15,9 @@ namespace XNA_ENGINE.Game.Objects
     {
         private readonly string _assetFile;
         private Model _model { get; set; }
+        private bool m_UseTexture { get; set; }
+        private Texture2D m_Texture;
+
 
         public GameModel(string assetFile)
         {
@@ -24,8 +28,8 @@ namespace XNA_ENGINE.Game.Objects
         {
             _model = contentManager.Load<Model>(_assetFile);
             base.LoadContent(contentManager);
-            /*
-            foreach (ModelMesh mesh in _model.Meshes)
+            
+            /*foreach (ModelMesh mesh in _model.Meshes)
             {
                 foreach (ModelMeshPart part in mesh.MeshParts)
                 {
@@ -47,6 +51,18 @@ namespace XNA_ENGINE.Game.Objects
                     effect.View = renderContext.Camera.View;
                     effect.Projection = renderContext.Camera.Projection;
                     effect.World = transforms[mesh.ParentBone.Index] * WorldMatrix;
+
+                    if (m_UseTexture)
+                    {
+                        effect.DiffuseColor = new Vector3(1, 1, 1);
+                        effect.TextureEnabled = true;
+                        effect.Texture = m_Texture;
+                    }
+                    else
+                    {
+                        effect.DiffuseColor = new Vector3(0.345098f,0.694118f,0.105882f);
+                        effect.TextureEnabled = false;
+                    }
                 }
 
                 mesh.Draw();
@@ -68,28 +84,23 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
-        public void SetTexture(Texture2D texture)
+        public bool UseTexture
         {
-            foreach (ModelMesh mesh in _model.Meshes)
+            get
             {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.DiffuseColor = new Vector3(1, 1, 1);
-                    effect.TextureEnabled = true;
-                    effect.Texture = texture;
-                }
+                return m_UseTexture;
+            }
+
+            set
+            {
+                m_UseTexture = value;
             }
         }
 
-        public void SetColor(Vector3 color)
+        public void SetTexture(Texture2D texture)
         {
-            foreach (ModelMesh mesh in _model.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.DiffuseColor = color;
-                }
-            }
+            m_UseTexture = true;
+            m_Texture = texture;
         }
     }
 }

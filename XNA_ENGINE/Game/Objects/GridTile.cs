@@ -73,6 +73,10 @@ namespace XNA_ENGINE.Game.Objects
 
             if (m_Selected)
                 m_TileModel.SetTexture(FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture"));
+            else
+                m_TileModel.UseTexture = false;
+
+
            // else
           //      m_TileModel.SetColor(new Vector3(0, 0.5f, 0));
 
@@ -119,7 +123,7 @@ namespace XNA_ENGINE.Game.Objects
                         ChangeChildModel("Models/settlement_TestSettlementRed");
                         break;
                     case Menu.ModeSelected.Delete:
-                        ChangeChildModel();
+                        RemoveChildModel();
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -147,7 +151,7 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.AddChild(newModel);
         }
 
-        private void ChangeChildModel()
+        private void RemoveChildModel()
         {
             m_TileModel.RemoveChild(m_SettlementDisplayModel);
         }
