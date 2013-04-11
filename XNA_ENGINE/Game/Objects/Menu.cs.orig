@@ -68,15 +68,22 @@ namespace XNA_ENGINE.Game.Objects
             return m_Menu;
         }
 
+<<<<<<< HEAD
+            m_TexMode = Content.Load<Texture2D>("switch");
+            m_TexTile1 = Content.Load<Texture2D>("Split_Army");
+            m_TexTile2 = Content.Load<Texture2D>("tile2");
+            m_TexTile3 = Content.Load<Texture2D>("tile3");
+=======
         private Menu()
         {
             Content = FinalScene.GetContentManager();
 
             m_TexSwitch = Content.Load<Texture2D>("switch");
 
-            m_TexTileBlue = Content.Load<Texture2D>("Split_Army");
+            m_TexTileBlue = Content.Load<Texture2D>("Tile1");
             m_TexTileGold = Content.Load<Texture2D>("Tile2");
             m_TexTileRed = Content.Load<Texture2D>("Tile3");
+>>>>>>> 16ad378c393092a193789f6d6f267817d66d9a60
             m_TexTile4 = Content.Load<Texture2D>("tile4");
 
             m_TexAttack = Content.Load<Texture2D>("attack");

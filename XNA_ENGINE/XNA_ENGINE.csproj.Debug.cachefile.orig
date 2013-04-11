@@ -1,9 +1,21 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
-<<<<<<< HEAD
 Content\Models\tile_Template.xnb
+Content\Models\tile_TemplateTest.xnb
+Content\Models\settlement_TestSettlementBlue.xnb
+Content\Models\settlement_TestSettlementGold.xnb
+Content\Models\settlement_TestSettlementRed.xnb
+<<<<<<< HEAD
+Content\switch.xnb
+Content\Split_Army.xnb
 =======
-Content\metal.xnb
-Content\ship2.xnb
-Content\metal_0.xnb
->>>>>>> e13422f4fe50d086d270b880b3d83557a9503eff
+Content\attack.xnb
+Content\defend.xnb
+Content\gather.xnb
+Content\switch.xnb
+Content\tile1.xnb
+Content\tile2.xnb
+Content\tile3.xnb
+Content\tile4.xnb
+Content\Textures\RainbowTexture.xnb
+>>>>>>> 16ad378c393092a193789f6d6f267817d66d9a60

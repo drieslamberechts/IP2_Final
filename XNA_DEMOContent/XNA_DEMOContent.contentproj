@@ -112,8 +112,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="switch.png">
-      <Name>switch</Name>
     <Compile Include="attack.jpg">
       <Name>attack</Name>
       <Importer>TextureImporter</Importer>
@@ -127,6 +125,7 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
     <Compile Include="defend.jpg">
       <Name>defend</Name>
       <Importer>TextureImporter</Importer>
@@ -134,11 +133,6 @@
     </Compile>
     <Compile Include="gather.jpg">
       <Name>gather</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="switch.jpg">
-      <Name>switch</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -166,6 +160,13 @@
   <ItemGroup>
     <Compile Include="Textures\RainbowTexture.png">
       <Name>RainbowTexture</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="switch.png">
+      <Name>switch</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
