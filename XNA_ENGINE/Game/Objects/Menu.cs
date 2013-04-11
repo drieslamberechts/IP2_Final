@@ -35,7 +35,7 @@ namespace XNA_ENGINE.Game.Objects
             m_NrOfTiles = nrOfTiles;
 
             m_TexMode = Content.Load<Texture2D>("switch");
-            m_TexTile1 = Content.Load<Texture2D>("tile1");
+            m_TexTile1 = Content.Load<Texture2D>("Split_Army");
             m_TexTile2 = Content.Load<Texture2D>("tile2");
             m_TexTile3 = Content.Load<Texture2D>("tile3");
             m_TexTile4 = Content.Load<Texture2D>("tile4");
