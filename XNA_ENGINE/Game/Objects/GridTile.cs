@@ -10,6 +10,7 @@ using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
+using XNA_ENGINE.Game.Scenes;
 
 
 namespace XNA_ENGINE.Game.Objects
@@ -17,24 +18,28 @@ namespace XNA_ENGINE.Game.Objects
     public class GridTile
     {
         private GameModel m_TileModel;
-        private static GameModel m_SettlementModel1;
-        private static GameModel m_SettlementModel2;
-        private static GameModel m_SettlementModel3;
         private GameModel m_SettlementDisplayModel;
-        private int m_Row, m_Column;
+        private readonly int m_Row,m_Column;
 
-        private static float GRIDWIDTH = 64;
-        private static float GRIDDEPTH = 64;
-        private static float GRIDHEIGHT = 32;
-        private const int YOFFSETMIN = -5;
-        private const int YOFFSETMAX = 5;
+        private const float GRIDWIDTH = 64;
+        private const float GRIDDEPTH = 64;
+        private const float GRIDHEIGHT = 32;
+        private const int YOFFSETMIN = 0;
+        private const int YOFFSETMAX = 15;
 
-        private string m_TileType;
+        private TileType m_TileType = TileType.Normal;
         private string m_TileSettlement;
 
         private bool m_Selected;
 
-        private GameScene m_GameScene;
+        private readonly GameScene m_GameScene;
+
+        public enum TileType
+        {
+            Normal,
+            Water,
+            Cliff
+        }
 
         public GridTile(GameScene pGameScene, int row, int column)
         {
@@ -55,38 +60,44 @@ namespace XNA_ENGINE.Game.Objects
             m_GameScene.AddSceneObject(m_TileModel);
 
             m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
-            m_TileModel.DrawBoundingBox = true;
-
-            m_TileType = "normal";
-
-
-            //SETTLEMENTSTESTS
-            m_SettlementModel1 = new GameModel("Models/settlement_TestSettlementBlue");
-            m_SettlementModel2 = new GameModel("Models/settlement_TestSettlementGold");
-            m_SettlementModel3 = new GameModel("Models/settlement_TestSettlementRed");
-            /*
-            m_SettlementDisplayModel = m_SettlementModel1;
-            Vector3 pos = m_TileModel.WorldPosition;
-            pos.Y += 32;
-            m_SettlementDisplayModel.Translate(pos);
-            m_GameScene.AddSceneObject(m_SettlementDisplayModel);
-            */
-            m_SettlementDisplayModel = m_SettlementModel1;
-            m_SettlementDisplayModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
-            m_SettlementDisplayModel.CanDraw = true;
-            m_TileModel.AddChild(m_SettlementDisplayModel);
+            m_TileModel.DrawBoundingBox = false;
         }
 
-        public void Update(Engine.RenderContext renderContext)
+        public void Update(RenderContext renderContext)
         {
-            if (m_Selected)
-                m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
+           // m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
+            switch (m_TileType)
+            {
+                case TileType.Normal:
+                    m_TileModel.DiffuseColor = new Vector3(0.0f,0.5f,0.0f);
+                    break;
+                case TileType.Water:
+                    m_TileModel.DiffuseColor = new Vector3(0.0f, 0.0f, 0.5f);
+                    break;
+                case TileType.Cliff: 
+                    m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
-            
-        /*  if (m_Selected)
-                m_TileModel.SetColor(new Vector3(0.5f,1,1));
+            if (m_Selected)
+            {
+                //m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
+                //m_TileModel.UseTexture = true;
+                m_TileModel.Selected = true;
+                if (m_SettlementDisplayModel != null)
+                    m_SettlementDisplayModel.Selected = true;
+            }
             else
-                m_TileModel.SetColor(new Vector3(0.0f, 1, 0.0f));*/
+            {
+                m_TileModel.Selected = false;
+                if (m_SettlementDisplayModel != null)
+                    m_SettlementDisplayModel.Selected = false;
+                //m_TileModel.UseTexture = false;
+            }
+           
+            m_Selected = false;
         }
 
         public bool HitTest(Ray ray)
@@ -94,17 +105,80 @@ namespace XNA_ENGINE.Game.Objects
             if (m_TileModel.HitTest(ray))
             {
                 System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
+                OnHit();
                 return true;
             }
             return false;
         }
 
-        public void SetTileType(string type)
+        //Code to execute on hit with mouse
+        private void OnHit()
+        {
+            bool creativeMode = GridFieldManager.GetInstance(m_GameScene).CreativeMode;
+
+            //What mode is there selected in the menu to build?
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+            
+            //Get the inputmanager
+            var inputManager = FinalScene.GetInputManager();
+            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+            {
+                switch (selectedMode)
+                {
+                    case Menu.ModeSelected.Attack:
+                        break;
+                    case Menu.ModeSelected.Defend:
+                        break;
+                    case Menu.ModeSelected.Gather:
+                        break;
+                    case Menu.ModeSelected.TileBlue:
+                        ChangeChildModel("Models/settlement_TestSettlementBlue");
+                        break;
+                    case Menu.ModeSelected.TileGold:
+                        ChangeChildModel("Models/settlement_TestSettlementGold");
+                        break;
+                    case Menu.ModeSelected.TileRed:
+                        ChangeChildModel("Models/settlement_TestSettlementRed");
+                        break;
+                    case Menu.ModeSelected.Delete:
+                        RemoveChildModel();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+
+            if(inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+            {
+
+            }
+
+            m_Selected = true;
+        }
+
+        private void ChangeChildModel(string asset)
+        {
+            GameModel newModel = new GameModel(asset);
+            newModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
+            newModel.CanDraw = true;
+            newModel.LoadContent(FinalScene.GetContentManager());
+            m_TileModel.RemoveChild(m_SettlementDisplayModel);
+
+            m_SettlementDisplayModel = newModel;
+            m_TileModel.AddChild(newModel);
+        }
+
+        private void RemoveChildModel()
+        {
+            m_TileModel.RemoveChild(m_SettlementDisplayModel);
+        }
+
+        public void SetTileType(TileType type)
         {
             m_TileType = type;
         }
 
-        public string GetTileType()
+        public TileType GetTileType()
         {
             return m_TileType;
         }
@@ -121,15 +195,8 @@ namespace XNA_ENGINE.Game.Objects
 
         public bool Selected
         {
-            get
-            {
-                return m_Selected;
-            }
-
-            set
-            {
-                m_Selected = value;
-            } 
+            get{return m_Selected;}
+            set{m_Selected = value;} 
         }
     }
 }

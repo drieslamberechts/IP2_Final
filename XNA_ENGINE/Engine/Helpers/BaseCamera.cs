@@ -10,7 +10,7 @@ namespace XNA_ENGINE.Engine.Helpers
     public class BaseCamera : GameObject3D
     {
         public Matrix View { get; protected set; }
-        public Matrix Projection { get; protected set; }
+        public Matrix Projection { get; set; }
 
         public BaseCamera()
         {

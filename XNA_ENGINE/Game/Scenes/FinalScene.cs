@@ -6,8 +6,8 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using XNA_ENGINE;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
@@ -24,40 +24,36 @@ using XNA_ENGINE.Game.Scenes;
 
 using XNA_ENGINE.Game.Managers;
 
-
-
-using GameModel = XNA_ENGINE.Engine.Objects.GameModel;
-
 namespace XNA_ENGINE.Game.Scenes
 {
     class FinalScene : GameScene
     {
-        enum PlayerInput
+        public enum PlayerInput
         {
-            LeftClick
+            LeftClick,
+            RightClick,
+            ScrollWheelDown,
+            ToggleCreativeMode
         }
 
-        private enum BuildSelection
-        {
-            BuildingAwesome,
-            BuildingStupid,
-            BuildingOutOfInspiration
-        }
-
-        private ContentManager m_Content;
-
-        // Menu
-        private Menu m_Menu;
+        private static ContentManager m_Content;
 
         // Controls
         GamePadState m_GamePadState;
-        private InputManager m_InputManager;
+        private static InputManager m_InputManager;
+
         private float m_ElapseTime;
         private int m_FrameCounter;
         private int m_Fps;
         private SpriteFont m_DebugFont;
 
-        private BuildSelection m_BuildSelection;
+        private const double CAMERAZOOMMIN = 0.4;
+        private const double CAMERAZOOMMAX = 1.5;
+        private const double ZOOMSTRENGTH = 0.001;
+        private const double CAMERASTARTSCALE = 1.0;
+        private double m_CameraScale = CAMERASTARTSCALE;
+        private double m_CameraScaleTarget = CAMERASTARTSCALE;
+        private Vector3 m_CameraTargetPos;
 
         public FinalScene(ContentManager content)
             : base("FinalScene")
@@ -69,52 +65,35 @@ namespace XNA_ENGINE.Game.Scenes
             m_DebugFont = content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
+
         public override void Initialize()
         {
-            m_BuildSelection = BuildSelection.BuildingAwesome;
-
             //Input manager + inputs
             m_InputManager = new InputManager();
 
             InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
+            InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
+            InputAction scrollWheelDown = new InputAction((int)PlayerInput.ScrollWheelDown, TriggerState.Down);
+            InputAction toggleCreativeMode = new InputAction((int)PlayerInput.ToggleCreativeMode, TriggerState.Pressed);
+
             leftClick.MouseButton = MouseButtons.LeftButton;
+            rightClick.MouseButton = MouseButtons.RightButton;
+            scrollWheelDown.MouseButton = MouseButtons.MiddleButton;
+            toggleCreativeMode.KeyButton = Keys.C;
+            
             m_InputManager.MapAction(leftClick);
+            m_InputManager.MapAction(rightClick);
+            m_InputManager.MapAction(scrollWheelDown);
+            m_InputManager.MapAction(toggleCreativeMode);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
          
             //Adjust the camera position
-            SceneManager.RenderContext.Camera.Translate(300, 300, 300);
+            SceneManager.RenderContext.Camera.Translate(800, 1000, 800);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
 
-            // Menu
-            m_Menu = new Menu(m_Content, 15);
-
-            /*
-            // ------------------------------------------
-            // OPEN AND READ XML FILE
-            // ------------------------------------------
-            // the file must be available in the Debug (or release) folder
-            System.IO.Stream stream = TitleContainer.OpenStream("tilemap.xml");
-
-            XDocument doc = XDocument.Load(stream);
-
-            m_Tiles = new List<Tile>();
-
-            m_Tiles = (from tile in doc.Descendants("tile")
-                       select new Tile()
-                       {
-                           position = new Vector2(Convert.ToInt32(tile.Element("positionX").Value), Convert.ToInt32(tile.Element("positionY").Value)),
-                           type = Convert.ToString(tile.Element("type").Value),
-                           settlement = Convert.ToString(tile.Element("settlement").Value)
-                       }).ToList();
-
-            // Test if the xml reader worked (and it does)
-            System.Diagnostics.Debug.WriteLine("Type: " + m_Tiles.ElementAt(0).type);
-            // ------------------------------------------
-            // END READING XML FILE
-            // ------------------------------------------
-            */
+            m_CameraTargetPos = SceneManager.RenderContext.Camera.LocalPosition;
 
             base.Initialize();
         }
@@ -133,7 +112,7 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             // UPDATE MENU
-            m_Menu.Update(renderContext, m_InputManager);
+            Menu.GetInstance().Update(renderContext);
 
             // Handle Input
             HandleInput(renderContext);
@@ -149,12 +128,15 @@ namespace XNA_ENGINE.Game.Scenes
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
 
             // DrawGUI
-            m_Menu.Draw(renderContext);
-
-            // Show Selection
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + m_BuildSelection, new Vector2(10, 30), Color.Black);
+            Menu.GetInstance().Draw(renderContext);
 
             base.Draw2D(renderContext, drawBefore3D);
+
+            // Show Selection
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.White);
+
+            // Creative mode
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Creative mode: " + GridFieldManager.GetInstance(this).CreativeMode, new Vector2(10, 50), Color.White);
         }
 
         public override void Draw3D(RenderContext renderContext)
@@ -167,73 +149,147 @@ namespace XNA_ENGINE.Game.Scenes
             //Update inputManager
             m_InputManager.Update();
 
+            //Check if the mouse is in the screen
+            bool isMouseInScreen = IsMouseInScreen(renderContext);
+
             // Handle Keyboard Input
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
+
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleCreativeMode))
+                GridFieldManager.GetInstance(this).CreativeMode = !GridFieldManager.GetInstance(this).CreativeMode;
+
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
-
-            // Handle Mouse Input
-            var mPos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
-
-            //Raycast to grid
-            GridTile hittedTile = null;
-            if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered)
-                hittedTile = GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
-
-            if (hittedTile != null)
-            {
-                hittedTile.Selected = true;
-            }
-            
-            //Selection of what to build
-            if (keyboardState[Keys.U] == KeyState.Down)
-                m_BuildSelection = BuildSelection.BuildingAwesome;
-            
-            if (keyboardState[Keys.I] == KeyState.Down)
-                m_BuildSelection = BuildSelection.BuildingStupid;
-            
-            if (keyboardState[Keys.O] == KeyState.Down)            
-                m_BuildSelection = BuildSelection.BuildingOutOfInspiration;
-
-
             //CAMERA
-            //Camera Vectors     
+            #region Camera
+            //Camera Vectors
+            //forward
             Vector3 forwardVecCam = GetForwardVectorOfQuaternion(renderContext.Camera.LocalRotation);
             forwardVecCam.Y = 0;
             forwardVecCam.Normalize();
-            Vector3 rightVecCam = GetRightVectorOfQuaternion(renderContext.Camera.LocalRotation);
-            rightVecCam.Y = 0;
+            //right
+            Vector3 rightVecCam;
+            Matrix rotMatrix;
+            rotMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(-90));
+            rightVecCam = Vector3.Transform(forwardVecCam, rotMatrix);
             rightVecCam.Normalize();
 
-            
-            //GamePad
-            //THIS MIGHT NOT WORK DRIES, fidle around with the - and + of the vectors, also the right vector isn't totally right.
+            //Gamepad
             if (m_GamePadState.IsConnected)
             {
                 if (m_GamePadState.ThumbSticks.Left.Y > 0)
-                    renderContext.Camera.LocalPosition += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y;
+                    m_CameraTargetPos += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
                 if (m_GamePadState.ThumbSticks.Left.X < 0)
-                    renderContext.Camera.LocalPosition += rightVecCam * m_GamePadState.ThumbSticks.Left.X;
+                    m_CameraTargetPos += rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
                 if (m_GamePadState.ThumbSticks.Left.Y < 0)
-                    renderContext.Camera.LocalPosition += forwardVecCam * m_GamePadState.ThumbSticks.Left.Y;
+                    m_CameraTargetPos += forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
                 if (m_GamePadState.ThumbSticks.Left.X > 0)
-                    renderContext.Camera.LocalPosition += -rightVecCam * m_GamePadState.ThumbSticks.Left.X;
+                    m_CameraTargetPos += -rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
             }
 
 
+            //Keyboard
+            float scrollStrength = 10*(float) m_CameraScale;
 
             if (keyboardState[Keys.Z] == KeyState.Down)
-                renderContext.Camera.LocalPosition += -forwardVecCam * 10;
-            if (keyboardState[Keys.Q] == KeyState.Down)
-                renderContext.Camera.LocalPosition += rightVecCam * 10;
+                m_CameraTargetPos += -forwardVecCam * scrollStrength;
             if (keyboardState[Keys.S] == KeyState.Down)
-                renderContext.Camera.LocalPosition += forwardVecCam * 10;
+                m_CameraTargetPos += forwardVecCam * scrollStrength;
+            if (keyboardState[Keys.Q] == KeyState.Down)
+                m_CameraTargetPos += rightVecCam * scrollStrength;
             if (keyboardState[Keys.D] == KeyState.Down)
-                renderContext.Camera.LocalPosition += -rightVecCam * 10;
+                m_CameraTargetPos += -rightVecCam * scrollStrength;
+
+            int mouseX = renderContext.Input.CurrentMouseState.X;
+            int mouseY = renderContext.Input.CurrentMouseState.Y;
+
+            //MOUSE
+            #region Mouse
+            if (isMouseInScreen)
+            {
+                int offset = 5;
+
+                Viewport vp = renderContext.GraphicsDevice.Viewport;
+
+                if (mouseX < offset) m_CameraTargetPos += rightVecCam*scrollStrength;
+                if (mouseY < offset) m_CameraTargetPos += -forwardVecCam*scrollStrength;
+
+                if (mouseX > vp.Width - offset) m_CameraTargetPos += -rightVecCam*scrollStrength;
+                if (mouseY > vp.Height - offset) m_CameraTargetPos += forwardVecCam*scrollStrength;
+            }
+
+            //Mouse wheel move
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.ScrollWheelDown))
+            {
+                m_CameraTargetPos += rightVecCam*(mouseX - renderContext.Input.OldMouseState.X)*(float) m_CameraScale*
+                                     1.33f; //magic numbers
+                m_CameraTargetPos += -forwardVecCam*(mouseY - renderContext.Input.OldMouseState.Y)*(float) m_CameraScale*
+                                     1.8f; //magic number
+            }
+
+            //Move the actual camera with the vector
+            renderContext.Camera.LocalPosition += (m_CameraTargetPos - renderContext.Camera.LocalPosition)/5;
+                //Change the value to fiddle with the speed of the smooth transition
+
+            //Zoom in and out camera
+            double mouseScrollDifference = (double) m_InputManager.CurrentMouseState.ScrollWheelValue -
+                                           (double) m_InputManager.OldMouseState.ScrollWheelValue;
+
+            double newCameraScaleTarget = m_CameraScaleTarget + mouseScrollDifference*ZOOMSTRENGTH*-1;
+            if (newCameraScaleTarget < CAMERAZOOMMIN)
+                newCameraScaleTarget = CAMERAZOOMMIN;
+            if (newCameraScaleTarget > CAMERAZOOMMAX)
+                newCameraScaleTarget = CAMERAZOOMMAX;
+            m_CameraScaleTarget = newCameraScaleTarget;
+
+            m_CameraScale += (m_CameraScaleTarget - m_CameraScale)/10;
+                //Change the value to fiddle with the speed of the smooth transition
+
+            renderContext.Camera.Projection = CalculateProjectionMatrixOrthographic(renderContext);
+
+            #endregion
+            #endregion
+            
+            //Handle menu //If menu is hit don't do the grid test
+            if (Menu.GetInstance().HandleInput(renderContext)) return;
+
+            //Raycast to grid
+            if (isMouseInScreen)
+                GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
         }
 
-        public Ray CalculateCursorRay(RenderContext renderContext)
+        public static bool IsMouseInScreen(RenderContext renderContext)
+        {
+            int x = renderContext.Input.CurrentMouseState.X;
+            if (x < 0) return false;
+
+            int y = renderContext.Input.CurrentMouseState.Y;
+            if (y < 0) return false;
+
+            Viewport vp = renderContext.GraphicsDevice.Viewport;
+            if (x > vp.Width) return false;
+            if (y > vp.Height) return false;
+
+            return true;
+        }
+
+        public static ContentManager GetContentManager()
+        {
+            return m_Content;
+        }
+        public static InputManager GetInputManager()
+        {
+            return m_InputManager;
+        }
+
+        public Matrix CalculateProjectionMatrixOrthographic(RenderContext renderContext)
+        {
+            float aspectRatio = (float)renderContext.GraphicsDevice.Viewport.Width/(float)renderContext.GraphicsDevice.Viewport.Height;
+            return Matrix.CreateOrthographic((720 * aspectRatio) * (float)m_CameraScale, 720 * (float)m_CameraScale, 0.1f, 10000f);
+        }
+
+        public static Ray CalculateCursorRay(RenderContext renderContext)
         {
             Matrix view = renderContext.Camera.View;
             Matrix projection = renderContext.Camera.Projection;
@@ -265,24 +321,12 @@ namespace XNA_ENGINE.Game.Scenes
             return new Ray(nearPoint, direction);
         }
     
-        //Quaternion conversion helpers
-        public Vector3 GetForwardVectorOfQuaternion(Quaternion q) 
+        //Quaternion conversion helper
+        public static Vector3 GetForwardVectorOfQuaternion(Quaternion q) 
         {
             return new Vector3(2 * (q.X * q.Z + q.W * q.Y),
                             2 * (q.Y * q.X - q.W * q.X),
                             1 - 2 * (q.X * q.X + q.Y * q.Y));
-        }
-        public Vector3 GetUpVectorOfQuaternion(Quaternion q) 
-        {
-            return new Vector3(2 * (q.X * q.Y - q.W * q.Z),
-                            1 - 2 * (q.X * q.Z + q.Z * q.Z),
-                            2 * (q.Y * q.Z + q.W * q.X));
-        }
-        public Vector3 GetRightVectorOfQuaternion(Quaternion q) 
-        {
-            return new Vector3(1 - 2 * (q.Y * q.Y + q.Z * q.Z),
-                2 * (q.X * q.Y + q.W * q.Z),
-                2 * (q.X * q.Z - q.W * q.Y));
         }
     }
 }
