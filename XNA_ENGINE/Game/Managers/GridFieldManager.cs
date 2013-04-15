@@ -16,8 +16,10 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridTile[,] m_GridField;
 
-        private const int GRID_ROW_LENGTH = 40;
-        private const int GRID_COLUMN_LENGTH = 40;
+        private GameScene m_GameScene;
+
+        private const int GRID_ROW_LENGTH = 30;
+        private const int GRID_COLUMN_LENGTH = 30;
 
         // private int GRID_OFFSET = 64;
 
@@ -25,24 +27,11 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridFieldManager(GameScene pGameScene)
         {
+            m_GameScene = pGameScene;
             CreativeMode = false;
-            // Generate a new Map
-            m_GridField = MapLoadSave.GetInstance().GenerateMap(pGameScene);
 
-            /*//LOAD GRIDFIELD
-            LoadGridField(pGameScene, "tilemap.xml");
-            
-            //GENERATE GRIDFIELD
-            m_GridField = new List<List<GridTile>>();
-            for (int i = 0; i < GRID_ROW_LENGTH; ++i)
-            {
-                List<GridTile> tempList = new List<GridTile>();
-                for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
-                {
-                    tempList.Add(new GridTile(pGameScene, i, j));
-                }
-                m_GridField.Add(tempList);
-            }*/
+            // Load Map
+            m_GridField = MapLoadSave.GetInstance().LoadMap(pGameScene,"GeneratedTileMap");
         }
 
         static public GridFieldManager GetInstance(GameScene pGameScene)
@@ -79,20 +68,6 @@ namespace XNA_ENGINE.Game.Managers
             }
         }
 
-        public void LoadGridField(GameScene pGameScene, string XMLFile)
-        {
-            m_GridField = MapLoadSave.GetInstance().LoadMap(XMLFile, pGameScene);
-
-            //Count columns and rows
-            //int rows = m_GridField.Count(list => true);
-            //int columns = m_GridField[0].Count(tile => true);
-
-            //System.Diagnostics.Debug.WriteLine("Rows: " + rows + " Columns: " + columns);
-
-            //GRID_ROW_LENGTH = rows;
-            //GRID_COLUMN_LENGTH = rows;
-        }
-
         public GridTile HitTestField(Ray ray)
         {
             //Iterate over every GridTile
@@ -110,6 +85,11 @@ namespace XNA_ENGINE.Game.Managers
         public Random Random
         {
             get { return m_Random; }
+        }
+
+        public GridTile[,] GridField
+        {
+            get { return m_GridField; }
         }
 
         public bool CreativeMode { get; set; }

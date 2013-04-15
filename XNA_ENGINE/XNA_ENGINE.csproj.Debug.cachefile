@@ -5,7 +5,6 @@ Content\Models\tile_TemplateTest.xnb
 Content\Models\settlement_TestSettlementBlue.xnb
 Content\Models\settlement_TestSettlementGold.xnb
 Content\Models\settlement_TestSettlementRed.xnb
-Content\Split_Army.xnb
 Content\attack.xnb
 Content\defend.xnb
 Content\gather.xnb
@@ -14,4 +13,5 @@ Content\tile2.xnb
 Content\tile3.xnb
 Content\tile4.xnb
 Content\Textures\RainbowTexture.xnb
+Content\Split_Army.xnb
 Content\switch.xnb

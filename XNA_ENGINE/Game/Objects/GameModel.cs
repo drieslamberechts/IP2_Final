@@ -39,6 +39,8 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Draw(RenderContext renderContext)
         {
+            if (!CanDraw) return;
+
             var transforms = new Matrix[_model.Bones.Count];
             _model.CopyAbsoluteBoneTransformsTo(transforms);
 

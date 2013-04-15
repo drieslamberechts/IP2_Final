@@ -19,7 +19,7 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GameModel m_TileModel;
         private GameModel m_SettlementDisplayModel;
-        private readonly int m_Row,m_Column;
+        private readonly int m_Row, m_Column;
 
         private const float GRIDWIDTH = 64;
         private const float GRIDDEPTH = 64;
@@ -38,7 +38,10 @@ namespace XNA_ENGINE.Game.Objects
         {
             Normal,
             Water,
-            Cliff
+            Cliff,
+
+            //<----Add new types in front of this comment 
+            enumSize
         }
 
         public GridTile(GameScene pGameScene, int row, int column)
@@ -66,21 +69,26 @@ namespace XNA_ENGINE.Game.Objects
         public void Update(RenderContext renderContext)
         {
            // m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
+            //Appearance of the tile
             switch (m_TileType)
             {
                 case TileType.Normal:
+                    m_TileModel.CanDraw = true;
                     m_TileModel.DiffuseColor = new Vector3(0.0f,0.5f,0.0f);
                     break;
                 case TileType.Water:
+                    m_TileModel.CanDraw = true;
                     m_TileModel.DiffuseColor = new Vector3(0.0f, 0.0f, 0.5f);
                     break;
-                case TileType.Cliff: 
+                case TileType.Cliff:
+                    m_TileModel.CanDraw = false;
                     m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
+            //What to do if the tile is selected
             if (m_Selected)
             {
                 //m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
@@ -115,42 +123,60 @@ namespace XNA_ENGINE.Game.Objects
         private void OnHit()
         {
             bool creativeMode = GridFieldManager.GetInstance(m_GameScene).CreativeMode;
-
-            //What mode is there selected in the menu to build?
-            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
-            
             //Get the inputmanager
             var inputManager = FinalScene.GetInputManager();
-            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+            //What mode is there selected in the menu to build?
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
+
+            if (creativeMode) //Creative mode off
             {
-                switch (selectedMode)
+
+                if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
                 {
-                    case Menu.ModeSelected.Attack:
-                        break;
-                    case Menu.ModeSelected.Defend:
-                        break;
-                    case Menu.ModeSelected.Gather:
-                        break;
-                    case Menu.ModeSelected.TileBlue:
-                        ChangeChildModel("Models/settlement_TestSettlementBlue");
-                        break;
-                    case Menu.ModeSelected.TileGold:
-                        ChangeChildModel("Models/settlement_TestSettlementGold");
-                        break;
-                    case Menu.ModeSelected.TileRed:
-                        ChangeChildModel("Models/settlement_TestSettlementRed");
-                        break;
-                    case Menu.ModeSelected.Delete:
-                        RemoveChildModel();
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    ++m_TileType;
+                    if ((int) m_TileType >= (int)TileType.enumSize) m_TileType = 0;
+                }
+
+                if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+                {
+                    --m_TileType;
+                    if ((int) m_TileType < 0) m_TileType = TileType.enumSize-1;
                 }
             }
-
-            if(inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+            else
             {
+                if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+                {
+                    switch (selectedMode)
+                    {
+                        case Menu.ModeSelected.Attack:
+                            break;
+                        case Menu.ModeSelected.Defend:
+                            break;
+                        case Menu.ModeSelected.Gather:
+                            break;
+                        case Menu.ModeSelected.TileBlue:
+                            ChangeChildModel("Models/settlement_TestSettlementBlue");
+                            break;
+                        case Menu.ModeSelected.TileGold:
+                            ChangeChildModel("Models/settlement_TestSettlementGold");
+                            break;
+                        case Menu.ModeSelected.TileRed:
+                            ChangeChildModel("Models/settlement_TestSettlementRed");
+                            break;
+                        case Menu.ModeSelected.Delete:
+                            RemoveChildModel();
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
 
+                if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+                {
+
+                }
             }
 
             m_Selected = true;
@@ -173,16 +199,6 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.RemoveChild(m_SettlementDisplayModel);
         }
 
-        public void SetTileType(TileType type)
-        {
-            m_TileType = type;
-        }
-
-        public TileType GetTileType()
-        {
-            return m_TileType;
-        }
-
         public void SetTileSettlement(string type)
         {
             m_TileSettlement = type;
@@ -197,6 +213,22 @@ namespace XNA_ENGINE.Game.Objects
         {
             get{return m_Selected;}
             set{m_Selected = value;} 
+        }
+
+        public int Row
+        {
+            get { return m_Row; }
+        }
+
+        public int Column
+        {
+            get { return m_Column; }
+        }
+
+        public TileType TileTypeValue
+        {
+            get { return m_TileType; }
+            set { m_TileType = value; }
         }
     }
 }

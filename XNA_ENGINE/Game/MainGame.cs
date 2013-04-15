@@ -1,8 +1,11 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Helpers;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Scenes;
 
@@ -39,6 +42,12 @@ namespace XNA_ENGINE.Game
             SceneManager.MainGame = this;
         }
 
+        protected override void OnExiting(Object sender, EventArgs args)
+        {
+            MapLoadSave.GetInstance().SaveMap(GridFieldManager.GetInstance(SceneManager.ActiveScene).GridField);
+            base.OnExiting(sender, args);
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -49,9 +58,7 @@ namespace XNA_ENGINE.Game
         {
             // TODO: Add your initialization logic here
             SceneManager.AddGameScene(new FinalScene(Content));
-
             SceneManager.SetActiveScene("FinalScene");
-
             SceneManager.Initialize();
 
             IsMouseVisible = true;
