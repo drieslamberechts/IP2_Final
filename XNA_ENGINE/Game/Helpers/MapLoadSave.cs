@@ -19,8 +19,9 @@ namespace XNA_ENGINE.Game.Helpers
         private static MapLoadSave m_MapLoadSave;
 
         // Generate a new Map
-        private const int MAX_HEIGHT = 30;
-        private const int MAX_WIDTH = 30;
+        
+        private const int MAX_ROWS = 30;
+        private const int MAX_COLUMNS = 30;
 
         private Random m_Random;
 
@@ -39,7 +40,7 @@ namespace XNA_ENGINE.Game.Helpers
 
         public GridTile[,] LoadMap(GameScene pGameScene, string fileName = "GeneratedTileMap")
         {
-            GridTile[,] gridField = new GridTile[MAX_WIDTH, MAX_HEIGHT];
+            GridTile[,] gridField = new GridTile[MAX_ROWS, MAX_COLUMNS];
 
             Stream stream = TitleContainer.OpenStream("./" + fileName + ".xml");
             XDocument doc = XDocument.Load(stream);
@@ -67,16 +68,16 @@ namespace XNA_ENGINE.Game.Helpers
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
             writer.WriteLine("<tilemap>");
 
-            for (int height = 0; height < MAX_HEIGHT; ++height)
+            for (int column = 0; column < MAX_COLUMNS; ++column)
             {
-                for (int width = 0; width < MAX_WIDTH; ++width)
+                for (int row = 0; row < MAX_ROWS; ++row)
                 {
                     writer.WriteLine("\t<tile>");
 
-                    writer.WriteLine("\t\t<positionX>" + width + "</positionX>");
-                    writer.WriteLine("\t\t<positionY>" + height + "</positionY>");
-                    writer.WriteLine("\t\t<TileType>" + (int)gridField[height, width].TileTypeValue + "</TileType>");
-                    writer.WriteLine("\t\t<settlement>" + gridField[height, width].GetTileSettlement() + "</settlement>");
+                    writer.WriteLine("\t\t<positionX>" + row + "</positionX>");
+                    writer.WriteLine("\t\t<positionY>" + column + "</positionY>");
+                    writer.WriteLine("\t\t<TileType>" + (int)gridField[row, column].TileTypeValue + "</TileType>");
+                    writer.WriteLine("\t\t<settlement>" + gridField[row, column].GetTileSettlement() + "</settlement>");
 
                     writer.WriteLine("\t</tile>");
                 }
@@ -90,44 +91,44 @@ namespace XNA_ENGINE.Game.Helpers
 
         public GridTile[,] GenerateMap(GameScene pGameScene)
         {
-            GridTile[,] gridField = new GridTile[MAX_WIDTH, MAX_HEIGHT]; ;
+            GridTile[,] gridField = new GridTile[MAX_ROWS, MAX_COLUMNS]; ;
             // Map:
             List<GridTile> addTest = new List<GridTile>();
 
-            for (int height = 0; height < MAX_HEIGHT; ++height)
+            for (int column = 0; column < MAX_COLUMNS; ++column)
             {
-                for (int width = 0; width < MAX_WIDTH; ++width)
+                for (int row = 0; row < MAX_ROWS; ++row)
                 {
-                    GridTile tileToAdd = new GridTile(pGameScene, width, height);
+                    GridTile tileToAdd = new GridTile(pGameScene, row, column);
                     addTest.Add(tileToAdd);
                 }
             }
 
             // Add Tiles to the right grid and give them the right attributes.
-            for (int height = 0, teller = 0; height < MAX_HEIGHT; ++height)
+            for (int column = 0, teller = 0; column < MAX_COLUMNS; ++column)
             {
-                for (int width = 0; width < MAX_WIDTH; ++width, ++ teller)
+                for (int row = 0; row < MAX_ROWS; ++row, ++teller)
                 {
-                    gridField[width, height] = addTest.ElementAt(teller);
+                    gridField[row, column] = addTest.ElementAt(teller);
 
                     // Set the tile type (normal, tribe,...)
                     switch (m_Random.Next(0, 3))
                     {
                         case 0:
-                            gridField[width, height].TileTypeValue = GridTile.TileType.Normal;
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal;
                             break;
                         case 1:
-                            gridField[width, height].TileTypeValue = GridTile.TileType.Cliff;
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Cliff;
                             break;
                         case 2:
-                            gridField[width, height].TileTypeValue = GridTile.TileType.Water;
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Water;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
 
                     // Use a color to create a new Tribe (none, green, red, blue,...)
-                    gridField[width, height].SetTileSettlement("none");
+                    gridField[row, column].SetTileSettlement("none");
                 }
             }
 
