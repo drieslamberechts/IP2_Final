@@ -16,6 +16,8 @@ namespace XNA_ENGINE.Game.Objects
         private const int LOW_FOOD = 10;
         private const int LOW_MONEY = 10;
 
+        private int m_ArmyCount;
+
         private readonly Resources m_Resources;
 
         // AI
@@ -25,7 +27,10 @@ namespace XNA_ENGINE.Game.Objects
         // METHODS
         public Player(bool isAI)
         {
+            // Initialize
             m_bIsAI = isAI;
+
+            m_ArmyCount = 0;
 
             m_Resources = new Resources();
         }
@@ -54,6 +59,11 @@ namespace XNA_ENGINE.Game.Objects
         public List<float> GetResources()
         {
             return m_Resources.GetResources();
+        }
+
+        public AI GetPlayerOptions()
+        {
+            return m_Ai;
         }
     }
 

@@ -74,14 +74,14 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TexSwitch = Content.Load<Texture2D>("switch");
 
-            m_TexTileBlue = Content.Load<Texture2D>("Split_Army");
+            m_TexTileBlue = Content.Load<Texture2D>("Tile1");
             m_TexTileGold = Content.Load<Texture2D>("Tile2");
             m_TexTileRed = Content.Load<Texture2D>("Tile3");
-            m_TexTile4 = Content.Load<Texture2D>("tile4");
+            m_TexTile4 = Content.Load<Texture2D>("Tile4");
 
-            m_TexAttack = Content.Load<Texture2D>("attack");
-            m_TexDefend = Content.Load<Texture2D>("defend");
-            m_TexGather = Content.Load<Texture2D>("gather");
+            m_TexAttack = Content.Load<Texture2D>("Attack");
+            m_TexDefend = Content.Load<Texture2D>("Move");
+            m_TexGather = Content.Load<Texture2D>("Split_Army");
 
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
 

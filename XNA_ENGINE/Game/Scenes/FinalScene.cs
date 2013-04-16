@@ -252,7 +252,7 @@ namespace XNA_ENGINE.Game.Scenes
             #endregion
             
             //Handle menu //If menu is hit don't do the grid test
-            if (Menu.GetInstance().HandleInput(renderContext)) return;
+            if (Menu.GetInstance().HandleInput(renderContext)) return; // hier in Menu -> klikken?
 
             //Raycast to grid
             if (isMouseInScreen)

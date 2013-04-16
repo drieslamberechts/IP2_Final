@@ -18,7 +18,8 @@ namespace XNA_ENGINE.Game.Objects
         // INITIALIZE
         public void Initialize()
         {
-
+            // Create reference to Army
+            // Create reference to worker
         }
 
         // SCOUT
@@ -32,24 +33,28 @@ namespace XNA_ENGINE.Game.Objects
         public void Attack()
         {
             // attack nearby player
+            // Get Current Tile
+            // if enemy is 2 tiles away from army -> Attack (from worker -> Retreat)
         }
 
         // BUILD TILE
         public void BuildTile()
         {
-
+            // with worker reference
         }
 
         // BUILD TRIBE
         public void BuildTribe()
         {
-
+            // With worker reference
         }
 
         // SPLIT THE ARMY
         public void SplitArmy()
         {
-            
+            // Create 2 references from first Army Reference
         }
+
+
     }
 }
