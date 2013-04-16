@@ -9,19 +9,19 @@
 	<tile>
 		<positionX>1</positionX>
 		<positionY>0</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
 		<positionX>2</positionX>
 		<positionY>0</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
 		<positionX>3</positionX>
 		<positionY>0</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
@@ -183,13 +183,13 @@
 	<tile>
 		<positionX>0</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
 		<positionX>1</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
@@ -201,7 +201,7 @@
 	<tile>
 		<positionX>3</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
@@ -363,13 +363,13 @@
 	<tile>
 		<positionX>0</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
 		<positionX>1</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
@@ -543,13 +543,13 @@
 	<tile>
 		<positionX>0</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
 		<positionX>1</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
@@ -723,7 +723,7 @@
 	<tile>
 		<positionX>0</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>

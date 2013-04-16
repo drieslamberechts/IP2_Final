@@ -137,7 +137,6 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.MoveMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
-                        
                         m_SelectedMode = ModeSelected.Attack;
                         return true;
                     }

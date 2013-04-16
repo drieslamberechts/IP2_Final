@@ -6,16 +6,16 @@ Content\Models\settlement_TestSettlementBlue.xnb
 Content\Models\settlement_TestSettlementGold.xnb
 Content\Models\settlement_TestSettlementRed.xnb
 <<<<<<< HEAD
-Content\switch.xnb
 Content\Split_Army.xnb
 =======
-Content\attack.xnb
+>>>>>>> aa3fa6c7661297e56f652ddb93c34ddb6ab5a229
 Content\defend.xnb
 Content\gather.xnb
-Content\switch.xnb
-Content\tile1.xnb
-Content\tile2.xnb
-Content\tile3.xnb
-Content\tile4.xnb
 Content\Textures\RainbowTexture.xnb
->>>>>>> 16ad378c393092a193789f6d6f267817d66d9a60
+Content\switch.xnb
+Content\attack.xnb
+Content\move.xnb
+Content\Tile1.xnb
+Content\Tile2.xnb
+Content\Tile3.xnb
+Content\Tile4.xnb

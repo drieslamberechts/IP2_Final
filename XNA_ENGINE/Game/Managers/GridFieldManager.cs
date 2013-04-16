@@ -31,7 +31,7 @@ namespace XNA_ENGINE.Game.Managers
             CreativeMode = false;
 
             // Load Map
-            m_GridField = MapLoadSave.GetInstance().LoadMap(pGameScene,"tilemap");
+            m_GridField = MapLoadSave.GetInstance().LoadMap(pGameScene);
         }
 
         static public GridFieldManager GetInstance(GameScene pGameScene)
