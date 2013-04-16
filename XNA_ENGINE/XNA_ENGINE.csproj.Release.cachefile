@@ -2,3 +2,17 @@ Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
 Content\Models\tile_Template.xnb
 Content\Models\tile_TemplateTest.xnb
+Content\Models\settlement_TestSettlementBlue.xnb
+Content\Models\settlement_TestSettlementGold.xnb
+Content\Models\settlement_TestSettlementRed.xnb
+Content\Split_Army.xnb
+Content\defend.xnb
+Content\gather.xnb
+Content\Textures\RainbowTexture.xnb
+Content\switch.xnb
+Content\attack.xnb
+Content\move.xnb
+Content\Tile1.xnb
+Content\Tile2.xnb
+Content\Tile3.xnb
+Content\Tile4.xnb
