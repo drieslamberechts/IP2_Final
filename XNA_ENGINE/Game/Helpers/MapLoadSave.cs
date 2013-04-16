@@ -42,7 +42,7 @@ namespace XNA_ENGINE.Game.Helpers
         {
             GridTile[,] gridField = new GridTile[MAX_ROWS, MAX_COLUMNS];
 
-            Stream stream = TitleContainer.OpenStream("./" + fileName + ".xml");
+            Stream stream = TitleContainer.OpenStream(".../.../.../.../XNA_DEMOContent/XMLFiles/" + fileName + ".xml");
             XDocument doc = XDocument.Load(stream);
             
             List<GridTile> gridList = (from tile in doc.Descendants("tile")
@@ -62,7 +62,7 @@ namespace XNA_ENGINE.Game.Helpers
         public void SaveMap(GridTile[,] gridField, string fileName = "GeneratedTileMap")
         {
             //"../../../../XNA_DEMOContent/XMLFiles/" + 
-            var xmlFile = new FileStream("./" + fileName + ".xml", FileMode.OpenOrCreate, FileAccess.Write);
+            var xmlFile = new FileStream("../../../../XNA_DEMOContent/XMLFiles/" + fileName + ".xml", FileMode.OpenOrCreate, FileAccess.Write);
             var writer = new StreamWriter(xmlFile);
 
             writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
