@@ -14,6 +14,8 @@ namespace XNA_ENGINE.Game.Objects
 {
     class AI
     {
+        private bool m_AttackScene;
+
         public AI()
         {
 
@@ -23,7 +25,8 @@ namespace XNA_ENGINE.Game.Objects
         public void Initialize()
         {
             // Create reference to Army
-            // Create reference to worker
+
+            m_AttackScene = false;
         }
 
         // SCOUT
@@ -33,12 +36,22 @@ namespace XNA_ENGINE.Game.Objects
             // return to tribe when resources found
         }
 
+        // MOVE
+        public void Move()
+        {
+            Console.WriteLine("The army starts moving.");
+            // Only move the selected army
+        }
+
         // ATTACK
         public void Attack()
         {
             // attack nearby player
             // Get Current Tile
             // if enemy is 2 tiles away from army -> Attack (from worker -> Retreat)
+            Console.WriteLine("The attack Algorithm has started!");
+
+            m_AttackScene = true;
         }
 
         // BUILD TILE
@@ -54,9 +67,21 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         // SPLIT THE ARMY
-        public void SplitArmy()
+        public void SplitArmy(Army army)
         {
             // Create 2 references from first Army Reference
+            Console.WriteLine("The selected army is split");
+        }
+
+        // GETTERS AND SETTERS
+        public bool GetAttack()
+        {
+            return m_AttackScene;
+        }
+
+        public void ResetAttack()
+        {
+            m_AttackScene = false;
         }
 
 

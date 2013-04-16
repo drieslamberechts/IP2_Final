@@ -24,13 +24,18 @@ namespace XNA_ENGINE.Game.Objects
         private AI m_Ai;
         private bool m_bIsAI;
 
+        // Army
+        private List<Army> m_ArmyList; 
+
         // METHODS
         public Player(bool isAI)
         {
             // Initialize
             m_bIsAI = isAI;
+            m_Ai = new AI();
 
             m_ArmyCount = 0;
+            m_ArmyList = new List<Army>();
 
             m_Resources = new Resources();
         }
@@ -42,7 +47,7 @@ namespace XNA_ENGINE.Game.Objects
                 // -------------------------
                 // AI UPDATE
                 // -------------------------
-                if (m_Resources.GetResources()[WOOD] <= LOW_WOOD)
+                if (m_Resources.GetAllResources()[WOOD] <= LOW_WOOD)
                 {
                     // Search for resources
                     m_Ai.Scout();
@@ -56,14 +61,38 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
-        public List<float> GetResources()
+        public Resources GetResources()
         {
-            return m_Resources.GetResources();
+            return m_Resources;
         }
 
         public AI GetPlayerOptions()
         {
             return m_Ai;
+        }
+
+        public int GetArmySize()
+        {
+            return m_ArmyCount;
+        }
+
+        public bool GetAttack()
+        {
+           return m_Ai.GetAttack();
+        }
+
+        public void ResetAttack()
+        {
+            m_Ai.ResetAttack();
+        }
+
+        public Army GetSelectedArmy()
+        {
+            // Hier moet de selectie komen (welke van de legers is geselecteerd)
+
+            m_ArmyList.Add(new Army()); // Om te testen
+
+            return m_ArmyList[0];
         }
     }
 
@@ -85,7 +114,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Money = 100;
         }
 
-        public List<float> GetResources()
+        public List<float> GetAllResources()
         {
             List<float> resourceArray = new List<float>();
             resourceArray.Add(m_Wood);

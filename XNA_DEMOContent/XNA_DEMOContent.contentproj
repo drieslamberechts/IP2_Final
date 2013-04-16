@@ -164,16 +164,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tile1.png">
-      <Name>Tile1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Tile2.png">
-      <Name>Tile2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Tile3.png">
       <Name>Tile3</Name>
       <Importer>TextureImporter</Importer>
@@ -181,6 +171,18 @@
     </Compile>
     <Compile Include="Tile4.png">
       <Name>Tile4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuildBase.png">
+      <Name>BuildBase</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="BuildTile.png">
+      <Name>BuildTile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

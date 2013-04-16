@@ -158,12 +158,15 @@ namespace XNA_ENGINE.Game.Objects
                             break;
                         case Menu.ModeSelected.TileBlue:
                             ChangeChildModel("Models/settlement_TestSettlementBlue");
+                            Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.TileGold:
                             ChangeChildModel("Models/settlement_TestSettlementGold");
+                            Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.TileRed:
                             ChangeChildModel("Models/settlement_TestSettlementRed");
+                            Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.Delete:
                             RemoveChildModel();

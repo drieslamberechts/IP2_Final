@@ -47,6 +47,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public enum ModeSelected
         {
+            None,
             Attack,
             Defend,
             Gather,
@@ -58,7 +59,8 @@ namespace XNA_ENGINE.Game.Objects
 
         private SubMenuSelected m_ModeSelected = SubMenuSelected.MoveMode;
         private ModeSelected m_SelectedMode = ModeSelected.Attack;
-        private readonly SpriteFont m_DebugFont;
+        private SpriteFont m_DebugFont;
+        private Player m_Player;
 
         //Singleton implementation
         static public Menu GetInstance()
@@ -74,8 +76,8 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TexSwitch = Content.Load<Texture2D>("switch");
 
-            m_TexTileBlue = Content.Load<Texture2D>("Tile1");
-            m_TexTileGold = Content.Load<Texture2D>("Tile2");
+            m_TexTileBlue = Content.Load<Texture2D>("BuildBase");
+            m_TexTileGold = Content.Load<Texture2D>("BuildTile");
             m_TexTileRed = Content.Load<Texture2D>("Tile3");
             m_TexTile4 = Content.Load<Texture2D>("Tile4");
 
@@ -88,6 +90,16 @@ namespace XNA_ENGINE.Game.Objects
             var click = new InputAction((int) FinalScene.PlayerInput.LeftClick, TriggerState.Pressed);
             click.MouseButton = MouseButtons.LeftButton;
             click.GamePadButton = Buttons.X;
+        }
+
+        public void SetPlayer(Player player)
+        {
+            m_Player = player;
+        }
+
+        public void SetFont(SpriteFont font)
+        {
+            m_DebugFont = font;
         }
 
         public void Update(RenderContext renderContext)
@@ -112,18 +124,25 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.BuildMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileBlue))
                     {
+                        // SET DECREASE RESOURCES
+                        m_Player.GetResources().DecreaseWood(10);
+
                         m_SelectedMode = ModeSelected.TileBlue;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileGold))
                     {
+                        // SET DECREASE RESOURCES
+
                         m_SelectedMode = ModeSelected.TileGold;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileRed))
                     {
+                        // SET DECREASE RESOURCES
+
                         m_SelectedMode = ModeSelected.TileRed;
                         return true;
                     }
@@ -137,18 +156,27 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.MoveMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
+                        Console.WriteLine("Attack!");
+                        m_Player.GetPlayerOptions().Attack();
+
                         m_SelectedMode = ModeSelected.Attack;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMove))
                     {
+                        Console.WriteLine("Move!");
+                        m_Player.GetPlayerOptions().Move();
+
                         m_SelectedMode = ModeSelected.Defend;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
+                        Console.WriteLine("Split!");
+                        m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy());
+
                         m_SelectedMode = ModeSelected.Gather;
                         return true;
                     }
@@ -198,6 +226,15 @@ namespace XNA_ENGINE.Game.Objects
                 renderContext.SpriteBatch.Draw(m_TexMove, m_RectMove, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexSplit, m_RectSplit, Color.White);
             }
+
+            // DRAW EXTRA INFORMATION (RESOURCES,...)
+            // resources
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + m_Player.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 10), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Food: " + m_Player.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 30), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Money: " + m_Player.GetResources().GetAllResources().ElementAt(2), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 50), Color.White);
+
+            // armysize
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Army Size: " + m_Player.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 25, 10), Color.White);
         }
 
         private bool CheckHitButton(Vector2 mousePos, Rectangle buttonRect)
@@ -214,6 +251,11 @@ namespace XNA_ENGINE.Game.Objects
         public ModeSelected GetSelectedMode()
         {
             return m_SelectedMode;
+        }
+
+        public void ResetSelectedMode()
+        {
+            m_SelectedMode = ModeSelected.None;
         }
     }
 }

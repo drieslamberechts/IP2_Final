@@ -58,6 +58,9 @@ namespace XNA_ENGINE.Game.Scenes
         private double m_CameraScaleTarget = CAMERASTARTSCALE;
         private Vector3 m_CameraTargetPos;
 
+        // scene
+        private AttackScene m_AttackScene; 
+
         public FinalScene(ContentManager content)
             : base("FinalScene")
         {
@@ -74,6 +77,9 @@ namespace XNA_ENGINE.Game.Scenes
             // Initialize player and AI
             m_Player = new Player(false);
             m_Ai = new Player(true);
+
+            // Give menu the playerInfo
+            Menu.GetInstance().SetPlayer(m_Player);
 
             //Input manager + inputs
             m_InputManager = new InputManager();
@@ -102,6 +108,10 @@ namespace XNA_ENGINE.Game.Scenes
 
             m_CameraTargetPos = SceneManager.RenderContext.Camera.LocalPosition;
 
+            // ADD SCENES
+            m_AttackScene = new AttackScene(m_Content, m_Player, m_Ai);
+            SceneManager.AddGameScene(m_AttackScene);
+
             base.Initialize();
         }
 
@@ -125,6 +135,19 @@ namespace XNA_ENGINE.Game.Scenes
             HandleInput(renderContext);
 
             GridFieldManager.GetInstance(this).Update(renderContext);
+
+            // Update Scenes
+            if (m_Player.GetAttack())
+            {
+                Console.WriteLine("Player is Attacking");
+                m_Player.ResetAttack();
+                SceneManager.SetActiveScene("AttackScene");
+            }
+            if (m_Ai.GetAttack())
+            {
+                SceneManager.SetActiveScene("AttackScene");
+                m_Ai.ResetAttack();
+            }
 
             base.Update(renderContext);
         }
