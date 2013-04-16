@@ -150,6 +150,21 @@
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </None>
+    <Compile Include="Models\tree_TreeShort.X">
+      <Name>tree_TreeShort</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tree_TreeTall.X">
+      <Name>tree_TreeTall</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Normal.X">
+      <Name>tile_Normal</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="attack.png">
@@ -183,6 +198,25 @@
     </Compile>
     <Compile Include="BuildTile.png">
       <Name>BuildTile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_tree_TreeShort1.png">
+      <Name>tex_tree_TreeShort1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_tile_Basic.png">
+      <Name>tex_tile_Basic</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicWithDirt.png">
+      <Name>tex_tile_BasicWithDirt</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -5,10 +5,10 @@ Content\Models\tile_TemplateTest.xnb
 Content\Models\settlement_TestSettlementBlue.xnb
 Content\Models\settlement_TestSettlementGold.xnb
 Content\Models\settlement_TestSettlementRed.xnb
-Content\Split_Army.xnb
 Content\defend.xnb
 Content\gather.xnb
 Content\Textures\RainbowTexture.xnb
+Content\Split_Army.xnb
 Content\switch.xnb
 Content\attack.xnb
 Content\move.xnb
@@ -16,3 +16,9 @@ Content\Tile3.xnb
 Content\Tile4.xnb
 Content\BuildBase.xnb
 Content\BuildTile.xnb
+Content\Models\tree_TreeShort.xnb
+Content\Models\tree_TreeTall.xnb
+Content\Textures\tex_tree_TreeShort1.xnb
+Content\Models\tile_Normal.xnb
+Content\Textures\tex_tile_Basic.xnb
+Content\Textures\tex_tile_BasicWithDirt.xnb

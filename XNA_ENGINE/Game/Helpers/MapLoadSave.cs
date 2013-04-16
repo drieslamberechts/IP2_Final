@@ -115,12 +115,21 @@ namespace XNA_ENGINE.Game.Helpers
                     switch (m_Random.Next(0, 3))
                     {
                         case 0:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal;
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal1;
                             break;
                         case 1:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Cliff;
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal2;
                             break;
                         case 2:
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal3;
+                            break;
+                        case 3:
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal4;
+                            break;
+                        case 4:
+                            gridField[row, column].TileTypeValue = GridTile.TileType.Cliff;
+                            break;
+                        case 5:
                             gridField[row, column].TileTypeValue = GridTile.TileType.Water;
                             break;
                         default:
@@ -139,29 +148,3 @@ namespace XNA_ENGINE.Game.Helpers
         }
     }
 }
-
-            /*
-            // ------------------------------------------
-            // OPEN AND READ XML FILE
-            // ------------------------------------------
-            // the file must be available in the Debug (or release) folder
-            System.IO.Stream stream = TitleContainer.OpenStream("tilemap.xml");
-
-            XDocument doc = XDocument.Load(stream);
-
-            m_Tiles = new List<Tile>();
-
-            m_Tiles = (from tile in doc.Descendants("tile")
-                       select new Tile()
-                       {
-                           position = new Vector2(Convert.ToInt32(tile.Element("positionX").Value), Convert.ToInt32(tile.Element("positionY").Value)),
-                           type = Convert.ToString(tile.Element("type").Value),
-                           settlement = Convert.ToString(tile.Element("settlement").Value)
-                       }).ToList();
-
-            // Test if the xml reader worked (and it does)
-            System.Diagnostics.Debug.WriteLine("Count: " + m_Tiles.ElementAt(0).type);
-            // ------------------------------------------
-            // END READING XML FILE
-            // -----------------------------------------
-            */

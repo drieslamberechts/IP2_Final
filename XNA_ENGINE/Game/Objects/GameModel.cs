@@ -60,6 +60,8 @@ namespace XNA_ENGINE.Game.Objects
 
                     //Diffuse
                     effect.DiffuseColor = m_DiffuseColor;
+
+                    effect.SpecularColor = new Vector3(0.1f, 0.1f, 0.1f); ;
                     //Alpha
                     effect.Alpha = m_Alpha;
 

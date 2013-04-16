@@ -33,7 +33,9 @@ namespace XNA_ENGINE.Game.Scenes
             LeftClick,
             RightClick,
             ScrollWheelDown,
-            ToggleCreativeMode
+            ToggleCreativeMode,
+            RotateClockWise,
+            RotateCounterClockWise
         }
 
         private static ContentManager m_Content;
@@ -56,6 +58,7 @@ namespace XNA_ENGINE.Game.Scenes
         private const double CAMERASTARTSCALE = 1.0;
         private double m_CameraScale = CAMERASTARTSCALE;
         private double m_CameraScaleTarget = CAMERASTARTSCALE;
+        private double m_CameraRotationOffset;
         private Vector3 m_CameraTargetPos;
 
         // scene
@@ -88,16 +91,22 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
             InputAction scrollWheelDown = new InputAction((int)PlayerInput.ScrollWheelDown, TriggerState.Down);
             InputAction toggleCreativeMode = new InputAction((int)PlayerInput.ToggleCreativeMode, TriggerState.Pressed);
+            InputAction rotateClockwise = new InputAction((int)PlayerInput.RotateClockWise, TriggerState.Down);
+            InputAction rotateCounterClockwise = new InputAction((int)PlayerInput.RotateCounterClockWise, TriggerState.Down);
 
             leftClick.MouseButton = MouseButtons.LeftButton;
             rightClick.MouseButton = MouseButtons.RightButton;
             scrollWheelDown.MouseButton = MouseButtons.MiddleButton;
             toggleCreativeMode.KeyButton = Keys.C;
+            rotateClockwise.KeyButton = Keys.A;
+            rotateCounterClockwise.KeyButton = Keys.E;
             
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
             m_InputManager.MapAction(scrollWheelDown);
             m_InputManager.MapAction(toggleCreativeMode);
+            m_InputManager.MapAction(rotateClockwise);
+            m_InputManager.MapAction(rotateCounterClockwise);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
@@ -230,6 +239,15 @@ namespace XNA_ENGINE.Game.Scenes
                 m_CameraTargetPos += rightVecCam * scrollStrength;
             if (keyboardState[Keys.D] == KeyState.Down)
                 m_CameraTargetPos += -rightVecCam * scrollStrength;
+
+            //Rotate
+            float camSpeed = 0.5f;
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.RotateClockWise))
+                m_CameraRotationOffset += camSpeed;
+            if (m_InputManager.IsActionTriggered((int)PlayerInput.RotateCounterClockWise))
+                m_CameraRotationOffset -= camSpeed;
+
+            SceneManager.RenderContext.Camera.Rotate(-45, 30 + (float)m_CameraRotationOffset, 150);
 
             int mouseX = renderContext.Input.CurrentMouseState.X;
             int mouseY = renderContext.Input.CurrentMouseState.Y;

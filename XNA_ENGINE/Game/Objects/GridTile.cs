@@ -19,6 +19,10 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GameModel m_TileModel;
         private GameModel m_SettlementDisplayModel;
+        private GameModel m_TreeShort1;
+        private GameModel m_TreeTall1;
+
+        private List<GameModel> m_PropsList; 
         private readonly int m_Row, m_Column;
 
         private const float GRIDWIDTH = 64;
@@ -27,7 +31,7 @@ namespace XNA_ENGINE.Game.Objects
         private const int YOFFSETMIN = 0;
         private const int YOFFSETMAX = 15;
 
-        private TileType m_TileType = TileType.Normal;
+        private TileType m_TileType = TileType.Normal1;
         private string m_TileSettlement;
 
         private bool m_Selected;
@@ -36,7 +40,10 @@ namespace XNA_ENGINE.Game.Objects
 
         public enum TileType
         {
-            Normal,
+            Normal1,
+            Normal2,
+            Normal3,
+            Normal4,
             Water,
             Cliff,
 
@@ -58,7 +65,16 @@ namespace XNA_ENGINE.Game.Objects
         {
             int yOffset = GridFieldManager.GetInstance(m_GameScene).Random.Next(YOFFSETMIN, YOFFSETMAX);
 
-            m_TileModel = new GameModel("Models/tile_Template");
+            m_TileModel = new GameModel("Models/tile_Normal");
+
+            m_PropsList = new List<GameModel>();
+
+            m_TreeShort1 = new GameModel("Models/tree_TreeShort");
+            m_TreeTall1 = new GameModel("Models/tree_TreeTall");
+            m_PropsList.Add(m_TreeShort1);
+            m_PropsList.Add(m_TreeTall1);
+            InitializeProps();
+
             m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
             m_GameScene.AddSceneObject(m_TileModel);
 
@@ -68,20 +84,63 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(RenderContext renderContext)
         {
-           // m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
             //Appearance of the tile
             switch (m_TileType)
             {
-                case TileType.Normal:
+                case TileType.Normal1:
+                    ResetPropListParameters();
+
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+                  
                     m_TileModel.CanDraw = true;
-                    m_TileModel.DiffuseColor = new Vector3(0.0f,0.5f,0.0f);
+                   
+                    m_TileModel.DiffuseColor = new Vector3(1.0f,1.0f,1.0f);
+                    break;
+                case TileType.Normal2:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicWithDirt");
+                    m_TileModel.UseTexture = true;
+
+                    m_TileModel.CanDraw = true;
+                   
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+                case TileType.Normal3:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+                    
+                    m_TileModel.CanDraw = true;
+                    m_TreeShort1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeShort1.UseTexture = true;
+                    m_TreeShort1.CanDraw = true;
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
+                case TileType.Normal4:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+
+                    m_TileModel.CanDraw = true;
+                    m_TreeTall1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeTall1.UseTexture = true;
+                    m_TreeTall1.CanDraw = true;
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
                 case TileType.Water:
+                    ResetPropListParameters();
                     m_TileModel.CanDraw = true;
-                    m_TileModel.DiffuseColor = new Vector3(0.0f, 0.0f, 0.5f);
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
                 case TileType.Cliff:
+                    ResetPropListParameters();
                     m_TileModel.CanDraw = false;
+                   
                     m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
                     break;
                 default:
@@ -91,8 +150,7 @@ namespace XNA_ENGINE.Game.Objects
             //What to do if the tile is selected
             if (m_Selected)
             {
-                //m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/RainbowTexture");
-                //m_TileModel.UseTexture = true;
+
                 m_TileModel.Selected = true;
                 if (m_SettlementDisplayModel != null)
                     m_SettlementDisplayModel.Selected = true;
@@ -102,7 +160,7 @@ namespace XNA_ENGINE.Game.Objects
                 m_TileModel.Selected = false;
                 if (m_SettlementDisplayModel != null)
                     m_SettlementDisplayModel.Selected = false;
-                //m_TileModel.UseTexture = false;
+                
             }
            
             m_Selected = false;
@@ -127,6 +185,7 @@ namespace XNA_ENGINE.Game.Objects
             var inputManager = FinalScene.GetInputManager();
             //What mode is there selected in the menu to build?
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
 
 
             if (creativeMode) //Creative mode off
@@ -157,19 +216,19 @@ namespace XNA_ENGINE.Game.Objects
                         case Menu.ModeSelected.Gather:
                             break;
                         case Menu.ModeSelected.TileBlue:
-                            ChangeChildModel("Models/settlement_TestSettlementBlue");
+                            ChangeSettlementModel("Models/settlement_TestSettlementBlue");
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.TileGold:
-                            ChangeChildModel("Models/settlement_TestSettlementGold");
+                            ChangeSettlementModel("Models/settlement_TestSettlementGold");
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.TileRed:
-                            ChangeChildModel("Models/settlement_TestSettlementRed");
+                            ChangeSettlementModel("Models/settlement_TestSettlementRed");
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.Delete:
-                            RemoveChildModel();
+                            RemoveSettlementModel();
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -185,7 +244,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Selected = true;
         }
 
-        private void ChangeChildModel(string asset)
+        private void ChangeSettlementModel(string asset)
         {
             GameModel newModel = new GameModel(asset);
             newModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
@@ -197,7 +256,30 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel.AddChild(newModel);
         }
 
-        private void RemoveChildModel()
+        private void InitializeProps()
+        {
+            foreach (GameModel prop in m_PropsList)
+            {
+                prop.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
+                prop.CanDraw = true;
+                prop.LoadContent(FinalScene.GetContentManager());
+                prop.Rotate(0, -90, 0);
+                prop.Translate(0, 0, 20);
+                prop.DiffuseColor = new Vector3(1, 1, 1);
+                m_TileModel.AddChild(prop);
+            }
+        }
+
+        private void ResetPropListParameters()
+        {
+            foreach (GameModel prop in m_PropsList)
+            {
+                prop.CanDraw = false;
+                prop.DiffuseColor = new Vector3(1, 1, 1);
+            }
+        }
+
+        private void RemoveSettlementModel()
         {
             m_TileModel.RemoveChild(m_SettlementDisplayModel);
         }
