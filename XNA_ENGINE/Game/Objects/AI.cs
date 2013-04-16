@@ -6,6 +6,10 @@ using System.Text;
 // -- INFO --
 // - We should use a player list so the AI knows which player to control
 
+// ---------------------------------------------------------
+// -- USED BY AI AS WELL AS THE ACTUAL PLAYER --
+// ---------------------------------------------------------
+
 namespace XNA_ENGINE.Game.Objects
 {
     class AI

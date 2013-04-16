@@ -38,7 +38,7 @@ namespace XNA_ENGINE.Game.Helpers
             return m_MapLoadSave;
         }
 
-        public GridTile[,] LoadMap(GameScene pGameScene, string fileName = "GeneratedTileMap")
+        public GridTile[,] LoadMap(GameScene pGameScene, string fileName = "tilemap")
         {
             GridTile[,] gridField = new GridTile[MAX_ROWS, MAX_COLUMNS];
 
@@ -59,7 +59,7 @@ namespace XNA_ENGINE.Game.Helpers
             return gridField;
         }
 
-        public void SaveMap(GridTile[,] gridField, string fileName = "GeneratedTileMap")
+        public void SaveMap(GridTile[,] gridField, string fileName = "tilemap")
         {
             //"../../../../XNA_DEMOContent/XMLFiles/" + 
             var xmlFile = new FileStream("./" + fileName + ".xml", FileMode.OpenOrCreate, FileAccess.Write);

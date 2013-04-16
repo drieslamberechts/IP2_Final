@@ -38,6 +38,9 @@ namespace XNA_ENGINE.Game.Scenes
 
         private static ContentManager m_Content;
 
+        // Player and AI
+        private Player m_Player, m_Ai;
+
         // Controls
         GamePadState m_GamePadState;
         private static InputManager m_InputManager;
@@ -68,6 +71,10 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            // Initialize player and AI
+            m_Player = new Player(false);
+            m_Ai = new Player(true);
+
             //Input manager + inputs
             m_InputManager = new InputManager();
 

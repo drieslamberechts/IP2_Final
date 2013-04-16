@@ -27,8 +27,8 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexTileRed,
                                    m_TexTile4,
                                    m_TexAttack,
-                                   m_TexDefend,
-                                   m_TexGather;
+                                   m_TexMove,
+                                   m_TexSplit;
 
         private Rectangle m_RectSwitch,
                           m_RectTileBlue,
@@ -36,8 +36,8 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectTileRed,
                           m_RectTile4,
                           m_RectAttack,
-                          m_RectDefend,
-                          m_RectGather;
+                          m_RectMove,
+                          m_RectSplit;
 
         public enum SubMenuSelected
         {
@@ -80,8 +80,8 @@ namespace XNA_ENGINE.Game.Objects
             m_TexTile4 = Content.Load<Texture2D>("Tile4");
 
             m_TexAttack = Content.Load<Texture2D>("Attack");
-            m_TexDefend = Content.Load<Texture2D>("Move");
-            m_TexGather = Content.Load<Texture2D>("Split_Army");
+            m_TexMove = Content.Load<Texture2D>("Move");
+            m_TexSplit = Content.Load<Texture2D>("Split_Army");
 
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
 
@@ -137,17 +137,18 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.MoveMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
+                        
                         m_SelectedMode = ModeSelected.Attack;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDefend))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMove))
                     {
                         m_SelectedMode = ModeSelected.Defend;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectGather))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         m_SelectedMode = ModeSelected.Gather;
                         return true;
@@ -177,10 +178,10 @@ namespace XNA_ENGINE.Game.Objects
 
             m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,
                                          m_TexAttack.Height);
-            m_RectDefend = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexDefend.Width,
-                                         m_TexDefend.Height);
-            m_RectGather = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexGather.Width,
-                                         m_TexGather.Height);
+            m_RectMove = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexMove.Width,
+                                         m_TexMove.Height);
+            m_RectSplit = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexSplit.Width,
+                                         m_TexSplit.Height);
 
 
             renderContext.SpriteBatch.Draw(m_TexSwitch,m_RectSwitch,Color.White);
@@ -195,8 +196,8 @@ namespace XNA_ENGINE.Game.Objects
             else if (m_ModeSelected == SubMenuSelected.MoveMode)
             {
                 renderContext.SpriteBatch.Draw(m_TexAttack, m_RectAttack, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexDefend, m_RectDefend, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexGather, m_RectGather, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexMove, m_RectMove, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexSplit, m_RectSplit, Color.White);
             }
         }
 
