@@ -65,6 +65,8 @@ namespace XNA_ENGINE.Game.Scenes
 
             // Throw Dice
             ThrowDice();
+
+            //EndAttack();
         }
 
         public override void Update(RenderContext renderContext)
@@ -134,6 +136,11 @@ namespace XNA_ENGINE.Game.Scenes
                 var defendersDice = random.Next(1, 6);
                 m_DefendersDice = defendersDice;
             }
+        }
+
+        private void EndAttack()
+        {
+            SceneManager.SetActiveScene("FinalScene");
         }
     }
 }

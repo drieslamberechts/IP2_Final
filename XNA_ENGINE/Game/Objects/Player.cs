@@ -9,12 +9,10 @@ namespace XNA_ENGINE.Game.Objects
     {
         // VARIABLES
         const int WOOD = 0;
-        const int FOOD = 1;
-        const int MONEY = 2;
+        const int INFLUENCE = 0;
 
         private const int LOW_WOOD = 10;
-        private const int LOW_FOOD = 10;
-        private const int LOW_MONEY = 10;
+        private const int LOW_INFLUENCE = 10;
 
         private int m_ArmyCount;
 
@@ -94,6 +92,11 @@ namespace XNA_ENGINE.Game.Objects
 
             return m_ArmyList[0];
         }
+
+        public List<Army> GetArmyList()
+        {
+            return m_ArmyList;
+        }
     }
 
     // ------------------------------------
@@ -104,22 +107,21 @@ namespace XNA_ENGINE.Game.Objects
     class Resources
     {
         // VARIABLES
-        float m_Wood, m_Food, m_Money;
+        float m_Wood, m_Influence;
 
         // METHODS
         public Resources()
         {
             m_Wood = 100;
-            m_Food = 100;
-            m_Money = 100;
+            m_Influence = 100;
         }
 
+        // GET RESOURCES
         public List<float> GetAllResources()
         {
             List<float> resourceArray = new List<float>();
             resourceArray.Add(m_Wood);
-            resourceArray.Add(m_Food);
-            resourceArray.Add(m_Money);
+            resourceArray.Add(m_Influence);
 
             return resourceArray;
         }
@@ -130,14 +132,9 @@ namespace XNA_ENGINE.Game.Objects
             m_Wood += wood;
         }
 
-        public void AddFood(float food)
+        public void AddInfluence(float influence)
         {
-            m_Food += food;
-        }
-
-        public void AddMoney(float money)
-        {
-            m_Money = money;
+            m_Influence += influence;
         }
 
         // DECREASE RESOURCES
@@ -146,14 +143,10 @@ namespace XNA_ENGINE.Game.Objects
             m_Wood -= wood;
         }
 
-        public void DecreaseFood(float food)
+        public void DecreaseInfluence(float influence)
         {
-            m_Food -= food;
+            m_Influence -= influence;
         }
 
-        public void DecreaseMoney(float money)
-        {
-            m_Money -= money;
-        }
     }
 }

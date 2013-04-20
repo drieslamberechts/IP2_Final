@@ -176,7 +176,7 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         Console.WriteLine("Split!");
-                        m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy());
+                        m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
 
                         m_SelectedMode = ModeSelected.Gather;
                         return true;
@@ -237,9 +237,8 @@ namespace XNA_ENGINE.Game.Objects
 
             // DRAW EXTRA INFORMATION (RESOURCES,...)
             // resources
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + m_Player.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 10), Color.White);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Food: " + m_Player.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 30), Color.White);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Money: " + m_Player.GetResources().GetAllResources().ElementAt(2), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 50), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + m_Player.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 10), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Influence Points: " + m_Player.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 30), Color.White);
 
             // armysize
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Army Size: " + m_Player.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 25, 10), Color.White);

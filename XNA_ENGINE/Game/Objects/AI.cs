@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 // -- INFO --
 // - We should use a player list so the AI knows which player to control
@@ -67,10 +68,20 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         // SPLIT THE ARMY
-        public void SplitArmy(Army army)
+        public Army SplitArmy(Army army)
         {
             // Create 2 references from first Army Reference
+            Army newArmy;
+            newArmy = new Army();
+
+            army.SplitArmy();
+
+            newArmy.SetArmyCount(army.GetArmyCount());
+            newArmy.SetPosition(new Vector2(army.GetCurrentPosition().X, army.GetCurrentPosition().Y + 1));
+            
             Console.WriteLine("The selected army is split");
+
+            return newArmy;
         }
 
         // GETTERS AND SETTERS
