@@ -117,6 +117,7 @@
     <Compile Include="Game\Objects\Menu.cs" />
     <Compile Include="Game\Objects\Player.cs" />
     <Compile Include="Game\Objects\Settlement.cs" />
+    <Compile Include="Game\Objects\Sjaman.cs" />
     <Compile Include="Game\Scenes\AttackScene.cs" />
     <Compile Include="Game\Scenes\FinalScene.cs" />
     <Compile Include="Game\Scenes\MainMenuScene.cs" />
