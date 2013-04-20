@@ -59,20 +59,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\tile_Template.X">
-      <Name>tile_Template</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\tile_TemplateTest.X">
-      <Name>tile_TemplateTest</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -97,16 +83,6 @@
   <ItemGroup>
     <Compile Include="Models\settlement_TestSettlementBlue.X">
       <Name>settlement_TestSettlementBlue</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\settlement_TestSettlementGold.X">
-      <Name>settlement_TestSettlementGold</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\settlement_TestSettlementRed.X">
-      <Name>settlement_TestSettlementRed</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
@@ -162,6 +138,11 @@
     </Compile>
     <Compile Include="Models\tile_Normal.X">
       <Name>tile_Normal</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\flag_FlagNormal.X">
+      <Name>flag_FlagNormal</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

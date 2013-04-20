@@ -127,7 +127,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public void PlaceDirectionFlag(GridTile gridTile)
         {
-            m_DirectionTile.RemoveFlag();
+            m_DirectionTile.ShowFlag(false);
             m_DirectionTile = gridTile;
         }
     }

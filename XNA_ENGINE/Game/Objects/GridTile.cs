@@ -312,19 +312,6 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
-        public void RemoveFlag()
-        {
-            foreach (var placeable in m_Placeables)
-            {
-                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Flag)
-                {
-                    placeable.LinkedTile.ShowFlag(false);
-                    m_Placeables.Remove(placeable);
-                    return;
-                }
-            }
-        }
-
         public Settlement HasSettlement()
         {
             foreach (var placeable in m_Placeables)
@@ -375,7 +362,9 @@ namespace XNA_ENGINE.Game.Objects
             foreach (var placeable in m_Placeables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Flag)
+                {
                     placeable.Model.CanDraw = value;
+                }
             }
         }
     }
