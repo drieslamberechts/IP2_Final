@@ -230,9 +230,6 @@ namespace XNA_ENGINE.Game.Objects
                     {
                         case Menu.ModeSelected.None:
                             GridFieldManager.GetInstance(m_GameScene).PermanentSelect(m_Row,m_Column);
-
-                           // m_PermanentSelected = !m_PermanentSelected;
-                            //m_SettlementDisplayModel
                             break;
                         case Menu.ModeSelected.Attack:
                             break;

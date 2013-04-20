@@ -94,12 +94,13 @@ namespace XNA_ENGINE.Game.Managers
 
         public void PermanentSelect(int row, int column)
         {
+            bool value = m_GridField[row, column].PermanentSelect;
             foreach (var gridTile in m_GridField)
             {
                 gridTile.PermanentSelect = false;
             }
 
-            m_GridField[row, column].PermanentSelect = true;
+            m_GridField[row, column].PermanentSelect = !value;
         }
 
         public bool CreativeMode { get; set; }
