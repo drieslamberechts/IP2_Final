@@ -28,7 +28,8 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexTile4,
                                    m_TexAttack,
                                    m_TexMove,
-                                   m_TexSplit;
+                                   m_TexSplit,
+                                   m_TexBuild;
 
         private Rectangle m_RectSwitch,
                           m_RectTileBlue,
@@ -37,12 +38,14 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectTile4,
                           m_RectAttack,
                           m_RectMove,
-                          m_RectSplit;
+                          m_RectSplit,
+                          m_RectBuild;
 
         public enum SubMenuSelected
         {
             MoveMode, //Attack, defend,...
-            BuildMode //Tile 1,2,3,...
+            BuildMode, //Tile 1,2,3,...
+            SettlementMode
         }
 
         public enum ModeSelected
@@ -57,8 +60,8 @@ namespace XNA_ENGINE.Game.Objects
             Delete
         }
 
-        private SubMenuSelected m_ModeSelected = SubMenuSelected.MoveMode;
-        private ModeSelected m_SelectedMode = ModeSelected.Attack;
+        private SubMenuSelected m_SubMenuSelected = SubMenuSelected.MoveMode;
+        private ModeSelected m_SelectedMode = ModeSelected.None;
         private SpriteFont m_DebugFont;
         private Player m_Player;
 
@@ -85,11 +88,9 @@ namespace XNA_ENGINE.Game.Objects
             m_TexMove = Content.Load<Texture2D>("Move");
             m_TexSplit = Content.Load<Texture2D>("Split_Army");
 
-            m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
+            m_TexBuild = Content.Load<Texture2D>("Build");
 
-            var click = new InputAction((int) FinalScene.PlayerInput.LeftClick, TriggerState.Pressed);
-            click.MouseButton = MouseButtons.LeftButton;
-            click.GamePadButton = Buttons.X;
+            m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
         public void SetPlayer(Player player)
@@ -114,12 +115,12 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
             {
-                if (m_ModeSelected == SubMenuSelected.MoveMode) m_ModeSelected = SubMenuSelected.BuildMode;
-                else m_ModeSelected = SubMenuSelected.MoveMode;
+                if (m_SubMenuSelected == SubMenuSelected.MoveMode) m_SubMenuSelected = SubMenuSelected.BuildMode;
+                else m_SubMenuSelected = SubMenuSelected.MoveMode;
                 return true;
             }
 
-            switch (m_ModeSelected)
+            switch (m_SubMenuSelected)
             {
                 case SubMenuSelected.BuildMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileBlue))
@@ -181,6 +182,15 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
                     break;
+
+                case SubMenuSelected.SettlementMode:
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuild))
+                    {
+                        Console.WriteLine("Build goblin");
+                        m_Player.GetPlayerOptions().BuildTribe();
+                        return true;
+                    }
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -191,40 +201,38 @@ namespace XNA_ENGINE.Game.Objects
         // Draw
         public void Draw(RenderContext renderContext)
         {
-            m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,
-                                       m_TexSwitch.Height);
+            m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,m_TexSwitch.Height);
 
-            m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,
-                                        m_TexTileBlue.Height);
-            m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,
-                                        m_TexTileGold.Height);
-            m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,
-                                        m_TexTileRed.Height);
-            m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,
-                                        m_TexTile4.Height);
+            m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,m_TexTileBlue.Height);
+            m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,m_TexTileGold.Height);
+            m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,m_TexTileRed.Height);
+            m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,m_TexTile4.Height);
 
-            m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,
-                                         m_TexAttack.Height);
-            m_RectMove = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexMove.Width,
-                                         m_TexMove.Height);
-            m_RectSplit = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexSplit.Width,
-                                         m_TexSplit.Height);
+            m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,m_TexAttack.Height);
+            m_RectMove = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexMove.Width,m_TexMove.Height);
+            m_RectSplit = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexSplit.Width,m_TexSplit.Height);
+
+            m_RectBuild = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexBuild.Width, m_TexBuild.Height);
 
 
             renderContext.SpriteBatch.Draw(m_TexSwitch,m_RectSwitch,Color.White);
 
-            if (m_ModeSelected == SubMenuSelected.BuildMode)
+            if (m_SubMenuSelected == SubMenuSelected.BuildMode)
             {
                 renderContext.SpriteBatch.Draw(m_TexTileBlue, m_RectTileBlue, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexTileGold, m_RectTileGold, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexTileRed, m_RectTileRed, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexTile4, m_RectTile4, Color.White);
             }
-            else if (m_ModeSelected == SubMenuSelected.MoveMode)
+            else if (m_SubMenuSelected == SubMenuSelected.MoveMode)
             {
                 renderContext.SpriteBatch.Draw(m_TexAttack, m_RectAttack, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexMove, m_RectMove, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexSplit, m_RectSplit, Color.White);
+            }
+            else if (m_SubMenuSelected == SubMenuSelected.SettlementMode)
+            {
+                renderContext.SpriteBatch.Draw(m_TexBuild, m_RectBuild, Color.White);
             }
 
             // DRAW EXTRA INFORMATION (RESOURCES,...)
@@ -253,9 +261,20 @@ namespace XNA_ENGINE.Game.Objects
             return m_SelectedMode;
         }
 
+        public void SetSelectedMode(ModeSelected mode)
+        {
+            m_SelectedMode = mode;
+        }
+
         public void ResetSelectedMode()
         {
             m_SelectedMode = ModeSelected.None;
+        }
+
+        public SubMenuSelected SubMenu
+        {
+            get { return m_SubMenuSelected; }
+            set { m_SubMenuSelected = value; }
         }
     }
 }

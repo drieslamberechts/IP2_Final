@@ -52,10 +52,10 @@ namespace XNA_ENGINE.Game.Scenes
         private int m_Fps;
         private SpriteFont m_DebugFont;
 
-        private const double CAMERAZOOMMIN = 0.4;
-        private const double CAMERAZOOMMAX = 1.5;
+        private const double CAMERAZOOMMIN = 0.2;
+        private const double CAMERAZOOMMAX = 0.7;
         private const double ZOOMSTRENGTH = 0.001;
-        private const double CAMERASTARTSCALE = 1.0;
+        private const double CAMERASTARTSCALE = 0.7;
         private double m_CameraScale = CAMERASTARTSCALE;
         private double m_CameraScaleTarget = CAMERASTARTSCALE;
         private double m_CameraRotationOffset;

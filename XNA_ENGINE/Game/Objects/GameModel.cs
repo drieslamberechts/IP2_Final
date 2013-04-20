@@ -18,6 +18,7 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_UseTexture { get; set; }
         private Texture2D m_Texture { get; set; }
         private bool m_Selected { get; set; }
+        private bool m_PermanentSelected { get; set; }
 
         private Vector3 m_DiffuseColor { get; set; }
         private float m_Alpha { get; set; }
@@ -60,15 +61,20 @@ namespace XNA_ENGINE.Game.Objects
 
                     //Diffuse
                     effect.DiffuseColor = m_DiffuseColor;
+                    effect.SpecularColor = new Vector3(0.1f, 0.1f, 0.1f); 
 
-                    effect.SpecularColor = new Vector3(0.1f, 0.1f, 0.1f); ;
                     //Alpha
                     effect.Alpha = m_Alpha;
 
-                    //Selecetd
-                    if (m_Selected)
+                    //Selected
+                    if (m_PermanentSelected)
+                    {
+                        effect.SpecularColor = new Vector3(1.0f, 1.0f, 1.0f); 
+                        effect.EmissiveColor = new Vector3(0.5f, 0.5f, 0.5f);
+                    }
+                    else if (m_Selected)
                         effect.EmissiveColor = new Vector3(0.1f, 0.1f, 0.1f);
-                    else
+                    else 
                         effect.EmissiveColor = new Vector3(0.0f, 0.0f, 0.0f);
                 }
 
@@ -99,7 +105,12 @@ namespace XNA_ENGINE.Game.Objects
             get{return m_Selected;}
             set{ m_Selected = value;}
         }
-        
+        public bool PermanentSelected
+        {
+            get { return m_PermanentSelected; }
+            set { m_PermanentSelected = value; }
+        }
+
         public Vector3 DiffuseColor
         {
             get{return m_DiffuseColor;}

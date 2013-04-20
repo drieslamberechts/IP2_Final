@@ -19,8 +19,12 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GameModel m_TileModel;
         private GameModel m_SettlementDisplayModel;
+        
+        //Props
         private GameModel m_TreeShort1;
         private GameModel m_TreeTall1;
+
+        private Army m_Army;
 
         private List<GameModel> m_PropsList; 
         private readonly int m_Row, m_Column;
@@ -35,6 +39,7 @@ namespace XNA_ENGINE.Game.Objects
         private string m_TileSettlement;
 
         private bool m_Selected;
+        private bool m_PermanentSelected;
 
         private readonly GameScene m_GameScene;
 
@@ -97,6 +102,7 @@ namespace XNA_ENGINE.Game.Objects
                    
                     m_TileModel.DiffuseColor = new Vector3(1.0f,1.0f,1.0f);
                     break;
+
                 case TileType.Normal2:
                     ResetPropListParameters();
                     m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicWithDirt");
@@ -106,6 +112,7 @@ namespace XNA_ENGINE.Game.Objects
                    
                     m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
+
                 case TileType.Normal3:
                     ResetPropListParameters();
                     m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
@@ -131,12 +138,14 @@ namespace XNA_ENGINE.Game.Objects
 
                     m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
+
                 case TileType.Water:
                     ResetPropListParameters();
                     m_TileModel.CanDraw = true;
 
                     m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
+
                 case TileType.Cliff:
                     ResetPropListParameters();
                     m_TileModel.CanDraw = false;
@@ -150,7 +159,6 @@ namespace XNA_ENGINE.Game.Objects
             //What to do if the tile is selected
             if (m_Selected)
             {
-
                 m_TileModel.Selected = true;
                 if (m_SettlementDisplayModel != null)
                     m_SettlementDisplayModel.Selected = true;
@@ -162,7 +170,27 @@ namespace XNA_ENGINE.Game.Objects
                     m_SettlementDisplayModel.Selected = false;
                 
             }
-           
+
+            //What to do if the tile is permanently selected (until the tile is deselected)
+            if (m_PermanentSelected)
+            {
+                m_TileModel.PermanentSelected = true;
+                if (m_SettlementDisplayModel != null)
+                {
+                    m_SettlementDisplayModel.PermanentSelected = true;
+                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
+                }
+            }
+            else
+            {
+                m_TileModel.PermanentSelected = false;
+                if (m_SettlementDisplayModel != null)
+                {
+                    m_SettlementDisplayModel.PermanentSelected = false;
+                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
+                }
+            }
+
             m_Selected = false;
         }
 
@@ -186,11 +214,8 @@ namespace XNA_ENGINE.Game.Objects
             //What mode is there selected in the menu to build?
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
 
-
-
             if (creativeMode) //Creative mode off
             {
-
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
                 {
                     ++m_TileType;
@@ -209,6 +234,9 @@ namespace XNA_ENGINE.Game.Objects
                 {
                     switch (selectedMode)
                     {
+                        case Menu.ModeSelected.None:
+                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(m_Row,m_Column);
+                            break;
                         case Menu.ModeSelected.Attack:
                             break;
                         case Menu.ModeSelected.Defend:
@@ -298,6 +326,12 @@ namespace XNA_ENGINE.Game.Objects
         {
             get{return m_Selected;}
             set{m_Selected = value;} 
+        }
+
+        public bool PermanentSelect
+        {
+            get { return m_PermanentSelected; }
+            set { m_PermanentSelected = value; }
         }
 
         public int Row
