@@ -11,7 +11,7 @@ using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Scenes;
 
-namespace XNA_ENGINE.Game.Helpers
+namespace XNA_ENGINE.Game.Objects
 {
     class MapLoadSave
     {
@@ -77,7 +77,8 @@ namespace XNA_ENGINE.Game.Helpers
                     writer.WriteLine("\t\t<positionX>" + row + "</positionX>");
                     writer.WriteLine("\t\t<positionY>" + column + "</positionY>");
                     writer.WriteLine("\t\t<TileType>" + (int)gridField[row, column].TileTypeValue + "</TileType>");
-                    writer.WriteLine("\t\t<settlement>" + gridField[row, column].GetTileSettlement() + "</settlement>");
+
+                    //writer.WriteLine("\t\t<settlement>" + gridField[row, column].GetTileSettlement() + "</settlement>");
 
                     writer.WriteLine("\t</tile>");
                 }
@@ -137,7 +138,7 @@ namespace XNA_ENGINE.Game.Helpers
                     }
 
                     // Use a color to create a new Tribe (none, green, red, blue,...)
-                    gridField[row, column].SetTileSettlement("none");
+                    //gridField[row, column].SetTileSettlement("none");
                 }
             }
 

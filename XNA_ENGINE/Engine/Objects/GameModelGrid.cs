@@ -11,7 +11,7 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class GameModel : GameObject3D
+    public class GameModelGrid : GameObject3D
     {
         private readonly string _assetFile;
         private Model _model { get; set; }
@@ -23,7 +23,7 @@ namespace XNA_ENGINE.Game.Objects
         private Vector3 m_DiffuseColor { get; set; }
         private float m_Alpha { get; set; }
 
-        public GameModel(string assetFile)
+        public GameModelGrid(string assetFile)
         {
             _assetFile = assetFile;
         }

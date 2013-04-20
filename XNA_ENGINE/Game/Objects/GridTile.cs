@@ -8,25 +8,25 @@ using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
-using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
-
 
 namespace XNA_ENGINE.Game.Objects
 {
     public class GridTile
     {
-        private GameModel m_TileModel;
-        private GameModel m_SettlementDisplayModel;
+        private GameModelGrid m_TileModel;
         
         //Props
-        private GameModel m_TreeShort1;
-        private GameModel m_TreeTall1;
+        private GameModelGrid m_TreeShort1;
+        private GameModelGrid m_TreeTall1;
 
         private Army m_Army;
 
-        private List<GameModel> m_PropsList; 
+        private List<GameModelGrid> m_PropsList;
+        private List<Placeable> m_Placeables;
+        
         private readonly int m_Row, m_Column;
 
         private const float GRIDWIDTH = 64;
@@ -36,7 +36,6 @@ namespace XNA_ENGINE.Game.Objects
         private const int YOFFSETMAX = 15;
 
         private TileType m_TileType = TileType.Normal1;
-        private string m_TileSettlement;
 
         private bool m_Selected;
         private bool m_PermanentSelected;
@@ -70,12 +69,13 @@ namespace XNA_ENGINE.Game.Objects
         {
             int yOffset = GridFieldManager.GetInstance(m_GameScene).Random.Next(YOFFSETMIN, YOFFSETMAX);
 
-            m_TileModel = new GameModel("Models/tile_Normal");
+            m_TileModel = new GameModelGrid("Models/tile_Normal");
 
-            m_PropsList = new List<GameModel>();
+            m_PropsList = new List<GameModelGrid>();
+            m_Placeables = new List<Placeable>();
 
-            m_TreeShort1 = new GameModel("Models/tree_TreeShort");
-            m_TreeTall1 = new GameModel("Models/tree_TreeTall");
+            m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");
+            m_TreeTall1 = new GameModelGrid("Models/tree_TreeTall");
             m_PropsList.Add(m_TreeShort1);
             m_PropsList.Add(m_TreeTall1);
             InitializeProps();
@@ -160,35 +160,29 @@ namespace XNA_ENGINE.Game.Objects
             if (m_Selected)
             {
                 m_TileModel.Selected = true;
-                if (m_SettlementDisplayModel != null)
-                    m_SettlementDisplayModel.Selected = true;
             }
             else
             {
                 m_TileModel.Selected = false;
-                if (m_SettlementDisplayModel != null)
-                    m_SettlementDisplayModel.Selected = false;
-                
             }
 
             //What to do if the tile is permanently selected (until the tile is deselected)
             if (m_PermanentSelected)
             {
                 m_TileModel.PermanentSelected = true;
-                if (m_SettlementDisplayModel != null)
-                {
-                    m_SettlementDisplayModel.PermanentSelected = true;
-                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
-                }
+  
+               // Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
             }
             else
             {
                 m_TileModel.PermanentSelected = false;
-                if (m_SettlementDisplayModel != null)
-                {
-                    m_SettlementDisplayModel.PermanentSelected = false;
-                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
-                }
+
+                // Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
+            }
+
+            foreach (var placeable in m_Placeables)
+            {
+                placeable.Update(renderContext);
             }
 
             m_Selected = false;
@@ -244,15 +238,15 @@ namespace XNA_ENGINE.Game.Objects
                         case Menu.ModeSelected.Gather:
                             break;
                         case Menu.ModeSelected.TileBlue:
-                            ChangeSettlementModel("Models/settlement_TestSettlementBlue");
+                            AddSettlement(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.TileGold:
-                            ChangeSettlementModel("Models/settlement_TestSettlementGold");
+                            AddSettlement(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.TileRed:
-                            ChangeSettlementModel("Models/settlement_TestSettlementRed");
+                            AddSettlement(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.Delete:
@@ -269,24 +263,15 @@ namespace XNA_ENGINE.Game.Objects
                 }
             }
 
+            foreach (var placeable in m_Placeables)
+                placeable.OnHit();
+
             m_Selected = true;
-        }
-
-        private void ChangeSettlementModel(string asset)
-        {
-            GameModel newModel = new GameModel(asset);
-            newModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
-            newModel.CanDraw = true;
-            newModel.LoadContent(FinalScene.GetContentManager());
-            m_TileModel.RemoveChild(m_SettlementDisplayModel);
-
-            m_SettlementDisplayModel = newModel;
-            m_TileModel.AddChild(newModel);
         }
 
         private void InitializeProps()
         {
-            foreach (GameModel prop in m_PropsList)
+            foreach (GameModelGrid prop in m_PropsList)
             {
                 prop.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
                 prop.CanDraw = true;
@@ -300,38 +285,40 @@ namespace XNA_ENGINE.Game.Objects
 
         private void ResetPropListParameters()
         {
-            foreach (GameModel prop in m_PropsList)
+            foreach (GameModelGrid prop in m_PropsList)
             {
                 prop.CanDraw = false;
                 prop.DiffuseColor = new Vector3(1, 1, 1);
             }
         }
 
+        private void AddSettlement(Settlement.SettlementType settlementType)
+        {
+            m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
+        }
+
         private void RemoveSettlementModel()
         {
-            m_TileModel.RemoveChild(m_SettlementDisplayModel);
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                {
+                    m_Placeables.Remove(placeable);
+                    return;
+                }
+            }
         }
 
-        public void SetTileSettlement(string type)
+        public bool PermanentSelected
         {
-            m_TileSettlement = type;
-        }
-
-        public string GetTileSettlement()
-        {
-            return m_TileSettlement;
+            get { return m_PermanentSelected; }
+            set { m_PermanentSelected = value; }
         }
 
         public bool Selected
         {
             get{return m_Selected;}
             set{m_Selected = value;} 
-        }
-
-        public bool PermanentSelect
-        {
-            get { return m_PermanentSelected; }
-            set { m_PermanentSelected = value; }
         }
 
         public int Row
@@ -348,6 +335,13 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_TileType; }
             set { m_TileType = value; }
+        }
+
+        public GameModelGrid Model
+        {
+            get { return m_TileModel; }
+            set { m_TileModel = value; }
+
         }
     }
 }

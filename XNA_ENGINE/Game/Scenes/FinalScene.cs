@@ -16,7 +16,6 @@ using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Engine.Objects;
 
 using XNA_ENGINE.Engine.Helpers;
-using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
 
 using Microsoft.Xna.Framework.Media;
@@ -128,7 +127,7 @@ namespace XNA_ENGINE.Game.Scenes
         {
             // FPS
             m_ElapseTime += (float)renderContext.GameTime.ElapsedGameTime.TotalSeconds;
-            m_FrameCounter++;
+            ++m_FrameCounter;
 
             if (m_ElapseTime > 1)
             {
