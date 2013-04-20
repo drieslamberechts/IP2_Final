@@ -94,9 +94,7 @@ namespace XNA_ENGINE.Game.Managers
             foreach (var gridTile in m_GridField)
             {
                 if (gridTile.PermanentSelected)
-                {
                     return gridTile;
-                }
             }
 
             return null;

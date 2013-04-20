@@ -258,10 +258,9 @@ namespace XNA_ENGINE.Game.Objects
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
                 {
                     //Place flag of settlement
-                    Settlement settlement = GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement();
-                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement() != null)
+                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement() != null)
                     {
-                        settlement.PlaceDirectionFlag(this);
+                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement().PlaceDirectionFlag(this);
                     }
                 }
             }
