@@ -172,14 +172,10 @@ namespace XNA_ENGINE.Game.Objects
             if (m_PermanentSelected)
             {
                 m_TileModel.PermanentSelected = true;
-  
-               // Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
             }
             else
             {
                 m_TileModel.PermanentSelected = false;
-
-                // Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
             }
 
             foreach (var placeable in m_Placeables)

@@ -99,7 +99,6 @@ namespace XNA_ENGINE.Game.Objects
             {
                 m_Model.PermanentSelected = false;
                 m_DirectionTile.ShowFlag(false);
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
             }
 
             base.Update(renderContext);
