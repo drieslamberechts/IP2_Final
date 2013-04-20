@@ -16,7 +16,6 @@ using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Engine.Objects;
 
 using XNA_ENGINE.Engine.Helpers;
-using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
 
 using Microsoft.Xna.Framework.Media;
@@ -52,6 +51,8 @@ namespace XNA_ENGINE.Game.Scenes
         private int m_Fps;
         private SpriteFont m_DebugFont;
 
+        private readonly Texture2D m_TexBackground;
+
         private const double CAMERAZOOMMIN = 0.2;
         private const double CAMERAZOOMMAX = 0.7;
         private const double ZOOMSTRENGTH = 0.001;
@@ -72,6 +73,9 @@ namespace XNA_ENGINE.Game.Scenes
 
             // FONT
             m_DebugFont = content.Load<SpriteFont>("Fonts/DebugFont");
+
+            //TEXTURES
+            m_TexBackground = content.Load<Texture2D>("Textures/Background");
         }
 
 
@@ -128,7 +132,7 @@ namespace XNA_ENGINE.Game.Scenes
         {
             // FPS
             m_ElapseTime += (float)renderContext.GameTime.ElapsedGameTime.TotalSeconds;
-            m_FrameCounter++;
+            ++m_FrameCounter;
 
             if (m_ElapseTime > 1)
             {
@@ -163,19 +167,28 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
-            // Show FPS 2
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
 
-            // DrawGUI
-            Menu.GetInstance().Draw(renderContext);
+            if (drawBefore3D == false) // draw after the 3D is drawn
+            {
+                // Show FPS 2
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
 
-            base.Draw2D(renderContext, drawBefore3D);
+                // DrawGUI
+                Menu.GetInstance().Draw(renderContext);
 
-            // Show Selection
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.White);
+                base.Draw2D(renderContext, drawBefore3D);
 
-            // Creative mode
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Creative mode: " + GridFieldManager.GetInstance(this).CreativeMode, new Vector2(10, 50), Color.White);
+                // Show Selection
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.White);
+
+                // Creative mode
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "Creative mode: " + GridFieldManager.GetInstance(this).CreativeMode, new Vector2(10, 50), Color.White);
+
+            }
+            else // Draw before the 3D is drawn
+            {
+                renderContext.SpriteBatch.Draw(m_TexBackground, new Vector2(0,0), Color.White);
+            }
         }
 
         public override void Draw3D(RenderContext renderContext)

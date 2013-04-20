@@ -4,13 +4,20 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Scenegraph;
-using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
 
 namespace XNA_ENGINE.Game.Managers
 {
     class GridFieldManager
     {
+        public enum SelectionMode
+        {
+            select1x1,
+            select2x2,
+
+            enumSize
+        }
+
         //Singleton implementation
         private static GridFieldManager m_GridFieldManager;
 
@@ -20,6 +27,8 @@ namespace XNA_ENGINE.Game.Managers
 
         private const int GRID_ROW_LENGTH = 30;
         private const int GRID_COLUMN_LENGTH = 30;
+
+        private SelectionMode m_SelectionMode = SelectionMode.select1x1;
 
         // private int GRID_OFFSET = 64;
 
@@ -84,13 +93,19 @@ namespace XNA_ENGINE.Game.Managers
 
         public void PermanentSelect(int row, int column)
         {
-            bool value = m_GridField[row, column].PermanentSelect;
+            bool value = m_GridField[row, column].PermanentSelected;
             foreach (var gridTile in m_GridField)
             {
-                gridTile.PermanentSelect = false;
+                gridTile.PermanentSelected = false;
             }
 
-            m_GridField[row, column].PermanentSelect = !value;
+            m_GridField[row, column].PermanentSelected = !value;
+        }
+
+        public SelectionMode SelectionModeMeth
+        {
+            get { return m_SelectionMode; }
+            set { m_SelectionMode = value; }
         }
 
         public Random Random
@@ -103,5 +118,6 @@ namespace XNA_ENGINE.Game.Managers
         }
 
         public bool CreativeMode { get; set; }
+
     }
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using XNA_ENGINE.Game.Objects;
+
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class Army
+    class Army : Placeable
     {
         private Vector2 m_Position; // Same as the grid tile
         private int m_ArmyCount;
