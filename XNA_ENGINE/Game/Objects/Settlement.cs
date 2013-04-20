@@ -68,11 +68,11 @@ namespace XNA_ENGINE.Game.Objects
             {
                 case SettlementType.Basic1:
                     //m_Model.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
-                   // m_Model.UseTexture = true;
+                    //m_Model.UseTexture = true;
 
-                   // m_Model.CanDraw = true;
+                    //m_Model.CanDraw = true;
 
-                   // m_Model.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    //m_Model.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
