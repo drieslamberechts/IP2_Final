@@ -1,28 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
-using XNA_ENGINE;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
 
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
-using XNA_ENGINE.Engine.Objects;
 
 using XNA_ENGINE.Engine.Helpers;
-using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
-
-using Microsoft.Xna.Framework.Media;
-using XNA_ENGINE.Game.Scenes;
-
-using XNA_ENGINE.Game.Managers;
 
 namespace XNA_ENGINE.Game.Scenes
 {
@@ -37,7 +22,7 @@ namespace XNA_ENGINE.Game.Scenes
         }
 
         private static ContentManager m_Content;
-        private SpriteFont m_DebugFont;
+        private readonly SpriteFont m_DebugFont;
         private float m_ElapseTime;
         private decimal m_FrameCounter;
         private decimal m_Fps;
@@ -46,6 +31,10 @@ namespace XNA_ENGINE.Game.Scenes
 
         // Player and AI
         private Player m_Player, m_Ai;
+
+        // Dice
+        private int m_AttackersDice;
+        private int m_DefendersDice;
 
         public AttackScene(ContentManager content, Player player, Player ai)
             : base("AttackScene")
@@ -59,20 +48,23 @@ namespace XNA_ENGINE.Game.Scenes
 
             // FONT
             m_DebugFont = m_Content.Load<SpriteFont>("Fonts/DebugFont");
+
+            // Execute Everything in the Scene
+            Start();
         }
 
-
-        public override void Initialize()
+        public void Start()
         {
             //Input manager + inputs
             m_InputManager = new InputManager();
 
-            InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
+            var rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
 
             rightClick.MouseButton = MouseButtons.RightButton;
             m_InputManager.MapAction(rightClick);
 
-            base.Initialize();
+            // Throw Dice
+            ThrowDice();
         }
 
         public override void Update(RenderContext renderContext)
@@ -112,12 +104,36 @@ namespace XNA_ENGINE.Game.Scenes
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Ai Armysize: " + m_Ai.GetArmySize(),
                                                  new Vector2(10, 120), Color.White);
 
+            // Draw Dice
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Attackers Dice: " + m_AttackersDice,
+                                                 new Vector2(300, 100), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Defenders Dice: " + m_DefendersDice,
+                                                 new Vector2(300, 120), Color.White);
+
             base.Draw2D(renderContext, drawBefore3D);
         }
 
         public override void Draw3D(RenderContext renderContext)
         {
             base.Draw3D(renderContext);
+        }
+
+        // Throws Dice for both the Attackers as Defenders
+        private void ThrowDice()
+        {
+            var random = new Random();
+
+            for (var t = 0; t < m_Player.GetArmySize(); ++t)
+            {
+                var attackersDice = random.Next(1, 6);
+                m_AttackersDice = attackersDice;
+            }
+
+            for (var t = 0; t < m_Ai.GetArmySize(); ++t)
+            {
+                var defendersDice = random.Next(1, 6);
+                m_DefendersDice = defendersDice;
+            }
         }
     }
 }

@@ -58,7 +58,8 @@ namespace XNA_ENGINE.Game
         {
             // TODO: Add your initialization logic here
             SceneManager.AddGameScene(new FinalScene(Content));
-            SceneManager.SetActiveScene("FinalScene");
+            SceneManager.AddGameScene(new MainMenuScene(Content));
+            SceneManager.SetActiveScene("MainMenuScene");
             SceneManager.Initialize();
 
             IsMouseVisible = true;
