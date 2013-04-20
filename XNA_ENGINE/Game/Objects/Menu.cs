@@ -42,7 +42,8 @@ namespace XNA_ENGINE.Game.Objects
         public enum SubMenuSelected
         {
             MoveMode, //Attack, defend,...
-            BuildMode //Tile 1,2,3,...
+            BuildMode, //Tile 1,2,3,...
+            SettlementMode
         }
 
         public enum ModeSelected
@@ -181,6 +182,35 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
                     break;
+
+                case SubMenuSelected.SettlementMode:
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
+                    {
+                        Console.WriteLine("Attack!");
+                        m_Player.GetPlayerOptions().Attack();
+
+                        m_SelectedMode = ModeSelected.Attack;
+                        return true;
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMove))
+                    {
+                        Console.WriteLine("Move!");
+                        m_Player.GetPlayerOptions().Move();
+
+                        m_SelectedMode = ModeSelected.Defend;
+                        return true;
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
+                    {
+                        Console.WriteLine("Split!");
+                        m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy());
+
+                        m_SelectedMode = ModeSelected.Gather;
+                        return true;
+                    }
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -191,24 +221,16 @@ namespace XNA_ENGINE.Game.Objects
         // Draw
         public void Draw(RenderContext renderContext)
         {
-            m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,
-                                       m_TexSwitch.Height);
+            m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,m_TexSwitch.Height);
 
-            m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,
-                                        m_TexTileBlue.Height);
-            m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,
-                                        m_TexTileGold.Height);
-            m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,
-                                        m_TexTileRed.Height);
-            m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,
-                                        m_TexTile4.Height);
+            m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,m_TexTileBlue.Height);
+            m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,m_TexTileGold.Height);
+            m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,m_TexTileRed.Height);
+            m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,m_TexTile4.Height);
 
-            m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,
-                                         m_TexAttack.Height);
-            m_RectMove = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexMove.Width,
-                                         m_TexMove.Height);
-            m_RectSplit = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexSplit.Width,
-                                         m_TexSplit.Height);
+            m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,m_TexAttack.Height);
+            m_RectMove = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexMove.Width,m_TexMove.Height);
+            m_RectSplit = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexSplit.Width,m_TexSplit.Height);
 
 
             renderContext.SpriteBatch.Draw(m_TexSwitch,m_RectSwitch,Color.White);
@@ -251,6 +273,11 @@ namespace XNA_ENGINE.Game.Objects
         public ModeSelected GetSelectedMode()
         {
             return m_SelectedMode;
+        }
+
+        public void SetSelectedMode(ModeSelected mode)
+        {
+            m_SelectedMode = mode;
         }
 
         public void ResetSelectedMode()

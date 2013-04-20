@@ -19,8 +19,12 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GameModel m_TileModel;
         private GameModel m_SettlementDisplayModel;
+        
+        //Props
         private GameModel m_TreeShort1;
         private GameModel m_TreeTall1;
+
+        private Army m_Army;
 
         private List<GameModel> m_PropsList; 
         private readonly int m_Row, m_Column;
@@ -97,6 +101,7 @@ namespace XNA_ENGINE.Game.Objects
                    
                     m_TileModel.DiffuseColor = new Vector3(1.0f,1.0f,1.0f);
                     break;
+
                 case TileType.Normal2:
                     ResetPropListParameters();
                     m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicWithDirt");
@@ -106,6 +111,7 @@ namespace XNA_ENGINE.Game.Objects
                    
                     m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
+
                 case TileType.Normal3:
                     ResetPropListParameters();
                     m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
@@ -131,12 +137,14 @@ namespace XNA_ENGINE.Game.Objects
 
                     m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
+
                 case TileType.Water:
                     ResetPropListParameters();
                     m_TileModel.CanDraw = true;
 
                     m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
+
                 case TileType.Cliff:
                     ResetPropListParameters();
                     m_TileModel.CanDraw = false;
@@ -150,7 +158,6 @@ namespace XNA_ENGINE.Game.Objects
             //What to do if the tile is selected
             if (m_Selected)
             {
-
                 m_TileModel.Selected = true;
                 if (m_SettlementDisplayModel != null)
                     m_SettlementDisplayModel.Selected = true;
@@ -186,11 +193,8 @@ namespace XNA_ENGINE.Game.Objects
             //What mode is there selected in the menu to build?
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
 
-
-
             if (creativeMode) //Creative mode off
             {
-
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
                 {
                     ++m_TileType;
@@ -209,6 +213,9 @@ namespace XNA_ENGINE.Game.Objects
                 {
                     switch (selectedMode)
                     {
+                        case Menu.ModeSelected.None:
+                            //m_SettlementDisplayModel
+                            break;
                         case Menu.ModeSelected.Attack:
                             break;
                         case Menu.ModeSelected.Defend:
