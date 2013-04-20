@@ -3717,7 +3717,7 @@
 	<tile>
 		<positionX>19</positionX>
 		<positionY>20</positionY>
-		<TileType>0</TileType>
+		<TileType>3</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>

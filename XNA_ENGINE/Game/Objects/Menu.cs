@@ -59,7 +59,7 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         private SubMenuSelected m_ModeSelected = SubMenuSelected.MoveMode;
-        private ModeSelected m_SelectedMode = ModeSelected.Attack;
+        private ModeSelected m_SelectedMode = ModeSelected.None;
         private SpriteFont m_DebugFont;
         private Player m_Player;
 

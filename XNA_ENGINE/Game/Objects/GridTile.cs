@@ -39,6 +39,7 @@ namespace XNA_ENGINE.Game.Objects
         private string m_TileSettlement;
 
         private bool m_Selected;
+        private bool m_PermanentSelected;
 
         private readonly GameScene m_GameScene;
 
@@ -169,7 +170,21 @@ namespace XNA_ENGINE.Game.Objects
                     m_SettlementDisplayModel.Selected = false;
                 
             }
-           
+
+            //What to do if the tile is permanently selected (until the tile is deselected)
+            if (m_PermanentSelected)
+            {
+                m_TileModel.PermanentSelected = true;
+                if (m_SettlementDisplayModel != null)
+                    m_SettlementDisplayModel.PermanentSelected = true;
+            }
+            else
+            {
+                m_TileModel.PermanentSelected = false;
+                if (m_SettlementDisplayModel != null)
+                    m_SettlementDisplayModel.PermanentSelected = false;
+            }
+
             m_Selected = false;
         }
 
@@ -214,6 +229,9 @@ namespace XNA_ENGINE.Game.Objects
                     switch (selectedMode)
                     {
                         case Menu.ModeSelected.None:
+                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(m_Row,m_Column);
+
+                           // m_PermanentSelected = !m_PermanentSelected;
                             //m_SettlementDisplayModel
                             break;
                         case Menu.ModeSelected.Attack:
@@ -305,6 +323,12 @@ namespace XNA_ENGINE.Game.Objects
         {
             get{return m_Selected;}
             set{m_Selected = value;} 
+        }
+
+        public bool PermanentSelect
+        {
+            get { return m_PermanentSelected; }
+            set { m_PermanentSelected = value; }
         }
 
         public int Row

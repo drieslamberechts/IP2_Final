@@ -92,6 +92,16 @@ namespace XNA_ENGINE.Game.Managers
             get { return m_GridField; }
         }
 
+        public void PermanentSelect(int row, int column)
+        {
+            foreach (var gridTile in m_GridField)
+            {
+                gridTile.PermanentSelect = false;
+            }
+
+            m_GridField[row, column].PermanentSelect = true;
+        }
+
         public bool CreativeMode { get; set; }
     }
 }
