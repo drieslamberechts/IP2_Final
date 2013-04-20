@@ -1677,7 +1677,7 @@
 	<tile>
 		<positionX>9</positionX>
 		<positionY>9</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
@@ -1845,13 +1845,13 @@
 	<tile>
 		<positionX>7</positionX>
 		<positionY>10</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>10</positionY>
-		<TileType>0</TileType>
+		<TileType>4</TileType>
 		<settlement></settlement>
 	</tile>
 	<tile>

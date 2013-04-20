@@ -176,13 +176,19 @@ namespace XNA_ENGINE.Game.Objects
             {
                 m_TileModel.PermanentSelected = true;
                 if (m_SettlementDisplayModel != null)
+                {
                     m_SettlementDisplayModel.PermanentSelected = true;
+                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
+                }
             }
             else
             {
                 m_TileModel.PermanentSelected = false;
                 if (m_SettlementDisplayModel != null)
+                {
                     m_SettlementDisplayModel.PermanentSelected = false;
+                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
+                }
             }
 
             m_Selected = false;

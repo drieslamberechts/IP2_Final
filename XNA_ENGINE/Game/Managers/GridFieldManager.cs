@@ -82,16 +82,6 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
-        public Random Random
-        {
-            get { return m_Random; }
-        }
-
-        public GridTile[,] GridField
-        {
-            get { return m_GridField; }
-        }
-
         public void PermanentSelect(int row, int column)
         {
             bool value = m_GridField[row, column].PermanentSelect;
@@ -101,6 +91,15 @@ namespace XNA_ENGINE.Game.Managers
             }
 
             m_GridField[row, column].PermanentSelect = !value;
+        }
+
+        public Random Random
+        {
+            get { return m_Random; }
+        }
+        public GridTile[,] GridField
+        {
+            get { return m_GridField; }
         }
 
         public bool CreativeMode { get; set; }
