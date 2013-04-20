@@ -73,6 +73,8 @@ namespace XNA_ENGINE.Game.Objects
 
             m_PropsList = new List<GameModelGrid>();
             m_Placeables = new List<Placeable>();
+            m_Placeables.Add(new Flag(this,m_GameScene));
+            ShowFlag(false);
 
             m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");
             m_TreeTall1 = new GameModelGrid("Models/tree_TreeTall");
@@ -170,14 +172,10 @@ namespace XNA_ENGINE.Game.Objects
             if (m_PermanentSelected)
             {
                 m_TileModel.PermanentSelected = true;
-  
-               // Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
             }
             else
             {
                 m_TileModel.PermanentSelected = false;
-
-                // Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
             }
 
             foreach (var placeable in m_Placeables)
@@ -259,7 +257,12 @@ namespace XNA_ENGINE.Game.Objects
 
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
                 {
-
+                    //Place flag of settlement
+                    Settlement settlement = GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement();
+                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement() != null)
+                    {
+                        settlement.PlaceDirectionFlag(this);
+                    }
                 }
             }
 
@@ -309,6 +312,17 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
+        public Settlement HasSettlement()
+        {
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                    return (Settlement)placeable;
+            }
+
+            return null;
+        }
+
         public bool PermanentSelected
         {
             get { return m_PermanentSelected; }
@@ -341,7 +355,17 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_TileModel; }
             set { m_TileModel = value; }
+        }
 
+        public void ShowFlag(bool value)
+        {
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Flag)
+                {
+                    placeable.Model.CanDraw = value;
+                }
+            }
         }
     }
 }

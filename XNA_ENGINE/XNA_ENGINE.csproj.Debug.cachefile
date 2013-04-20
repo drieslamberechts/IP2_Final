@@ -1,10 +1,6 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
-Content\Models\tile_Template.xnb
-Content\Models\tile_TemplateTest.xnb
 Content\Models\settlement_TestSettlementBlue.xnb
-Content\Models\settlement_TestSettlementGold.xnb
-Content\Models\settlement_TestSettlementRed.xnb
 Content\Split_Army.xnb
 Content\defend.xnb
 Content\gather.xnb
@@ -22,7 +18,8 @@ Content\Models\tile_Normal.xnb
 Content\Textures\tex_tree_TreeShort1.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
+Content\Build.xnb
 Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
-Content\Build.xnb
 Content\Textures\Background.xnb
+Content\Models\flag_FlagNormal.xnb

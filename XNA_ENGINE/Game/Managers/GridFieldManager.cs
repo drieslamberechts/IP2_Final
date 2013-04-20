@@ -23,7 +23,6 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridTile[,] m_GridField;
 
-        private GameScene m_GameScene;
 
         private const int GRID_ROW_LENGTH = 30;
         private const int GRID_COLUMN_LENGTH = 30;
@@ -36,7 +35,6 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridFieldManager(GameScene pGameScene)
         {
-            m_GameScene = pGameScene;
             CreativeMode = false;
 
             // Load Map
@@ -88,6 +86,19 @@ namespace XNA_ENGINE.Game.Managers
                         return m_GridField[i, j];
                 }
             }
+            return null;
+        }
+
+        public GridTile GetSelectedTile()
+        {
+            foreach (var gridTile in m_GridField)
+            {
+                if (gridTile.PermanentSelected)
+                {
+                    return gridTile;
+                }
+            }
+
             return null;
         }
 
