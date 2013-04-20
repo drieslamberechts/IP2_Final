@@ -10,12 +10,13 @@ using XNA_ENGINE.Engine;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    abstract class Placeable
+    public abstract class Placeable
     {
         public enum PlaceableType
         {
             Settlement,
             Army,
+            Flag,
 
             enumSize
         }
@@ -23,6 +24,7 @@ namespace XNA_ENGINE.Game.Objects
         protected bool m_Static = false;
         protected PlaceableType m_PlaceableType;
         protected GameModelGrid m_Model;
+        protected GridTile m_LinkedTile;
 
         public virtual void Update(RenderContext renderContext)
         {
@@ -50,6 +52,12 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_Model; }
             set { m_Model = value; }
+        }
+
+        public GridTile LinkedTile
+        {
+            get { return m_LinkedTile; }
+            set { m_LinkedTile = value; }
         }
     }
 }

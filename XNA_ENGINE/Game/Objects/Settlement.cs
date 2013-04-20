@@ -12,9 +12,9 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class Settlement : Placeable
+    public class Settlement : Placeable
     {
-        private readonly GridTile m_LinkedTile;
+        private GridTile m_DirectionTile;
 
         //Props
         private readonly int m_Row, m_Column;
@@ -57,6 +57,8 @@ namespace XNA_ENGINE.Game.Objects
             m_Row = m_LinkedTile.Row;
 
             m_GameScene = pGameScene;
+
+            m_DirectionTile = m_LinkedTile;
         }
 
         public override void Update(RenderContext renderContext)
@@ -90,11 +92,13 @@ namespace XNA_ENGINE.Game.Objects
             if (m_LinkedTile.PermanentSelected)
             {
                 m_Model.PermanentSelected = true;
+                m_DirectionTile.ShowFlag(true);
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
             }
             else
             {
                 m_Model.PermanentSelected = false;
+                m_DirectionTile.ShowFlag(false);
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
             }
 
@@ -111,7 +115,7 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
             {
-                int test = 0;
+                
             }
 
             if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
@@ -121,39 +125,11 @@ namespace XNA_ENGINE.Game.Objects
 
             base.OnHit();
         }
-        /*
-        private void ChangeSettlementModel(string asset)
-        {
-            GameModel newModel = new GameModel(asset);
-            newModel.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
-            newModel.CanDraw = true;
-            newModel.LoadContent(FinalScene.GetContentManager());
-            m_TileModel.RemoveChild(m_SettlementDisplayModel);
 
-            m_SettlementDisplayModel = newModel;
-            m_TileModel.AddChild(newModel);
-        }*/
-/*
-        public void SetTileSettlement(string type)
+        public void PlaceDirectionFlag(GridTile gridTile)
         {
-            m_TileSettlement = type;
+            m_DirectionTile.RemoveFlag();
+            m_DirectionTile = gridTile;
         }
-
-        public string GetTileSettlement()
-        {
-            return m_TileSettlement;
-        }*/
-
-        public int Row
-        {
-            get { return m_Row; }
-        }
-
-        public int Column
-        {
-            get { return m_Column; }
-        }
-
-
     }
 }
