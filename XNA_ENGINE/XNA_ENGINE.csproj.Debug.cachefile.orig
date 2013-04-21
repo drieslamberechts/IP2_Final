@@ -1,14 +1,15 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
-Content\Models\tile_Template.xnb
-Content\Models\tile_TemplateTest.xnb
 Content\Models\settlement_TestSettlementBlue.xnb
+<<<<<<< HEAD
 Content\Models\settlement_TestSettlementGold.xnb
 Content\Models\settlement_TestSettlementRed.xnb
+Content\Split_Army.xnb
+=======
+>>>>>>> 3eeb712e0fdef227c389e89714f3c69aa4a23da0
 Content\defend.xnb
 Content\gather.xnb
 Content\Textures\RainbowTexture.xnb
-Content\Split_Army.xnb
 Content\switch.xnb
 Content\attack.xnb
 Content\move.xnb
@@ -18,17 +19,12 @@ Content\BuildBase.xnb
 Content\BuildTile.xnb
 Content\Models\tree_TreeShort.xnb
 Content\Models\tree_TreeTall.xnb
-Content\Textures\tex_tree_TreeShort1.xnb
 Content\Models\tile_Normal.xnb
+Content\Textures\tex_tree_TreeShort1.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
-<<<<<<< HEAD
-Content\menu\exitButton.xnb
-Content\menu\startButton.xnb
-Content\Build.xnb
-=======
 Content\Build.xnb
 Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
 Content\Textures\Background.xnb
->>>>>>> 37a507351d02c3af33fa770f93e55f2997ea6dc6
+Content\Models\flag_FlagNormal.xnb

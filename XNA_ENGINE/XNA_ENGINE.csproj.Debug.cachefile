@@ -18,8 +18,8 @@ Content\Models\tile_Normal.xnb
 Content\Textures\tex_tree_TreeShort1.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
-Content\Build.xnb
 Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
+Content\Build.xnb
 Content\Textures\Background.xnb
 Content\Models\flag_FlagNormal.xnb
