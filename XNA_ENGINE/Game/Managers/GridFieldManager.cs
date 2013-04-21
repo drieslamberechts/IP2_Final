@@ -14,6 +14,7 @@ namespace XNA_ENGINE.Game.Managers
         {
             select1x1,
             select2x2,
+            select3x3,
 
             enumSize
         }
@@ -27,7 +28,7 @@ namespace XNA_ENGINE.Game.Managers
         private const int GRID_ROW_LENGTH = 30;
         private const int GRID_COLUMN_LENGTH = 30;
 
-        private SelectionMode m_SelectionMode = SelectionMode.select1x1;
+        private SelectionMode m_SelectionMode = SelectionMode.select2x2;
 
         // private int GRID_OFFSET = 64;
 
@@ -100,15 +101,120 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
-        public void PermanentSelect(int row, int column)
+        public void PermanentSelect(GridTile tile)
         {
-            bool value = m_GridField[row, column].PermanentSelected;
+            bool value = tile.PermanentSelected;
             foreach (var gridTile in m_GridField)
             {
                 gridTile.PermanentSelected = false;
             }
 
-            m_GridField[row, column].PermanentSelected = !value;
+            tile.PermanentSelected = !value;
+        }
+
+        public void Select(GridTile tile)
+        {
+            foreach (var gridTile in m_GridField)
+                gridTile.Selected = false;
+
+            switch (m_SelectionMode)
+            {
+                case SelectionMode.select1x1:
+                    tile.Selected = true;
+                    break;
+                case SelectionMode.select2x2:
+                    tile.Selected = true;
+                    if (GetNWTile(tile) != null) GetNWTile(tile).Selected = true;
+                    if (GetNTile(tile) != null) GetNTile(tile).Selected = true;
+                    if (GetNETile(tile) != null) GetNETile(tile).Selected = true;
+                    break;
+                case SelectionMode.select3x3:
+                    tile.Selected = true;
+                    if (GetNWTile(tile) != null) GetNWTile(tile).Selected = true;
+                    if (GetNTile(tile) != null) GetNTile(tile).Selected = true;
+                    if (GetNETile(tile) != null) GetNETile(tile).Selected = true;
+                    if (GetETile(tile) != null) GetETile(tile).Selected = true;
+                    if (GetSETile(tile) != null) GetSETile(tile).Selected = true;
+                    if (GetSTile(tile) != null) GetSTile(tile).Selected = true;
+                    if (GetSWTile(tile) != null) GetSWTile(tile).Selected = true;
+                    if (GetWTile(tile) != null) GetWTile(tile).Selected = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("SelectionMode (1x1 or 2x2) is out of range in GridFieldManager");
+            }
+        }
+
+        //NW and following names stand for north west....
+        //NorthWest
+        public GridTile GetNWTile(GridTile tile)
+        {
+            if (tile.Row <= 0) 
+                return null;
+
+            return m_GridField[tile.Row - 1, tile.Column];
+        }
+
+        //North
+        public GridTile GetNTile(GridTile tile)
+        {
+            if (tile.Row <= 0 || tile.Column <= 0)
+                return null;
+
+            return m_GridField[tile.Row - 1, tile.Column - 1];
+        }
+
+        //NorthEast
+        public GridTile GetNETile(GridTile tile)
+        {
+            if (tile.Column <= 0)
+                return null;
+
+            return m_GridField[tile.Row, tile.Column - 1];
+        }
+
+        //East
+        public GridTile GetETile(GridTile tile)
+        {
+            if (tile.Row >= GRID_ROW_LENGTH - 1 || tile.Column <= 0)
+                return null;
+
+            return m_GridField[tile.Row +1, tile.Column - 1];
+        }
+
+        //SouthEast
+        public GridTile GetSETile(GridTile tile)
+        {
+            if (tile.Row >= GRID_ROW_LENGTH -1)
+                return null;
+
+            return m_GridField[tile.Row +1, tile.Column];
+        }
+
+        //South
+        public GridTile GetSTile(GridTile tile)
+        {
+            if (tile.Row >= GRID_ROW_LENGTH - 1 || tile.Column >= GRID_COLUMN_LENGTH - 1)
+                return null;
+
+            return m_GridField[tile.Row + 1, tile.Column + 1];
+        }
+
+        //SouthWest
+        public GridTile GetSWTile(GridTile tile)
+        {
+            if (tile.Column >= GRID_COLUMN_LENGTH -1)
+                return null;
+
+            return m_GridField[tile.Row , tile.Column +1];
+        }
+
+        //West
+        public GridTile GetWTile(GridTile tile)
+        {
+            if (tile.Row <= 0 || tile.Column >= GRID_COLUMN_LENGTH - 1)
+                return null;
+
+            return m_GridField[tile.Row -1 , tile.Column + 1];
         }
 
         public SelectionMode SelectionModeMeth
@@ -116,6 +222,13 @@ namespace XNA_ENGINE.Game.Managers
             get { return m_SelectionMode; }
             set { m_SelectionMode = value; }
         }
+
+        public void NextSelectionMode()
+        {
+            ++m_SelectionMode;
+            if ((int)m_SelectionMode >= (int)SelectionMode.enumSize) m_SelectionMode = 0;
+        }
+
 
         public Random Random
         {

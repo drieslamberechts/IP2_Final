@@ -62,6 +62,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private SubMenuSelected m_SubMenuSelected = SubMenuSelected.MoveMode;
         private ModeSelected m_SelectedMode = ModeSelected.None;
+        private GridTile.TileType m_TileTypeSelected = GridTile.TileType.Normal1;
         private SpriteFont m_DebugFont;
         private Player m_Player;
 
@@ -265,6 +266,12 @@ namespace XNA_ENGINE.Game.Objects
             m_SelectedMode = mode;
         }
 
+        public void NextTileType()
+        {
+            ++m_TileTypeSelected;
+            if ((int)m_TileTypeSelected >= (int)GridTile.TileType.enumSize) m_TileTypeSelected = 0;
+        }
+
         public void ResetSelectedMode()
         {
             m_SelectedMode = ModeSelected.None;
@@ -274,6 +281,12 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_SubMenuSelected; }
             set { m_SubMenuSelected = value; }
+        }
+
+        public GridTile.TileType TileTypeSelected
+        {
+            get { return m_TileTypeSelected; }
+            set { m_TileTypeSelected = value; }
         }
     }
 }

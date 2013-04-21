@@ -183,7 +183,7 @@ namespace XNA_ENGINE.Game.Objects
                 placeable.Update(renderContext);
             }
 
-            m_Selected = false;
+            OnSelected();
         }
 
         public bool HitTest(Ray ray)
@@ -191,15 +191,15 @@ namespace XNA_ENGINE.Game.Objects
             if (m_TileModel.HitTest(ray))
             {
                 System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
-                OnHit();
                 return true;
             }
             return false;
         }
 
-        //Code to execute on hit with mouse
-        private void OnHit()
+        private bool OnSelected()
         {
+            if (!m_Selected) return false;
+
             bool creativeMode = GridFieldManager.GetInstance(m_GameScene).CreativeMode;
             //Get the inputmanager
             var inputManager = FinalScene.GetInputManager();
@@ -208,16 +208,9 @@ namespace XNA_ENGINE.Game.Objects
 
             if (creativeMode) //Creative mode off
             {
-                if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+                if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftHold).IsTriggered)
                 {
-                    ++m_TileType;
-                    if ((int) m_TileType >= (int)TileType.enumSize) m_TileType = 0;
-                }
-
-                if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
-                {
-                    --m_TileType;
-                    if ((int) m_TileType < 0) m_TileType = TileType.enumSize-1;
+                    m_TileType = Menu.GetInstance().TileTypeSelected;
                 }
             }
             else
@@ -227,7 +220,7 @@ namespace XNA_ENGINE.Game.Objects
                     switch (selectedMode)
                     {
                         case Menu.ModeSelected.None:
-                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(m_Row,m_Column);
+                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(this);
                             break;
                         case Menu.ModeSelected.Attack:
                             break;
@@ -266,9 +259,9 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             foreach (var placeable in m_Placeables)
-                placeable.OnHit();
+                placeable.OnSelected();
 
-            m_Selected = true;
+            return true;
         }
 
         private void InitializeProps()

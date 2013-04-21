@@ -105,8 +105,10 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         //Code to execute on hit with mouse
-        public override void OnHit()
+        public override bool OnSelected()
         {
+            if (!m_LinkedTile.Selected) return false;
+
             //Get the inputmanager
             var inputManager = FinalScene.GetInputManager();
             //What mode is there selected in the menu to build?
@@ -122,7 +124,9 @@ namespace XNA_ENGINE.Game.Objects
 
             }
 
-            base.OnHit();
+            base.OnSelected();
+
+            return true;
         }
 
         public void PlaceDirectionFlag(GridTile gridTile)

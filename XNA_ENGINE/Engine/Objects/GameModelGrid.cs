@@ -35,7 +35,7 @@ namespace XNA_ENGINE.Game.Objects
             
             m_Alpha = 1;
             m_UseTexture = false;
-            m_DiffuseColor = new Vector3(0.5f, 0.5f, 0.5f);
+            //m_DiffuseColor = new Vector3(0.5f, 0.5f, 0.5f);
         }
 
         public override void Draw(RenderContext renderContext)

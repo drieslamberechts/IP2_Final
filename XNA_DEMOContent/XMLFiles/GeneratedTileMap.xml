@@ -43,12 +43,12 @@
 	<tile>
 		<positionX>8</positionX>
 		<positionY>0</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>0</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
@@ -133,22 +133,22 @@
 	<tile>
 		<positionX>26</positionX>
 		<positionY>0</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>0</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>0</positionY>
-		<TileType>2</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>0</positionY>
-		<TileType>2</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -188,22 +188,22 @@
 	<tile>
 		<positionX>7</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
@@ -213,12 +213,12 @@
 	<tile>
 		<positionX>12</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
@@ -283,22 +283,22 @@
 	<tile>
 		<positionX>26</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>1</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>1</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>1</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -338,22 +338,22 @@
 	<tile>
 		<positionX>7</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
@@ -363,12 +363,12 @@
 	<tile>
 		<positionX>12</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
@@ -398,12 +398,12 @@
 	<tile>
 		<positionX>19</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
@@ -438,17 +438,17 @@
 	<tile>
 		<positionX>27</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>2</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>2</positionY>
-		<TileType>2</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -483,32 +483,32 @@
 	<tile>
 		<positionX>6</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
@@ -553,12 +553,12 @@
 	<tile>
 		<positionX>20</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
@@ -598,7 +598,7 @@
 	<tile>
 		<positionX>29</positionX>
 		<positionY>3</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -628,47 +628,47 @@
 	<tile>
 		<positionX>5</positionX>
 		<positionY>4</positionY>
-		<TileType>1</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
 		<positionY>4</positionY>
-		<TileType>1</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
@@ -703,2277 +703,2277 @@
 	<tile>
 		<positionX>20</positionX>
 		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>4</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>4</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>5</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>5</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>5</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>5</positionY>
-		<TileType>3</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>5</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>5</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>5</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>6</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>6</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>6</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>6</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>6</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>6</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>7</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>7</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>7</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>7</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>8</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>8</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>8</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>8</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>8</positionY>
-		<TileType>3</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>8</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>8</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>8</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>8</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>8</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>8</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>8</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>8</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>8</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>9</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>9</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>9</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>9</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>9</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>9</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>9</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>9</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>9</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>9</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>10</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>10</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>10</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>10</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>10</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>10</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>10</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>10</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>10</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>10</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>10</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>11</positionY>
-		<TileType>3</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>11</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>11</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>11</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>11</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>11</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>11</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>11</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>11</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>12</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>12</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>12</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>12</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>12</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>12</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>12</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>12</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>12</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>13</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>13</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>13</positionY>
-		<TileType>3</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>13</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>13</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>13</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>13</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>13</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>13</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>13</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>13</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>13</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>13</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>14</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>14</positionY>
-		<TileType>3</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>14</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>14</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>14</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>14</positionY>
-		<TileType>3</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>14</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>14</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>14</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>14</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>14</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>15</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>15</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>15</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>15</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>15</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>16</positionY>
-		<TileType>3</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>16</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>16</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>16</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>16</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>16</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>16</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>17</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>17</positionY>
-		<TileType>2</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>17</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>24</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>25</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>26</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>27</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>28</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>29</positionX>
-		<positionY>17</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>1</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>2</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>3</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>4</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>18</positionY>
 		<TileType>3</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
-		<positionY>18</positionY>
-		<TileType>0</TileType>
+		<positionY>4</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
+		<positionY>4</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
+		<positionY>4</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
+		<positionY>4</positionY>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
-		<positionY>18</positionY>
+		<positionY>4</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
-		<positionY>18</positionY>
+		<positionY>4</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
-		<positionY>18</positionY>
+		<positionY>4</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
-		<positionY>18</positionY>
+		<positionY>4</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
-		<positionY>18</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>0</positionX>
-		<positionY>19</positionY>
+		<positionY>4</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
+		<positionX>0</positionX>
+		<positionY>5</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
 		<positionX>1</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>2</positionX>
-		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<positionY>5</positionY>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>3</positionX>
-		<positionY>19</positionY>
-		<TileType>1</TileType>
+		<positionY>5</positionY>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>4</positionX>
-		<positionY>19</positionY>
-		<TileType>5</TileType>
+		<positionY>5</positionY>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>5</positionX>
-		<positionY>19</positionY>
-		<TileType>5</TileType>
+		<positionY>5</positionY>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
-		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<positionY>5</positionY>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
-		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
-		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
-		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
-		<positionY>19</positionY>
-		<TileType>2</TileType>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
-		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<positionY>5</positionY>
+		<TileType>3</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
-		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
-		<positionY>19</positionY>
+		<positionY>5</positionY>
 		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
+		<positionY>5</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>5</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>5</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>5</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>5</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>6</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>6</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>6</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>6</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>6</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>6</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>6</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>6</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>6</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>6</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>6</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>6</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>7</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>7</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>7</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>7</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>7</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>7</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>7</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>7</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>7</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>7</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>8</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>8</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>8</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>8</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>8</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>8</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>8</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>8</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>8</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>8</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>9</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>9</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>9</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>9</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>9</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>9</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>9</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>9</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>9</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>9</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>9</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>10</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>10</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>10</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>10</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>10</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>10</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>10</positionY>
+		<TileType>3</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>10</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>10</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>10</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>11</positionY>
+		<TileType>3</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>11</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>11</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>11</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>11</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>11</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>11</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>11</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>11</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>11</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>11</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>12</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>12</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>12</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>13</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>13</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>13</positionY>
+		<TileType>3</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>13</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>13</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>13</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>13</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>13</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>13</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>14</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>14</positionY>
+		<TileType>3</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>14</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>14</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>14</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>14</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>14</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>14</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>14</positionY>
+		<TileType>3</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>14</positionY>
+		<TileType>3</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>14</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>15</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>15</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>15</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>15</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>15</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>15</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>15</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>15</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>15</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>16</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>16</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>16</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>16</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>16</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>17</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>17</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>17</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>17</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>17</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>17</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>17</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>17</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
+		<positionY>18</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>18</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>18</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>24</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>25</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>26</positionX>
+		<positionY>18</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>27</positionX>
+		<positionY>18</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>28</positionX>
+		<positionY>18</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>29</positionX>
+		<positionY>18</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>0</positionX>
 		<positionY>19</positionY>
 		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>1</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>2</positionX>
+		<positionY>19</positionY>
+		<TileType>0</TileType>
+	</tile>
+	<tile>
+		<positionX>3</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>4</positionX>
+		<positionY>19</positionY>
+		<TileType>5</TileType>
+	</tile>
+	<tile>
+		<positionX>5</positionX>
+		<positionY>19</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>6</positionX>
+		<positionY>19</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>19</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>19</positionY>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>19</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
 		<positionY>19</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
@@ -2988,7 +2988,7 @@
 	<tile>
 		<positionX>27</positionX>
 		<positionY>19</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -3018,112 +3018,112 @@
 	<tile>
 		<positionX>3</positionX>
 		<positionY>20</positionY>
-		<TileType>1</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>4</positionX>
 		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>5</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>6</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>7</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>8</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>9</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>10</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>20</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>20</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>20</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>20</positionY>
 		<TileType>1</TileType>
 	</tile>
 	<tile>
-		<positionX>16</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>20</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
+		<positionX>5</positionX>
 		<positionY>20</positionY>
 		<TileType>3</TileType>
 	</tile>
 	<tile>
+		<positionX>6</positionX>
+		<positionY>20</positionY>
+		<TileType>3</TileType>
+	</tile>
+	<tile>
+		<positionX>7</positionX>
+		<positionY>20</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>8</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>9</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>20</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
 		<positionX>20</positionX>
 		<positionY>20</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>20</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
 		<positionY>20</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>20</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>20</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
@@ -3143,12 +3143,12 @@
 	<tile>
 		<positionX>28</positionX>
 		<positionY>20</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>20</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -3168,12 +3168,12 @@
 	<tile>
 		<positionX>3</positionX>
 		<positionY>21</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>4</positionX>
 		<positionY>21</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>5</positionX>
@@ -3188,7 +3188,7 @@
 	<tile>
 		<positionX>7</positionX>
 		<positionY>21</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
@@ -3197,98 +3197,98 @@
 	</tile>
 	<tile>
 		<positionX>9</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>10</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>11</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>12</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>13</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>14</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>15</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>16</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>17</positionX>
+		<positionY>21</positionY>
+		<TileType>1</TileType>
+	</tile>
+	<tile>
+		<positionX>18</positionX>
+		<positionY>21</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>19</positionX>
+		<positionY>21</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>20</positionX>
+		<positionY>21</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>21</positionX>
+		<positionY>21</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>22</positionX>
+		<positionY>21</positionY>
+		<TileType>2</TileType>
+	</tile>
+	<tile>
+		<positionX>23</positionX>
 		<positionY>21</positionY>
 		<TileType>3</TileType>
 	</tile>
 	<tile>
-		<positionX>10</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>11</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>12</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>13</positionX>
-		<positionY>21</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>14</positionX>
-		<positionY>21</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>15</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>16</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>17</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>18</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>19</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>20</positionX>
-		<positionY>21</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>21</positionX>
-		<positionY>21</positionY>
-		<TileType>5</TileType>
-	</tile>
-	<tile>
-		<positionX>22</positionX>
-		<positionY>21</positionY>
-		<TileType>0</TileType>
-	</tile>
-	<tile>
-		<positionX>23</positionX>
-		<positionY>21</positionY>
-		<TileType>1</TileType>
-	</tile>
-	<tile>
 		<positionX>24</positionX>
 		<positionY>21</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>21</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>21</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>21</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -3323,12 +3323,12 @@
 	<tile>
 		<positionX>4</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>5</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
@@ -3348,52 +3348,52 @@
 	<tile>
 		<positionX>9</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
 		<positionY>22</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>22</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
@@ -3403,12 +3403,12 @@
 	<tile>
 		<positionX>20</positionX>
 		<positionY>22</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
@@ -3418,27 +3418,27 @@
 	<tile>
 		<positionX>23</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>22</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -3458,12 +3458,12 @@
 	<tile>
 		<positionX>1</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>2</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>3</positionX>
@@ -3473,17 +3473,17 @@
 	<tile>
 		<positionX>4</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>5</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
@@ -3498,17 +3498,17 @@
 	<tile>
 		<positionX>9</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>23</positionY>
-		<TileType>2</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
@@ -3518,42 +3518,42 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>23</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
 		<positionY>23</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>23</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>23</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
@@ -3568,27 +3568,27 @@
 	<tile>
 		<positionX>23</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -3608,12 +3608,12 @@
 	<tile>
 		<positionX>1</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>2</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>3</positionX>
@@ -3623,37 +3623,37 @@
 	<tile>
 		<positionX>4</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>5</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>24</positionY>
-		<TileType>3</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
@@ -3668,42 +3668,42 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
 		<positionY>24</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>24</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
@@ -3713,42 +3713,42 @@
 	<tile>
 		<positionX>22</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>24</positionY>
-		<TileType>3</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -3778,22 +3778,22 @@
 	<tile>
 		<positionX>5</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>25</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
@@ -3818,22 +3818,22 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
@@ -3843,62 +3843,62 @@
 	<tile>
 		<positionX>18</positionX>
 		<positionY>25</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>25</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>25</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>25</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>25</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -3928,7 +3928,7 @@
 	<tile>
 		<positionX>5</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
@@ -3968,37 +3968,37 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
 		<positionY>26</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>26</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
@@ -4008,47 +4008,47 @@
 	<tile>
 		<positionX>21</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>26</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>26</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>26</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -4078,17 +4078,17 @@
 	<tile>
 		<positionX>5</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
@@ -4123,82 +4123,82 @@
 	<tile>
 		<positionX>14</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
 		<positionY>27</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>27</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>27</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>27</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>27</positionY>
-		<TileType>5</TileType>
+		<TileType>3</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>27</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -4228,32 +4228,32 @@
 	<tile>
 		<positionX>5</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
@@ -4263,52 +4263,52 @@
 	<tile>
 		<positionX>12</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
 		<positionY>28</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>28</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
@@ -4318,37 +4318,37 @@
 	<tile>
 		<positionX>23</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>28</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>28</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>28</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>28</positionY>
-		<TileType>5</TileType>
+		<TileType>3</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>28</positionY>
-		<TileType>5</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>0</positionX>
@@ -4378,32 +4378,32 @@
 	<tile>
 		<positionX>5</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>8</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>9</positionX>
 		<positionY>29</positionY>
-		<TileType>2</TileType>
+		<TileType>3</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
@@ -4413,52 +4413,52 @@
 	<tile>
 		<positionX>12</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
 		<positionY>29</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>17</positionX>
 		<positionY>29</positionY>
-		<TileType>4</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>18</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
@@ -4468,36 +4468,36 @@
 	<tile>
 		<positionX>23</positionX>
 		<positionY>29</positionY>
-		<TileType>0</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>29</positionX>
 		<positionY>29</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 </tilemap>

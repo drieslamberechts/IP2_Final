@@ -31,10 +31,13 @@ namespace XNA_ENGINE.Game.Scenes
         {
             LeftClick,
             RightClick,
+            LeftHold,
             ScrollWheelDown,
             ToggleCreativeMode,
             RotateClockWise,
-            RotateCounterClockWise
+            RotateCounterClockWise,
+            ToggleSelectionMode,
+            ToggleTileType
         }
 
         private static ContentManager m_Content;
@@ -93,24 +96,35 @@ namespace XNA_ENGINE.Game.Scenes
 
             InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
             InputAction rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
+            InputAction leftHold = new InputAction((int)PlayerInput.LeftHold,TriggerState.Down);
             InputAction scrollWheelDown = new InputAction((int)PlayerInput.ScrollWheelDown, TriggerState.Down);
             InputAction toggleCreativeMode = new InputAction((int)PlayerInput.ToggleCreativeMode, TriggerState.Pressed);
             InputAction rotateClockwise = new InputAction((int)PlayerInput.RotateClockWise, TriggerState.Down);
             InputAction rotateCounterClockwise = new InputAction((int)PlayerInput.RotateCounterClockWise, TriggerState.Down);
+            InputAction toggleSelectionMode = new InputAction((int)PlayerInput.ToggleSelectionMode, TriggerState.Pressed);
+            InputAction toggleTileType = new InputAction((int)PlayerInput.ToggleTileType, TriggerState.Pressed);
+            
 
             leftClick.MouseButton = MouseButtons.LeftButton;
             rightClick.MouseButton = MouseButtons.RightButton;
+            leftHold.MouseButton = MouseButtons.LeftButton;
             scrollWheelDown.MouseButton = MouseButtons.MiddleButton;
             toggleCreativeMode.KeyButton = Keys.C;
             rotateClockwise.KeyButton = Keys.A;
             rotateCounterClockwise.KeyButton = Keys.E;
+            toggleSelectionMode.KeyButton = Keys.V;
+            toggleTileType.KeyButton = Keys.B;
             
+
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
+            m_InputManager.MapAction(leftHold);
             m_InputManager.MapAction(scrollWheelDown);
             m_InputManager.MapAction(toggleCreativeMode);
             m_InputManager.MapAction(rotateClockwise);
             m_InputManager.MapAction(rotateCounterClockwise);
+            m_InputManager.MapAction(toggleSelectionMode);
+            m_InputManager.MapAction(toggleTileType);
 
             //Initialize the GridFieldManager
             GridFieldManager.GetInstance(this).Initialize();
@@ -182,7 +196,12 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.White);
 
                 // Creative mode
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "Creative mode: " + GridFieldManager.GetInstance(this).CreativeMode, new Vector2(10, 50), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "C: Creative mode: " + GridFieldManager.GetInstance(this).CreativeMode , new Vector2(10, 50), Color.White);
+                // TileType
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "B: Tiletype to build: " + Menu.GetInstance().TileTypeSelected, new Vector2(10, 70), Color.White);
+
+                // Selection mode
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "V: Selection mode: " + GridFieldManager.GetInstance(this).SelectionModeMeth, new Vector2(10, 90), Color.White);
 
             }
             else // Draw before the 3D is drawn
@@ -207,8 +226,18 @@ namespace XNA_ENGINE.Game.Scenes
             // Handle Keyboard Input
             KeyboardState keyboardState = renderContext.Input.CurrentKeyboardState;
 
+            //Creative Mode
             if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleCreativeMode))
                 GridFieldManager.GetInstance(this).CreativeMode = !GridFieldManager.GetInstance(this).CreativeMode;
+
+            //TileTypeSelected
+            if (m_InputManager.IsActionTriggered((int)PlayerInput.ToggleSelectionMode))
+                GridFieldManager.GetInstance(this).NextSelectionMode();
+
+            //SelectionMode
+            if (m_InputManager.IsActionTriggered((int)PlayerInput.ToggleTileType))
+                Menu.GetInstance().NextTileType();
+
 
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
@@ -317,7 +346,11 @@ namespace XNA_ENGINE.Game.Scenes
 
             //Raycast to grid
             if (isMouseInScreen)
-                GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
+            {
+                var tile = GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
+                if (tile != null)
+                    GridFieldManager.GetInstance(this).Select(tile);
+            }
         }
 
         public static bool IsMouseInScreen(RenderContext renderContext)
