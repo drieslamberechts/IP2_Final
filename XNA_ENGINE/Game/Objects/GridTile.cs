@@ -25,7 +25,7 @@ namespace XNA_ENGINE.Game.Objects
         private Army m_Army;
 
         private List<GameModelGrid> m_PropsList;
-        private List<Placeable> m_Placeables;
+        private List<Placeable> m_LinkedPlaceables;
         
         private readonly int m_Row, m_Column;
 
@@ -73,8 +73,8 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel = new GameModelGrid("Models/tile_Normal");
 
             m_PropsList = new List<GameModelGrid>();
-            m_Placeables = new List<Placeable>();
-            m_Placeables.Add(new RallyPoint(this,m_GameScene));
+            m_LinkedPlaceables = new List<Placeable>();
+            m_LinkedPlaceables.Add(new RallyPoint(this, m_GameScene));
             ShowFlag(false);
 
             m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");
@@ -179,7 +179,7 @@ namespace XNA_ENGINE.Game.Objects
                 m_TileModel.PermanentSelected = false;
             }
 
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 placeable.Update(renderContext);
             }
@@ -227,7 +227,7 @@ namespace XNA_ENGINE.Game.Objects
                 }
             }
 
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
                 placeable.OnSelected();
 
             return true;
@@ -258,17 +258,17 @@ namespace XNA_ENGINE.Game.Objects
 
         public void AddSettlement(Settlement.SettlementType settlementType)
         {
-            m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
+            m_LinkedPlaceables.Add(new Settlement(this, m_GameScene, settlementType));
         }
 
         public void AddSchool(School.SchoolType schoolType)
         {
-            m_Placeables.Add(new School(this, m_GameScene, schoolType));
+            m_LinkedPlaceables.Add(new School(this, m_GameScene, schoolType));
         }
 
         public void AddShrine(Shrine.ShrineType shrineType)
         {
-            m_Placeables.Add(new Shrine(this, m_GameScene, shrineType));
+            m_LinkedPlaceables.Add(new Shrine(this, m_GameScene, shrineType));
         }
 
        /* private void RemoveSettlementModel()
@@ -285,7 +285,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public Settlement HasSettlement()
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                     return (Settlement)placeable;
@@ -296,7 +296,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public School HasSchool()
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.School)
                     return (School)placeable;
@@ -307,7 +307,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public Shrine HasShrine()
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
                     return (Shrine)placeable;
@@ -352,7 +352,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public void ShowFlag(bool value)
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Flag)
                 {

@@ -94,7 +94,5 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_AttackScene = false;
         }
-
-
     }
 }

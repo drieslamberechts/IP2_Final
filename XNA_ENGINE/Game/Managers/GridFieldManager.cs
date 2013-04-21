@@ -81,7 +81,6 @@ namespace XNA_ENGINE.Game.Managers
             }
         }
 
-
         public void HandleInput(RenderContext renderContext)
         {
             var inputManager = FinalScene.GetInputManager();
