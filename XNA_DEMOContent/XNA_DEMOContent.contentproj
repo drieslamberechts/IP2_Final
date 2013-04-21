@@ -141,8 +141,8 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\flag_FlagNormal.X">
-      <Name>flag_FlagNormal</Name>
+    <Compile Include="Models\building_FlagNormal.X">
+      <Name>building_FlagNormal</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

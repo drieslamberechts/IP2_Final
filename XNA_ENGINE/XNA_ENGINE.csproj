@@ -107,7 +107,7 @@
     <Compile Include="Engine\Scenegraph\GameScene.cs" />
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
     <Compile Include="Game\Helpers\MapLoadSave.cs" />
-    <Compile Include="Game\Objects\Flag.cs" />
+    <Compile Include="Game\Objects\RallyPoint.cs" />
     <Compile Include="Game\Objects\Placeable.cs" />
     <Compile Include="Game\Managers\GridFieldManager.cs" />
     <Compile Include="Game\MainGame.cs" />

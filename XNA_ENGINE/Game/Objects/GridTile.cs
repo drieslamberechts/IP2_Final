@@ -73,7 +73,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_PropsList = new List<GameModelGrid>();
             m_Placeables = new List<Placeable>();
-            m_Placeables.Add(new Flag(this,m_GameScene));
+            m_Placeables.Add(new RallyPoint(this,m_GameScene));
             ShowFlag(false);
 
             m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");

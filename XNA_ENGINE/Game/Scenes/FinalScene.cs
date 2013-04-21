@@ -238,7 +238,6 @@ namespace XNA_ENGINE.Game.Scenes
             if (m_InputManager.IsActionTriggered((int)PlayerInput.ToggleTileType))
                 Menu.GetInstance().NextTileType();
 
-
             // Handle GamePad Input
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
