@@ -233,15 +233,15 @@ namespace XNA_ENGINE.Game.Objects
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.BuildShrine:
-                            AddShrine(Settlement.SettlementType.Basic1);
+                            AddShrine(School.SchoolType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.BuildSchool:
-                            AddSchool(Settlement.SettlementType.Basic1);
+                            AddSchool(Shrine.ShrineType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.Delete:
-                            RemoveSettlementModel();
+                            //RemoveSettlementModel();
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -253,7 +253,19 @@ namespace XNA_ENGINE.Game.Objects
                     //Place flag of settlement
                     if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement() != null)
                     {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement().PlaceDirectionFlag(this);
+                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement().PlaceRallyPoint(this);
+                    }
+
+                    //Place flag of school
+                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool() != null)
+                    {
+                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool().PlaceRallyPoint(this);
+                    }
+
+                    //Place flag of shrine
+                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine() != null)
+                    {
+                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine().PlaceRallyPoint(this);
                     }
                 }
             }
@@ -292,17 +304,17 @@ namespace XNA_ENGINE.Game.Objects
             m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
         }
 
-        private void AddShrine(Settlement.SettlementType settlementType)
+        private void AddShrine(School.SchoolType schoolType)
         {
-            m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
+            m_Placeables.Add(new School(this, m_GameScene, schoolType));
         }
 
-        private void AddSchool(Settlement.SettlementType settlementType)
+        private void AddSchool(Shrine.ShrineType shrineType)
         {
-            m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
+            m_Placeables.Add(new Shrine(this, m_GameScene, shrineType));
         }
 
-        private void RemoveSettlementModel()
+       /* private void RemoveSettlementModel()
         {
             foreach (var placeable in m_Placeables)
             {
@@ -312,7 +324,7 @@ namespace XNA_ENGINE.Game.Objects
                     return;
                 }
             }
-        }
+        }*/
 
         public Settlement HasSettlement()
         {
@@ -320,6 +332,28 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                     return (Settlement)placeable;
+            }
+
+            return null;
+        }
+
+        public School HasSchool()
+        {
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.School)
+                    return (School)placeable;
+            }
+
+            return null;
+        }
+
+        public Shrine HasShrine()
+        {
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
+                    return (Shrine)placeable;
             }
 
             return null;

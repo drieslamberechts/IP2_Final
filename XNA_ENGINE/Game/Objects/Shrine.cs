@@ -12,7 +12,7 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    public class Settlement : Placeable
+    public class Shrine : Placeable
     {
         private GridTile m_DirectionTile;
 
@@ -23,9 +23,9 @@ namespace XNA_ENGINE.Game.Objects
 
         private readonly GameScene m_GameScene;
 
-        private readonly SettlementType m_SettlementType;
+        private readonly ShrineType m_ShrineType;
 
-        public enum SettlementType
+        public enum ShrineType
         {
             Basic1,
 
@@ -33,18 +33,18 @@ namespace XNA_ENGINE.Game.Objects
             enumSize
         }
 
-        public Settlement(GridTile tile, GameScene pGameScene, SettlementType settlementType)
+        public Shrine(GridTile tile, GameScene pGameScene, ShrineType shrineType)
         {
-            m_PlaceableType = PlaceableType.Settlement;
-            m_SettlementType = settlementType;
+            m_PlaceableType = PlaceableType.Shrine;
+            m_ShrineType = shrineType;
 
             m_LinkedTile = tile;
 
-            switch (m_SettlementType)
+            switch (m_ShrineType)
             {
-                case SettlementType.Basic1:
-                    m_Model = new GameModelGrid("Models/building_Settlement");
-                    m_Model.LocalPosition += new Vector3(30, GRIDHEIGHT, 64);
+                case ShrineType.Basic1:
+                    m_Model = new GameModelGrid("Models/building_Shrine");
+                    m_Model.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
                     Quaternion rotation = new Quaternion(new Vector3(0,1,0), 0);
                     m_Model.LocalRotation += rotation;
                     m_Model.CanDraw = true;
@@ -53,7 +53,7 @@ namespace XNA_ENGINE.Game.Objects
                     m_LinkedTile.Model.AddChild(m_Model);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("settlementType");
+                    throw new ArgumentOutOfRangeException("shrineType");
             }
 
             m_Column = m_LinkedTile.Column;
@@ -67,9 +67,9 @@ namespace XNA_ENGINE.Game.Objects
         public override void Update(RenderContext renderContext)
         {
             //Appearance of the tile
-            switch (m_SettlementType)
+            switch (m_ShrineType)
             {
-                case SettlementType.Basic1:
+                case ShrineType.Basic1:
                     //m_Model.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
                     //m_Model.UseTexture = true;
 

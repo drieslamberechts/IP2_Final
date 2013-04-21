@@ -15,6 +15,8 @@ namespace XNA_ENGINE.Game.Objects
         public enum PlaceableType
         {
             Settlement,
+            School,
+            Shrine,
             Army,
             Flag,
 

@@ -109,7 +109,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(RenderContext renderContext)
         {
-            if (m_SelectedMode == ModeSelected.None)
+            if (m_SelectedMode == ModeSelected.None && GridFieldManager.GetInstance(SceneManager.ActiveScene).CreativeMode == false)
                 GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
         }
 
