@@ -1,10 +1,10 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
 Content\Models\settlement_TestSettlementBlue.xnb
-Content\Split_Army.xnb
 Content\defend.xnb
 Content\gather.xnb
 Content\Textures\RainbowTexture.xnb
+Content\Split_Army.xnb
 Content\switch.xnb
 Content\attack.xnb
 Content\move.xnb
@@ -14,8 +14,8 @@ Content\BuildBase.xnb
 Content\BuildTile.xnb
 Content\Models\tree_TreeShort.xnb
 Content\Models\tree_TreeTall.xnb
-Content\Models\tile_Normal.xnb
 Content\Textures\tex_tree_TreeShort1.xnb
+Content\Models\tile_Normal.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
 Content\Build.xnb
@@ -23,3 +23,4 @@ Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
 Content\Textures\Background.xnb
 Content\Models\flag_FlagNormal.xnb
+Content\Models\building_Settlement.xnb

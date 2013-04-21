@@ -43,10 +43,12 @@ namespace XNA_ENGINE.Game.Objects
             switch (m_SettlementType)
             {
                 case SettlementType.Basic1:
-                    m_Model = new GameModelGrid("Models/settlement_TestSettlementBlue");
-                    m_Model.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
+                    m_Model = new GameModelGrid("Models/building_Settlement");
+                    m_Model.LocalPosition += new Vector3(40, GRIDHEIGHT, 40);
                     m_Model.CanDraw = true;
                     m_Model.LoadContent(FinalScene.GetContentManager());
+                    m_Model.Scale(0.4f, 0.4f, 0.4f);
+                    m_Model.DiffuseColor = new Vector3(0.2f,0.6f,0.2f);
                     m_LinkedTile.Model.AddChild(m_Model);
                     break;
                 default:

@@ -341,6 +341,7 @@ namespace XNA_ENGINE.Game.Scenes
             #endregion
             #endregion
             
+            GridFieldManager.GetInstance(this).Deselect();
             //Handle menu //If menu is hit don't do the grid test
             if (Menu.GetInstance().HandleInput(renderContext)) return; // hier in Menu -> klikken?
 

@@ -228,16 +228,16 @@ namespace XNA_ENGINE.Game.Objects
                             break;
                         case Menu.ModeSelected.Gather:
                             break;
-                        case Menu.ModeSelected.TileBlue:
+                        case Menu.ModeSelected.BuildSettlement:
                             AddSettlement(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
-                        case Menu.ModeSelected.TileGold:
-                            AddSettlement(Settlement.SettlementType.Basic1);
+                        case Menu.ModeSelected.BuildShrine:
+                            AddShrine(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
-                        case Menu.ModeSelected.TileRed:
-                            AddSettlement(Settlement.SettlementType.Basic1);
+                        case Menu.ModeSelected.BuildSchool:
+                            AddSchool(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.Delete:
@@ -288,6 +288,16 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         private void AddSettlement(Settlement.SettlementType settlementType)
+        {
+            m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
+        }
+
+        private void AddShrine(Settlement.SettlementType settlementType)
+        {
+            m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
+        }
+
+        private void AddSchool(Settlement.SettlementType settlementType)
         {
             m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
         }

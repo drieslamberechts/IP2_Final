@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
@@ -54,10 +55,12 @@ namespace XNA_ENGINE.Game.Objects
             Attack,
             Defend,
             Gather,
-            TileBlue,
-            TileGold,
-            TileRed,
-            Delete
+            BuildSettlement,
+            BuildShrine,
+            BuildSchool,
+            Delete,
+
+            enumSize
         }
 
         private SubMenuSelected m_SubMenuSelected = SubMenuSelected.MoveMode;
@@ -106,7 +109,8 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(RenderContext renderContext)
         {
-           
+            if (m_SelectedMode == ModeSelected.None)
+                GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
         }
 
         public bool HandleInput(RenderContext renderContext)
@@ -127,30 +131,31 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileBlue))
                     {
                         // SET DECREASE RESOURCES
-                        m_Player.GetResources().DecreaseWood(10);
-
-                        m_SelectedMode = ModeSelected.TileBlue;
+                        m_Player.GetResources().DecreaseWood(20);
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        m_SelectedMode = ModeSelected.BuildSettlement;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileGold))
                     {
                         // SET DECREASE RESOURCES
-
-                        m_SelectedMode = ModeSelected.TileGold;
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        m_SelectedMode = ModeSelected.BuildShrine;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileRed))
                     {
                         // SET DECREASE RESOURCES
-
-                        m_SelectedMode = ModeSelected.TileRed;
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        m_SelectedMode = ModeSelected.BuildSchool;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
                     {
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.Delete;
                         return true;
                     }

@@ -28,7 +28,7 @@ namespace XNA_ENGINE.Game.Managers
         private const int GRID_ROW_LENGTH = 30;
         private const int GRID_COLUMN_LENGTH = 30;
 
-        private SelectionMode m_SelectionMode = SelectionMode.select2x2;
+        private SelectionMode m_SelectionMode = SelectionMode.select1x1;
 
         // private int GRID_OFFSET = 64;
 
@@ -114,9 +114,6 @@ namespace XNA_ENGINE.Game.Managers
 
         public void Select(GridTile tile)
         {
-            foreach (var gridTile in m_GridField)
-                gridTile.Selected = false;
-
             switch (m_SelectionMode)
             {
                 case SelectionMode.select1x1:
@@ -144,6 +141,16 @@ namespace XNA_ENGINE.Game.Managers
             }
         }
 
+        public void Deselect()
+        {
+            foreach (var gridTile in m_GridField)
+                gridTile.Selected = false;
+        }
+
+        //Functions that pick a surrounding tile of another tile
+        #region Surrounding tiles
+
+        
         //NW and following names stand for north west....
         //NorthWest
         public GridTile GetNWTile(GridTile tile)
@@ -217,6 +224,8 @@ namespace XNA_ENGINE.Game.Managers
             return m_GridField[tile.Row -1 , tile.Column + 1];
         }
 
+        #endregion
+
         public SelectionMode SelectionModeMeth
         {
             get { return m_SelectionMode; }
@@ -228,7 +237,6 @@ namespace XNA_ENGINE.Game.Managers
             ++m_SelectionMode;
             if ((int)m_SelectionMode >= (int)SelectionMode.enumSize) m_SelectionMode = 0;
         }
-
 
         public Random Random
         {
