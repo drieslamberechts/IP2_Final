@@ -15,6 +15,8 @@ namespace XNA_ENGINE.Game.Objects
         public enum PlaceableType
         {
             Settlement,
+            School,
+            Shrine,
             Army,
             Flag,
 
@@ -31,9 +33,11 @@ namespace XNA_ENGINE.Game.Objects
             
         }
 
-        public virtual void OnHit()
+        public virtual bool OnSelected()
         {
+            if (!m_LinkedTile.Selected) return false;
 
+            return true;
         }
 
         public bool Static 

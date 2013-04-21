@@ -12,7 +12,7 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    public class Settlement : Placeable
+    public class School : Placeable
     {
         private GridTile m_DirectionTile;
 
@@ -23,9 +23,9 @@ namespace XNA_ENGINE.Game.Objects
 
         private readonly GameScene m_GameScene;
 
-        private readonly SettlementType m_SettlementType;
+        private readonly SchoolType m_SchoolType;
 
-        public enum SettlementType
+        public enum SchoolType
         {
             Basic1,
 
@@ -33,27 +33,27 @@ namespace XNA_ENGINE.Game.Objects
             enumSize
         }
 
-        public Settlement(GridTile tile, GameScene pGameScene, SettlementType settlementType)
+        public School(GridTile tile, GameScene pGameScene, SchoolType schoolType)
         {
-            m_PlaceableType = PlaceableType.Settlement;
-            m_SettlementType = settlementType;
+            m_PlaceableType = PlaceableType.School;
+            m_SchoolType = schoolType;
 
             m_LinkedTile = tile;
 
-            switch (m_SettlementType)
+            switch (m_SchoolType)
             {
-                case SettlementType.Basic1:
-                    m_Model = new GameModelGrid("Models/building_Settlement");
-                    m_Model.LocalPosition += new Vector3(30, GRIDHEIGHT, 64);
+                case SchoolType.Basic1:
+                    m_Model = new GameModelGrid("Models/building_School");
+                    m_Model.LocalPosition += new Vector3(30, GRIDHEIGHT, 10);
                     Quaternion rotation = new Quaternion(new Vector3(0,1,0), 0);
                     m_Model.LocalRotation += rotation;
                     m_Model.CanDraw = true;
                     m_Model.LoadContent(FinalScene.GetContentManager());
-                    m_Model.DiffuseColor = new Vector3(0.1f,0.1f,0.5f);
+                    m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
                     m_LinkedTile.Model.AddChild(m_Model);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("settlementType");
+                    throw new ArgumentOutOfRangeException("schoolType");
             }
 
             m_Column = m_LinkedTile.Column;
@@ -67,9 +67,9 @@ namespace XNA_ENGINE.Game.Objects
         public override void Update(RenderContext renderContext)
         {
             //Appearance of the tile
-            switch (m_SettlementType)
+            switch (m_SchoolType)
             {
-                case SettlementType.Basic1:
+                case SchoolType.Basic1:
                     //m_Model.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
                     //m_Model.UseTexture = true;
 

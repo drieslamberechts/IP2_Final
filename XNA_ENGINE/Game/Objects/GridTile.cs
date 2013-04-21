@@ -73,7 +73,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_PropsList = new List<GameModelGrid>();
             m_Placeables = new List<Placeable>();
-            m_Placeables.Add(new Flag(this,m_GameScene));
+            m_Placeables.Add(new RallyPoint(this,m_GameScene));
             ShowFlag(false);
 
             m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");
@@ -183,7 +183,7 @@ namespace XNA_ENGINE.Game.Objects
                 placeable.Update(renderContext);
             }
 
-            m_Selected = false;
+            OnSelected();
         }
 
         public bool HitTest(Ray ray)
@@ -191,15 +191,15 @@ namespace XNA_ENGINE.Game.Objects
             if (m_TileModel.HitTest(ray))
             {
                 System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
-                OnHit();
                 return true;
             }
             return false;
         }
 
-        //Code to execute on hit with mouse
-        private void OnHit()
+        private bool OnSelected()
         {
+            if (!m_Selected) return false;
+
             bool creativeMode = GridFieldManager.GetInstance(m_GameScene).CreativeMode;
             //Get the inputmanager
             var inputManager = FinalScene.GetInputManager();
@@ -208,16 +208,9 @@ namespace XNA_ENGINE.Game.Objects
 
             if (creativeMode) //Creative mode off
             {
-                if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+                if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftHold).IsTriggered)
                 {
-                    ++m_TileType;
-                    if ((int) m_TileType >= (int)TileType.enumSize) m_TileType = 0;
-                }
-
-                if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
-                {
-                    --m_TileType;
-                    if ((int) m_TileType < 0) m_TileType = TileType.enumSize-1;
+                    m_TileType = Menu.GetInstance().TileTypeSelected;
                 }
             }
             else
@@ -227,7 +220,7 @@ namespace XNA_ENGINE.Game.Objects
                     switch (selectedMode)
                     {
                         case Menu.ModeSelected.None:
-                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(m_Row,m_Column);
+                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(this);
                             break;
                         case Menu.ModeSelected.Attack:
                             break;
@@ -235,20 +228,20 @@ namespace XNA_ENGINE.Game.Objects
                             break;
                         case Menu.ModeSelected.Gather:
                             break;
-                        case Menu.ModeSelected.TileBlue:
+                        case Menu.ModeSelected.BuildSettlement:
                             AddSettlement(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
-                        case Menu.ModeSelected.TileGold:
-                            AddSettlement(Settlement.SettlementType.Basic1);
+                        case Menu.ModeSelected.BuildShrine:
+                            AddShrine(School.SchoolType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
-                        case Menu.ModeSelected.TileRed:
-                            AddSettlement(Settlement.SettlementType.Basic1);
+                        case Menu.ModeSelected.BuildSchool:
+                            AddSchool(Shrine.ShrineType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
                         case Menu.ModeSelected.Delete:
-                            RemoveSettlementModel();
+                            //RemoveSettlementModel();
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -260,15 +253,27 @@ namespace XNA_ENGINE.Game.Objects
                     //Place flag of settlement
                     if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement() != null)
                     {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement().PlaceDirectionFlag(this);
+                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement().PlaceRallyPoint(this);
+                    }
+
+                    //Place flag of school
+                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool() != null)
+                    {
+                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool().PlaceRallyPoint(this);
+                    }
+
+                    //Place flag of shrine
+                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine() != null)
+                    {
+                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine().PlaceRallyPoint(this);
                     }
                 }
             }
 
             foreach (var placeable in m_Placeables)
-                placeable.OnHit();
+                placeable.OnSelected();
 
-            m_Selected = true;
+            return true;
         }
 
         private void InitializeProps()
@@ -299,7 +304,17 @@ namespace XNA_ENGINE.Game.Objects
             m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
         }
 
-        private void RemoveSettlementModel()
+        private void AddShrine(School.SchoolType schoolType)
+        {
+            m_Placeables.Add(new School(this, m_GameScene, schoolType));
+        }
+
+        private void AddSchool(Shrine.ShrineType shrineType)
+        {
+            m_Placeables.Add(new Shrine(this, m_GameScene, shrineType));
+        }
+
+       /* private void RemoveSettlementModel()
         {
             foreach (var placeable in m_Placeables)
             {
@@ -309,7 +324,7 @@ namespace XNA_ENGINE.Game.Objects
                     return;
                 }
             }
-        }
+        }*/
 
         public Settlement HasSettlement()
         {
@@ -317,6 +332,28 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                     return (Settlement)placeable;
+            }
+
+            return null;
+        }
+
+        public School HasSchool()
+        {
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.School)
+                    return (School)placeable;
+            }
+
+            return null;
+        }
+
+        public Shrine HasShrine()
+        {
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
+                    return (Shrine)placeable;
             }
 
             return null;

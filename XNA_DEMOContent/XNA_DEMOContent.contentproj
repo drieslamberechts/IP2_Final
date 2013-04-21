@@ -141,8 +141,23 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\flag_FlagNormal.X">
-      <Name>flag_FlagNormal</Name>
+    <Compile Include="Models\building_FlagNormal.X">
+      <Name>building_FlagNormal</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\building_Settlement.X">
+      <Name>building_Settlement</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\building_School.X">
+      <Name>building_School</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\building_Shrine.X">
+      <Name>building_Shrine</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
