@@ -141,15 +141,15 @@ namespace XNA_ENGINE.Game.Objects
                     {
                         // SET DECREASE RESOURCES
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
-                        m_SelectedMode = ModeSelected.BuildShrine;
+                        m_SelectedMode = ModeSelected.BuildSchool;
                         return true;
                     }
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileRed))
                     {
                         // SET DECREASE RESOURCES
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
-                        m_SelectedMode = ModeSelected.BuildSchool;
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildShrine;
                         return true;
                     }
 

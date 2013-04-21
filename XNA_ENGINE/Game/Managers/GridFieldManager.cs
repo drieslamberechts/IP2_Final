@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Objects;
+using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Managers
 {
@@ -30,6 +32,8 @@ namespace XNA_ENGINE.Game.Managers
 
         private SelectionMode m_SelectionMode = SelectionMode.select1x1;
 
+        private GameScene m_GameScene;
+
         // private int GRID_OFFSET = 64;
 
         private Random m_Random;
@@ -37,6 +41,7 @@ namespace XNA_ENGINE.Game.Managers
         private GridFieldManager(GameScene pGameScene)
         {
             CreativeMode = false;
+            m_GameScene = pGameScene;
 
             // Load Map
             m_GridField = MapLoadSave.GetInstance().LoadMap(pGameScene, "GeneratedTileMap");
@@ -236,6 +241,76 @@ namespace XNA_ENGINE.Game.Managers
         {
             ++m_SelectionMode;
             if ((int)m_SelectionMode >= (int)SelectionMode.enumSize) m_SelectionMode = 0;
+        }
+
+        public void HandleInput(RenderContext renderContext)
+        {
+            var inputManager = FinalScene.GetInputManager();
+            bool isMouseInScreen = FinalScene.IsMouseInScreen(renderContext);
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
+            //Raycast to grid
+            if (isMouseInScreen)
+            {
+                var hittedTile = HitTestField(FinalScene.CalculateCursorRay(renderContext));
+                if (hittedTile != null)
+                {
+                    Select(hittedTile);
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+                    {
+                        switch (selectedMode)
+                        {
+                            case Menu.ModeSelected.None:
+                                PermanentSelect(hittedTile);
+                                break;
+                            case Menu.ModeSelected.Attack:
+                                break;
+                            case Menu.ModeSelected.Defend:
+                                break;
+                            case Menu.ModeSelected.Gather:
+                                break;
+                            case Menu.ModeSelected.BuildSettlement:
+                                hittedTile.AddSettlement(Settlement.SettlementType.Basic1);
+                                Menu.GetInstance().ResetSelectedMode();
+                                break;
+                            case Menu.ModeSelected.BuildShrine:
+                                hittedTile.AddShrine(Shrine.ShrineType.Basic1);
+                                Menu.GetInstance().ResetSelectedMode();
+                                break;
+                            case Menu.ModeSelected.BuildSchool:
+                                hittedTile.AddSchool(School.SchoolType.Basic1);
+                                Menu.GetInstance().ResetSelectedMode();
+                                break;
+                            case Menu.ModeSelected.Delete:
+                                //RemoveSettlementModel();
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+                    {
+                        //Place flag of settlement
+                        if (GetSelectedTile() != null && GetSelectedTile().HasSettlement() != null)
+                        {
+                            GetSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
+                        }
+
+                        //Place flag of school
+                        if (GetSelectedTile() != null && GetSelectedTile().HasSchool() != null)
+                        {
+                            GetSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
+                        }
+
+                        //Place flag of shrine
+                        if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null)
+                        {
+                            GetSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
+                        }
+                    }
+                }
+            }
         }
 
         public Random Random

@@ -39,6 +39,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private bool m_Selected;
         private bool m_PermanentSelected;
+        private bool m_Open = true;
 
         private readonly GameScene m_GameScene;
 
@@ -217,56 +218,12 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
                 {
-                    switch (selectedMode)
-                    {
-                        case Menu.ModeSelected.None:
-                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(this);
-                            break;
-                        case Menu.ModeSelected.Attack:
-                            break;
-                        case Menu.ModeSelected.Defend:
-                            break;
-                        case Menu.ModeSelected.Gather:
-                            break;
-                        case Menu.ModeSelected.BuildSettlement:
-                            AddSettlement(Settlement.SettlementType.Basic1);
-                            Menu.GetInstance().ResetSelectedMode();
-                            break;
-                        case Menu.ModeSelected.BuildShrine:
-                            AddShrine(School.SchoolType.Basic1);
-                            Menu.GetInstance().ResetSelectedMode();
-                            break;
-                        case Menu.ModeSelected.BuildSchool:
-                            AddSchool(Shrine.ShrineType.Basic1);
-                            Menu.GetInstance().ResetSelectedMode();
-                            break;
-                        case Menu.ModeSelected.Delete:
-                            //RemoveSettlementModel();
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    
                 }
 
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
                 {
-                    //Place flag of settlement
-                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement() != null)
-                    {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement().PlaceRallyPoint(this);
-                    }
 
-                    //Place flag of school
-                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool() != null)
-                    {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool().PlaceRallyPoint(this);
-                    }
-
-                    //Place flag of shrine
-                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine() != null)
-                    {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine().PlaceRallyPoint(this);
-                    }
                 }
             }
 
@@ -299,17 +256,17 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
-        private void AddSettlement(Settlement.SettlementType settlementType)
+        public void AddSettlement(Settlement.SettlementType settlementType)
         {
             m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
         }
 
-        private void AddShrine(School.SchoolType schoolType)
+        public void AddSchool(School.SchoolType schoolType)
         {
             m_Placeables.Add(new School(this, m_GameScene, schoolType));
         }
 
-        private void AddSchool(Shrine.ShrineType shrineType)
+        public void AddShrine(Shrine.ShrineType shrineType)
         {
             m_Placeables.Add(new Shrine(this, m_GameScene, shrineType));
         }
