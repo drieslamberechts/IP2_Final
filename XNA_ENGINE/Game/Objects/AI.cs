@@ -62,7 +62,7 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         // BUILD TRIBE
-        public void BuildTribe()
+        public void BuildGoblin()
         {
             // With worker reference
         }

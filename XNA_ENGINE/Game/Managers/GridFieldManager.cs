@@ -197,9 +197,9 @@ namespace XNA_ENGINE.Game.Managers
                     break;
                 case SelectionMode.select2x2:
                     tile.Selected = true;
-                    if (GetNWTile(tile) != null) GetNWTile(tile).Selected = true;
-                    if (GetNTile(tile) != null) GetNTile(tile).Selected = true;
-                    if (GetNETile(tile) != null) GetNETile(tile).Selected = true;
+                    if (GetSWTile(tile) != null) GetSWTile(tile).Selected = true;
+                    if (GetSTile(tile) != null) GetSTile(tile).Selected = true;
+                    if (GetSETile(tile) != null) GetSETile(tile).Selected = true;
                     break;
                 case SelectionMode.select3x3:
                     tile.Selected = true;
@@ -225,8 +225,6 @@ namespace XNA_ENGINE.Game.Managers
 
         //Functions that pick a surrounding tile of another tile
         #region Surrounding tiles
-
-        
         //NW and following names stand for north west....
         //NorthWest
         public GridTile GetNWTile(GridTile tile)

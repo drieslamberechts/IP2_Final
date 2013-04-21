@@ -193,7 +193,7 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuild))
                     {
                         Console.WriteLine("Build goblin");
-                        m_Player.GetPlayerOptions().BuildTribe();
+                        m_Player.GetPlayerOptions().BuildGoblin();
                         return true;
                     }
                     break;
