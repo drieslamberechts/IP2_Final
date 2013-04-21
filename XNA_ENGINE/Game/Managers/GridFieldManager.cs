@@ -81,6 +81,77 @@ namespace XNA_ENGINE.Game.Managers
             }
         }
 
+
+        public void HandleInput(RenderContext renderContext)
+        {
+            var inputManager = FinalScene.GetInputManager();
+            bool isMouseInScreen = FinalScene.IsMouseInScreen(renderContext);
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
+            //Raycast to grid
+            if (isMouseInScreen)
+            {
+                var hittedTile = HitTestField(FinalScene.CalculateCursorRay(renderContext));
+                if (hittedTile != null)
+                {
+                    Select(hittedTile);
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+                    {
+                        switch (selectedMode)
+                        {
+                            case Menu.ModeSelected.None:
+                                PermanentSelect(hittedTile);
+                                break;
+                            case Menu.ModeSelected.Attack:
+                                break;
+                            case Menu.ModeSelected.Defend:
+                                break;
+                            case Menu.ModeSelected.Gather:
+                                break;
+                            case Menu.ModeSelected.BuildSettlement:
+                                hittedTile.AddSettlement(Settlement.SettlementType.Basic1);
+                                Menu.GetInstance().ResetSelectedMode();
+                                break;
+                            case Menu.ModeSelected.BuildShrine:
+                                hittedTile.AddShrine(Shrine.ShrineType.Basic1);
+                                Menu.GetInstance().ResetSelectedMode();
+                                break;
+                            case Menu.ModeSelected.BuildSchool:
+                                hittedTile.AddSchool(School.SchoolType.Basic1);
+                                Menu.GetInstance().ResetSelectedMode();
+                                break;
+                            case Menu.ModeSelected.Delete:
+                                //RemoveSettlementModel();
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+                    {
+                        //Place flag of settlement
+                        if (GetSelectedTile() != null && GetSelectedTile().HasSettlement() != null)
+                        {
+                            GetSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
+                        }
+
+                        //Place flag of school
+                        if (GetSelectedTile() != null && GetSelectedTile().HasSchool() != null)
+                        {
+                            GetSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
+                        }
+
+                        //Place flag of shrine
+                        if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null)
+                        {
+                            GetSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
+                        }
+                    }
+                }
+            }
+        }
+
         public GridTile HitTestField(Ray ray)
         {
             //Iterate over every GridTile
@@ -243,75 +314,6 @@ namespace XNA_ENGINE.Game.Managers
             if ((int)m_SelectionMode >= (int)SelectionMode.enumSize) m_SelectionMode = 0;
         }
 
-        public void HandleInput(RenderContext renderContext)
-        {
-            var inputManager = FinalScene.GetInputManager();
-            bool isMouseInScreen = FinalScene.IsMouseInScreen(renderContext);
-            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
-
-            //Raycast to grid
-            if (isMouseInScreen)
-            {
-                var hittedTile = HitTestField(FinalScene.CalculateCursorRay(renderContext));
-                if (hittedTile != null)
-                {
-                    Select(hittedTile);
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
-                    {
-                        switch (selectedMode)
-                        {
-                            case Menu.ModeSelected.None:
-                                PermanentSelect(hittedTile);
-                                break;
-                            case Menu.ModeSelected.Attack:
-                                break;
-                            case Menu.ModeSelected.Defend:
-                                break;
-                            case Menu.ModeSelected.Gather:
-                                break;
-                            case Menu.ModeSelected.BuildSettlement:
-                                hittedTile.AddSettlement(Settlement.SettlementType.Basic1);
-                                Menu.GetInstance().ResetSelectedMode();
-                                break;
-                            case Menu.ModeSelected.BuildShrine:
-                                hittedTile.AddShrine(Shrine.ShrineType.Basic1);
-                                Menu.GetInstance().ResetSelectedMode();
-                                break;
-                            case Menu.ModeSelected.BuildSchool:
-                                hittedTile.AddSchool(School.SchoolType.Basic1);
-                                Menu.GetInstance().ResetSelectedMode();
-                                break;
-                            case Menu.ModeSelected.Delete:
-                                //RemoveSettlementModel();
-                                break;
-                            default:
-                                throw new ArgumentOutOfRangeException();
-                        }
-                    }
-
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
-                    {
-                        //Place flag of settlement
-                        if (GetSelectedTile() != null && GetSelectedTile().HasSettlement() != null)
-                        {
-                            GetSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
-                        }
-
-                        //Place flag of school
-                        if (GetSelectedTile() != null && GetSelectedTile().HasSchool() != null)
-                        {
-                            GetSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
-                        }
-
-                        //Place flag of shrine
-                        if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null)
-                        {
-                            GetSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
-                        }
-                    }
-                }
-            }
-        }
 
         public Random Random
         {
