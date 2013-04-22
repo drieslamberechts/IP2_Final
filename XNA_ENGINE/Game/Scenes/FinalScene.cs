@@ -136,8 +136,8 @@ namespace XNA_ENGINE.Game.Scenes
             m_CameraTargetPos = SceneManager.RenderContext.Camera.LocalPosition;
 
             // ADD SCENES
-            m_AttackScene = new AttackScene(m_Content, m_Player, m_Ai);
-            SceneManager.AddGameScene(m_AttackScene);
+           // m_AttackScene = new AttackScene(m_Content, m_Player, m_Ai);
+          //  SceneManager.AddGameScene(m_AttackScene);
 
             base.Initialize();
         }
