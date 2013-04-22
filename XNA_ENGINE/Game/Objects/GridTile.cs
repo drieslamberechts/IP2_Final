@@ -51,7 +51,6 @@ namespace XNA_ENGINE.Game.Objects
             Normal4,
             Water,
             Cliff,
-            Spiked,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -156,20 +155,6 @@ namespace XNA_ENGINE.Game.Objects
                    
                     m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
                     break;
-
-                case TileType.Spiked:
-                    ResetPropListParameters();
-                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
-                    m_TileModel.UseTexture = true;
-
-                    m_TileModel.CanDraw = true;
-                    m_TreeTall1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
-                    m_TreeTall1.UseTexture = true;
-                    m_TreeTall1.CanDraw = true;
-
-                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
-                    break;
-
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -233,23 +218,6 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
                 {
-
-                        // BUILD BUILDINGS
-
-                        // DELETE
-
-                        // CREATE TILES WITH SHAMAN
-                        case Menu.ModeSelected.BuildTile1:
-                            SetTileSpiked();
-                            break;
-                        case Menu.ModeSelected.BuildTile2:
-                            break;
-                        case Menu.ModeSelected.BuildTile3:
-                            break;
-                        case Menu.ModeSelected.BuildTile4:
-                            break;
-
-                        // DEFAULT
                     
                 }
 
@@ -301,12 +269,6 @@ namespace XNA_ENGINE.Game.Objects
         public void AddShrine(Shrine.ShrineType shrineType)
         {
             m_LinkedPlaceables.Add(new Shrine(this, m_GameScene, shrineType));
-        }
-
-        // CHANGE TILE WITH SHAMAN
-        private void SetTileSpiked()
-        {
-            m_TileType = TileType.Spiked;
         }
 
        /* private void RemoveSettlementModel()
