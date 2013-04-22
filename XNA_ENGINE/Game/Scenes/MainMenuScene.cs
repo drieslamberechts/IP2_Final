@@ -28,6 +28,7 @@ namespace XNA_ENGINE.Game.Scenes
         private Rectangle m_StartRect;
         private Rectangle m_ExitRect;
         private InputManager m_InputManager;
+        private bool m_ExitGame;
 
         public MainMenuScene(ContentManager content)
             : base("MainMenuScene")
@@ -47,6 +48,8 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction leftClick = new InputAction((int)PlayerInput.LeftClick, TriggerState.Pressed);
             leftClick.MouseButton = MouseButtons.LeftButton;
             m_InputManager.MapAction(leftClick);
+
+            m_ExitGame = false;
 
             base.Initialize();
         }
@@ -88,6 +91,7 @@ namespace XNA_ENGINE.Game.Scenes
             else if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_ExitRect))
             {
                 Console.WriteLine("Exit button");
+                ExitGame = true;
                 return true;
             }
             else return false;
@@ -102,6 +106,12 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             return false;
+        }
+
+        public bool ExitGame
+        {
+            get { return m_ExitGame; }
+            set { m_ExitGame = value; }
         }
     }
 }
