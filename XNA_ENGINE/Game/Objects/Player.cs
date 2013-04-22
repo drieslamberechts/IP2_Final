@@ -179,7 +179,7 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         // ADD RESOURCES
-        public void AddWood(float wood)
+        public void AddWood(int wood)
         {
             m_Wood += wood;
         }

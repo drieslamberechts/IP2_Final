@@ -17,7 +17,7 @@ namespace XNA_ENGINE.Game.Objects
     public class GridTile
     {
         private GameModelGrid m_TileModel;
-        
+
         //Props
         private GameModelGrid m_TreeShort1;
         private GameModelGrid m_TreeTall1;
@@ -27,7 +27,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private List<GameModelGrid> m_PropsList;
         private List<Placeable> m_LinkedPlaceables;
-        
+
         private readonly int m_Row, m_Column;
 
         private const float GRIDWIDTH = 64;
@@ -94,18 +94,18 @@ namespace XNA_ENGINE.Game.Objects
             m_Wood.Scale(new Vector3(0.5f, 0.5f, 0.5f));
 
 
-            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
+            m_TileModel.Translate(new Vector3(GRIDWIDTH*m_Row, yOffset, GRIDDEPTH*m_Column));
             m_GameScene.AddSceneObject(m_TileModel);
 
             m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
             m_TileModel.DrawBoundingBox = false;
 
-            int woodCount = GridFieldManager.GetInstance(SceneManager.ActiveScene).Random.Next(0,10);
+            int woodCount = GridFieldManager.GetInstance(SceneManager.ActiveScene).Random.Next(0, 10);
 
             if (woodCount == 1)
             {
-                m_WoodCount = 5;
-            } 
+                m_WoodCount = 20;
+            }
         }
 
         public void Update(RenderContext renderContext)
@@ -118,19 +118,20 @@ namespace XNA_ENGINE.Game.Objects
 
                     m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
                     m_TileModel.UseTexture = true;
-                  
+
                     m_TileModel.CanDraw = true;
-                   
-                    m_TileModel.DiffuseColor = new Vector3(1.0f,1.0f,1.0f);
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
 
                 case TileType.Normal2:
                     ResetPropListParameters();
-                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicWithDirt");
+                    m_TileModel.Texture2D =
+                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicWithDirt");
                     m_TileModel.UseTexture = true;
 
                     m_TileModel.CanDraw = true;
-                   
+
                     m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
                     break;
 
@@ -138,9 +139,10 @@ namespace XNA_ENGINE.Game.Objects
                     ResetPropListParameters();
                     m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
                     m_TileModel.UseTexture = true;
-                    
+
                     m_TileModel.CanDraw = true;
-                    m_TreeShort1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeShort1.Texture2D =
+                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
                     m_TreeShort1.UseTexture = true;
                     m_TreeShort1.CanDraw = true;
 
@@ -153,7 +155,8 @@ namespace XNA_ENGINE.Game.Objects
                     m_TileModel.UseTexture = true;
 
                     m_TileModel.CanDraw = true;
-                    m_TreeTall1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeTall1.Texture2D =
+                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
                     m_TreeTall1.UseTexture = true;
                     m_TreeTall1.CanDraw = true;
 
@@ -170,7 +173,7 @@ namespace XNA_ENGINE.Game.Objects
                 case TileType.Cliff:
                     ResetPropListParameters();
                     m_TileModel.CanDraw = false;
-                   
+
                     m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
                     break;
 
@@ -180,7 +183,8 @@ namespace XNA_ENGINE.Game.Objects
                     m_TileModel.UseTexture = true;
 
                     m_TileModel.CanDraw = true;
-                    m_TreeTall1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeTall1.Texture2D =
+                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
                     m_TreeTall1.UseTexture = true;
                     m_TreeTall1.CanDraw = true;
 
@@ -259,15 +263,15 @@ namespace XNA_ENGINE.Game.Objects
             }
             else
             {
-                if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+                if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftClick).IsTriggered)
                 {
 
-                        // BUILD BUILDINGS
+                    // BUILD BUILDINGS
 
-                        // DELETE
+                    // DELETE
 
-                        // CREATE TILES WITH SHAMAN
-                      /*  case Menu.ModeSelected.BuildTile1:
+                    // CREATE TILES WITH SHAMAN
+                    /*  case Menu.ModeSelected.BuildTile1:
                             SetTileSpiked();
                             break;
                         case Menu.ModeSelected.BuildTile2:
@@ -277,11 +281,11 @@ namespace XNA_ENGINE.Game.Objects
                         case Menu.ModeSelected.BuildTile4:
                             break;*/
 
-                        // DEFAULT
-                    
+                    // DEFAULT
+
                 }
 
-                if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+                if (inputManager.GetAction((int) FinalScene.PlayerInput.RightClick).IsTriggered)
                 {
 
                 }
@@ -337,7 +341,7 @@ namespace XNA_ENGINE.Game.Objects
             m_TileType = TileType.Spiked;
         }
 
-       /* private void RemoveSettlementModel()
+        /* private void RemoveSettlementModel()
         {
             foreach (var placeable in m_Placeables)
             {
@@ -354,7 +358,7 @@ namespace XNA_ENGINE.Game.Objects
             foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
-                    return (Settlement)placeable;
+                    return (Settlement) placeable;
             }
 
             return null;
@@ -365,7 +369,7 @@ namespace XNA_ENGINE.Game.Objects
             foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.School)
-                    return (School)placeable;
+                    return (School) placeable;
             }
 
             return null;
@@ -376,7 +380,7 @@ namespace XNA_ENGINE.Game.Objects
             foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
-                    return (Shrine)placeable;
+                    return (Shrine) placeable;
             }
 
             return null;
@@ -390,8 +394,8 @@ namespace XNA_ENGINE.Game.Objects
 
         public bool Selected
         {
-            get{return m_Selected;}
-            set{m_Selected = value;} 
+            get { return m_Selected; }
+            set { m_Selected = value; }
         }
 
         public int Row
@@ -432,6 +436,25 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
+        public bool PickupWood(Player player, bool pickup = true)
+        {
+            if (pickup)
+            {
+                player.GetResources().AddWood(m_WoodCount);
+                m_WoodCount = 0;
+                m_Wood.CanDraw = false;
 
+                return true;
+            }
+            else
+            {
+                if (m_WoodCount > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
 }

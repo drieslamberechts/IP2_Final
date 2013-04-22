@@ -47,6 +47,8 @@ namespace XNA_ENGINE.Game.Objects
             newPos.Y += 32;
             m_Model.Translate(newPos);
 
+            m_TargetTile.PickupWood(m_Owner);
+
             base.Update(renderContext);
         }
 
