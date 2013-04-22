@@ -176,6 +176,8 @@ namespace XNA_ENGINE.Game.Scenes
                 m_Ai.ResetAttack();
             }
 
+            m_Player.Update(renderContext);
+
             base.Update(renderContext);
         }
 

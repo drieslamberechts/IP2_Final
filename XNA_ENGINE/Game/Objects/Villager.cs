@@ -38,7 +38,9 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Update(Engine.RenderContext renderContext)
         {
-            
+            Vector3 newPos = m_TargetTile.Model.WorldPosition;
+            newPos.Y += 32;
+            m_Model.Translate(newPos);
 
             base.Update(renderContext);
         }

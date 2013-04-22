@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using XNA_ENGINE.Engine;
 
 namespace XNA_ENGINE.Game.Objects
 {
@@ -38,8 +39,13 @@ namespace XNA_ENGINE.Game.Objects
             m_Resources = new Resources();
         }
 
-        public void Update()
+        public void Update(RenderContext renderContext)
         {
+            foreach (var placeable in m_OwnedPlaceablesList)
+            {
+                placeable.Update(renderContext);
+            }
+
             if (m_bIsAI)
             {
                 // -------------------------
