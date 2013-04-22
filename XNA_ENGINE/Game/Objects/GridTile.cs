@@ -21,6 +21,7 @@ namespace XNA_ENGINE.Game.Objects
         //Props
         private GameModelGrid m_TreeShort1;
         private GameModelGrid m_TreeTall1;
+        private GameModelGrid m_Wood;
 
         private Army m_Army;
 
@@ -40,6 +41,8 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_Selected;
         private bool m_PermanentSelected;
         private bool m_Open = true;
+
+        private int m_WoodCount = 0;
 
         private readonly GameScene m_GameScene;
 
@@ -80,15 +83,29 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");
             m_TreeTall1 = new GameModelGrid("Models/tree_TreeTall");
+            m_Wood = new GameModelGrid("Models/prop_Wood");
             m_PropsList.Add(m_TreeShort1);
             m_PropsList.Add(m_TreeTall1);
+            m_PropsList.Add(m_Wood);
             InitializeProps();
+
+            m_Wood.LocalPosition = new Vector3(16, 32, -16);
+            m_Wood.UseTexture = false;
+            m_Wood.Scale(new Vector3(0.5f, 0.5f, 0.5f));
+
 
             m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
             m_GameScene.AddSceneObject(m_TileModel);
 
             m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
             m_TileModel.DrawBoundingBox = false;
+
+            int woodCount = GridFieldManager.GetInstance(SceneManager.ActiveScene).Random.Next(0,10);
+
+            if (woodCount == 1)
+            {
+                m_WoodCount = 5;
+            } 
         }
 
         public void Update(RenderContext renderContext)
@@ -172,6 +189,17 @@ namespace XNA_ENGINE.Game.Objects
 
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+
+            if (m_WoodCount > 0)
+            {
+                m_Wood.DiffuseColor = new Vector3(0.36f, 0.25f, 0.20f);
+                m_Wood.CanDraw = true;
+            }
+            else
+            {
+                m_Wood.DiffuseColor = new Vector3(0.36f, 0.25f, 0.20f);
+                m_Wood.CanDraw = false;
             }
 
             //What to do if the tile is selected
