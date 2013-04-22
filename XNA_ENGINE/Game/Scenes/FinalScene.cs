@@ -344,13 +344,7 @@ namespace XNA_ENGINE.Game.Scenes
             //Handle menu //If menu is hit don't do the grid test
             if (Menu.GetInstance().HandleInput(renderContext)) return; // hier in Menu -> klikken?
 
-            //Raycast to grid
-            if (isMouseInScreen)
-            {
-                var tile = GridFieldManager.GetInstance(this).HitTestField(CalculateCursorRay(renderContext));
-                if (tile != null)
-                    GridFieldManager.GetInstance(this).Select(tile);
-            }
+            GridFieldManager.GetInstance(this).HandleInput(renderContext);
         }
 
         public static bool IsMouseInScreen(RenderContext renderContext)

@@ -25,7 +25,7 @@ namespace XNA_ENGINE.Game.Objects
         private Army m_Army;
 
         private List<GameModelGrid> m_PropsList;
-        private List<Placeable> m_Placeables; 
+        private List<Placeable> m_LinkedPlaceables;
         
         private readonly int m_Row, m_Column;
 
@@ -39,6 +39,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private bool m_Selected;
         private bool m_PermanentSelected;
+        private bool m_Open = true;
 
         private readonly GameScene m_GameScene;
 
@@ -73,8 +74,8 @@ namespace XNA_ENGINE.Game.Objects
             m_TileModel = new GameModelGrid("Models/tile_Normal");
 
             m_PropsList = new List<GameModelGrid>();
-            m_Placeables = new List<Placeable>();
-            m_Placeables.Add(new RallyPoint(this,m_GameScene));
+            m_LinkedPlaceables = new List<Placeable>();
+            m_LinkedPlaceables.Add(new RallyPoint(this, m_GameScene));
             ShowFlag(false);
 
             m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");
@@ -193,7 +194,7 @@ namespace XNA_ENGINE.Game.Objects
                 m_TileModel.PermanentSelected = false;
             }
 
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 placeable.Update(renderContext);
             }
@@ -232,36 +233,10 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
                 {
-                    switch (selectedMode)
-                    {
-                        case Menu.ModeSelected.None:
-                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(this);
-                            break;
-                        case Menu.ModeSelected.Attack:
-                            break;
-                        case Menu.ModeSelected.Defend:
-                            break;
-                        case Menu.ModeSelected.Gather:
-                            break;
 
                         // BUILD BUILDINGS
-                        case Menu.ModeSelected.BuildSettlement:
-                            AddSettlement(Settlement.SettlementType.Basic1);
-                            Menu.GetInstance().ResetSelectedMode();
-                            break;
-                        case Menu.ModeSelected.BuildShrine:
-                            AddShrine(School.SchoolType.Basic1);
-                            Menu.GetInstance().ResetSelectedMode();
-                            break;
-                        case Menu.ModeSelected.BuildSchool:
-                            AddSchool(Shrine.ShrineType.Basic1);
-                            Menu.GetInstance().ResetSelectedMode();
-                            break;
 
                         // DELETE
-                        case Menu.ModeSelected.Delete:
-                            //RemoveSettlementModel();
-                            break;
 
                         // CREATE TILES WITH SHAMAN
                         case Menu.ModeSelected.BuildTile1:
@@ -275,34 +250,16 @@ namespace XNA_ENGINE.Game.Objects
                             break;
 
                         // DEFAULT
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    
                 }
 
                 if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
                 {
-                    //Place flag of settlement
-                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement() != null)
-                    {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSettlement().PlaceRallyPoint(this);
-                    }
 
-                    //Place flag of school
-                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool() != null)
-                    {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasSchool().PlaceRallyPoint(this);
-                    }
-
-                    //Place flag of shrine
-                    if (GridFieldManager.GetInstance(m_GameScene).GetSelectedTile() != null && GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine() != null)
-                    {
-                        GridFieldManager.GetInstance(m_GameScene).GetSelectedTile().HasShrine().PlaceRallyPoint(this);
-                    }
                 }
             }
 
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
                 placeable.OnSelected();
 
             return true;
@@ -331,20 +288,19 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
-        // ADD BUILDING
-        private void AddSettlement(Settlement.SettlementType settlementType)
+        public void AddSettlement(Settlement.SettlementType settlementType)
         {
-            m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
+            m_LinkedPlaceables.Add(new Settlement(this, m_GameScene, settlementType));
         }
 
-        private void AddShrine(School.SchoolType schoolType)
+        public void AddSchool(School.SchoolType schoolType)
         {
-            m_Placeables.Add(new School(this, m_GameScene, schoolType));
+            m_LinkedPlaceables.Add(new School(this, m_GameScene, schoolType));
         }
 
-        private void AddSchool(Shrine.ShrineType shrineType)
+        public void AddShrine(Shrine.ShrineType shrineType)
         {
-            m_Placeables.Add(new Shrine(this, m_GameScene, shrineType));
+            m_LinkedPlaceables.Add(new Shrine(this, m_GameScene, shrineType));
         }
 
         // CHANGE TILE WITH SHAMAN
@@ -367,7 +323,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public Settlement HasSettlement()
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                     return (Settlement)placeable;
@@ -378,7 +334,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public School HasSchool()
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.School)
                     return (School)placeable;
@@ -389,7 +345,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public Shrine HasShrine()
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
                     return (Shrine)placeable;
@@ -434,7 +390,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public void ShowFlag(bool value)
         {
-            foreach (var placeable in m_Placeables)
+            foreach (var placeable in m_LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Flag)
                 {
