@@ -58,7 +58,7 @@ namespace XNA_ENGINE.Game.Scenes
 
         public void Start()
         {
-            //Input manager + inputs
+            //Input manager + input
             m_InputManager = new InputManager();
 
             var rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
