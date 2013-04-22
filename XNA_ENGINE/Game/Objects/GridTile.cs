@@ -25,7 +25,7 @@ namespace XNA_ENGINE.Game.Objects
         private Army m_Army;
 
         private List<GameModelGrid> m_PropsList;
-        private List<Placeable> m_Placeables;
+        private List<Placeable> m_Placeables; 
         
         private readonly int m_Row, m_Column;
 
@@ -50,6 +50,7 @@ namespace XNA_ENGINE.Game.Objects
             Normal4,
             Water,
             Cliff,
+            Spiked,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -154,6 +155,20 @@ namespace XNA_ENGINE.Game.Objects
                    
                     m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
                     break;
+
+                case TileType.Spiked:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+
+                    m_TileModel.CanDraw = true;
+                    m_TreeTall1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeTall1.UseTexture = true;
+                    m_TreeTall1.CanDraw = true;
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -228,6 +243,8 @@ namespace XNA_ENGINE.Game.Objects
                             break;
                         case Menu.ModeSelected.Gather:
                             break;
+
+                        // BUILD BUILDINGS
                         case Menu.ModeSelected.BuildSettlement:
                             AddSettlement(Settlement.SettlementType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
@@ -240,9 +257,24 @@ namespace XNA_ENGINE.Game.Objects
                             AddSchool(Shrine.ShrineType.Basic1);
                             Menu.GetInstance().ResetSelectedMode();
                             break;
+
+                        // DELETE
                         case Menu.ModeSelected.Delete:
                             //RemoveSettlementModel();
                             break;
+
+                        // CREATE TILES WITH SHAMAN
+                        case Menu.ModeSelected.BuildTile1:
+                            SetTileSpiked();
+                            break;
+                        case Menu.ModeSelected.BuildTile2:
+                            break;
+                        case Menu.ModeSelected.BuildTile3:
+                            break;
+                        case Menu.ModeSelected.BuildTile4:
+                            break;
+
+                        // DEFAULT
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
@@ -299,6 +331,7 @@ namespace XNA_ENGINE.Game.Objects
             }
         }
 
+        // ADD BUILDING
         private void AddSettlement(Settlement.SettlementType settlementType)
         {
             m_Placeables.Add(new Settlement(this, m_GameScene, settlementType));
@@ -312,6 +345,12 @@ namespace XNA_ENGINE.Game.Objects
         private void AddSchool(Shrine.ShrineType shrineType)
         {
             m_Placeables.Add(new Shrine(this, m_GameScene, shrineType));
+        }
+
+        // CHANGE TILE WITH SHAMAN
+        private void SetTileSpiked()
+        {
+            m_TileType = TileType.Spiked;
         }
 
        /* private void RemoveSettlementModel()

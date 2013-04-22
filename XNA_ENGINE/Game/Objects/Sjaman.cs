@@ -8,21 +8,16 @@ namespace XNA_ENGINE.Game.Objects
 {
     class Sjaman : Placeable
     {
-        private Vector2 m_Position;
-
         public Sjaman()
         {
-            m_Position = new Vector2(0, 0);
         }
 
-        public void SetPosition(Vector2 position)
+        public void Update()
         {
-            m_Position = position;
-        }
-
-        public Vector2 GetPosition()
-        {
-            return m_Position;
+            if (m_LinkedTile.Selected)
+            {
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
+            }
         }
     }
 }

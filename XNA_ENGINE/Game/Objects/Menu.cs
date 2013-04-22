@@ -26,6 +26,9 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexTileBlue,
                                    m_TexTileGold,
                                    m_TexTileRed,
+                                   m_TexTile1,
+                                   m_TexTile2,
+                                   m_TexTile3,
                                    m_TexTile4,
                                    m_TexAttack,
                                    m_TexMove,
@@ -36,6 +39,9 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectTileBlue,
                           m_RectTileGold,
                           m_RectTileRed,
+                          m_RectTile1,
+                          m_RectTile2,
+                          m_RectTile3,
                           m_RectTile4,
                           m_RectAttack,
                           m_RectMove,
@@ -46,7 +52,8 @@ namespace XNA_ENGINE.Game.Objects
         {
             MoveMode, //Attack, defend,...
             BuildMode, //Tile 1,2,3,...
-            SettlementMode
+            SettlementMode,
+            ShamanMode
         }
 
         public enum ModeSelected
@@ -59,6 +66,10 @@ namespace XNA_ENGINE.Game.Objects
             BuildShrine,
             BuildSchool,
             Delete,
+            BuildTile1,
+            BuildTile2,
+            BuildTile3,
+            BuildTile4,
 
             enumSize
         }
@@ -86,6 +97,10 @@ namespace XNA_ENGINE.Game.Objects
             m_TexTileBlue = Content.Load<Texture2D>("BuildBase");
             m_TexTileGold = Content.Load<Texture2D>("BuildTile");
             m_TexTileRed = Content.Load<Texture2D>("Tile3");
+
+            m_TexTile1 = Content.Load<Texture2D>("Tile1");
+            m_TexTile2 = Content.Load<Texture2D>("Tile2");
+            m_TexTile3 = Content.Load<Texture2D>("Tile3");
             m_TexTile4 = Content.Load<Texture2D>("Tile4");
 
             m_TexAttack = Content.Load<Texture2D>("Attack");
@@ -153,13 +168,53 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
 
+                    // DISABLED TO USE FOR SHAMAN
+                    /*
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
                     {
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.Delete;
                         return true;
                     }
+                     */
                     break;
+
+                case SubMenuSelected.ShamanMode:
+                    // BUILD TILES WITH SHAMAN
+                    if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
+                    {
+                        Console.WriteLine("Create Tile 1");
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildTile1;
+                        return true;
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
+                    {
+                        Console.WriteLine("Create Tile 2");
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildTile2;
+                        return true;
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile3))
+                    {
+                        Console.WriteLine("Create Tile 3");
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildTile3;
+                        return true;
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
+                    {
+                        Console.WriteLine("Create Tile 4");
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildTile4;
+                        return true;
+                    }
+
+                    break;
+
                 case SubMenuSelected.MoveMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
@@ -212,6 +267,11 @@ namespace XNA_ENGINE.Game.Objects
             m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,m_TexTileBlue.Height);
             m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,m_TexTileGold.Height);
             m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,m_TexTileRed.Height);
+
+            // SHAMAN MENU
+            m_RectTile1 = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile1.Width, m_TexTile1.Height);
+            m_RectTile2 = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile2.Width, m_TexTile2.Height);
+            m_RectTile3 = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile3.Width, m_TexTile3.Height);
             m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,m_TexTile4.Height);
 
             m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,m_TexAttack.Height);
