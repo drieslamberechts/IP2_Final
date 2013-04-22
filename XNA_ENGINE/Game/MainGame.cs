@@ -71,7 +71,7 @@ namespace XNA_ENGINE.Game
             InputAction Tap = new InputAction((int)PlayerInput.FullScreen, TriggerState.Pressed);
             Tap.KeyButton = Keys.F;
             InputAction Exit = new InputAction((int)PlayerInput.Exit, TriggerState.Pressed);
-            Exit.KeyButton = Keys.E;
+            Exit.KeyButton = Keys.M;
 
             m_InputManager.MapAction(Tap);
             m_InputManager.MapAction(Exit);
