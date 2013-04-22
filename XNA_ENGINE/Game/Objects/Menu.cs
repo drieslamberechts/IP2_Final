@@ -36,9 +36,9 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexBuild;
 
         private Rectangle m_RectSwitch,
-                          m_RectTileBlue,
-                          m_RectTileGold,
-                          m_RectTileRed,
+                          m_RectSettlement,
+                          m_RectSchool,
+                          m_RectShrine,
                           m_RectTile1,
                           m_RectTile2,
                           m_RectTile3,
@@ -79,6 +79,13 @@ namespace XNA_ENGINE.Game.Objects
         private GridTile.TileType m_TileTypeSelected = GridTile.TileType.Normal1;
         private SpriteFont m_DebugFont;
         private Player m_Player;
+
+        private const int COSTOFWOOD_SETTLEMENT = 20;
+        private const int COSTOFWOOD_SCHOOL = 30;
+        private const int COSTOFWOOD_SHRINE = 50;
+        private const int COSTOFINFLUENCE_SETTLEMENT = 0;
+        private const int COSTOFINFLUENCE_SCHOOL = 0;
+        private const int COSTOFINFLUENCE_SHRINE = 0;
 
         //Singleton implementation
         static public Menu GetInstance()
@@ -143,26 +150,31 @@ namespace XNA_ENGINE.Game.Objects
             switch (m_SubMenuSelected)
             {
                 case SubMenuSelected.BuildMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileBlue))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
                     {
                         // SET DECREASE RESOURCES
-                        m_Player.GetResources().DecreaseWood(20);
+                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
+                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSettlement;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileGold))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
                     {
                         // SET DECREASE RESOURCES
+                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SCHOOL);
+                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SCHOOL);
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSchool;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileRed))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
                     {
                         // SET DECREASE RESOURCES
+                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SHRINE);
+                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SHRINE);
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildShrine;
                         return true;
@@ -264,9 +276,9 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,m_TexSwitch.Height);
 
-            m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,m_TexTileBlue.Height);
-            m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,m_TexTileGold.Height);
-            m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,m_TexTileRed.Height);
+            m_RectSettlement = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,m_TexTileBlue.Height);
+            m_RectSchool = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,m_TexTileGold.Height);
+            m_RectShrine = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,m_TexTileRed.Height);
 
             // SHAMAN MENU
             m_RectTile1 = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile1.Width, m_TexTile1.Height);
@@ -285,9 +297,9 @@ namespace XNA_ENGINE.Game.Objects
 
             if (m_SubMenuSelected == SubMenuSelected.BuildMode)
             {
-                renderContext.SpriteBatch.Draw(m_TexTileBlue, m_RectTileBlue, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexTileGold, m_RectTileGold, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexTileRed, m_RectTileRed, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexTileBlue, m_RectSettlement, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexTileGold, m_RectSchool, Color.White);
+                renderContext.SpriteBatch.Draw(m_TexTileRed, m_RectShrine, Color.White);
                 renderContext.SpriteBatch.Draw(m_TexTile4, m_RectTile4, Color.White);
             }
             else if (m_SubMenuSelected == SubMenuSelected.MoveMode)
@@ -329,6 +341,12 @@ namespace XNA_ENGINE.Game.Objects
         public void SetSelectedMode(ModeSelected mode)
         {
             m_SelectedMode = mode;
+        }
+
+        public Player Player
+        {
+            get { return m_Player; }
+            //set { m_Player = value; }
         }
 
         public void NextTileType()

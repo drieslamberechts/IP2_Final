@@ -132,13 +132,13 @@ namespace XNA_ENGINE.Game.Objects
             m_Wood += wood;
         }
 
-        public void AddInfluence(float influence)
+        public void AddInfluence(int influence)
         {
             m_Influence += influence;
         }
 
         // DECREASE RESOURCES
-        public void DecreaseWood(float wood)
+        public void DecreaseWood(int wood)
         {
             m_Wood -= wood;
         }
