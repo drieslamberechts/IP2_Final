@@ -71,6 +71,11 @@ namespace XNA_ENGINE.Game.Objects
 
         }
 
+        public virtual void SetTargetTile(GridTile targetTile)
+        {
+            
+        }
+
         public void SetOwner(Player owner)
         {
             m_Owner = owner;

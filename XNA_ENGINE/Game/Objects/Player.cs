@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine;
+using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Managers;
+using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
@@ -63,6 +67,39 @@ namespace XNA_ENGINE.Game.Objects
             {
                 // REGULAR UPDATES
             }
+        }
+
+        public Placeable HitTestPlaceables(Ray ray)
+        {
+            foreach (var placeable in m_OwnedPlaceablesList)
+                if (placeable.Model.HitTest(ray)) return placeable;
+
+            return null;
+        }
+
+        public bool HandleInput(RenderContext renderContext)
+        {
+            var inputManager = FinalScene.GetInputManager();
+            bool isMouseInScreen = FinalScene.IsMouseInScreen(renderContext);
+
+            //Raycast to grid
+            if (isMouseInScreen)
+            {
+                var hittedPlaceable = HitTestPlaceables(FinalScene.CalculateCursorRay(renderContext));
+                if (hittedPlaceable != null)
+                {
+                    if (inputManager.IsActionTriggered((int)FinalScene.PlayerInput.LeftClick))
+                    {
+                        bool value = hittedPlaceable.Model.PermanentSelected;
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).PermanentDeselect();
+                        hittedPlaceable.Model.PermanentSelected = !value;
+                        
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public Resources GetResources()

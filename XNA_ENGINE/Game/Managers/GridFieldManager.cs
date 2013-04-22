@@ -140,23 +140,33 @@ namespace XNA_ENGINE.Game.Managers
 
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
                     {
+                        var selectedPlaceable =GetPermanentSelectedPlaceable();
+
                         //Place flag of settlement
-                        if (GetSelectedTile() != null && GetSelectedTile().HasSettlement() != null)
+                        if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasSettlement() != null)
                         {
-                            GetSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
+                            GetPermanentSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
                         }
 
                         //Place flag of school
-                        if (GetSelectedTile() != null && GetSelectedTile().HasSchool() != null)
+                        if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasSchool() != null)
                         {
-                            GetSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
+                            GetPermanentSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
                         }
 
                         //Place flag of shrine
-                        if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null)
+                        if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasShrine() != null)
                         {
-                            GetSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
+                            GetPermanentSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
                         }
+
+                        if (selectedPlaceable != null && GetSelectedTile() != null &&
+                            selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Villager)
+                        {
+                            selectedPlaceable.SetTargetTile(GetSelectedTile());
+                        }
+
+                        //if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null))
                     }
                 }
             }
@@ -176,11 +186,22 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
-        public GridTile GetSelectedTile()
+        public GridTile GetPermanentSelectedTile()
         {
             foreach (var gridTile in m_GridField)
             {
                 if (gridTile.PermanentSelected)
+                    return gridTile;
+            }
+
+            return null;
+        }
+
+        public GridTile GetSelectedTile()
+        {
+            foreach (var gridTile in m_GridField)
+            {
+                if (gridTile.Selected)
                     return gridTile;
             }
 
@@ -198,16 +219,17 @@ namespace XNA_ENGINE.Game.Managers
                 }
             }
 
+            foreach (var placeable in FinalScene.Player.GetOwnedList())
+                if(placeable.Model.PermanentSelected)
+                    return placeable;
+
             return null;
         }
 
         public void PermanentSelect(GridTile tile)
         {
             bool value = tile.PermanentSelected;
-            foreach (var gridTile in m_GridField)
-            {
-                gridTile.PermanentSelected = false;
-            }
+            PermanentDeselect();
 
             tile.PermanentSelected = !value;
         }
@@ -245,6 +267,17 @@ namespace XNA_ENGINE.Game.Managers
         {
             foreach (var gridTile in m_GridField)
                 gridTile.Selected = false;
+        }
+
+        public void PermanentDeselect()
+        {
+            foreach (var gridTile in m_GridField)
+                gridTile.PermanentSelected = false;
+
+            foreach (var placeable in FinalScene.Player.GetOwnedList())
+                placeable.Model.PermanentSelected = false;
+
+
         }
 
         //Functions that pick a surrounding tile of another tile
@@ -335,6 +368,7 @@ namespace XNA_ENGINE.Game.Managers
             ++m_SelectionMode;
             if ((int)m_SelectionMode >= (int)SelectionMode.enumSize) m_SelectionMode = 0;
         }
+
 
 
         public Random Random

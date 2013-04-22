@@ -43,7 +43,7 @@ namespace XNA_ENGINE.Game.Scenes
         private static ContentManager m_Content;
 
         // Player and AI
-        private Player m_Player, m_Ai;
+        private static Player m_Player, m_Ai;
 
         // Controls
         GamePadState m_GamePadState;
@@ -346,7 +346,7 @@ namespace XNA_ENGINE.Game.Scenes
             //Handle menu //If menu is hit don't do the grid test
             if (Menu.GetInstance().HandleInput(renderContext)) return; // hier in Menu -> klikken?
 
-            
+            if (m_Player.HandleInput(renderContext)) return;
 
             GridFieldManager.GetInstance(this).HandleInput(renderContext);
         }
@@ -412,7 +412,13 @@ namespace XNA_ENGINE.Game.Scenes
             // and then create a new ray using nearPoint as the source.
             return new Ray(nearPoint, direction);
         }
-    
+
+        public static Player Player
+        {
+            get { return m_Player; }
+            //set { m_Player = value; }
+        }
+
         //Quaternion conversion helper
         public static Vector3 GetForwardVectorOfQuaternion(Quaternion q) 
         {
