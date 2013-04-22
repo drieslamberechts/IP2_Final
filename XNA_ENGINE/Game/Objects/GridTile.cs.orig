@@ -9,85 +9,435 @@ using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Objects;
-
+using XNA_ENGINE.Game.Managers;
+using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
     public class GridTile
     {
-        private GameModel m_TileModel;
-        private int m_Row, m_Column;
+        private GameModelGrid m_TileModel;
+        
+        //Props
+        private GameModelGrid m_TreeShort1;
+        private GameModelGrid m_TreeTall1;
 
-        private static float GRIDWIDTH = 65;
-        private static float GRIDDEPTH = 65;
-        //  private static float GRIDHEIGHT = 32;
+        private Army m_Army;
 
-        private string m_TileType;
-        private string m_TileSettlement;
+        private List<GameModelGrid> m_PropsList;
+<<<<<<< HEAD
+        private List<Placeable> m_Placeables; 
+=======
+        private List<Placeable> m_LinkedPlaceables;
+>>>>>>> dc459d6f7c9f590543c5c5c0835892478d526143
+        
+        private readonly int m_Row, m_Column;
 
-        private bool m_Selected { get; set; }
+        private const float GRIDWIDTH = 64;
+        private const float GRIDDEPTH = 64;
+        private const float GRIDHEIGHT = 32;
+        private const int YOFFSETMIN = 0;
+        private const int YOFFSETMAX = 15;
+
+        private TileType m_TileType = TileType.Normal1;
+
+        private bool m_Selected;
+        private bool m_PermanentSelected;
+        private bool m_Open = true;
+
+        private readonly GameScene m_GameScene;
+
+        public enum TileType
+        {
+            Normal1,
+            Normal2,
+            Normal3,
+            Normal4,
+            Water,
+            Cliff,
+            Spiked,
+
+            //<----Add new types in front of this comment 
+            enumSize
+        }
 
         public GridTile(GameScene pGameScene, int row, int column)
         {
-            m_Row = row;
             m_Column = column;
-
-            m_TileModel = new GameModel("Models/tile_Template");
-            m_TileModel.Translate(new Vector3(GRIDWIDTH*m_Row, 0, GRIDDEPTH*m_Column));
-            pGameScene.AddSceneObject(m_TileModel);
+            m_Row = row;
 
             m_Selected = false;
 
-            m_TileModel.CreateBoundingBox(GRIDWIDTH, 32, GRIDDEPTH,new Vector3(0,16,0));
-            m_TileModel.DrawBoundingBox = true;
+            m_GameScene = pGameScene;
         }
 
         public void Initialize()
         {
-<<<<<<< HEAD
-            m_TileType = "normal";
-=======
+            int yOffset = GridFieldManager.GetInstance(m_GameScene).Random.Next(YOFFSETMIN, YOFFSETMAX);
 
->>>>>>> e1b1fb261a2d7ef18c487222beab5918944fe784
+            m_TileModel = new GameModelGrid("Models/tile_Normal");
+
+            m_PropsList = new List<GameModelGrid>();
+            m_LinkedPlaceables = new List<Placeable>();
+            m_LinkedPlaceables.Add(new RallyPoint(this, m_GameScene));
+            ShowFlag(false);
+
+            m_TreeShort1 = new GameModelGrid("Models/tree_TreeShort");
+            m_TreeTall1 = new GameModelGrid("Models/tree_TreeTall");
+            m_PropsList.Add(m_TreeShort1);
+            m_PropsList.Add(m_TreeTall1);
+            InitializeProps();
+
+            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
+            m_GameScene.AddSceneObject(m_TileModel);
+
+            m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
+            m_TileModel.DrawBoundingBox = false;
         }
 
-        public void Update(Engine.RenderContext renderContext)
+        public void Update(RenderContext renderContext)
         {
+            //Appearance of the tile
+            switch (m_TileType)
+            {
+                case TileType.Normal1:
+                    ResetPropListParameters();
+
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+                  
+                    m_TileModel.CanDraw = true;
+                   
+                    m_TileModel.DiffuseColor = new Vector3(1.0f,1.0f,1.0f);
+                    break;
+
+                case TileType.Normal2:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicWithDirt");
+                    m_TileModel.UseTexture = true;
+
+                    m_TileModel.CanDraw = true;
+                   
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
+                case TileType.Normal3:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+                    
+                    m_TileModel.CanDraw = true;
+                    m_TreeShort1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeShort1.UseTexture = true;
+                    m_TreeShort1.CanDraw = true;
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
+                case TileType.Normal4:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+
+                    m_TileModel.CanDraw = true;
+                    m_TreeTall1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeTall1.UseTexture = true;
+                    m_TreeTall1.CanDraw = true;
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
+                case TileType.Water:
+                    ResetPropListParameters();
+                    m_TileModel.CanDraw = true;
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
+                case TileType.Cliff:
+                    ResetPropListParameters();
+                    m_TileModel.CanDraw = false;
+                   
+                    m_TileModel.DiffuseColor = new Vector3(0.5f, 0.0f, 0.0f);
+                    break;
+
+                case TileType.Spiked:
+                    ResetPropListParameters();
+                    m_TileModel.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+                    m_TileModel.UseTexture = true;
+
+                    m_TileModel.CanDraw = true;
+                    m_TreeTall1.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    m_TreeTall1.UseTexture = true;
+                    m_TreeTall1.CanDraw = true;
+
+                    m_TileModel.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            //What to do if the tile is selected
             if (m_Selected)
-                m_TileModel.Rotate(0, 45.0f*(float) renderContext.GameTime.TotalGameTime.TotalSeconds, 0);
+            {
+                m_TileModel.Selected = true;
+            }
+            else
+            {
+                m_TileModel.Selected = false;
+            }
+
+            //What to do if the tile is permanently selected (until the tile is deselected)
+            if (m_PermanentSelected)
+            {
+                m_TileModel.PermanentSelected = true;
+            }
+            else
+            {
+                m_TileModel.PermanentSelected = false;
+            }
+
+            foreach (var placeable in m_LinkedPlaceables)
+            {
+                placeable.Update(renderContext);
+            }
+
+            OnSelected();
         }
 
         public bool HitTest(Ray ray)
         {
             if (m_TileModel.HitTest(ray))
             {
-                m_Selected = true;
-                System.Diagnostics.Debug.WriteLine(m_Row.ToString() + "," + m_Column.ToString() );
-
+                System.Diagnostics.Debug.WriteLine("Row:" + m_Row.ToString() + " Column:" + m_Column.ToString());
                 return true;
             }
-
             return false;
         }
 
-        public void SetTileType(string type)
+        private bool OnSelected()
         {
-            m_TileType = type;
+            if (!m_Selected) return false;
+
+            bool creativeMode = GridFieldManager.GetInstance(m_GameScene).CreativeMode;
+            //Get the inputmanager
+            var inputManager = FinalScene.GetInputManager();
+            //What mode is there selected in the menu to build?
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
+            if (creativeMode) //Creative mode off
+            {
+                if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftHold).IsTriggered)
+                {
+                    m_TileType = Menu.GetInstance().TileTypeSelected;
+                }
+            }
+            else
+            {
+                if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+                {
+<<<<<<< HEAD
+                    switch (selectedMode)
+                    {
+                        case Menu.ModeSelected.None:
+                            GridFieldManager.GetInstance(m_GameScene).PermanentSelect(this);
+                            break;
+                        case Menu.ModeSelected.Attack:
+                            break;
+                        case Menu.ModeSelected.Defend:
+                            break;
+                        case Menu.ModeSelected.Gather:
+                            break;
+
+                        // BUILD BUILDINGS
+                        case Menu.ModeSelected.BuildSettlement:
+                            AddSettlement(Settlement.SettlementType.Basic1);
+                            Menu.GetInstance().ResetSelectedMode();
+                            break;
+                        case Menu.ModeSelected.BuildShrine:
+                            AddShrine(School.SchoolType.Basic1);
+                            Menu.GetInstance().ResetSelectedMode();
+                            break;
+                        case Menu.ModeSelected.BuildSchool:
+                            AddSchool(Shrine.ShrineType.Basic1);
+                            Menu.GetInstance().ResetSelectedMode();
+                            break;
+
+                        // DELETE
+                        case Menu.ModeSelected.Delete:
+                            //RemoveSettlementModel();
+                            break;
+
+                        // CREATE TILES WITH SHAMAN
+                        case Menu.ModeSelected.BuildTile1:
+                            SetTileSpiked();
+                            break;
+                        case Menu.ModeSelected.BuildTile2:
+                            break;
+                        case Menu.ModeSelected.BuildTile3:
+                            break;
+                        case Menu.ModeSelected.BuildTile4:
+                            break;
+
+                        // DEFAULT
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+=======
+                    
+>>>>>>> dc459d6f7c9f590543c5c5c0835892478d526143
+                }
+
+                if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+                {
+
+                }
+            }
+
+            foreach (var placeable in m_LinkedPlaceables)
+                placeable.OnSelected();
+
+            return true;
         }
 
-        public string GetTileType()
+        private void InitializeProps()
         {
-            return m_TileType;
+            foreach (GameModelGrid prop in m_PropsList)
+            {
+                prop.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
+                prop.CanDraw = true;
+                prop.LoadContent(FinalScene.GetContentManager());
+                prop.Rotate(0, -90, 0);
+                prop.Translate(0, 0, 20);
+                prop.DiffuseColor = new Vector3(1, 1, 1);
+                m_TileModel.AddChild(prop);
+            }
         }
 
-        public void SetTileSettlement(string type)
+        private void ResetPropListParameters()
         {
-            m_TileSettlement = type;
+            foreach (GameModelGrid prop in m_PropsList)
+            {
+                prop.CanDraw = false;
+                prop.DiffuseColor = new Vector3(1, 1, 1);
+            }
         }
 
-        public string GetTileSettlement()
+<<<<<<< HEAD
+        // ADD BUILDING
+        private void AddSettlement(Settlement.SettlementType settlementType)
+=======
+        public void AddSettlement(Settlement.SettlementType settlementType)
+>>>>>>> dc459d6f7c9f590543c5c5c0835892478d526143
         {
-            return m_TileSettlement;
+            m_LinkedPlaceables.Add(new Settlement(this, m_GameScene, settlementType));
+        }
+
+        public void AddSchool(School.SchoolType schoolType)
+        {
+            m_LinkedPlaceables.Add(new School(this, m_GameScene, schoolType));
+        }
+
+        public void AddShrine(Shrine.ShrineType shrineType)
+        {
+            m_LinkedPlaceables.Add(new Shrine(this, m_GameScene, shrineType));
+        }
+
+        // CHANGE TILE WITH SHAMAN
+        private void SetTileSpiked()
+        {
+            m_TileType = TileType.Spiked;
+        }
+
+       /* private void RemoveSettlementModel()
+        {
+            foreach (var placeable in m_Placeables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                {
+                    m_Placeables.Remove(placeable);
+                    return;
+                }
+            }
+        }*/
+
+        public Settlement HasSettlement()
+        {
+            foreach (var placeable in m_LinkedPlaceables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                    return (Settlement)placeable;
+            }
+
+            return null;
+        }
+
+        public School HasSchool()
+        {
+            foreach (var placeable in m_LinkedPlaceables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.School)
+                    return (School)placeable;
+            }
+
+            return null;
+        }
+
+        public Shrine HasShrine()
+        {
+            foreach (var placeable in m_LinkedPlaceables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
+                    return (Shrine)placeable;
+            }
+
+            return null;
+        }
+
+        public bool PermanentSelected
+        {
+            get { return m_PermanentSelected; }
+            set { m_PermanentSelected = value; }
+        }
+
+        public bool Selected
+        {
+            get{return m_Selected;}
+            set{m_Selected = value;} 
+        }
+
+        public int Row
+        {
+            get { return m_Row; }
+        }
+
+        public int Column
+        {
+            get { return m_Column; }
+        }
+
+        public TileType TileTypeValue
+        {
+            get { return m_TileType; }
+            set { m_TileType = value; }
+        }
+
+        public GameModelGrid Model
+        {
+            get { return m_TileModel; }
+            set { m_TileModel = value; }
+        }
+
+        public void ShowFlag(bool value)
+        {
+            foreach (var placeable in m_LinkedPlaceables)
+            {
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Flag)
+                {
+                    placeable.Model.CanDraw = value;
+                }
+            }
         }
     }
 }

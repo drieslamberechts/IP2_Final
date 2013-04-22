@@ -304,7 +304,7 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         // CHANGE TILE WITH SHAMAN
-        private void SetTileSpiked()
+        public void SetTileSpiked()
         {
             m_TileType = TileType.Spiked;
         }

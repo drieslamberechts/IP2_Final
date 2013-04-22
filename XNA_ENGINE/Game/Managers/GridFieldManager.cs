@@ -122,6 +122,17 @@ namespace XNA_ENGINE.Game.Managers
                             case Menu.ModeSelected.Delete:
                                 //RemoveSettlementModel();
                                 break;
+
+                            // CREATE TILES WITH SHAMAN
+                            case Menu.ModeSelected.BuildTile1:
+                                hittedTile.SetTileSpiked();
+                                break;
+                            case Menu.ModeSelected.BuildTile2:
+                                break;
+                            case Menu.ModeSelected.BuildTile3:
+                                break;
+                            case Menu.ModeSelected.BuildTile4:
+                                break;
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
