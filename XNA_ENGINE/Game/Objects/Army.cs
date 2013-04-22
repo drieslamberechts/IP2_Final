@@ -8,7 +8,7 @@ using XNA_ENGINE.Game.Objects;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class Army : Placeable
+    public class Army : Placeable
     {
         private Vector2 m_Position; // Same as the grid tile
         private int m_ArmyCount;

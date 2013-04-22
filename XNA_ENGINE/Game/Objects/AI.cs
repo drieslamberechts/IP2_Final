@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class AI
+    public class AI
     {
         private bool m_AttackScene;
 
@@ -65,6 +65,12 @@ namespace XNA_ENGINE.Game.Objects
         public void BuildGoblin()
         {
             // With worker reference
+        }
+
+        // BUILD TRIBE
+        public void BuildVillager(Placeable placeable)
+        {
+            
         }
 
         // SPLIT THE ARMY

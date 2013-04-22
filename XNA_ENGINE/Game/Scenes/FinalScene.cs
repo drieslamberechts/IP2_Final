@@ -344,6 +344,8 @@ namespace XNA_ENGINE.Game.Scenes
             //Handle menu //If menu is hit don't do the grid test
             if (Menu.GetInstance().HandleInput(renderContext)) return; // hier in Menu -> klikken?
 
+            
+
             GridFieldManager.GetInstance(this).HandleInput(renderContext);
         }
 

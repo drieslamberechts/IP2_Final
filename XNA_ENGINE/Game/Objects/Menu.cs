@@ -139,6 +139,7 @@ namespace XNA_ENGINE.Game.Objects
         {
             var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
             var inputManager = FinalScene.GetInputManager();
+            Placeable selectedPlaceable = GridFieldManager.GetInstance(SceneManager.ActiveScene).GetPermanentSelectedPlaceable();
 
             if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
             {
@@ -249,7 +250,7 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         Console.WriteLine("Split!");
-                        m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
+                        //m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
 
                         m_SelectedMode = ModeSelected.Gather;
                         return true;
@@ -259,8 +260,12 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.SettlementMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuild))
                     {
-                        Console.WriteLine("Build goblin");
-                        m_Player.GetPlayerOptions().BuildGoblin();
+                        if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                        {
+                            selectedPlaceable.QueueVillager();
+                            Console.WriteLine("Build Villager");
+                        }
+
                         return true;
                     }
                     break;

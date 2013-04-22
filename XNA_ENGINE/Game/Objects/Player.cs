@@ -5,7 +5,7 @@ using System.Text;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class Player
+    public class Player
     {
         // VARIABLES
         const int WOOD = 0;
@@ -23,7 +23,7 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_bIsAI;
 
         // Army
-        private List<Army> m_ArmyList; 
+        private List<Placeable> m_OwnedPlaceablesList; 
 
         // METHODS
         public Player(bool isAI)
@@ -33,7 +33,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Ai = new AI();
 
             m_ArmyCount = 0;
-            m_ArmyList = new List<Army>();
+            m_OwnedPlaceablesList = new List<Placeable>();
 
             m_Resources = new Resources();
         }
@@ -84,18 +84,27 @@ namespace XNA_ENGINE.Game.Objects
             m_Ai.ResetAttack();
         }
 
-        public Army GetSelectedArmy()
+       /* public Army GetSelectedArmy()
         {
             // Hier moet de selectie komen (welke van de legers is geselecteerd)
 
-            m_ArmyList.Add(new Army()); // Om te testen
+          //  m_OwnedPlaceablesList.Add(new Army()); // Om te testen
 
-            return m_ArmyList[0];
+
+
+           // return m_OwnedPlaceablesList[0];
+        }*/
+
+
+        public void NewPlaceable(Placeable placeable)
+        {
+            placeable.SetOwner(this);
+            m_OwnedPlaceablesList.Add(placeable);
         }
 
-        public List<Army> GetArmyList()
+        public List<Placeable> GetOwnedList()
         {
-            return m_ArmyList;
+            return m_OwnedPlaceablesList;
         }
     }
 
@@ -104,7 +113,7 @@ namespace XNA_ENGINE.Game.Objects
     // RESOURCES
     // ------------------------------------
     // ------------------------------------
-    class Resources
+    public class Resources
     {
         // VARIABLES
         float m_Wood, m_Influence;

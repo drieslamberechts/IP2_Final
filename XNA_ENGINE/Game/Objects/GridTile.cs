@@ -388,6 +388,11 @@ namespace XNA_ENGINE.Game.Objects
             set { m_TileModel = value; }
         }
 
+        public List<Placeable> LinkedPlaceables
+        {
+            get { return m_LinkedPlaceables; }
+        }
+
         public void ShowFlag(bool value)
         {
             foreach (var placeable in m_LinkedPlaceables)
@@ -398,5 +403,7 @@ namespace XNA_ENGINE.Game.Objects
                 }
             }
         }
+
+
     }
 }

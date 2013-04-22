@@ -19,14 +19,16 @@ namespace XNA_ENGINE.Game.Objects
             Shrine,
             Army,
             Flag,
+            Villager,
 
             enumSize
         }
 
-        protected bool m_Static = false;
+        protected bool m_Static = true;
         protected PlaceableType m_PlaceableType;
         protected GameModelGrid m_Model;
         protected GridTile m_LinkedTile;
+        protected Player m_Owner;
 
         public virtual void Update(RenderContext renderContext)
         {
@@ -62,6 +64,16 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_LinkedTile; }
             set { m_LinkedTile = value; }
+        }
+
+        public virtual void QueueVillager(int amount = 1)
+        {
+
+        }
+
+        public void SetOwner(Player owner)
+        {
+            m_Owner = owner;
         }
     }
 }

@@ -187,6 +187,20 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
+        public Placeable GetPermanentSelectedPlaceable()
+        {
+            foreach (var gridTile in m_GridField)
+            {
+                foreach (var placeable in gridTile.LinkedPlaceables)
+                {
+                    if (placeable.Model.PermanentSelected)
+                        return placeable;
+                }
+            }
+
+            return null;
+        }
+
         public void PermanentSelect(GridTile tile)
         {
             bool value = tile.PermanentSelected;

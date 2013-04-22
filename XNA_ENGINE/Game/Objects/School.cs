@@ -21,6 +21,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private const float GRIDHEIGHT = 32;
 
+
         private readonly GameScene m_GameScene;
 
         private readonly SchoolType m_SchoolType;
