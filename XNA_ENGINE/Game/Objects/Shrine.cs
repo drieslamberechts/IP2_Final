@@ -16,10 +16,10 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GridTile m_DirectionTile;
 
-        //Props
-        private readonly int m_Row, m_Column;
-
         private const float GRIDHEIGHT = 32;
+        private const float TIMEPERINFLUENCEPOINT = 5;
+
+        private double m_InfluenceTimer = TIMEPERINFLUENCEPOINT;
 
         private readonly GameScene m_GameScene;
 
@@ -56,9 +56,6 @@ namespace XNA_ENGINE.Game.Objects
                     throw new ArgumentOutOfRangeException("shrineType");
             }
 
-            m_Column = m_LinkedTile.Column;
-            m_Row = m_LinkedTile.Row;
-
             m_GameScene = pGameScene;
 
             m_DirectionTile = m_LinkedTile;
@@ -66,6 +63,14 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Update(RenderContext renderContext)
         {
+            m_InfluenceTimer -= (renderContext.GameTime.ElapsedGameTime.Milliseconds/1000.0);
+
+            if (m_InfluenceTimer <= 0)
+            {
+                m_InfluenceTimer = TIMEPERINFLUENCEPOINT;
+                Menu.GetInstance().Player.GetResources().AddInfluence(1);
+            }
+
             //Appearance of the tile
             switch (m_ShrineType)
             {
