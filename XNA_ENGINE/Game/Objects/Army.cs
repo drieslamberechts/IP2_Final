@@ -16,7 +16,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private const float GRIDHEIGHT = 32;
 
-        private int m_ArmySize;
+        private int m_ArmySize = 1;
 
         public Army(GameScene gameScene, GridTile startTile)
         {
