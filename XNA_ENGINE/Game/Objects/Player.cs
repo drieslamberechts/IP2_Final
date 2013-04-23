@@ -19,6 +19,7 @@ namespace XNA_ENGINE.Game.Objects
         private const int LOW_WOOD = 10;
         private const int LOW_INFLUENCE = 10;
 
+
         private int m_ArmyCount;
 
         private readonly Resources m_Resources;
@@ -28,7 +29,8 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_bIsAI;
 
         // Army
-        private List<Placeable> m_OwnedPlaceablesList; 
+        private List<Placeable> m_OwnedPlaceablesList;
+        private List<Placeable> m_ObjectsNeedToBeRemoved;
 
         // METHODS
         public Player(bool isAI)
@@ -39,6 +41,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_ArmyCount = 0;
             m_OwnedPlaceablesList = new List<Placeable>();
+            m_ObjectsNeedToBeRemoved = new List<Placeable>();
 
             m_Resources = new Resources();
         }
@@ -48,6 +51,22 @@ namespace XNA_ENGINE.Game.Objects
             foreach (var placeable in m_OwnedPlaceablesList)
             {
                 placeable.Update(renderContext);
+            }
+            bool goOut = false;
+
+            foreach (var placeable1 in m_ObjectsNeedToBeRemoved)
+            {
+                foreach (var placeable in m_OwnedPlaceablesList)
+                {
+                    if (placeable1 == placeable)
+                    {
+                        m_ObjectsNeedToBeRemoved.Remove(placeable1);
+                        m_OwnedPlaceablesList.Remove(placeable);
+                        goOut = true;
+                    }
+                    if (goOut) break;
+                }
+                if (goOut) break;
             }
 
             if (m_bIsAI)
@@ -143,6 +162,11 @@ namespace XNA_ENGINE.Game.Objects
         {
             placeable.SetOwner(this);
             m_OwnedPlaceablesList.Add(placeable);
+        }
+
+        public void RemovePlaceable(Placeable placeable)
+        {
+            m_ObjectsNeedToBeRemoved.Add(placeable);
         }
 
         public List<Placeable> GetOwnedList()

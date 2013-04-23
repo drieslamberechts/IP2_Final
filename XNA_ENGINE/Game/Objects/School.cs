@@ -14,13 +14,16 @@ namespace XNA_ENGINE.Game.Objects
 {
     public class School : Placeable
     {
-        private GridTile m_DirectionTile;
+        private GridTile m_RallyPointTile;
 
         //Props
         private readonly int m_Row, m_Column;
 
         private const float GRIDHEIGHT = 32;
 
+        private const float TIMEFORVILLAGER = 2;
+        private double m_Timer = TIMEFORVILLAGER;
+        private int m_AmountOfSoldiersQueued = 0;
 
         private readonly GameScene m_GameScene;
 
@@ -62,11 +65,24 @@ namespace XNA_ENGINE.Game.Objects
 
             m_GameScene = pGameScene;
 
-            m_DirectionTile = m_LinkedTile;
+            m_RallyPointTile = m_LinkedTile;
         }
 
         public override void Update(RenderContext renderContext)
         {
+            if (m_AmountOfSoldiersQueued > 0)
+            {
+                m_Timer -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
+
+                if (m_Timer <= 0)
+                {
+                    //Console.WriteLine("Soldier built");
+                    m_Timer = TIMEFORVILLAGER;
+                    --m_AmountOfSoldiersQueued;
+                    Menu.GetInstance().Player.NewPlaceable(new Army(SceneManager.ActiveScene, m_RallyPointTile));
+                }
+            }
+
             //Appearance of the tile
             switch (m_SchoolType)
             {
@@ -96,13 +112,13 @@ namespace XNA_ENGINE.Game.Objects
             if (m_LinkedTile.PermanentSelected)
             {
                 m_Model.PermanentSelected = true;
-                m_DirectionTile.ShowFlag(true);
+                m_RallyPointTile.ShowFlag(true);
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
             }
             else
             {
                 m_Model.PermanentSelected = false;
-                m_DirectionTile.ShowFlag(false);
+                m_RallyPointTile.ShowFlag(false);
             }
 
             base.Update(renderContext);
@@ -133,10 +149,15 @@ namespace XNA_ENGINE.Game.Objects
             return true;
         }
 
+        public override void QueueSoldier(int amount = 1)
+        {
+            m_AmountOfSoldiersQueued += amount;
+        }
+
         public void PlaceRallyPoint(GridTile gridTile)
         {
-            m_DirectionTile.ShowFlag(false);
-            m_DirectionTile = gridTile;
+            m_RallyPointTile.ShowFlag(false);
+            m_RallyPointTile = gridTile;
         }
     }
 }

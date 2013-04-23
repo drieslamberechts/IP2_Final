@@ -173,6 +173,18 @@ namespace XNA_ENGINE.Game.Managers
                             selectedPlaceable.SetTargetTile(GetSelectedTile());
                         }
 
+                        if (selectedPlaceable != null && GetSelectedTile() != null &&
+                             selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Sjaman)
+                        {
+                            selectedPlaceable.SetTargetTile(GetSelectedTile());
+                        }
+
+                        if (selectedPlaceable != null && GetSelectedTile() != null &&
+                             selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                        {
+                            selectedPlaceable.SetTargetTile(GetSelectedTile());
+                        }
+
                         //if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null))
                     }
                 }

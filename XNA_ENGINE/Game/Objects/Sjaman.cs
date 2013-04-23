@@ -19,7 +19,7 @@ namespace XNA_ENGINE.Game.Objects
             m_LinkedTile = null;
             m_Static = false;
 
-            m_PlaceableType = PlaceableType.Villager;
+            m_PlaceableType = PlaceableType.Sjaman;
 
             m_Model = new GameModelGrid("Models/char_Sjaman");
             m_Model.LocalPosition += new Vector3(30, GRIDHEIGHT + 64, 64);

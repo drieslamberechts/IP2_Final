@@ -49,6 +49,16 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TargetTile.PickupWood(m_Owner);
 
+            foreach (var placeable in m_TargetTile.LinkedPlaceables)
+            {
+                if (placeable.PlaceableTypeMeth == PlaceableType.School)
+                {
+                    placeable.QueueSoldier();
+                    SceneManager.ActiveScene.RemoveSceneObject(m_Model);
+                    Menu.GetInstance().Player.RemovePlaceable(this);
+                }
+            }
+
             base.Update(renderContext);
         }
 
