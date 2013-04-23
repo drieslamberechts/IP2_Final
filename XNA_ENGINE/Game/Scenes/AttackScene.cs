@@ -104,8 +104,8 @@ namespace XNA_ENGINE.Game.Scenes
             renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Press Right Mouse Button to return to the main game", new Vector2(10, 50), Color.White);
 
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Player Armysize: " + m_Attacker.GetArmyCount(), new Vector2(10, 100), Color.White);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Ai Armysize: " + m_Defender.GetArmyCount(), new Vector2(10, 120), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Player Armysize: " + m_Attacker.ArmySize, new Vector2(10, 100), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Ai Armysize: " + m_Defender.ArmySize, new Vector2(10, 120), Color.White);
 
             // Draw Dice
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Attackers Dice: " + m_AttackersDice, new Vector2(300, 100), Color.White);
@@ -113,7 +113,7 @@ namespace XNA_ENGINE.Game.Scenes
 
             if (m_bEnd)
             {
-                if (m_Attacker.GetArmyCount() > m_Defender.GetArmyCount())
+                if (m_Attacker.ArmySize > m_Defender.ArmySize)
                     renderContext.SpriteBatch.DrawString(m_DebugFont, "Attacker won!", new Vector2(300, 300), Color.White);
                 else
                     renderContext.SpriteBatch.DrawString(m_DebugFont, "Defender won!", new Vector2(300, 300), Color.White);
@@ -132,7 +132,7 @@ namespace XNA_ENGINE.Game.Scenes
         {
             var random = new Random();
 
-            for (var t = 0; t < m_Attacker.GetArmyCount(); ++t)
+            for (var t = 0; t < m_Attacker.ArmySize; ++t)
             {
                 var attackersDice = random.Next(1, 6);
 
@@ -140,7 +140,7 @@ namespace XNA_ENGINE.Game.Scenes
                     m_AttackersDice = attackersDice;
             }
 
-            for (var t = 0; t < m_Defender.GetArmyCount(); ++t)
+            for (var t = 0; t < m_Defender.ArmySize; ++t)
             {
                 var defendersDice = random.Next(1, 6);
 
@@ -149,9 +149,9 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             if (m_AttackersDice > m_DefendersDice)
-                if (m_Defender.GetArmyCount() > 0) m_Defender.SetArmyCount(m_Defender.GetArmyCount());
+                if (m_Defender.ArmySize > 0) m_Defender.ArmySize = m_Defender.ArmySize;
             else
-                if (m_Attacker.GetArmyCount() > 0) m_Attacker.SetArmyCount(m_Attacker.GetArmyCount());
+                if (m_Attacker.ArmySize > 0) m_Attacker.ArmySize = m_Attacker.ArmySize;
         }
 
         private void EndAttack()

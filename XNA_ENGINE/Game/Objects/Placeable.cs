@@ -17,9 +17,10 @@ namespace XNA_ENGINE.Game.Objects
             Settlement,
             School,
             Shrine,
-            Army,
             Flag,
             Villager,
+            Army,
+            Sjaman,
 
             enumSize
         }

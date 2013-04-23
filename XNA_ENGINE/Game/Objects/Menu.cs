@@ -53,7 +53,7 @@ namespace XNA_ENGINE.Game.Objects
             MoveMode, //Attack, defend,...
             BuildMode, //Tile 1,2,3,...
             SettlementMode,
-            ShamanMode
+            SjamanMode
         }
 
         public enum ModeSelected
@@ -86,6 +86,8 @@ namespace XNA_ENGINE.Game.Objects
         private const int COSTOFINFLUENCE_SETTLEMENT = 0;
         private const int COSTOFINFLUENCE_SCHOOL = 0;
         private const int COSTOFINFLUENCE_SHRINE = 0;
+        private const int COSTOFWOOD_TILE1 = 0;
+        private const int COSTOFINFLUENCE_TILE1 = 20;
 
         //Singleton implementation
         static public Menu GetInstance()
@@ -192,11 +194,13 @@ namespace XNA_ENGINE.Game.Objects
                      */
                     break;
 
-                case SubMenuSelected.ShamanMode:
+                case SubMenuSelected.SjamanMode:
                     // BUILD TILES WITH SHAMAN
                     if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
                     {
                         Console.WriteLine("Create Tile 1");
+                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_TILE1);
+                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_TILE1);
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildTile1;
                         return true;
@@ -314,6 +318,10 @@ namespace XNA_ENGINE.Game.Objects
                 renderContext.SpriteBatch.Draw(m_TexSplit, m_RectSplit, Color.White);
             }
             else if (m_SubMenuSelected == SubMenuSelected.SettlementMode)
+            {
+                renderContext.SpriteBatch.Draw(m_TexBuild, m_RectBuild, Color.White);
+            }
+            else if (m_SubMenuSelected == SubMenuSelected.SjamanMode)
             {
                 renderContext.SpriteBatch.Draw(m_TexBuild, m_RectBuild, Color.White);
             }

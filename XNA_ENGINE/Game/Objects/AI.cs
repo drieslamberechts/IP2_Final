@@ -73,7 +73,7 @@ namespace XNA_ENGINE.Game.Objects
             
         }
 
-        // SPLIT THE ARMY
+       /* // SPLIT THE ARMY
         public Army SplitArmy(Army army)
         {
             // Create 2 references from first Army Reference
@@ -88,7 +88,7 @@ namespace XNA_ENGINE.Game.Objects
             Console.WriteLine("The selected army is split");
 
             return newArmy;
-        }
+        }*/
 
         // GETTERS AND SETTERS
         public bool GetAttack()

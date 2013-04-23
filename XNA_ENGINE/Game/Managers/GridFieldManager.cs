@@ -67,6 +67,8 @@ namespace XNA_ENGINE.Game.Managers
                     m_GridField[i, j].Initialize();
                 }
             }
+
+            Menu.GetInstance().Player.NewPlaceable(new Sjaman(m_GameScene, m_GridField[5, 5]));
         }
 
         public void Update(Engine.RenderContext renderContext)
@@ -126,12 +128,16 @@ namespace XNA_ENGINE.Game.Managers
                             // CREATE TILES WITH SHAMAN
                             case Menu.ModeSelected.BuildTile1:
                                 hittedTile.SetTileSpiked();
+                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildTile2:
+                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildTile3:
+                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildTile4:
+                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();
