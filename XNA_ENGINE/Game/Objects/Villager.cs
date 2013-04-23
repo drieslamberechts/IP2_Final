@@ -57,6 +57,13 @@ namespace XNA_ENGINE.Game.Objects
                     SceneManager.ActiveScene.RemoveSceneObject(m_Model);
                     Menu.GetInstance().Player.RemovePlaceable(this);
                 }
+
+                if (placeable.PlaceableTypeMeth == PlaceableType.Shrine)
+                {
+                    SceneManager.ActiveScene.RemoveSceneObject(m_Model);
+                    Menu.GetInstance().Player.RemovePlaceable(this);
+                    Menu.GetInstance().Player.GetResources().AddInfluence(20);
+                }
             }
 
             base.Update(renderContext);

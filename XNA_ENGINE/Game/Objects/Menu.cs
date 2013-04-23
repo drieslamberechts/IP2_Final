@@ -206,7 +206,7 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
+                   /* if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
                     {
                         Console.WriteLine("Create Tile 2");
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
@@ -228,7 +228,7 @@ namespace XNA_ENGINE.Game.Objects
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildTile4;
                         return true;
-                    }
+                    }*/
 
                     break;
 
