@@ -18,7 +18,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private int m_ArmySize;
 
-        public Army(GridTile startTile)
+        public Army(GameScene gameScene, GridTile startTile)
         {
             m_LinkedTile = null;
             m_Static = false;
@@ -33,7 +33,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.CanDraw = true;
             m_Model.LoadContent(FinalScene.GetContentManager());
             m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
-            SceneManager.ActiveScene.AddSceneObject(m_Model);
+            gameScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT + 30, 0));
             //m_Model.DrawBoundingBox = true;
