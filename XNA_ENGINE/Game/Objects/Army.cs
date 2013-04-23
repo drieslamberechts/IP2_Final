@@ -49,12 +49,20 @@ namespace XNA_ENGINE.Game.Objects
             newPos.Y += 32;
             m_Model.Translate(newPos);
 
+            if (m_Model.PermanentSelected)
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.MoveMode;
+
             base.Update(renderContext);
         }
 
         public override void SetTargetTile(GridTile targetTile)
         {
             m_TargetTile = targetTile;
+        }
+
+        public override GridTile GetTargetTile()
+        {
+            return m_TargetTile;
         }
 
         public int ArmySize

@@ -81,6 +81,10 @@ namespace XNA_ENGINE.Game.Objects
         {
             
         }
+        public virtual GridTile GetTargetTile()
+        {
+            return null;
+        }
 
         public void SetOwner(Player owner)
         {

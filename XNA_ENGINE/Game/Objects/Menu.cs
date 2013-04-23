@@ -235,8 +235,19 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.MoveMode:
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
+                        var selectedArmy = GridFieldManager.GetInstance(SceneManager.ActiveScene).GetPermanentSelectedPlaceable();
+
                         Console.WriteLine("Attack!");
                         m_Player.GetPlayerOptions().Attack();
+
+                        if (selectedArmy != null && selectedArmy.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                        {
+                            var newArmy = new Army(SceneManager.ActiveScene, selectedArmy.GetTargetTile());
+                            Player.NewPlaceable(newArmy);
+                            
+                            SceneManager.AddGameScene(new AttackScene(Content, (Army)selectedArmy, newArmy));
+                        }
+                        
 
                         m_SelectedMode = ModeSelected.Attack;
                         return true;
