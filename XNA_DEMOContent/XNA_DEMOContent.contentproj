@@ -131,11 +131,6 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\tree_TreeTall.X">
-      <Name>tree_TreeTall</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\tile_Normal.X">
       <Name>tile_Normal</Name>
       <Importer>XImporter</Importer>
@@ -161,11 +156,6 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\char_Sjaman.X">
-      <Name>char_Sjaman</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\char_Soldier.X">
       <Name>char_Soldier</Name>
       <Importer>XImporter</Importer>
@@ -179,6 +169,16 @@
     <Compile Include="Models\prop_Wood.X">
       <Name>prop_Wood</Name>
       <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tree_TreeTall.FBX">
+      <Name>tree_TreeTall</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\char_Goblin_Shaman.FBX">
+      <Name>char_Goblin_Shaman</Name>
+      <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
   </ItemGroup>
@@ -214,13 +214,6 @@
     </Compile>
     <Compile Include="BuildTile.png">
       <Name>BuildTile</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Textures\tex_tree_TreeShort1.png">
-      <Name>tex_tree_TreeShort1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -271,6 +264,13 @@
     </Compile>
     <Compile Include="Tile2.png">
       <Name>Tile2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_tree_Tall1.png">
+      <Name>tex_tree_Tall1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

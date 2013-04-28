@@ -142,7 +142,7 @@ namespace XNA_ENGINE.Game.Objects
 
                     m_TileModel.CanDraw = true;
                     m_TreeShort1.Texture2D =
-                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_Tall1");
                     m_TreeShort1.UseTexture = true;
                     m_TreeShort1.CanDraw = true;
 
@@ -156,7 +156,7 @@ namespace XNA_ENGINE.Game.Objects
 
                     m_TileModel.CanDraw = true;
                     m_TreeTall1.Texture2D =
-                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_Tall1");
                     m_TreeTall1.UseTexture = true;
                     m_TreeTall1.CanDraw = true;
 
@@ -184,7 +184,7 @@ namespace XNA_ENGINE.Game.Objects
 
                     m_TileModel.CanDraw = true;
                     m_TreeTall1.Texture2D =
-                        FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_TreeShort1");
+                    FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_Tall1");
                     m_TreeTall1.UseTexture = true;
                     m_TreeTall1.CanDraw = true;
 
