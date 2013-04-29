@@ -132,6 +132,7 @@ namespace XNA_ENGINE.Game.Scenes
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(800, 1000, 800);
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
+            
 
             m_CameraTargetPos = SceneManager.RenderContext.Camera.LocalPosition;
 
@@ -140,6 +141,7 @@ namespace XNA_ENGINE.Game.Scenes
           //  SceneManager.AddGameScene(m_AttackScene);
 
             base.Initialize();
+            
         }
 
         public override void Update(RenderContext renderContext)
@@ -218,6 +220,7 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw3D(RenderContext renderContext)
         {
+            SceneManager.RenderContext.GraphicsDevice.BlendState = BlendState.AlphaBlend;
             base.Draw3D(renderContext);
         }
 

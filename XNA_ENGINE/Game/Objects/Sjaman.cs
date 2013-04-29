@@ -21,9 +21,9 @@ namespace XNA_ENGINE.Game.Objects
 
             m_PlaceableType = PlaceableType.Sjaman;
 
-            m_Model = new GameModelGrid("Models/char_Sjaman");
+            m_Model = new GameModelGrid("Models/char_Goblin_Shaman");
             m_Model.LocalPosition += new Vector3(30, GRIDHEIGHT + 64, 64);
-            m_Model.LocalScale = new Vector3(0.4f, 0.4f, 0.4f);
+           // m_Model.LocalScale = new Vector3(0.4f, 0.4f, 0.4f);
             // Quaternion rotation = new Quaternion(new Vector3(0, 1, 0), 0);
             // m_Model.LocalRotation += rotation;
             m_Model.CanDraw = true;
