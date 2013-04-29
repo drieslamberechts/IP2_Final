@@ -23,12 +23,15 @@ namespace XNA_ENGINE.Game.Scenes
         private readonly ContentManager m_Content;
 
         private Texture2D m_StartButton;
-        private Texture2D m_ExitButton ;
+        private Texture2D m_ExitButton;
+        private Texture2D m_DaeScreen;
 
         private Rectangle m_StartRect;
         private Rectangle m_ExitRect;
+        private Rectangle m_DaeRect;
         private InputManager m_InputManager;
         private bool m_ExitGame;
+        private  int m_Counter;
 
         public MainMenuScene(ContentManager content)
             : base("MainMenuScene")
@@ -39,6 +42,10 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            // DAE
+            m_Counter = 0;
+            m_DaeScreen = m_Content.Load<Texture2D>("DaeSplashScreen");
+
             // Buttons
             m_StartButton = m_Content.Load<Texture2D>("menu/startButton");
             m_ExitButton = m_Content.Load<Texture2D>("menu/exitButton");
@@ -66,11 +73,20 @@ namespace XNA_ENGINE.Game.Scenes
             int gameHeight = renderContext.GraphicsDevice.Viewport.Height;
             int gameWidth = renderContext.GraphicsDevice.Viewport.Width;
 
+            m_DaeRect = new Rectangle(0, 0, gameWidth, gameHeight);
             m_StartRect = new Rectangle(gameWidth / 2 - m_StartButton.Width / 2, gameHeight / 2 - 175, m_StartButton.Width, m_StartButton.Height);
             m_ExitRect = new Rectangle(gameWidth / 2 - m_ExitButton.Width / 2, gameHeight / 2, m_ExitButton.Width, m_ExitButton.Height);
 
-            renderContext.SpriteBatch.Draw(m_StartButton, m_StartRect, Color.White);
-            renderContext.SpriteBatch.Draw(m_ExitButton, m_ExitRect, Color.White);
+            if (m_Counter < 400)
+            {
+                ++m_Counter;
+                renderContext.SpriteBatch.Draw(m_DaeScreen, m_DaeRect, Color.White);
+            }
+            else
+            {
+                renderContext.SpriteBatch.Draw(m_StartButton, m_StartRect, Color.White);
+                renderContext.SpriteBatch.Draw(m_ExitButton, m_ExitRect, Color.White);
+            }
 
             base.Draw2D(renderContext, drawBefore3D);
         }
@@ -92,6 +108,7 @@ namespace XNA_ENGINE.Game.Scenes
             {
                 Console.WriteLine("Exit button");
                 ExitGame = true;
+                SceneManager.MainGame.Exit();
                 return true;
             }
             else return false;

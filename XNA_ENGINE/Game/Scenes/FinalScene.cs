@@ -205,6 +205,10 @@ namespace XNA_ENGINE.Game.Scenes
                 // Selection mode
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "V: Selection mode: " + GridFieldManager.GetInstance(this).SelectionModeMeth, new Vector2(10, 90), Color.White);
 
+                // Show Camera position (DEBUG)
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "Camera Pos: " + m_CameraTargetPos,
+                                                     new Vector2(10, 150), Color.White);
+
             }
             else // Draw before the 3D is drawn
             {
@@ -275,11 +279,11 @@ namespace XNA_ENGINE.Game.Scenes
             float scrollStrength = 10*(float) m_CameraScale;
 
             if (keyboardState[Keys.Z] == KeyState.Down)
-                m_CameraTargetPos += -forwardVecCam * scrollStrength;
+                /*if (m_CameraTargetPos.Z > 850)*/ m_CameraTargetPos += -forwardVecCam * scrollStrength;
             if (keyboardState[Keys.S] == KeyState.Down)
                 m_CameraTargetPos += forwardVecCam * scrollStrength;
             if (keyboardState[Keys.Q] == KeyState.Down)
-                m_CameraTargetPos += rightVecCam * scrollStrength;
+               /* if (m_CameraTargetPos.X > 620) */m_CameraTargetPos += rightVecCam * scrollStrength;
             if (keyboardState[Keys.D] == KeyState.Down)
                 m_CameraTargetPos += -rightVecCam * scrollStrength;
 

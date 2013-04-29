@@ -633,7 +633,7 @@
 	<tile>
 		<positionX>6</positionX>
 		<positionY>4</positionY>
-		<TileType>1</TileType>
+		<TileType>6</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
@@ -1233,7 +1233,7 @@
 	<tile>
 		<positionX>6</positionX>
 		<positionY>8</positionY>
-		<TileType>0</TileType>
+		<TileType>6</TileType>
 	</tile>
 	<tile>
 		<positionX>7</positionX>
@@ -1378,7 +1378,7 @@
 	<tile>
 		<positionX>5</positionX>
 		<positionY>9</positionY>
-		<TileType>0</TileType>
+		<TileType>6</TileType>
 	</tile>
 	<tile>
 		<positionX>6</positionX>

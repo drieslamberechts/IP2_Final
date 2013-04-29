@@ -17,8 +17,7 @@ namespace XNA_ENGINE.Game
     {
         enum PlayerInput
         {
-            FullScreen,
-            Exit
+            FullScreen
         }
 
         private InputManager m_InputManager;
@@ -70,11 +69,8 @@ namespace XNA_ENGINE.Game
             // Initialize InputAction to switch Screen
             InputAction Tap = new InputAction((int)PlayerInput.FullScreen, TriggerState.Pressed);
             Tap.KeyButton = Keys.F;
-            InputAction Exit = new InputAction((int)PlayerInput.Exit, TriggerState.Pressed);
-            Exit.KeyButton = Keys.M;
 
             m_InputManager.MapAction(Tap);
-            m_InputManager.MapAction(Exit);
 
             base.Initialize();
         }
@@ -145,9 +141,6 @@ namespace XNA_ENGINE.Game
                 graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2;
                 graphics.ApplyChanges();
             }
-            
-            if (m_InputManager.GetAction((int)PlayerInput.Exit).IsTriggered)
-                Exit();
 
             base.Update(gameTime);
         }
