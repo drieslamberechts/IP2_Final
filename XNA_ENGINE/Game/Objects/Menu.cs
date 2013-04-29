@@ -265,7 +265,10 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         Console.WriteLine("Split!");
-                        //m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
+                        // m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
+
+                        // Get the Split Army working
+                        m_Player.GetPlayerOptions().SplitArmy(/* Add selected army */, new Army(SceneManager.ActiveScene, new GridTile(SceneManager.ActiveScene, 10, 10)));
 
                         m_SelectedMode = ModeSelected.Gather;
                         return true;

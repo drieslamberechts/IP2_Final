@@ -73,22 +73,28 @@ namespace XNA_ENGINE.Game.Objects
             
         }
 
-       /* // SPLIT THE ARMY
-        public Army SplitArmy(Army army)
+        // SPLIT THE ARMY
+        public Army SplitArmy(Army army, Army newArmy)
         {
-            // Create 2 references from first Army Reference
-            Army newArmy;
-            newArmy = new Army();
+            // gebeurd nu hier
+            //army.SplitArmy();
 
-            army.SplitArmy();
-
-            newArmy.SetArmyCount(army.GetArmyCount());
-            newArmy.SetPosition(new Vector2(army.GetCurrentPosition().X, army.GetCurrentPosition().Y + 1));
+            newArmy.ArmySize = army.ArmySize;
+            newArmy.SetTargetTile(army.GetTargetTile());
             
             Console.WriteLine("The selected army is split");
 
             return newArmy;
-        }*/
+        }
+
+        // MERGE THE ARMY
+        public void Merge(Army firstArmy, Army secondArmy)
+        {
+            int firstArmyCount = firstArmy.ArmySize;
+            secondArmy.ArmySize += firstArmyCount;
+
+            // remove firstArmy
+        }
 
         // GETTERS AND SETTERS
         public bool GetAttack()

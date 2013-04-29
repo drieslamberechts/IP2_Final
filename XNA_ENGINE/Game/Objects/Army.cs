@@ -10,7 +10,7 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    class Army : Placeable
+    public class Army : Placeable
     {
         private GridTile m_TargetTile;
 
