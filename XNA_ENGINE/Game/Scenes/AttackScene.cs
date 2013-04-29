@@ -36,11 +36,14 @@ namespace XNA_ENGINE.Game.Scenes
         private int m_AttackersDice;
         private int m_DefendersDice;
         private bool m_bEnd;
+        private bool m_AttackerWon, m_DefenderWon;
 
         public AttackScene(ContentManager content, Army attackerArmy, Army defenderArmy)
             : base("AttackScene")
         {
             m_bEnd = false;
+            m_AttackerWon = false;
+            m_DefenderWon = false;
 
             //CONTENT
             m_Content = content;
@@ -101,7 +104,7 @@ namespace XNA_ENGINE.Game.Scenes
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
             // Show FPS 2
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
+            // renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Press Right Mouse Button to return to the main game", new Vector2(10, 50), Color.White);
 
             renderContext.SpriteBatch.DrawString(m_DebugFont, "Player Armysize: " + m_Attacker.ArmySize, new Vector2(10, 100), Color.White);
@@ -113,10 +116,18 @@ namespace XNA_ENGINE.Game.Scenes
 
             if (m_bEnd)
             {
-                if (m_Attacker.ArmySize > m_Defender.ArmySize)
-                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Attacker won!", new Vector2(300, 300), Color.White);
+                if (m_AttackersDice > m_DefendersDice)
+                {
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Attacker won!", new Vector2(300, 300),
+                                                         Color.White);
+                    m_AttackerWon = true;
+                }
                 else
-                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Defender won!", new Vector2(300, 300), Color.White);
+                {
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Defender won!", new Vector2(300, 300),
+                                                         Color.White);
+                    m_DefenderWon = true;
+                }
             }
 
             base.Draw2D(renderContext, drawBefore3D);
@@ -158,6 +169,18 @@ namespace XNA_ENGINE.Game.Scenes
         {
             m_bEnd = true;
             //SceneManager.SetActiveScene("FinalScene");
+        }
+
+        public string GetWinner()
+        {
+            if (m_AttackerWon)
+            {
+                return "Attacker";
+            }
+            else
+            {
+                return "Defender";
+            }
         }
     }
 }

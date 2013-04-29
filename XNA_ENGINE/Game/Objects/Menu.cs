@@ -296,6 +296,7 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,m_TexSwitch.Height);
 
+            // BUILDINGS
             m_RectSettlement = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,m_TexTileBlue.Height);
             m_RectSchool = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,m_TexTileGold.Height);
             m_RectShrine = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,m_TexTileRed.Height);
@@ -306,6 +307,7 @@ namespace XNA_ENGINE.Game.Objects
             m_RectTile3 = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile3.Width, m_TexTile3.Height);
             m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,m_TexTile4.Height);
 
+            // ATTACK MOVE SPLIT
             m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,m_TexAttack.Height);
             m_RectMove = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexMove.Width,m_TexMove.Height);
             m_RectSplit = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexSplit.Width,m_TexSplit.Height);

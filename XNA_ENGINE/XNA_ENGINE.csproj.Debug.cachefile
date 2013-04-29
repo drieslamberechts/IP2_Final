@@ -13,9 +13,7 @@ Content\Tile4.xnb
 Content\BuildBase.xnb
 Content\BuildTile.xnb
 Content\Models\tree_TreeShort.xnb
-Content\Models\tree_TreeTall.xnb
 Content\Models\tile_Normal.xnb
-Content\Textures\tex_tree_TreeShort1.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
 Content\menu\exitButton.xnb
@@ -28,8 +26,11 @@ Content\Models\building_School.xnb
 Content\Models\building_Shrine.xnb
 Content\Tile1.xnb
 Content\Tile2.xnb
-Content\Models\char_Sjaman.xnb
 Content\Models\char_Soldier.xnb
 Content\Models\char_Villager.xnb
 Content\Models\prop_Wood.xnb
+Content\Textures\tex_tree_Tall1.xnb
+Content\Models\tree_TreeTall.xnb
+Content\Models\char_Goblin_Shaman.xnb
+Content\FBX\B84D346A\tree_TreeTall.fbm\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
 Content\DaeSplashScreen.xnb
