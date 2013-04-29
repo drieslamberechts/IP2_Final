@@ -38,10 +38,9 @@ namespace XNA_ENGINE.Game.Managers
 
         private Random m_Random;
 
-        private GridFieldManager(GameScene pGameScene)
+        private GridFieldManager()
         {
             CreativeMode = false;
-            m_GameScene = pGameScene;
 
             // Load Map
             m_GridField = MapLoadSave.GetInstance().LoadMap(pGameScene, "GeneratedTileMap");
@@ -280,6 +279,16 @@ namespace XNA_ENGINE.Game.Managers
                 default:
                     throw new ArgumentOutOfRangeException("SelectionMode (1x1 or 2x2) is out of range in GridFieldManager");
             }
+        }
+
+        public void AddPlayer(Player player)
+        {
+
+        }
+
+        public void SetUserPlayer(Player player)
+        {
+
         }
 
         public void Deselect()

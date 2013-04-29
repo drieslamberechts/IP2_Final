@@ -123,6 +123,7 @@
     <Compile Include="Game\Objects\Settlement.cs" />
     <Compile Include="Game\Objects\Sjaman.cs" />
     <Compile Include="Game\Scenes\AttackScene.cs" />
+    <Compile Include="Game\Scenes\PlayScene.cs" />
     <Compile Include="Game\Scenes\FinalScene.cs" />
     <Compile Include="Game\Scenes\MainMenuScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
