@@ -189,12 +189,14 @@ namespace XNA_ENGINE.Game.Scenes
             if (drawBefore3D == false) // draw after the 3D is drawn
             {
                 // Show FPS 2
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
+                // renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
 
                 // DrawGUI
                 Menu.GetInstance().Draw(renderContext);
 
                 base.Draw2D(renderContext, drawBefore3D);
+
+                /*
 
                 // Show Selection
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.White);
@@ -210,6 +212,7 @@ namespace XNA_ENGINE.Game.Scenes
                 // Show Camera position (DEBUG)
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "Camera Pos: " + m_CameraTargetPos,
                                                      new Vector2(10, 150), Color.White);
+                 */
 
             }
             else // Draw before the 3D is drawn

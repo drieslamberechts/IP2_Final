@@ -159,5 +159,10 @@ namespace XNA_ENGINE.Game.Objects
             m_RallyPointTile.ShowFlag(false);
             m_RallyPointTile = gridTile;
         }
+
+        public int GetAmountOfVillagersQueued()
+        {
+            return m_AmountOfVillagersQueued;
+        }
     }
 }

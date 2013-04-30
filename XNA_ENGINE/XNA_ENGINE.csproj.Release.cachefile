@@ -1,17 +1,6 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
 Content\Models\settlement_TestSettlementBlue.xnb
-Content\Split_Army.xnb
-Content\defend.xnb
-Content\gather.xnb
-Content\Textures\RainbowTexture.xnb
-Content\switch.xnb
-Content\attack.xnb
-Content\move.xnb
-Content\Tile1.xnb
-Content\Tile2.xnb
-Content\Tile3.xnb
-Content\Tile4.xnb
 Content\Models\tree_TreeShort.xnb
 Content\Models\tile_Normal.xnb
 Content\Models\building_FlagNormal.xnb
@@ -21,6 +10,15 @@ Content\Models\building_Shrine.xnb
 Content\Models\char_Soldier.xnb
 Content\Models\char_Villager.xnb
 Content\Models\prop_Wood.xnb
+Content\Split_Army.xnb
+Content\defend.xnb
+Content\gather.xnb
+Content\Textures\RainbowTexture.xnb
+Content\switch.xnb
+Content\attack.xnb
+Content\move.xnb
+Content\Tile3.xnb
+Content\Tile4.xnb
 Content\BuildBase.xnb
 Content\BuildTile.xnb
 Content\Textures\tex_tile_Basic.xnb
@@ -29,7 +27,17 @@ Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
 Content\Build.xnb
 Content\Textures\Background.xnb
-Content\Models\tree_TreeTall.xnb
-Content\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
+Content\Tile1.xnb
+Content\Tile2.xnb
 Content\Textures\tex_tree_Tall1.xnb
+Content\DaeSplashScreen.xnb
+Content\final Menu\grootMenu_Onderkant.xnb
+Content\final Menu\resources_influence.xnb
+Content\final Menu\resources_wood.xnb
+Content\final Menu\iconStandard.xnb
+Content\final Menu\characterStats.xnb
+Content\final Menu\hoverVillager.xnb
+Content\final Menu\unitList.xnb
+Content\Models\tree_TreeTall.xnb
 Content\Models\char_Goblin_Shaman.xnb
+Content\FBX\B84D346A\tree_TreeTall.fbm\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
