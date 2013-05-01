@@ -46,7 +46,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.Translate(newPos);
 
             if (m_Model.PermanentSelected)
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SjamanMode;
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
 
             base.Update(renderContext);
         }

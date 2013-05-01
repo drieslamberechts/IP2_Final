@@ -29,11 +29,11 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexCharacterStats,
                                    m_TexHoverVillager,
                                    m_TexUnitList,
-                                   m_TexSwitch,
                                    m_TexSettlement,
                                    m_TexSchool,
                                    m_TexShrine,
-                                   m_TexBuildTile;
+                                   m_TexBuildTile,
+                                   m_TexSplit;
 
         private Rectangle m_RectMenuBackground,
                           m_RectWoodResource,
@@ -42,11 +42,11 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectCharacterStats,
                           m_RectHoverVillager,
                           m_RectUnitList,
-                          m_RectSwitch,
                           m_RectSettlement,
                           m_RectSchool,
                           m_RectShrine,
-                          m_RectBuildTile;
+                          m_RectBuildTile,
+                          m_RectSplit;
 
         public enum SubMenuSelected
         {
@@ -55,7 +55,8 @@ namespace XNA_ENGINE.Game.Objects
             ShrineMode,
             SettlementMode,
             ShamanMode,
-            VillagerMode
+            VillagerMode,
+            SchoolMode
         }
 
         public enum ModeSelected
@@ -108,8 +109,6 @@ namespace XNA_ENGINE.Game.Objects
 
             m_bShowVillagerHover = false;
 
-            m_TexSwitch = Content.Load<Texture2D>("switch");
-
             // MENU ONDERKANT BACKGROUND
             m_TexMenuBackground = Content.Load<Texture2D>("final Menu/grootMenu_Onderkant");
 
@@ -123,6 +122,7 @@ namespace XNA_ENGINE.Game.Objects
 
             // ICONS
             m_TexDelete = Content.Load<Texture2D>("final Menu/iconStandard");
+            m_TexSplit = Content.Load<Texture2D>("final Menu/iconStandard");
 
             // HOVERING
             m_TexHoverVillager = Content.Load<Texture2D>("final Menu/hoverVillager");
@@ -133,12 +133,6 @@ namespace XNA_ENGINE.Game.Objects
             m_TexShrine = Content.Load<Texture2D>("final Menu/iconStandard");
 
             m_TexBuildTile = Content.Load<Texture2D>("final Menu/iconStandard");
-
-            m_TexAttack = Content.Load<Texture2D>("Attack");
-            m_TexMove = Content.Load<Texture2D>("Move");
-            m_TexSplit = Content.Load<Texture2D>("Split_Army");
-
-            m_TexBuild = Content.Load<Texture2D>("Build");
 
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
         }
@@ -208,6 +202,16 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
 
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
+                    {
+                        // SET DECREASE RESOURCES
+                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
+                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        m_SelectedMode = ModeSelected.BuildSettlement;
+                        return true;
+                    }
+
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
                     {
                         // SET DECREASE RESOURCES
@@ -233,66 +237,12 @@ namespace XNA_ENGINE.Game.Objects
                         m_SelectedMode = ModeSelected.BuildTile1;
                         return true;
                     }
-                   
-                   /* if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile2))
-                    {
-                        Console.WriteLine("Create Tile 2");
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
-                        m_SelectedMode = ModeSelected.BuildTile2;
-                        return true;
-                    }
-
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile3))
-                    {
-                        Console.WriteLine("Create Tile 3");
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
-                        m_SelectedMode = ModeSelected.BuildTile3;
-                        return true;
-                    }
-
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
-                    {
-                        Console.WriteLine("Create Tile 4");
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
-                        m_SelectedMode = ModeSelected.BuildTile4;
-                        return true;
-                    }*/
-
                     break;
 
                 // --------------------------------------------
                 // SOLDIER MODE
                 // --------------------------------------------
                 case SubMenuSelected.SoldierMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
-                    {
-                        var selectedArmy = GridFieldManager.GetInstance(SceneManager.ActiveScene).GetPermanentSelectedPlaceable();
-
-                        Console.WriteLine("Attack!");
-                        m_Player.GetPlayerOptions().Attack();
-
-                        if (selectedArmy != null && selectedArmy.PlaceableTypeMeth == Placeable.PlaceableType.Army)
-                        {
-                            var newArmy = new Army(SceneManager.ActiveScene, selectedArmy.GetTargetTile());
-                            Player.NewPlaceable(newArmy);
-                            
-                            SceneManager.AddGameScene(new AttackScene(Content, (Army)selectedArmy, newArmy));
-                        }
-                        
-
-                        m_SelectedMode = ModeSelected.Attack;
-                        return true;
-                    }
-
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMove))
-                    {
-                        Console.WriteLine("Move!");
-                        m_Player.GetPlayerOptions().Move();
-
-                        m_SelectedMode = ModeSelected.Defend;
-                        return true;
-                    }
-
                     if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         Console.WriteLine("Split!");
@@ -362,6 +312,22 @@ namespace XNA_ENGINE.Game.Objects
                                                            m_TexDelete.Width / 2,
                                                            m_TexDelete.Height / 2);
 
+                m_RectSchool = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45,
+                                                           m_TexSchool.Width / 2,
+                                                           m_TexSchool.Height / 2);
+
+                m_RectShrine = new Rectangle(10 + m_TexSchool.Width / 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height + 45,
+                                                           m_TexShrine.Width / 2,
+                                                           m_TexShrine.Height / 2);
+
+                m_RectSettlement = new Rectangle(10 * 3 + m_TexSchool.Width, renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height + 45,
+                                                           m_TexSettlement.Width / 2,
+                                                           m_TexSettlement.Height / 2);
+
+                m_RectSplit = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSplit.Height + 45,
+                                                           m_TexSplit.Width / 2,
+                                                           m_TexSplit.Height / 2);
+
                 // HOVERING
                 m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height / 2 - 10,
                                                            m_TexHoverVillager.Width / 2,
@@ -398,30 +364,23 @@ namespace XNA_ENGINE.Game.Objects
                                                            m_TexDelete.Width,
                                                            m_TexDelete.Height);
 
+                m_RectSettlement = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height - 20,
+                                                           m_TexSettlement.Width,
+                                                           m_TexSettlement.Height);
+
+                m_RectSchool = new Rectangle(10 + m_TexSettlement.Width + 10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20,
+                                                           m_TexSchool.Width,
+                                                           m_TexSchool.Height);
+
+                m_RectShrine = new Rectangle(10 * 3 + m_TexShrine.Width * 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height - 20,
+                                                           m_TexShrine.Width,
+                                                           m_TexShrine.Height);
+
                 // HOVERING
                 m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20,
                                                            m_TexHoverVillager.Width,
                                                            m_TexHoverVillager.Height);
             }
-
-            
-
-            m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,m_TexSwitch.Height);
-
-            // BUILDINGS
-            //m_RectSettlement = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,m_TexTileBlue.Height);
-            //m_RectSchool = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,m_TexTileGold.Height);
-            //m_RectShrine = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,m_TexTileRed.Height);
-
-            // SHAMAN MENU
-            //m_RectTile1 = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile1.Width, m_TexTile1.Height);
-            //m_RectTile2 = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile2.Width, m_TexTile2.Height);
-            //m_RectTile3 = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile3.Width, m_TexTile3.Height);
-            //m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,m_TexTile4.Height);
-
-            // ATTACK MOVE SPLIT
-            //m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,m_TexAttack.Height);
-            //m_RectMove = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexMove.Width,m_TexMove.Height);
 
             switch (m_SubMenuSelected)
             {
@@ -452,7 +411,7 @@ namespace XNA_ENGINE.Game.Objects
                 // SOLDIER MODE
                 // --------------------------------------------
                 case SubMenuSelected.SoldierMode:
-                    renderContext.SpriteBatch.Draw(m_TexSwitch, m_RectSwitch, Color.White);
+                    
                     break;
 
                 // --------------------------------------------
@@ -461,39 +420,13 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.SettlementMode:
                     break;
 
-                    m_RectSplit = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexSplit.Width,
-                                                m_TexSplit.Height);
-
-                    m_RectBuild = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexBuild.Width,
-                                                m_TexBuild.Height);
-
+                case SubMenuSelected.SchoolMode:
                     // HOVERING
                     if (m_bShowVillagerHover)
                     {
                         renderContext.SpriteBatch.Draw(m_TexHoverVillager, m_RectHoverVillager, Color.White);
                     }
-
-                    
-
-                    if (m_SubMenuSelected == SubMenuSelected.VillagerMode)
-                    {
-                        
-                        renderContext.SpriteBatch.Draw(m_TexTile4, m_RectTile4, Color.White);
-                    }
-                    else if (m_SubMenuSelected == SubMenuSelected.MoveMode)
-                    {
-                        renderContext.SpriteBatch.Draw(m_TexAttack, m_RectAttack, Color.White);
-                        renderContext.SpriteBatch.Draw(m_TexMove, m_RectMove, Color.White);
-                        renderContext.SpriteBatch.Draw(m_TexSplit, m_RectSplit, Color.White);
-                    }
-                    else if (m_SubMenuSelected == SubMenuSelected.SettlementMode)
-                    {
-                        // renderContext.SpriteBatch.Draw(m_TexBuild, m_RectBuild, Color.White);
-                    }
-                    else if (m_SubMenuSelected == SubMenuSelected.SjamanMode)
-                    {
-                        renderContext.SpriteBatch.Draw(m_TexBuild, m_RectBuild, Color.White);
-                    }
+                    break;
             }
 
             // DRAW EXTRA INFORMATION (RESOURCES,...) IN TEXT

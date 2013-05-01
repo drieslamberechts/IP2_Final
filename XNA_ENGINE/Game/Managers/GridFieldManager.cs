@@ -70,6 +70,7 @@ namespace XNA_ENGINE.Game.Managers
 
             Menu.GetInstance().Player.NewPlaceable(new Sjaman(m_GameScene, m_GridField[5, 5]));
             Menu.GetInstance().Player.NewPlaceable(new Army(m_GameScene, m_GridField[5, 6]));
+            Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));
         }
 
         public void Update(Engine.RenderContext renderContext)

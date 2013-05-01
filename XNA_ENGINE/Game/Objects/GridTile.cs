@@ -232,6 +232,9 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             OnSelected();
+
+            if (this.PermanentSelected)
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
         }
 
         public bool HitTest(Ray ray)
