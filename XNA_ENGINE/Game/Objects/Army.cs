@@ -103,6 +103,8 @@ namespace XNA_ENGINE.Game.Objects
             newPos.Y += 32;
             m_Model.Translate(newPos);
 
+            if (m_Model.PermanentSelected)
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
             base.Update(renderContext);
         }
 

@@ -17,7 +17,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private const float GRIDHEIGHT = 32;
 
-        public Villager(GridTile startTile)
+        public Villager(GameScene gameScene, GridTile startTile)
         {
             m_LinkedTileList = null;
 
@@ -31,7 +31,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.CanDraw = true;
             m_Model.LoadContent(PlayScene.GetContentManager());
             m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
-            SceneManager.ActiveScene.AddSceneObject(m_Model);
+            gameScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT+30, 0));
             m_Model.DrawBoundingBox = true;
@@ -67,6 +67,9 @@ namespace XNA_ENGINE.Game.Objects
                   //  Menu.GetInstance().Player.GetResources().AddInfluence(20);
                 }
             }*/
+
+            if (m_Model.PermanentSelected)
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.VillagerMode;
 
             base.Update(renderContext);
         }

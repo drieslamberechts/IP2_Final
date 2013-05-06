@@ -79,6 +79,8 @@ namespace XNA_ENGINE.Game.Objects
         {
             if (!m_Model.PermanentSelected) return false;
 
+          
+
             return true;
         }
     }

@@ -68,7 +68,7 @@ namespace XNA_ENGINE.Game.Managers
             
             //Iterate over every Player
             Player attackPlayer = null;
-            foreach (var player in m_PlayersList)
+            Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));
             {
                 player.Update(renderContext);
                 if (player.GetAttack()) attackPlayer = player; // If the player is under attack initiate the battlesequence!
@@ -291,6 +291,7 @@ namespace XNA_ENGINE.Game.Managers
                 }
             }
             if (returnList.Any()) return returnList;
+Content\DaeSplashScreen.xnb
 
             return null;
         }

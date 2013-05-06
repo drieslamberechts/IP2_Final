@@ -75,7 +75,7 @@ namespace XNA_ENGINE.Game.Objects
                     Console.WriteLine("Villager built");
                     m_Timer = TIMEFORVILLAGER;
                     --m_AmountOfVillagersQueued;
-
+                    Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_RallyPointTile));
                     m_Owner.AddPlaceable(new Villager(m_RallyPointTile));
                 }
             }
@@ -184,7 +184,11 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (PlaceRallyPoint(surroundingTile))
                     return;
-            }
+        }
+
+        public int GetAmountOfVillagersQueued()
+        {
+            return m_AmountOfVillagersQueued;
         }
     }
 }
