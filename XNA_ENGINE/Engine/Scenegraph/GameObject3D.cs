@@ -74,7 +74,7 @@ namespace XNA_ENGINE.Engine.Scenegraph
         {
             Children = new List<GameObject3D>();
             LocalScale = WorldScale = Vector3.One;
-            CanDraw = true;
+            CanDraw = false;
         }
 
         public void AddChild(GameObject3D child)

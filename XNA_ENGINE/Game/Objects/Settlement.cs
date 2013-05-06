@@ -16,56 +16,52 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GridTile m_RallyPointTile;
 
-        //Props
-        private readonly int m_Row, m_Column;
-
         private const float GRIDHEIGHT = 32;
         private const float TIMEFORVILLAGER = 2;
         private double m_Timer = TIMEFORVILLAGER;
 
         private int m_AmountOfVillagersQueued = 0;
 
-        private readonly GameScene m_GameScene;
-
-        private readonly SettlementType m_SettlementType;
-
-        public enum SettlementType
-        {
-            Basic1,
-
-            //<----Add new types in front of this comment 
-            enumSize
-        }
-
-        public Settlement(GridTile tile, GameScene pGameScene, SettlementType settlementType)
+        public Settlement(List<GridTile> tileList)
         {
             m_PlaceableType = PlaceableType.Settlement;
-            m_SettlementType = settlementType;
 
-            m_LinkedTile = tile;
+            m_LinkedTileList = new List<GridTile>();
 
-            switch (m_SettlementType)
+            foreach (var gridTile in tileList)
             {
-                case SettlementType.Basic1:
-                    m_Model = new GameModelGrid("Models/building_Settlement");
-                    m_Model.LocalPosition += new Vector3(30, GRIDHEIGHT, 64);
-                    Quaternion rotation = new Quaternion(new Vector3(0,1,0), 0);
-                    m_Model.LocalRotation += rotation;
-                    m_Model.CanDraw = true;
-                    m_Model.LoadContent(FinalScene.GetContentManager());
-                    m_Model.DiffuseColor = new Vector3(0.1f,0.1f,0.5f);
-                    m_LinkedTile.Model.AddChild(m_Model);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("settlementType");
+                gridTile.SetIsUsedByStructure(true);
+                m_LinkedTileList.Add(gridTile);
             }
+                
+            m_Model = new GameModelGrid("Models/building_Settlement");
+            m_Model.LocalPosition += new Vector3(m_LinkedTileList.ElementAt(0).Model.LocalPosition.X + 30, GRIDHEIGHT, m_LinkedTileList.ElementAt(0).Model.LocalPosition.Z);
+            Quaternion rotation = new Quaternion(new Vector3(0,1,0), 0);
+            m_Model.LocalRotation += rotation;
+            m_Model.CanDraw = true;
+            m_Model.LoadContent(PlayScene.GetContentManager());
+            m_Model.DiffuseColor = new Vector3(0.1f,0.1f,0.5f);
 
-            m_Column = m_LinkedTile.Column;
-            m_Row = m_LinkedTile.Row;
+            m_Model.CreateBoundingBox(100, 64, 100, new Vector3(0, 20, -20));
+            m_Model.DrawBoundingBox = true;
 
-            m_GameScene = pGameScene;
+            //Child Model
+            var childModel = new GameModelGrid("Models/building_Settlement");
+            childModel.LocalPosition += new Vector3(0, 0, -64);
+            childModel.CanDraw = true;
+            childModel.LoadContent(PlayScene.GetContentManager());
+            childModel.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
+            m_Model.AddChild(childModel);
 
-            m_RallyPointTile = m_LinkedTile;
+            GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
+
+            Initialize();
+            SearchForDefaultRallyPointSpot();
+        }
+
+        public virtual void Initialize()
+        {
+            base.Initialize();
         }
 
         public override void Update(RenderContext renderContext)
@@ -79,74 +75,60 @@ namespace XNA_ENGINE.Game.Objects
                     Console.WriteLine("Villager built");
                     m_Timer = TIMEFORVILLAGER;
                     --m_AmountOfVillagersQueued;
-                    Menu.GetInstance().Player.NewPlaceable(new Villager(m_RallyPointTile));
+
+                    m_Owner.AddPlaceable(new Villager(m_RallyPointTile));
                 }
-            }
-
-            //Appearance of the tile
-            switch (m_SettlementType)
-            {
-                case SettlementType.Basic1:
-                    //m_Model.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
-                    //m_Model.UseTexture = true;
-
-                    //m_Model.CanDraw = true;
-
-                    //m_Model.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            //What to do if the tile is selected
-            if (m_LinkedTile.Selected)
-            {
-                m_Model.Selected = true;
-            }
-            else
-            {
-                m_Model.Selected = false;
-            }
-
-            //What to do if the tile is permanently selected (until the tile is deselected)
-            if (m_LinkedTile.PermanentSelected)
-            {
-                m_Model.PermanentSelected = true;
-                m_RallyPointTile.ShowFlag(true);
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
-            }
-            else
-            {
-                m_Model.PermanentSelected = false;
-                m_RallyPointTile.ShowFlag(false);
             }
 
             base.Update(renderContext);
         }
 
         //Code to execute on hit with mouse
-        public override bool OnSelected()
+        public override void OnSelected()
         {
-            if (!m_LinkedTile.Selected) return false;
-
             //Get the inputmanager
-            var inputManager = FinalScene.GetInputManager();
+            var inputManager = PlayScene.GetInputManager();
+
             //What mode is there selected in the menu to build?
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
 
-            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
             {
                 
             }
 
-            if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
 
             }
 
             base.OnSelected();
+        }
 
-            return true;
+        //Code to execute on Permanently selected
+        public override void OnPermanentSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+            var gridFieldManager = GridFieldManager.GetInstance();
+            m_Rallypoint.CanDraw = true;
+
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
+
+            GridTile selectedTile;
+            if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
+                selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
+            else
+                selectedTile = null;
+
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+                if (selectedTile != null)
+                    PlaceRallyPoint(selectedTile);
+            }
+
+            base.OnPermanentSelected();
         }
 
         public override void QueueVillager(int amount = 1)
@@ -154,10 +136,55 @@ namespace XNA_ENGINE.Game.Objects
             m_AmountOfVillagersQueued += amount;
         }
 
-        public void PlaceRallyPoint(GridTile gridTile)
+        public bool PlaceRallyPoint(GridTile gridTile)
         {
-            m_RallyPointTile.ShowFlag(false);
-            m_RallyPointTile = gridTile;
+            if (gridTile.IsOpen())
+            {
+                m_RallyPointTile = gridTile;
+                m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
+
+                return true;
+            }
+            //Couldn't place the rallypoint
+            return false;
+        }
+
+        private void SearchForDefaultRallyPointSpot()
+        {
+            List<GridTile> totalSurroundingTiles = new List<GridTile>();
+            List<GridTile> surroundingTiles = new List<GridTile>();
+            foreach (var structureTile in m_LinkedTileList)
+            {
+                surroundingTiles.Clear();
+                surroundingTiles = GridFieldManager.GetInstance().GetAllSurroundingTiles(structureTile);
+
+                //Loop over surrounding tiles
+                foreach (var surroundingTile in surroundingTiles)
+                    totalSurroundingTiles.Add(surroundingTile);
+            }
+
+            List<GridTile> removeList = new List<GridTile>();
+            foreach (var surroundingTile in totalSurroundingTiles)
+            {
+                foreach (var structureTile in m_LinkedTileList)
+                {
+                    //If the tile is a tile on the structure
+                    if (structureTile == surroundingTile)
+                        removeList.Add(structureTile);
+                }
+            }
+
+            //Remove the elements form the list
+            foreach (var gridTile in removeList)
+            {
+                totalSurroundingTiles.Remove(gridTile);
+            }
+
+            foreach (var surroundingTile in totalSurroundingTiles)
+            {
+                if (PlaceRallyPoint(surroundingTile))
+                    return;
+            }
         }
     }
 }

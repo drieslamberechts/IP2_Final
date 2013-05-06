@@ -26,13 +26,15 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridTile[,] m_GridField;
 
-
         private const int GRID_ROW_LENGTH = 30;
         private const int GRID_COLUMN_LENGTH = 30;
 
         private SelectionMode m_SelectionMode = SelectionMode.select1x1;
 
         private GameScene m_GameScene;
+
+        private List<Player> m_PlayersList;
+        private Player m_UserPlayer;
 
         // private int GRID_OFFSET = 64;
 
@@ -42,21 +44,49 @@ namespace XNA_ENGINE.Game.Managers
         {
             CreativeMode = false;
 
-            // Load Map
-            m_GridField = MapLoadSave.GetInstance().LoadMap(pGameScene, "GeneratedTileMap");
+            m_Random = new Random();
         }
 
-        static public GridFieldManager GetInstance(GameScene pGameScene)
+        static public GridFieldManager GetInstance()
         {
             if (m_GridFieldManager == null)
-                m_GridFieldManager = new GridFieldManager(pGameScene);
+                m_GridFieldManager = new GridFieldManager();
 
             return m_GridFieldManager;
         }
 
-        public void Initialize()
+        public void Update(RenderContext renderContext)
         {
-            m_Random = new Random();
+            //Iterate over every GridTile
+            for (int i = 0; i < GRID_ROW_LENGTH; ++i)
+            {
+                for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
+                {
+                    m_GridField[i,j].Update(renderContext);
+                }
+            }
+            
+            //Iterate over every Player
+            Player attackPlayer = null;
+            foreach (var player in m_PlayersList)
+            {
+                player.Update(renderContext);
+                if (player.GetAttack()) attackPlayer = player; // If the player is under attack initiate the battlesequence!
+            }
+
+            if (attackPlayer != null)
+            {
+                attackPlayer.ResetAttack();
+                SceneManager.SetActiveScene("AttackScene");
+            }
+        }
+
+        public void LoadMap(GameScene gameScene, string map)
+        {
+            m_GameScene = gameScene;
+
+            // Load Map
+            m_GridField = MapLoadSave.GetInstance().LoadMap(gameScene, map);
 
             //Iterate over every GridTile
             for (int i = 0; i < GRID_ROW_LENGTH; ++i)
@@ -67,41 +97,45 @@ namespace XNA_ENGINE.Game.Managers
                 }
             }
 
-            Menu.GetInstance().Player.NewPlaceable(new Sjaman(m_GameScene, m_GridField[5, 5]));
-            Menu.GetInstance().Player.NewPlaceable(new Army(m_GameScene, m_GridField[5, 6]));
-        }
+            m_PlayersList = new List<Player>();
 
-        public void Update(Engine.RenderContext renderContext)
-        {
-            //Iterate over every GridTile
-            for (int i = 0; i < GRID_ROW_LENGTH; ++i)
-            {
-                for (int j = 0; j < GRID_COLUMN_LENGTH; ++j)
-                {
-                    m_GridField[i,j].Update(renderContext);
-                }
-            }
+           // Menu.GetInstance().Player.NewPlaceable(new Shaman(m_GridField[5, 5]));
+           // Menu.GetInstance().Player.NewPlaceable(new Army(m_GridField[5, 6]));
         }
 
         public void HandleInput(RenderContext renderContext)
         {
-            var inputManager = FinalScene.GetInputManager();
-            bool isMouseInScreen = FinalScene.IsMouseInScreen(renderContext);
+            var inputManager = PlayScene.GetInputManager();
+            bool isMouseInScreen = PlayScene.IsMouseInScreen(renderContext);
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
 
-            //Raycast to grid
+            Deselect();
+            //Handle menu //If menu is hit don't do the grid test
+            if (Menu.GetInstance().HandleInput(renderContext)) return; // hier in Menu -> klikken?
+            if (m_UserPlayer.HandleInput(renderContext)) return;
+
+            //Check if the mouse cursor is in the screen
             if (isMouseInScreen)
             {
-                var hittedTile = HitTestField(FinalScene.CalculateCursorRay(renderContext));
-                if (hittedTile != null)
+                //Raycast to grid
+                var hittedTile = HitTestField(PlayScene.CalculateCursorRay(renderContext));
+                //Raycast to placeables
+                var hittedPlaceable = HitTestPlaceables(PlayScene.CalculateCursorRay(renderContext));
+
+                if (hittedPlaceable != null)
+                {
+                    Select(hittedPlaceable);
+                }
+                else if (hittedTile != null)
                 {
                     Select(hittedTile);
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
                     {
                         switch (selectedMode)
                         {
                             case Menu.ModeSelected.None:
-                                PermanentSelect(hittedTile);
+                                PermanentDeselect();
                                 break;
                             case Menu.ModeSelected.Attack:
                                 break;
@@ -110,15 +144,15 @@ namespace XNA_ENGINE.Game.Managers
                             case Menu.ModeSelected.Gather:
                                 break;
                             case Menu.ModeSelected.BuildSettlement:
-                                hittedTile.AddSettlement(Settlement.SettlementType.Basic1);
+                                BuildStructure(Placeable.PlaceableType.Settlement, m_UserPlayer);
                                 Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildShrine:
-                                hittedTile.AddShrine(Shrine.ShrineType.Basic1);
+                                BuildStructure(Placeable.PlaceableType.Shrine, m_UserPlayer);
                                 Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildSchool:
-                                hittedTile.AddSchool(School.SchoolType.Basic1);
+                                BuildStructure(Placeable.PlaceableType.School, m_UserPlayer);
                                 Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.Delete:
@@ -127,7 +161,7 @@ namespace XNA_ENGINE.Game.Managers
 
                             // CREATE TILES WITH SHAMAN
                             case Menu.ModeSelected.BuildTile1:
-                                hittedTile.SetTileSpiked();
+                                hittedTile.SetType(GridTile.TileType.Spiked);
                                 Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildTile2:
@@ -144,45 +178,45 @@ namespace XNA_ENGINE.Game.Managers
                         }
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
                     {
-                        var selectedPlaceable =GetPermanentSelectedPlaceable();
+                        var selectedPlaceable = GetPermanentSelected();
 
                         //Place flag of settlement
-                        if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasSettlement() != null)
+                       /* if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasSettlement() != null)
                         {
-                            GetPermanentSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
+                            //GetPermanentSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
                         }
 
                         //Place flag of school
                         if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasSchool() != null)
                         {
-                            GetPermanentSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
+                           // GetPermanentSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
                         }
 
                         //Place flag of shrine
                         if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasShrine() != null)
                         {
-                            GetPermanentSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
-                        }
-
-                        if (selectedPlaceable != null && GetSelectedTile() != null &&
+                            //GetPermanentSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
+                        }*/
+                        /*
+                        if (selectedPlaceable != null && GetSelectedTiles() != null &&
                             selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Villager)
                         {
-                            selectedPlaceable.SetTargetTile(GetSelectedTile());
+                            selectedPlaceable.SetTargetTile(GetSelectedTiles());
                         }
 
-                        if (selectedPlaceable != null && GetSelectedTile() != null &&
-                             selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Sjaman)
+                        if (selectedPlaceable != null && GetSelectedTiles() != null &&
+                             selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Shaman)
                         {
-                            selectedPlaceable.SetTargetTile(GetSelectedTile());
+                            selectedPlaceable.SetTargetTile(GetSelectedTiles());
                         }
 
-                        if (selectedPlaceable != null && GetSelectedTile() != null &&
+                        if (selectedPlaceable != null && GetSelectedTiles() != null &&
                              selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Army)
                         {
-                            selectedPlaceable.SetTargetTile(GetSelectedTile());
-                        }
+                            selectedPlaceable.SetTargetTile(GetSelectedTiles());
+                        }*/
 
                         //if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null))
                     }
@@ -201,55 +235,64 @@ namespace XNA_ENGINE.Game.Managers
                         return m_GridField[i, j];
                 }
             }
-            return null;
-        }
-
-        public GridTile GetPermanentSelectedTile()
-        {
-            foreach (var gridTile in m_GridField)
-            {
-                if (gridTile.PermanentSelected)
-                    return gridTile;
-            }
 
             return null;
         }
 
-        public GridTile GetSelectedTile()
+        public Placeable HitTestPlaceables(Ray ray)
         {
-            foreach (var gridTile in m_GridField)
+            //Iterate over every placeable
+            foreach (var player in m_PlayersList)
             {
-                if (gridTile.Selected)
-                    return gridTile;
-            }
-
-            return null;
-        }
-
-        public Placeable GetPermanentSelectedPlaceable()
-        {
-            foreach (var gridTile in m_GridField)
-            {
-                foreach (var placeable in gridTile.LinkedPlaceables)
+                foreach (var ownedPlaceable in player.GetOwnedList())
                 {
-                    if (placeable.Model.PermanentSelected)
-                        return placeable;
+                    if (ownedPlaceable.HitTest(ray))
+                        return ownedPlaceable;
                 }
             }
 
-            foreach (var placeable in FinalScene.Player.GetOwnedList())
-                if(placeable.Model.PermanentSelected)
-                    return placeable;
+            return null;
+        }
+
+        public Placeable GetPermanentSelected()
+        {
+            foreach (var player in m_PlayersList)
+                foreach (var placeable in player.GetOwnedList())
+                    if (placeable.Model.PermanentSelected)
+                        return placeable;
 
             return null;
         }
 
-        public void PermanentSelect(GridTile tile)
+        public List<GridTile> GetSelectedTiles()
         {
-            bool value = tile.PermanentSelected;
-            PermanentDeselect();
+            List<GridTile> returnList = new List<GridTile>();
 
-            tile.PermanentSelected = !value;
+            foreach (var gridTile in m_GridField)
+            {
+                if (gridTile.Selected)
+                    returnList.Add(gridTile);
+            }
+            if (returnList.Any()) return returnList;
+
+            return null;
+        }
+
+        public List<Placeable> GetSelectedPlaceables()
+        {
+            List<Placeable> returnList = new List<Placeable>();
+
+            foreach (var player in m_PlayersList)
+            {
+                foreach (var ownedPlaceables in player.GetOwnedList())
+                {
+                    if (ownedPlaceables.Model.Selected)
+                        returnList.Add(ownedPlaceables);
+                }
+            }
+            if (returnList.Any()) return returnList;
+
+            return null;
         }
 
         public void Select(GridTile tile)
@@ -277,35 +320,66 @@ namespace XNA_ENGINE.Game.Managers
                     if (GetWTile(tile) != null) GetWTile(tile).Selected = true;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("SelectionMode (1x1 or 2x2) is out of range in GridFieldManager");
+                    throw new ArgumentOutOfRangeException("SelectionMode (1x1, 2x2 or 3x3) is out of range in GridFieldManager");
+            }
+        }
+
+        public void Select(Placeable placeable)
+        {
+            placeable.Model.Selected = true;
+        }
+
+        public void BuildStructure(Placeable.PlaceableType structureType, Player owner)
+        {
+            switch (structureType)
+            {
+                case Placeable.PlaceableType.Settlement:
+                    owner.AddPlaceable(new Settlement(GetSelectedTiles()));
+                    break;
+                case Placeable.PlaceableType.School:
+                    owner.AddPlaceable(new School(GetSelectedTiles()));
+                    break;
+                case Placeable.PlaceableType.Shrine:
+                    owner.AddPlaceable(new Shrine(GetSelectedTiles()));
+                    break;
+                case Placeable.PlaceableType.RallyPoint:
+                    break;
+                case Placeable.PlaceableType.Villager:
+                    break;
+                case Placeable.PlaceableType.Army:
+                    break;
+                case Placeable.PlaceableType.Shaman:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("structureType");
             }
         }
 
         public void AddPlayer(Player player)
         {
-
+            m_PlayersList.Add(player);
         }
 
         public void SetUserPlayer(Player player)
         {
-
+            m_UserPlayer = player;
         }
 
         public void Deselect()
         {
+            foreach (var player in m_PlayersList)
+                foreach (var ownedPlaceable in player.GetOwnedList())
+                    ownedPlaceable.Model.Selected = false;
+            
             foreach (var gridTile in m_GridField)
                 gridTile.Selected = false;
         }
 
         public void PermanentDeselect()
         {
-            foreach (var gridTile in m_GridField)
-                gridTile.PermanentSelected = false;
-
-            foreach (var placeable in FinalScene.Player.GetOwnedList())
-                placeable.Model.PermanentSelected = false;
-
-
+            foreach (var player in m_PlayersList)
+                foreach (var placeable in player.GetOwnedList())
+                    placeable.Model.PermanentSelected = false;
         }
 
         //Functions that pick a surrounding tile of another tile
@@ -383,6 +457,23 @@ namespace XNA_ENGINE.Game.Managers
             return m_GridField[tile.Row -1 , tile.Column + 1];
         }
 
+        //All surrounding tiles
+        public List<GridTile> GetAllSurroundingTiles(GridTile tile)
+        {
+            List<GridTile> returnList = new List<GridTile>();
+
+            if (GetNWTile(tile) != null) returnList.Add(GetNWTile(tile));
+            if (GetNTile(tile) != null) returnList.Add(GetNTile(tile));
+            if (GetNETile(tile) != null) returnList.Add(GetNETile(tile));
+            if (GetETile(tile) != null) returnList.Add(GetETile(tile));
+            if (GetSETile(tile) != null) returnList.Add(GetSETile(tile));
+            if (GetSTile(tile) != null) returnList.Add(GetSTile(tile));
+            if (GetSWTile(tile) != null) returnList.Add(GetSWTile(tile));
+            if (GetWTile(tile) != null) returnList.Add(GetWTile(tile));
+
+            return returnList;
+        }
+
         #endregion
 
         public SelectionMode SelectionModeMeth
@@ -391,13 +482,21 @@ namespace XNA_ENGINE.Game.Managers
             set { m_SelectionMode = value; }
         }
 
+        public GameScene GameScene
+        {
+            get { return m_GameScene; }
+        }
+
+        public Player UserPlayer
+        {
+            get { return m_UserPlayer; }
+        }
+
         public void NextSelectionMode()
         {
             ++m_SelectionMode;
             if ((int)m_SelectionMode >= (int)SelectionMode.enumSize) m_SelectionMode = 0;
         }
-
-
 
         public Random Random
         {
@@ -409,6 +508,5 @@ namespace XNA_ENGINE.Game.Managers
         }
 
         public bool CreativeMode { get; set; }
-
     }
 }

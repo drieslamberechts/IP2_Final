@@ -14,51 +14,44 @@ namespace XNA_ENGINE.Game.Objects
 {
     public class Shrine : Placeable
     {
-        private GridTile m_DirectionTile;
+        private GridTile m_RallyPointTile;
 
         private const float GRIDHEIGHT = 32;
         private const float TIMEPERINFLUENCEPOINT = 5;
 
         private double m_InfluenceTimer = TIMEPERINFLUENCEPOINT;
 
-        private readonly GameScene m_GameScene;
-
-        private readonly ShrineType m_ShrineType;
-
-        public enum ShrineType
-        {
-            Basic1,
-
-            //<----Add new types in front of this comment 
-            enumSize
-        }
-
-        public Shrine(GridTile tile, GameScene pGameScene, ShrineType shrineType)
+        public Shrine(List<GridTile> tileList)
         {
             m_PlaceableType = PlaceableType.Shrine;
-            m_ShrineType = shrineType;
 
-            m_LinkedTile = tile;
+            m_LinkedTileList = new List<GridTile>();
 
-            switch (m_ShrineType)
-            {
-                case ShrineType.Basic1:
-                    m_Model = new GameModelGrid("Models/building_Shrine");
-                    m_Model.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
-                    Quaternion rotation = new Quaternion(new Vector3(0,1,0), 0);
-                    m_Model.LocalRotation += rotation;
-                    m_Model.CanDraw = true;
-                    m_Model.LoadContent(FinalScene.GetContentManager());
-                    m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
-                    m_LinkedTile.Model.AddChild(m_Model);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("shrineType");
-            }
+            foreach (var gridTile in tileList)
+                m_LinkedTileList.Add(gridTile);
 
-            m_GameScene = pGameScene;
+            m_RallyPointTile = tileList.ElementAt(0);
 
-            m_DirectionTile = m_LinkedTile;
+            m_Model = new GameModelGrid("Models/building_Shrine");
+            m_Model.LocalPosition += new Vector3(m_LinkedTileList.ElementAt(0).Model.LocalPosition.X, GRIDHEIGHT, m_LinkedTileList.ElementAt(0).Model.LocalPosition.Z);
+            Quaternion rotation = new Quaternion(new Vector3(0,1,0), 0);
+            m_Model.LocalRotation += rotation;
+            m_Model.CanDraw = true;
+            m_Model.LoadContent(PlayScene.GetContentManager());
+            m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
+
+            m_Model.CreateBoundingBox(50, 64, 50, new Vector3(0, 50, 0));
+            m_Model.DrawBoundingBox = true;
+
+            GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
+
+            Initialize();
+            SearchForDefaultRallyPointSpot();
+        }
+
+        public virtual void Initialize()
+        {
+            base.Initialize();
         }
 
         public override void Update(RenderContext renderContext)
@@ -68,79 +61,94 @@ namespace XNA_ENGINE.Game.Objects
             if (m_InfluenceTimer <= 0)
             {
                 m_InfluenceTimer = TIMEPERINFLUENCEPOINT;
-                Menu.GetInstance().Player.GetResources().AddInfluence(1);
-            }
-
-            //Appearance of the tile
-            switch (m_ShrineType)
-            {
-                case ShrineType.Basic1:
-                    //m_Model.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
-                    //m_Model.UseTexture = true;
-
-                    //m_Model.CanDraw = true;
-
-                    //m_Model.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            //What to do if the tile is selected
-            if (m_LinkedTile.Selected)
-            {
-                m_Model.Selected = true;
-            }
-            else
-            {
-                m_Model.Selected = false;
-            }
-
-            //What to do if the tile is permanently selected (until the tile is deselected)
-            if (m_LinkedTile.PermanentSelected)
-            {
-                m_Model.PermanentSelected = true;
-                m_DirectionTile.ShowFlag(true);
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
-            }
-            else
-            {
-                m_Model.PermanentSelected = false;
-                m_DirectionTile.ShowFlag(false);
+                //Menu.GetInstance().Player.GetResources().AddInfluence(1);
             }
 
             base.Update(renderContext);
         }
 
         //Code to execute on hit with mouse
-        public override bool OnSelected()
+        public override void OnSelected()
         {
-            if (!m_LinkedTile.Selected) return false;
+            //if (!m_LinkedTile.Selected) return false;
 
             //Get the inputmanager
-            var inputManager = FinalScene.GetInputManager();
+            var inputManager = PlayScene.GetInputManager();
             //What mode is there selected in the menu to build?
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
 
-            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered)
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
             {
                 
             }
 
-            if (inputManager.GetAction((int)FinalScene.PlayerInput.RightClick).IsTriggered)
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
 
             }
 
             base.OnSelected();
-
-            return true;
         }
 
-        public void PlaceRallyPoint(GridTile gridTile)
+        private void SearchForDefaultRallyPointSpot()
         {
-            m_DirectionTile.ShowFlag(false);
-            m_DirectionTile = gridTile;
+            List<GridTile> totalSurroundingTiles = new List<GridTile>();
+            List<GridTile> surroundingTiles = new List<GridTile>();
+            foreach (var structureTile in m_LinkedTileList)
+            {
+                surroundingTiles.Clear();
+                surroundingTiles = GridFieldManager.GetInstance().GetAllSurroundingTiles(structureTile);
+
+                //Loop over surrounding tiles
+                foreach (var surroundingTile in surroundingTiles)
+                    totalSurroundingTiles.Add(surroundingTile);
+            }
+
+            List<GridTile> removeList = new List<GridTile>();
+            foreach (var surroundingTile in totalSurroundingTiles)
+            {
+                foreach (var structureTile in m_LinkedTileList)
+                {
+                    //If the tile is a tile on the structure
+                    if (structureTile == surroundingTile)
+                        removeList.Add(structureTile);
+                }
+            }
+
+            //Remove the elements form the list
+            foreach (var gridTile in removeList)
+            {
+                totalSurroundingTiles.Remove(gridTile);
+            }
+
+            foreach (var surroundingTile in totalSurroundingTiles)
+            {
+                if (PlaceRallyPoint(surroundingTile))
+                    return;
+            }
         }
+
+        //Code to execute on Permanently selected
+        public override void OnPermanentSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+
+            base.OnPermanentSelected();
+        }
+
+        public bool PlaceRallyPoint(GridTile gridTile)
+        {
+            if (gridTile.IsOpen())
+            {
+                m_RallyPointTile = gridTile;
+                m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
+
+                return true;
+            }
+            //Couldn't place the rallypoint
+            return false;
+        }
+
     }
 }

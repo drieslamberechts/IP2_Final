@@ -30,43 +30,52 @@ namespace XNA_ENGINE.Game.Objects
 
         // Army
         private List<Placeable> m_OwnedPlaceablesList;
+
         private List<Placeable> m_ObjectsNeedToBeRemoved;
+        private List<Placeable> m_ObjectsNeedToBeAdded;
+
+        private PlayerColor m_Color;
+
+        public enum PlayerColor
+        {
+            Blue,
+            Red,
+
+            enumSize
+        }
 
         // METHODS
-        public Player(bool isAI)
+        public Player(PlayerColor color)
         {
+            m_Color = color;
+
             // Initialize
-            m_bIsAI = isAI;
             m_Ai = new AI();
 
             m_ArmyCount = 0;
             m_OwnedPlaceablesList = new List<Placeable>();
             m_ObjectsNeedToBeRemoved = new List<Placeable>();
+            m_ObjectsNeedToBeAdded = new List<Placeable>();
 
             m_Resources = new Resources();
         }
 
         public void Update(RenderContext renderContext)
         {
+            //Push the objects from the add array to the owned array and clear the add array. We use this because sometimes stuff can be added in the update function
+            foreach (var placeable in m_ObjectsNeedToBeAdded)
+                m_OwnedPlaceablesList.Add(placeable);
+            m_ObjectsNeedToBeAdded.Clear();
+
+            //Remove every object that is in the removed array
+            foreach (var placeable in m_ObjectsNeedToBeRemoved)
+                m_OwnedPlaceablesList.Remove(placeable);
+            m_ObjectsNeedToBeRemoved.Clear();
+
+            //Update every placeable in the list
             foreach (var placeable in m_OwnedPlaceablesList)
             {
                 placeable.Update(renderContext);
-            }
-            bool goOut = false;
-
-            foreach (var placeable1 in m_ObjectsNeedToBeRemoved)
-            {
-                foreach (var placeable in m_OwnedPlaceablesList)
-                {
-                    if (placeable1 == placeable)
-                    {
-                        m_ObjectsNeedToBeRemoved.Remove(placeable1);
-                        m_OwnedPlaceablesList.Remove(placeable);
-                        goOut = true;
-                    }
-                    if (goOut) break;
-                }
-                if (goOut) break;
             }
 
             if (m_bIsAI)
@@ -98,19 +107,19 @@ namespace XNA_ENGINE.Game.Objects
 
         public bool HandleInput(RenderContext renderContext)
         {
-            var inputManager = FinalScene.GetInputManager();
-            bool isMouseInScreen = FinalScene.IsMouseInScreen(renderContext);
+            var inputManager = PlayScene.GetInputManager();
+            bool isMouseInScreen = PlayScene.IsMouseInScreen(renderContext);
 
             //Raycast to grid
             if (isMouseInScreen)
             {
-                var hittedPlaceable = HitTestPlaceables(FinalScene.CalculateCursorRay(renderContext));
+                var hittedPlaceable = HitTestPlaceables(PlayScene.CalculateCursorRay(renderContext));
                 if (hittedPlaceable != null)
                 {
-                    if (inputManager.IsActionTriggered((int)FinalScene.PlayerInput.LeftClick))
+                    if (inputManager.IsActionTriggered((int)PlayScene.PlayerInput.LeftClick))
                     {
                         bool value = hittedPlaceable.Model.PermanentSelected;
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).PermanentDeselect();
+                        GridFieldManager.GetInstance().PermanentDeselect();
                         hittedPlaceable.Model.PermanentSelected = !value;
                         
                         return true;
@@ -119,6 +128,12 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             return false;
+        }
+
+        public void AddPlaceable(Placeable placeable)
+        {
+            m_ObjectsNeedToBeAdded.Add(placeable);
+            placeable.SetOwner(this);
         }
 
         public Resources GetResources()
@@ -157,12 +172,6 @@ namespace XNA_ENGINE.Game.Objects
            // return m_OwnedPlaceablesList[0];
         }*/
 
-
-        public void NewPlaceable(Placeable placeable)
-        {
-            placeable.SetOwner(this);
-            m_OwnedPlaceablesList.Add(placeable);
-        }
 
         public void RemovePlaceable(Placeable placeable)
         {

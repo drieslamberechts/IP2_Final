@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine;
+using XNA_ENGINE.Game.Managers;
+using XNA_ENGINE.Game.Scenes;
 
 //----------------
 //This class will be used as an abstract class for placeable things on the grid
@@ -17,36 +20,55 @@ namespace XNA_ENGINE.Game.Objects
             Settlement,
             School,
             Shrine,
-            Flag,
+            RallyPoint,
             Villager,
             Army,
-            Sjaman,
+            Shaman,
 
             enumSize
         }
 
-        protected bool m_Static = true;
         protected PlaceableType m_PlaceableType;
         protected GameModelGrid m_Model;
-        protected GridTile m_LinkedTile;
+        protected GameModelGrid m_Rallypoint;
+        protected List<GridTile> m_LinkedTileList;
         protected Player m_Owner;
+
+        public virtual void Initialize()
+        {
+            //Load a rallyPointFlag
+            m_Rallypoint = new GameModelGrid("Models/tree_TreeWillow");
+            m_Rallypoint.LocalPosition += new Vector3(0, 200, 0);
+            m_Rallypoint.CanDraw = true;
+            m_Rallypoint.LoadContent(PlayScene.GetContentManager());
+            m_Rallypoint.DiffuseColor = new Vector3(0.0f, 0.8f, 0.0f);
+            m_Rallypoint.Scale(0.3f, 0.3f, 0.3f);
+            GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Rallypoint);
+        }
 
         public virtual void Update(RenderContext renderContext)
         {
-            
+            if (Model.Selected)
+                OnSelected();
+
+            if (Model.PermanentSelected)
+                OnPermanentSelected();
+            else
+                m_Rallypoint.CanDraw = false;
         }
 
-        public virtual bool OnSelected()
+        public virtual void OnSelected()
         {
-            if (!m_LinkedTile.Selected) return false;
-
-            return true;
+            if (m_LinkedTileList != null)
+                foreach (var gridTile in m_LinkedTileList)
+                    gridTile.Model.Selected = true;
         }
 
-        public bool Static 
+        public virtual void OnPermanentSelected()
         {
-            get { return m_Static; }
-            set { m_Static = value; }
+            if (m_LinkedTileList != null)
+                foreach (var gridTile in m_LinkedTileList)
+                    gridTile.Model.PermanentSelected = true;
         }
 
         public PlaceableType PlaceableTypeMeth
@@ -61,11 +83,13 @@ namespace XNA_ENGINE.Game.Objects
             set { m_Model = value; }
         }
 
-        public GridTile LinkedTile
+        public List<GridTile> LinkedTiles
         {
-            get { return m_LinkedTile; }
-            set { m_LinkedTile = value; }
+            get { return m_LinkedTileList; }
+            set { m_LinkedTileList = value; }
         }
+
+
 
         public virtual void QueueVillager(int amount = 1)
         {
@@ -89,6 +113,19 @@ namespace XNA_ENGINE.Game.Objects
         public void SetOwner(Player owner)
         {
             m_Owner = owner;
+        }
+
+        public Player GetOwner()
+        {
+            return m_Owner;
+        }
+
+        public bool HitTest(Ray ray)
+        {
+            if (m_Model.HitTest(ray))
+                return true;
+
+            return false;
         }
     }
 }

@@ -33,6 +33,8 @@ namespace XNA_ENGINE.Game.Scenes
         private bool m_ExitGame;
         private  int m_Counter;
 
+        private const int SPLASHSCREENTIME = 200;
+
         public MainMenuScene(ContentManager content)
             : base("MainMenuScene")
         {
@@ -77,7 +79,7 @@ namespace XNA_ENGINE.Game.Scenes
             m_StartRect = new Rectangle(gameWidth / 2 - m_StartButton.Width / 2, gameHeight / 2 - 175, m_StartButton.Width, m_StartButton.Height);
             m_ExitRect = new Rectangle(gameWidth / 2 - m_ExitButton.Width / 2, gameHeight / 2, m_ExitButton.Width, m_ExitButton.Height);
 
-            if (m_Counter < 400)
+            if (m_Counter < SPLASHSCREENTIME)
             {
                 ++m_Counter;
                 renderContext.SpriteBatch.Draw(m_DaeScreen, m_DaeRect, Color.White);
@@ -101,7 +103,12 @@ namespace XNA_ENGINE.Game.Scenes
             if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_StartRect))
             {
                 Console.WriteLine("Start button");
-                SceneManager.SetActiveScene("FinalScene");
+
+                var playScene = new PlayScene(m_Content, "GeneratedTileMap");
+                SceneManager.AddGameScene(playScene);
+                SceneManager.SetActiveScene("PlayScene");
+                playScene.Initialize();
+
                 return true;
             }
             else if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_ExitRect))

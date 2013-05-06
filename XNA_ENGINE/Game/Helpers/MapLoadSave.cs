@@ -54,6 +54,7 @@ namespace XNA_ENGINE.Game.Objects
             foreach (GridTile element in gridList)
             {
                 gridField[element.Row, element.Column] = element;
+                gridField[element.Row, element.Column].Initialize();
             }
 
             return gridField;
@@ -116,22 +117,22 @@ namespace XNA_ENGINE.Game.Objects
                     switch (m_Random.Next(0, 3))
                     {
                         case 0:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal1;
+                            gridField[row, column].SetType(GridTile.TileType.NormalGrass);
                             break;
                         case 1:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal2;
+                            gridField[row, column].SetType(GridTile.TileType.TreeLong);
                             break;
                         case 2:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal3;
+                            gridField[row, column].SetType(GridTile.TileType.TreeShort);
                             break;
                         case 3:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Normal4;
+                            gridField[row, column].SetType(GridTile.TileType.Normal4);
                             break;
                         case 4:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Cliff;
+                            gridField[row, column].SetType(GridTile.TileType.Cliff);
                             break;
                         case 5:
-                            gridField[row, column].TileTypeValue = GridTile.TileType.Water;
+                            gridField[row, column].SetType(GridTile.TileType.Water);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

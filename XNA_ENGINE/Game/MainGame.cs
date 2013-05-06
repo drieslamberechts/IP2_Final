@@ -43,7 +43,7 @@ namespace XNA_ENGINE.Game
 
         protected override void OnExiting(Object sender, EventArgs args)
         {
-            MapLoadSave.GetInstance().SaveMap(GridFieldManager.GetInstance(SceneManager.ActiveScene).GridField);
+            //MapLoadSave.GetInstance().SaveMap(GridFieldManager.GetInstance().GridField);
             base.OnExiting(sender, args);
         }
 
@@ -56,7 +56,7 @@ namespace XNA_ENGINE.Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            SceneManager.AddGameScene(new FinalScene(Content));
+           // SceneManager.AddGameScene(new FinalScene(Content));
             SceneManager.AddGameScene(new MainMenuScene(Content));
             SceneManager.SetActiveScene("MainMenuScene");
             SceneManager.Initialize();
@@ -113,8 +113,8 @@ namespace XNA_ENGINE.Game
                 this.Exit();
 
             //Change the active scene
-            if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D1))
-                SceneManager.SetActiveScene("FinalScene");
+           // if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.D1))
+          //      SceneManager.SetActiveScene("FinalScene");
        
 
             // TODO: Add your update logic here

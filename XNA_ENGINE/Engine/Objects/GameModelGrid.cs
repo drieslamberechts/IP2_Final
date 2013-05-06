@@ -34,8 +34,10 @@ namespace XNA_ENGINE.Game.Objects
             base.LoadContent(contentManager);
             
             m_Alpha = 1;
-            m_UseTexture = false;
-            //m_DiffuseColor = new Vector3(0.5f, 0.5f, 0.5f);
+            //m_UseTexture = true;
+
+            CanDraw = true;
+            m_DiffuseColor = new Vector3(1, 1, 1);
         }
 
         public override void Draw(RenderContext renderContext)
@@ -76,6 +78,8 @@ namespace XNA_ENGINE.Game.Objects
                         effect.EmissiveColor = new Vector3(0.1f, 0.1f, 0.1f);
                     else 
                         effect.EmissiveColor = new Vector3(0.0f, 0.0f, 0.0f);
+
+                    effect.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
                 }
 
                 mesh.Draw();

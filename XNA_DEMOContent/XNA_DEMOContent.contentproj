@@ -141,21 +141,6 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\building_Settlement.X">
-      <Name>building_Settlement</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\building_School.X">
-      <Name>building_School</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\building_Shrine.X">
-      <Name>building_Shrine</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\char_Soldier.X">
       <Name>char_Soldier</Name>
       <Importer>XImporter</Importer>
@@ -178,6 +163,86 @@
     </Compile>
     <Compile Include="Models\char_Goblin_Shaman.FBX">
       <Name>char_Goblin_Shaman</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\building_School.FBX">
+      <Name>building_School</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\building_Settlement.FBX">
+      <Name>building_Settlement</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\building_Shrine.FBX">
+      <Name>building_Shrine</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tree_TreeWillow.FBX">
+      <Name>tree_TreeWillow</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Dirt1.FBX">
+      <Name>tile_Dirt1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Dirt2.FBX">
+      <Name>tile_Dirt2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Grass.FBX">
+      <Name>tile_Grass</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Grass2.FBX">
+      <Name>tile_Grass2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_GrassRock1.FBX">
+      <Name>tile_GrassRock1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_GrassRock2.FBX">
+      <Name>tile_GrassRock2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_GrassRock3.FBX">
+      <Name>tile_GrassRock3</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_GrassWithDirt.FBX">
+      <Name>tile_GrassWithDirt</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_LightGrass1.FBX">
+      <Name>tile_LightGrass1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_LightGrass2.FBX">
+      <Name>tile_LightGrass2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_OrangeGrass.FBX">
+      <Name>tile_OrangeGrass</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Pond.FBX">
+      <Name>tile_Pond</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

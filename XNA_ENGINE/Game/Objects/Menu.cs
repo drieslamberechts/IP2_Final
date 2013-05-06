@@ -53,7 +53,7 @@ namespace XNA_ENGINE.Game.Objects
             MoveMode, //Attack, defend,...
             BuildMode, //Tile 1,2,3,...
             SettlementMode,
-            SjamanMode
+            ShamanMode
         }
 
         public enum ModeSelected
@@ -76,9 +76,8 @@ namespace XNA_ENGINE.Game.Objects
 
         private SubMenuSelected m_SubMenuSelected = SubMenuSelected.MoveMode;
         private ModeSelected m_SelectedMode = ModeSelected.None;
-        private GridTile.TileType m_TileTypeSelected = GridTile.TileType.Normal1;
+        private GridTile.TileType m_TileTypeSelected = GridTile.TileType.NormalGrass;
         private SpriteFont m_DebugFont;
-        private Player m_Player;
 
         private const int COSTOFWOOD_SETTLEMENT = 20;
         private const int COSTOFWOOD_SCHOOL = 30;
@@ -99,7 +98,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private Menu()
         {
-            Content = FinalScene.GetContentManager();
+            Content = PlayScene.GetContentManager();
 
             m_TexSwitch = Content.Load<Texture2D>("switch");
 
@@ -121,11 +120,6 @@ namespace XNA_ENGINE.Game.Objects
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
-        public void SetPlayer(Player player)
-        {
-            m_Player = player;
-        }
-
         public void SetFont(SpriteFont font)
         {
             m_DebugFont = font;
@@ -133,17 +127,19 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(RenderContext renderContext)
         {
-            if (m_SelectedMode == ModeSelected.None && GridFieldManager.GetInstance(SceneManager.ActiveScene).CreativeMode == false)
-                GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+            if (m_SelectedMode == ModeSelected.None && GridFieldManager.GetInstance().CreativeMode == false)
+                GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
         }
 
         public bool HandleInput(RenderContext renderContext)
         {
-            var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
-            var inputManager = FinalScene.GetInputManager();
-            Placeable selectedPlaceable = GridFieldManager.GetInstance(SceneManager.ActiveScene).GetPermanentSelectedPlaceable();
+            Player userPlayer = GridFieldManager.GetInstance().UserPlayer;
 
-            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
+            var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
+            var inputManager = PlayScene.GetInputManager();
+            Placeable selectedPlaceable = GridFieldManager.GetInstance().GetPermanentSelected();
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
             {
                 if (m_SubMenuSelected == SubMenuSelected.MoveMode) m_SubMenuSelected = SubMenuSelected.BuildMode;
                 else m_SubMenuSelected = SubMenuSelected.MoveMode;
@@ -153,32 +149,32 @@ namespace XNA_ENGINE.Game.Objects
             switch (m_SubMenuSelected)
             {
                 case SubMenuSelected.BuildMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
                     {
                         // SET DECREASE RESOURCES
-                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
-                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSettlement;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
                     {
                         // SET DECREASE RESOURCES
-                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SCHOOL);
-                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SCHOOL);
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SCHOOL);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SCHOOL);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSchool;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
                     {
                         // SET DECREASE RESOURCES
-                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SHRINE);
-                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SHRINE);
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SHRINE);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SHRINE);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildShrine;
                         return true;
                     }
@@ -194,14 +190,14 @@ namespace XNA_ENGINE.Game.Objects
                      */
                     break;
 
-                case SubMenuSelected.SjamanMode:
+                case SubMenuSelected.ShamanMode:
                     // BUILD TILES WITH SHAMAN
-                    if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
                     {
                         Console.WriteLine("Create Tile 1");
-                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_TILE1);
-                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_TILE1);
-                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_TILE1);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_TILE1);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildTile1;
                         return true;
                     }
@@ -233,17 +229,17 @@ namespace XNA_ENGINE.Game.Objects
                     break;
 
                 case SubMenuSelected.MoveMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
                     {
-                        var selectedArmy = GridFieldManager.GetInstance(SceneManager.ActiveScene).GetPermanentSelectedPlaceable();
+                        var selectedArmy = GridFieldManager.GetInstance().GetPermanentSelected();
 
                         Console.WriteLine("Attack!");
-                        m_Player.GetPlayerOptions().Attack();
+                        userPlayer.GetPlayerOptions().Attack();
 
                         if (selectedArmy != null && selectedArmy.PlaceableTypeMeth == Placeable.PlaceableType.Army)
                         {
-                            var newArmy = new Army(SceneManager.ActiveScene, selectedArmy.GetTargetTile());
-                            Player.NewPlaceable(newArmy);
+                            var newArmy = new Army(selectedArmy.GetTargetTile());
+                            userPlayer.AddPlaceable(newArmy);
                             
                             SceneManager.AddGameScene(new AttackScene(Content, (Army)selectedArmy, newArmy));
                         }
@@ -253,22 +249,22 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMove))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMove))
                     {
                         Console.WriteLine("Move!");
-                        m_Player.GetPlayerOptions().Move();
+                        userPlayer.GetPlayerOptions().Move();
 
                         m_SelectedMode = ModeSelected.Defend;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         Console.WriteLine("Split!");
                         // m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
 
                         // Get the Split Army working
-                        m_Player.GetPlayerOptions().SplitArmy(/* Add selected army */, new Army(SceneManager.ActiveScene, new GridTile(SceneManager.ActiveScene, 10, 10)));
+                        //m_Player.GetPlayerOptions().SplitArmy(/* Add selected army */, new Army(SceneManager.ActiveScene, new GridTile(SceneManager.ActiveScene, 10, 10)));
 
                         m_SelectedMode = ModeSelected.Gather;
                         return true;
@@ -276,7 +272,7 @@ namespace XNA_ENGINE.Game.Objects
                     break;
 
                 case SubMenuSelected.SettlementMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuild))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuild))
                     {
                         if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                         {
@@ -297,6 +293,8 @@ namespace XNA_ENGINE.Game.Objects
         // Draw
         public void Draw(RenderContext renderContext)
         {
+            Player userPlayer = GridFieldManager.GetInstance().UserPlayer;
+
             m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,m_TexSwitch.Height);
 
             // BUILDINGS
@@ -337,18 +335,19 @@ namespace XNA_ENGINE.Game.Objects
             {
                 renderContext.SpriteBatch.Draw(m_TexBuild, m_RectBuild, Color.White);
             }
-            else if (m_SubMenuSelected == SubMenuSelected.SjamanMode)
+            else if (m_SubMenuSelected == SubMenuSelected.ShamanMode)
             {
                 renderContext.SpriteBatch.Draw(m_TexBuild, m_RectBuild, Color.White);
             }
 
             // DRAW EXTRA INFORMATION (RESOURCES,...)
             // resources
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + m_Player.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 10), Color.White);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Influence Points: " + m_Player.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 30), Color.White);
+            
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + userPlayer.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 10), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Influence Points: " + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 30), Color.White);
 
             // armysize
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Army Size: " + m_Player.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 25, 10), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Army Size: " + userPlayer.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 25, 10), Color.White);
         }
 
         private bool CheckHitButton(Vector2 mousePos, Rectangle buttonRect)
@@ -370,12 +369,6 @@ namespace XNA_ENGINE.Game.Objects
         public void SetSelectedMode(ModeSelected mode)
         {
             m_SelectedMode = mode;
-        }
-
-        public Player Player
-        {
-            get { return m_Player; }
-            //set { m_Player = value; }
         }
 
         public void NextTileType()

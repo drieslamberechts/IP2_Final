@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Scenes;
 
@@ -18,8 +19,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public Villager(GridTile startTile)
         {
-            m_LinkedTile = null;
-            m_Static = false;
+            m_LinkedTileList = null;
 
             m_PlaceableType = PlaceableType.Villager;
 
@@ -29,16 +29,18 @@ namespace XNA_ENGINE.Game.Objects
            // Quaternion rotation = new Quaternion(new Vector3(0, 1, 0), 0);
            // m_Model.LocalRotation += rotation;
             m_Model.CanDraw = true;
-            m_Model.LoadContent(FinalScene.GetContentManager());
+            m_Model.LoadContent(PlayScene.GetContentManager());
             m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
             SceneManager.ActiveScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT+30, 0));
-            //m_Model.DrawBoundingBox = true;
+            m_Model.DrawBoundingBox = true;
 
             m_TargetTile = startTile;
 
             m_Model.Translate(m_TargetTile.Model.WorldPosition);
+
+            Initialize();
         }
 
         public override void Update(Engine.RenderContext renderContext)
@@ -49,24 +51,76 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TargetTile.PickupWood(m_Owner);
 
-            foreach (var placeable in m_TargetTile.LinkedPlaceables)
+           /* foreach (var placeable in m_TargetTile.LinkedPlaceables)
             {
                 if (placeable.PlaceableTypeMeth == PlaceableType.School)
                 {
                     placeable.QueueSoldier();
                     SceneManager.ActiveScene.RemoveSceneObject(m_Model);
-                    Menu.GetInstance().Player.RemovePlaceable(this);
+                   // GridFieldManager.GetInstance().Player.RemovePlaceable(this);
                 }
 
                 if (placeable.PlaceableTypeMeth == PlaceableType.Shrine)
                 {
                     SceneManager.ActiveScene.RemoveSceneObject(m_Model);
-                    Menu.GetInstance().Player.RemovePlaceable(this);
-                    Menu.GetInstance().Player.GetResources().AddInfluence(20);
+                  //  Menu.GetInstance().Player.RemovePlaceable(this);
+                  //  Menu.GetInstance().Player.GetResources().AddInfluence(20);
                 }
-            }
+            }*/
 
             base.Update(renderContext);
+        }
+
+        //Code to execute on hit with mouse
+        public override void OnSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+
+            //What mode is there selected in the menu to build?
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
+            {
+
+            }
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+
+            }
+
+            base.OnSelected();
+        }
+
+        //Code to execute on Permanently selected
+        public override void OnPermanentSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+            var gridFieldManager = GridFieldManager.GetInstance();
+            m_Rallypoint.CanDraw = false;
+
+            GridTile selectedTile;
+            if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
+                selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
+            else
+                selectedTile = null;
+
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.MoveMode;
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
+            {
+                
+            }
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+                if (selectedTile != null)
+                    SetTargetTile(selectedTile);
+            }
+
+            base.OnPermanentSelected();
         }
 
         public override void SetTargetTile(GridTile targetTile)

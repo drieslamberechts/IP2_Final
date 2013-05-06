@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Scenes;
 
@@ -18,10 +19,9 @@ namespace XNA_ENGINE.Game.Objects
 
         private int m_ArmySize = 1;
 
-        public Army(GameScene gameScene, GridTile startTile)
+        public Army(GridTile startTile)
         {
-            m_LinkedTile = null;
-            m_Static = false;
+            m_LinkedTileList = null;
 
             m_PlaceableType = PlaceableType.Army;
 
@@ -31,9 +31,9 @@ namespace XNA_ENGINE.Game.Objects
             // Quaternion rotation = new Quaternion(new Vector3(0, 1, 0), 0);
             // m_Model.LocalRotation += rotation;
             m_Model.CanDraw = true;
-            m_Model.LoadContent(FinalScene.GetContentManager());
+            m_Model.LoadContent(PlayScene.GetContentManager());
             m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
-            gameScene.AddSceneObject(m_Model);
+            GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT + 30, 0));
             //m_Model.DrawBoundingBox = true;
@@ -41,6 +41,60 @@ namespace XNA_ENGINE.Game.Objects
             m_TargetTile = startTile;
 
             m_Model.Translate(m_TargetTile.Model.WorldPosition);
+
+            Initialize();
+        }
+
+        //Code to execute on hit with mouse
+        public override void OnSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+
+            //What mode is there selected in the menu to build?
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
+            {
+
+            }
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+            
+            }
+
+            base.OnSelected();
+        }
+
+        //Code to execute on Permanently selected
+        public override void OnPermanentSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+            var gridFieldManager = GridFieldManager.GetInstance();
+            m_Rallypoint.CanDraw = false;
+
+            GridTile selectedTile;
+            if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
+                selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
+            else
+                selectedTile = null;
+
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.MoveMode;
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
+            {
+
+            }
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+                if (selectedTile != null)
+                    SetTargetTile(selectedTile);
+            }
+
+            base.OnPermanentSelected();
         }
 
         public override void Update(Engine.RenderContext renderContext)
@@ -48,9 +102,6 @@ namespace XNA_ENGINE.Game.Objects
             Vector3 newPos = m_TargetTile.Model.WorldPosition;
             newPos.Y += 32;
             m_Model.Translate(newPos);
-
-            if (m_Model.PermanentSelected)
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.MoveMode;
 
             base.Update(renderContext);
         }
