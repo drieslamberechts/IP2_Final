@@ -105,7 +105,7 @@ namespace XNA_ENGINE.Game.Objects
             var gridFieldManager = GridFieldManager.GetInstance();
             m_Rallypoint.CanDraw = true;
 
-            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BuildMode;
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SchoolMode;
 
             GridTile selectedTile;
             if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())

@@ -1,15 +1,10 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
 Content\Models\settlement_TestSettlementBlue.xnb
-<<<<<<< HEAD
-Content\Models\settlement_TestSettlementGold.xnb
-Content\Models\settlement_TestSettlementRed.xnb
-Content\Split_Army.xnb
-=======
->>>>>>> 3eeb712e0fdef227c389e89714f3c69aa4a23da0
 Content\defend.xnb
 Content\gather.xnb
 Content\Textures\RainbowTexture.xnb
+Content\Split_Army.xnb
 Content\switch.xnb
 Content\attack.xnb
 Content\move.xnb
@@ -18,13 +13,64 @@ Content\Tile4.xnb
 Content\BuildBase.xnb
 Content\BuildTile.xnb
 Content\Models\tree_TreeShort.xnb
-Content\Models\tree_TreeTall.xnb
 Content\Models\tile_Normal.xnb
-Content\Textures\tex_tree_TreeShort1.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
 Content\Build.xnb
 Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
 Content\Textures\Background.xnb
-Content\Models\flag_FlagNormal.xnb
+Content\Models\building_FlagNormal.xnb
+Content\Tile1.xnb
+Content\Tile2.xnb
+Content\Models\char_Soldier.xnb
+Content\Models\char_Villager.xnb
+Content\Models\prop_Wood.xnb
+Content\Textures\tex_tree_Tall1.xnb
+Content\DaeSplashScreen.xnb
+Content\Models\tree_TreeTall.xnb
+Content\Models\char_Goblin_Shaman.xnb
+<<<<<<< HEAD
+Content\Models\building_School.xnb
+Content\tex_house_tent1+tent2+tent3+camp_0.xnb
+Content\tex_env_Tree1+Tree2+Bush1+Grass1_1.xnb
+Content\Models\building_Settlement.xnb
+Content\Models\building_Shrine.xnb
+Content\Models\tree_TreeWillow.xnb
+Content\tex_env_Treetrunk1_0.xnb
+Content\tex_env_Foliage2_0.xnb
+Content\Models\tile_Dirt1.xnb
+Content\Models\tile_Dirt2.xnb
+Content\Models\tile_Grass.xnb
+Content\Models\tile_Grass2.xnb
+Content\Models\tile_GrassRock1.xnb
+Content\Models\tile_GrassRock2.xnb
+Content\Models\tile_GrassRock3.xnb
+Content\Models\tile_GrassWithDirt.xnb
+Content\Models\tile_LightGrass1.xnb
+Content\Models\tile_LightGrass2.xnb
+Content\Models\tile_OrangeGrass.xnb
+Content\Models\tile_Pond.xnb
+Content\tex_tile_Basic_ground2_0.xnb
+Content\tex_tile_Basic_ground1_0.xnb
+Content\tex_tile_Basic2_0.xnb
+Content\tex_Tile_BasicGrass2_0.xnb
+Content\tex_Tile_BasicWithDirt4_test_0.xnb
+Content\tex_Tile_BasicWithDirt2_0.xnb
+Content\tex_Tile_BasicWithDirt1_0.xnb
+Content\tex_tile_Basic1_0.xnb
+Content\tex_Tile_BasicGrass1_0.xnb
+Content\tex_Tile_BasicGrass3_0.xnb
+Content\tex_Tile_BasicGrass4_0.xnb
+Content\tex_Tile_Oasis_0.xnb
+=======
+Content\FBX\B84D346A\tree_TreeTall.fbm\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
+Content\DaeSplashScreen.xnb
+Content\final Menu\grootMenu_Onderkant.xnb
+Content\final Menu\resources_influence.xnb
+Content\final Menu\resources_wood.xnb
+Content\final Menu\iconStandard.xnb
+Content\final Menu\characterStats.xnb
+Content\final Menu\hoverVillager.xnb
+Content\final Menu\unitList.xnb
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
@@ -21,44 +22,81 @@ namespace XNA_ENGINE.Game.Objects
 
         private ContentManager Content;
 
-        private readonly Texture2D m_TexSwitch,
-                                   m_TexTileBlue,
-                                   m_TexTileGold,
-                                   m_TexTileRed,
-                                   m_TexTile4,
-                                   m_TexAttack,
-                                   m_TexDefend,
-                                   m_TexGather;
+        private readonly Texture2D m_TexMenuBackground,
+                                   m_TexWoodResource,
+                                   m_TexInfluenceResource,
+                                   m_TexDelete,
+                                   m_TexCharacterStats,
+                                   m_TexHoverVillager,
+                                   m_TexUnitList,
+                                   m_TexSettlement,
+                                   m_TexSchool,
+                                   m_TexShrine,
+                                   m_TexBuildTile,
+                                   m_TexSplit;
 
-        private Rectangle m_RectSwitch,
-                          m_RectTileBlue,
-                          m_RectTileGold,
-                          m_RectTileRed,
-                          m_RectTile4,
-                          m_RectAttack,
-                          m_RectDefend,
-                          m_RectGather;
+        private Rectangle m_RectMenuBackground,
+                          m_RectWoodResource,
+                          m_RectInfluenceResource,
+                          m_RectDelete,
+                          m_RectCharacterStats,
+                          m_RectHoverVillager,
+                          m_RectUnitList,
+                          m_RectSettlement,
+                          m_RectSchool,
+                          m_RectShrine,
+                          m_RectBuildTile,
+                          m_RectSplit;
 
         public enum SubMenuSelected
         {
-            MoveMode, //Attack, defend,...
-            BuildMode //Tile 1,2,3,...
+            BaseMode,
+            SoldierMode,
+            ShrineMode,
+            SettlementMode,
+<<<<<<< HEAD
+            ShamanMode
+=======
+            ShamanMode,
+            VillagerMode,
+            SchoolMode
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
         }
 
         public enum ModeSelected
         {
+            None,
             Attack,
             Defend,
             Gather,
-            TileBlue,
-            TileGold,
-            TileRed,
-            Delete
+            BuildSettlement,
+            BuildShrine,
+            BuildSchool,
+            Delete,
+            BuildTile1,
+            BuildTile2,
+            BuildTile3,
+            BuildTile4,
+
+            enumSize
         }
 
-        private SubMenuSelected m_ModeSelected = SubMenuSelected.MoveMode;
-        private ModeSelected m_SelectedMode = ModeSelected.Attack;
-        private readonly SpriteFont m_DebugFont;
+        private SubMenuSelected m_SubMenuSelected = SubMenuSelected.BaseMode;
+        private ModeSelected m_SelectedMode = ModeSelected.None;
+        private GridTile.TileType m_TileTypeSelected = GridTile.TileType.NormalGrass;
+        private SpriteFont m_DebugFont;
+
+        private const int COSTOFWOOD_SETTLEMENT = 20;
+        private const int COSTOFWOOD_SCHOOL = 30;
+        private const int COSTOFWOOD_SHRINE = 50;
+        private const int COSTOFINFLUENCE_SETTLEMENT = 0;
+        private const int COSTOFINFLUENCE_SCHOOL = 0;
+        private const int COSTOFINFLUENCE_SHRINE = 0;
+        private const int COSTOFWOOD_TILE1 = 0;
+        private const int COSTOFINFLUENCE_TILE1 = 20;
+
+        // HOVERING
+        private bool m_bShowVillagerHover;
 
         //Singleton implementation
         static public Menu GetInstance()
@@ -68,95 +106,245 @@ namespace XNA_ENGINE.Game.Objects
             return m_Menu;
         }
 
-<<<<<<< HEAD
-            m_TexMode = Content.Load<Texture2D>("switch");
-            m_TexTile1 = Content.Load<Texture2D>("Split_Army");
-            m_TexTile2 = Content.Load<Texture2D>("tile2");
-            m_TexTile3 = Content.Load<Texture2D>("tile3");
-=======
         private Menu()
         {
-            Content = FinalScene.GetContentManager();
+            Content = PlayScene.GetContentManager();
 
-            m_TexSwitch = Content.Load<Texture2D>("switch");
+            m_bShowVillagerHover = false;
 
-            m_TexTileBlue = Content.Load<Texture2D>("Tile1");
-            m_TexTileGold = Content.Load<Texture2D>("Tile2");
-            m_TexTileRed = Content.Load<Texture2D>("Tile3");
->>>>>>> 16ad378c393092a193789f6d6f267817d66d9a60
-            m_TexTile4 = Content.Load<Texture2D>("tile4");
+            // MENU ONDERKANT BACKGROUND
+            m_TexMenuBackground = Content.Load<Texture2D>("final Menu/grootMenu_Onderkant");
 
-            m_TexAttack = Content.Load<Texture2D>("attack");
-            m_TexDefend = Content.Load<Texture2D>("defend");
-            m_TexGather = Content.Load<Texture2D>("gather");
+            // RESOURCE STATS
+            m_TexWoodResource = Content.Load<Texture2D>("final Menu/resources_wood");
+            m_TexInfluenceResource = Content.Load<Texture2D>("final Menu/resources_influence");
+
+            // CHARACTER STATS
+            m_TexCharacterStats = Content.Load<Texture2D>("final Menu/characterStats");
+            m_TexUnitList = Content.Load<Texture2D>("final Menu/unitList");
+
+            // ICONS
+            m_TexDelete = Content.Load<Texture2D>("final Menu/iconStandard");
+            m_TexSplit = Content.Load<Texture2D>("final Menu/iconStandard");
+
+            // HOVERING
+            m_TexHoverVillager = Content.Load<Texture2D>("final Menu/hoverVillager");
+
+            // BUILDING ICONS
+            m_TexSettlement = Content.Load<Texture2D>("final Menu/iconStandard");
+            m_TexSchool = Content.Load<Texture2D>("final Menu/iconStandard");
+            m_TexShrine = Content.Load<Texture2D>("final Menu/iconStandard");
+
+            m_TexBuildTile = Content.Load<Texture2D>("final Menu/iconStandard");
 
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
+        }
 
-            var click = new InputAction((int) FinalScene.PlayerInput.LeftClick, TriggerState.Pressed);
-            click.MouseButton = MouseButtons.LeftButton;
-            click.GamePadButton = Buttons.X;
+        public void SetFont(SpriteFont font)
+        {
+            m_DebugFont = font;
         }
 
         public void Update(RenderContext renderContext)
         {
-           
+            if (m_SelectedMode == ModeSelected.None && GridFieldManager.GetInstance().CreativeMode == false)
+                GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
         }
 
         public bool HandleInput(RenderContext renderContext)
         {
-            var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
-            var inputManager = FinalScene.GetInputManager();
+            Player userPlayer = GridFieldManager.GetInstance().UserPlayer;
 
-            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
+            var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
+            var inputManager = PlayScene.GetInputManager();
+            Placeable selectedPlaceable = GridFieldManager.GetInstance().GetPermanentSelected();
+
+<<<<<<< HEAD
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
+=======
+            // HOVERING BUTTONS  --> dit is een test
+            if (CheckHitButton(mousePos, m_RectDelete) && m_SubMenuSelected == SubMenuSelected.SettlementMode)
             {
-                if (m_ModeSelected == SubMenuSelected.MoveMode) m_ModeSelected = SubMenuSelected.BuildMode;
-                else m_ModeSelected = SubMenuSelected.MoveMode;
+                m_bShowVillagerHover = true;
+            }
+            else m_bShowVillagerHover = false;
+
+            /*
+            if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+            {
+                if (m_SubMenuSelected == SubMenuSelected.MoveMode) m_SubMenuSelected = SubMenuSelected.VillagerMode;
+                else m_SubMenuSelected = SubMenuSelected.MoveMode;
                 return true;
             }
+            */
 
-            switch (m_ModeSelected)
+            switch (m_SubMenuSelected)
             {
+<<<<<<< HEAD
                 case SubMenuSelected.BuildMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileBlue))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
                     {
-                        m_SelectedMode = ModeSelected.TileBlue;
-                        return true;
-                    }
-
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileGold))
+                        // SET DECREASE RESOURCES
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        m_SelectedMode = ModeSelected.BuildSettlement;
+=======
+                // --------------------------------------------
+                // BASE MODE
+                // --------------------------------------------
+                case SubMenuSelected.BaseMode:
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
                     {
-                        m_SelectedMode = ModeSelected.TileGold;
-                        return true;
-                    }
-
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTileRed))
-                    {
-                        m_SelectedMode = ModeSelected.TileRed;
-                        return true;
-                    }
-
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile4))
-                    {
-                        m_SelectedMode = ModeSelected.Delete;
+                        // DELETE ITEM THAT WILL BE SELECTED
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
                         return true;
                     }
                     break;
-                case SubMenuSelected.MoveMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
+
+<<<<<<< HEAD
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
+=======
+                // --------------------------------------------
+                // VILLAGER MODE
+                // --------------------------------------------
+                case SubMenuSelected.VillagerMode:
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
                     {
+                        // SET DECREASE RESOURCES
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SCHOOL);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SCHOOL);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        m_SelectedMode = ModeSelected.BuildSchool;
+                        return true;
+                    }
+
+<<<<<<< HEAD
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
+                    {
+                        // SET DECREASE RESOURCES
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SHRINE);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SHRINE);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildShrine;
+=======
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
+                    {
+                        // SET DECREASE RESOURCES
+                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
+                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                        m_SelectedMode = ModeSelected.BuildSettlement;
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+                        return true;
+                    }
+
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
+                    {
+                        // SET DECREASE RESOURCES
+                        m_Player.GetResources().DecreaseWood(COSTOFWOOD_SHRINE);
+                        m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SHRINE);
+                        GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildShrine;
+                        return true;
+                    }
+                    break;
+
+<<<<<<< HEAD
+                case SubMenuSelected.ShamanMode:
+                    // BUILD TILES WITH SHAMAN
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectTile1))
+=======
+                // --------------------------------------------
+                // SHAMAN MODE
+                // --------------------------------------------
+                case SubMenuSelected.ShamanMode:
+                    // BUILD TILES WITH SHAMAN
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuildTile))
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+                    {
+                        Console.WriteLine("Create Tile 1");
+                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_TILE1);
+                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_TILE1);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        m_SelectedMode = ModeSelected.BuildTile1;
+                        return true;
+                    }
+                    break;
+
+<<<<<<< HEAD
+                case SubMenuSelected.MoveMode:
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectAttack))
+                    {
+                        var selectedArmy = GridFieldManager.GetInstance().GetPermanentSelected();
+
+                        Console.WriteLine("Attack!");
+                        userPlayer.GetPlayerOptions().Attack();
+
+                        if (selectedArmy != null && selectedArmy.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                        {
+                            var newArmy = new Army(selectedArmy.GetTargetTile());
+                            userPlayer.AddPlaceable(newArmy);
+                            
+                            SceneManager.AddGameScene(new AttackScene(Content, (Army)selectedArmy, newArmy));
+                        }
+                        
+
                         m_SelectedMode = ModeSelected.Attack;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDefend))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMove))
                     {
+                        Console.WriteLine("Move!");
+                        userPlayer.GetPlayerOptions().Move();
+
                         m_SelectedMode = ModeSelected.Defend;
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectGather))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
+=======
+                // --------------------------------------------
+                // SOLDIER MODE
+                // --------------------------------------------
+                case SubMenuSelected.SoldierMode:
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
                     {
+                        Console.WriteLine("Split!");
+                        // m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
+
+                        // Get the Split Army working
+<<<<<<< HEAD
+                        //m_Player.GetPlayerOptions().SplitArmy(/* Add selected army */, new Army(SceneManager.ActiveScene, new GridTile(SceneManager.ActiveScene, 10, 10)));
+=======
+                        // m_Player.GetPlayerOptions().SplitArmy(/* Add selected army */, new Army(SceneManager.ActiveScene, new GridTile(SceneManager.ActiveScene, 10, 10)));
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+
                         m_SelectedMode = ModeSelected.Gather;
+                        return true;
+                    }
+                    break;
+
+                // --------------------------------------------
+                // SETTLEMENT MODE
+                // --------------------------------------------
+                case SubMenuSelected.SettlementMode:
+<<<<<<< HEAD
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuild))
+=======
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+                    {
+                        if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                        {
+                            selectedPlaceable.QueueVillager();
+                            Console.WriteLine("Build Villager");
+                        }
+
                         return true;
                     }
                     break;
@@ -170,41 +358,218 @@ namespace XNA_ENGINE.Game.Objects
         // Draw
         public void Draw(RenderContext renderContext)
         {
-            m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,
-                                       m_TexSwitch.Height);
+<<<<<<< HEAD
+            Player userPlayer = GridFieldManager.GetInstance().UserPlayer;
 
-            m_RectTileBlue = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileBlue.Width,
-                                        m_TexTileBlue.Height);
-            m_RectTileGold = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileGold.Width,
-                                        m_TexTileGold.Height);
-            m_RectTileRed = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTileRed.Width,
-                                        m_TexTileRed.Height);
-            m_RectTile4 = new Rectangle(370, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexTile4.Width,
-                                        m_TexTile4.Height);
-
-            m_RectAttack = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexAttack.Width,
-                                         m_TexAttack.Height);
-            m_RectDefend = new Rectangle(150, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexDefend.Width,
-                                         m_TexDefend.Height);
-            m_RectGather = new Rectangle(260, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexGather.Width,
-                                         m_TexGather.Height);
-
-
-            renderContext.SpriteBatch.Draw(m_TexSwitch,m_RectSwitch,Color.White);
-
-            if (m_ModeSelected == SubMenuSelected.BuildMode)
+            m_RectSwitch = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - 140, m_TexSwitch.Width,m_TexSwitch.Height);
+=======
+            
+            // ------------------------------------------
+            // WINDOWED
+            // ------------------------------------------
+            if (renderContext.GraphicsDevice.Viewport.Height < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
             {
-                renderContext.SpriteBatch.Draw(m_TexTileBlue, m_RectTileBlue, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexTileGold, m_RectTileGold, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexTileRed, m_RectTileRed, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexTile4, m_RectTile4, Color.White);
+                // MENU ONDERKANT RECTANGLES
+                m_RectMenuBackground = new Rectangle(0, renderContext.GraphicsDevice.Viewport.Height - m_TexMenuBackground.Height / 2, m_TexMenuBackground.Width / 2,
+                                                     m_TexMenuBackground.Height / 2);
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+
+                // RESOURCE STATS RECTANGLES
+                m_RectWoodResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 - m_TexWoodResource.Width / 2,
+                                                  5, m_TexWoodResource.Width / 2,
+                                                   m_TexWoodResource.Height / 2);
+
+                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 + 10,
+                                                  5, m_TexInfluenceResource.Width / 2,
+                                                   m_TexInfluenceResource.Height / 2);
+
+                // CHARACTER STATS RECTANGLES
+                m_RectCharacterStats = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2,
+                                  0, m_TexCharacterStats.Width/2, m_TexCharacterStats.Height/2);
+
+                m_RectUnitList = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width / 2 + 10, 10,
+                                  m_TexUnitList.Width/2, m_TexUnitList.Height/2);
+
+                // ICONS
+                m_RectDelete = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height + 45,
+                                                           m_TexDelete.Width / 2,
+                                                           m_TexDelete.Height / 2);
+
+                m_RectSchool = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45,
+                                                           m_TexSchool.Width / 2,
+                                                           m_TexSchool.Height / 2);
+
+                m_RectShrine = new Rectangle(10 + m_TexSchool.Width / 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height + 45,
+                                                           m_TexShrine.Width / 2,
+                                                           m_TexShrine.Height / 2);
+
+                m_RectSettlement = new Rectangle(10 * 3 + m_TexSchool.Width, renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height + 45,
+                                                           m_TexSettlement.Width / 2,
+                                                           m_TexSettlement.Height / 2);
+
+                m_RectSplit = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSplit.Height + 45,
+                                                           m_TexSplit.Width / 2,
+                                                           m_TexSplit.Height / 2);
+
+                // HOVERING
+                m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height / 2 - 10,
+                                                           m_TexHoverVillager.Width / 2,
+                                                           m_TexHoverVillager.Height / 2);
+
             }
-            else if (m_ModeSelected == SubMenuSelected.MoveMode)
+            // ------------------------------------------
+            // FULLSCREEN
+            // ------------------------------------------
+            else
             {
-                renderContext.SpriteBatch.Draw(m_TexAttack, m_RectAttack, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexDefend, m_RectDefend, Color.White);
-                renderContext.SpriteBatch.Draw(m_TexGather, m_RectGather, Color.White);
+                // MENU ONDERKANT RECTANGLES
+                m_RectMenuBackground = new Rectangle(0, renderContext.GraphicsDevice.Viewport.Height - m_TexMenuBackground.Height, m_TexMenuBackground.Width,
+                                                     m_TexMenuBackground.Height);
+
+                // RESOURCE STATS RECTANGLES
+                m_RectWoodResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 - m_TexWoodResource.Width,
+                                                  5, m_TexWoodResource.Width,
+                                                   m_TexWoodResource.Height);
+
+                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 + 10,
+                                                  5, m_TexInfluenceResource.Width,
+                                                   m_TexInfluenceResource.Height);
+
+                // CHARACTER STATS RECTANGLES
+                m_RectCharacterStats = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width,
+                                  0, m_TexCharacterStats.Width, m_TexCharacterStats.Height);
+
+                m_RectUnitList = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width + 20, 20,
+                                  m_TexUnitList.Width, m_TexUnitList.Height);
+
+                // ICONS
+                m_RectDelete = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20,
+                                                           m_TexDelete.Width,
+                                                           m_TexDelete.Height);
+
+                m_RectSettlement = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height - 20,
+                                                           m_TexSettlement.Width,
+                                                           m_TexSettlement.Height);
+
+                m_RectSchool = new Rectangle(10 + m_TexSettlement.Width + 10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20,
+                                                           m_TexSchool.Width,
+                                                           m_TexSchool.Height);
+
+                m_RectShrine = new Rectangle(10 * 3 + m_TexShrine.Width * 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height - 20,
+                                                           m_TexShrine.Width,
+                                                           m_TexShrine.Height);
+
+                // HOVERING
+                m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20,
+                                                           m_TexHoverVillager.Width,
+                                                           m_TexHoverVillager.Height);
             }
+
+            switch (m_SubMenuSelected)
+            {
+                // --------------------------------------------
+                // BASE MODE
+                // --------------------------------------------
+                case SubMenuSelected.BaseMode:
+                    renderContext.SpriteBatch.Draw(m_TexDelete, m_RectDelete, Color.White);
+                    break;
+
+                // --------------------------------------------
+                // VILLAGER MODE
+                // --------------------------------------------
+                case SubMenuSelected.VillagerMode:
+                    renderContext.SpriteBatch.Draw(m_TexSettlement, m_RectSettlement, Color.White);
+                    renderContext.SpriteBatch.Draw(m_TexSchool, m_RectSchool, Color.White);
+                    renderContext.SpriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
+                    break;
+
+                // --------------------------------------------
+                // SHAMAN MODE
+                // --------------------------------------------
+                case SubMenuSelected.ShamanMode:
+                    m_RectBuildTile = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexBuildTile.Width, m_TexBuildTile.Height);
+                    break;
+
+                // --------------------------------------------
+                // SOLDIER MODE
+                // --------------------------------------------
+                case SubMenuSelected.SoldierMode:
+                    
+                    break;
+
+                // --------------------------------------------
+                // SETTLEMENT MODE
+                // --------------------------------------------
+                case SubMenuSelected.SettlementMode:
+                    break;
+
+                case SubMenuSelected.SchoolMode:
+                    // HOVERING
+                    if (m_bShowVillagerHover)
+                    {
+                        renderContext.SpriteBatch.Draw(m_TexHoverVillager, m_RectHoverVillager, Color.White);
+                    }
+                    break;
+            }
+
+            // DRAW EXTRA INFORMATION (RESOURCES,...) IN TEXT
+            // resources
+            if (renderContext.GraphicsDevice.Viewport.Height <
+                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+            {
+                renderContext.SpriteBatch.DrawString(m_DebugFont,
+                                                     "" + m_Player.GetResources().GetAllResources().ElementAt(0),
+                                                     new Vector2(
+                                                         renderContext.GraphicsDevice.Viewport.Width / 2 - 45, 8),
+                                                     Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont,
+                                                     "" + m_Player.GetResources().GetAllResources().ElementAt(1),
+                                                     new Vector2(
+                                                         renderContext.GraphicsDevice.Viewport.Width / 2 + 90, 8),
+                                                     Color.White);
+            }
+<<<<<<< HEAD
+            else if (m_SubMenuSelected == SubMenuSelected.ShamanMode)
+=======
+            else
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+            {
+                renderContext.SpriteBatch.DrawString(m_DebugFont,
+                                                     "" + m_Player.GetResources().GetAllResources().ElementAt(0),
+                                                     new Vector2(
+                                                         renderContext.GraphicsDevice.Viewport.Width / 2 - 90, 20),
+                                                     Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont,
+                                                     "" + m_Player.GetResources().GetAllResources().ElementAt(1),
+                                                     new Vector2(
+                                                         renderContext.GraphicsDevice.Viewport.Width / 2 + 180, 20),
+                                                     Color.White);
+            }
+
+<<<<<<< HEAD
+            // DRAW EXTRA INFORMATION (RESOURCES,...)
+            // resources
+            
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Wood: " + userPlayer.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 10), Color.White);
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Influence Points: " + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 30), Color.White);
+
+            // armysize
+            renderContext.SpriteBatch.DrawString(m_DebugFont, "Army Size: " + userPlayer.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 25, 10), Color.White);
+=======
+            // MENU ONDERKANT DRAW
+            renderContext.SpriteBatch.Draw(m_TexMenuBackground, m_RectMenuBackground, Color.White);
+
+            // RESOURCE STATS
+            renderContext.SpriteBatch.Draw(m_TexWoodResource, m_RectWoodResource, Color.White);
+            renderContext.SpriteBatch.Draw(m_TexInfluenceResource, m_RectInfluenceResource, Color.White);
+
+            // CHARACTER STATS
+            renderContext.SpriteBatch.Draw(m_TexCharacterStats, m_RectCharacterStats, Color.White);
+            renderContext.SpriteBatch.Draw(m_TexUnitList, m_RectUnitList, Color.White);
+
+            // ARMY STATS
+            // renderContext.SpriteBatch.DrawString(m_DebugFont, "Army Size: " + m_Player.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 25, 10), Color.White);
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
         }
 
         private bool CheckHitButton(Vector2 mousePos, Rectangle buttonRect)
@@ -221,6 +586,34 @@ namespace XNA_ENGINE.Game.Objects
         public ModeSelected GetSelectedMode()
         {
             return m_SelectedMode;
+        }
+
+        public void SetSelectedMode(ModeSelected mode)
+        {
+            m_SelectedMode = mode;
+        }
+
+        public void NextTileType()
+        {
+            ++m_TileTypeSelected;
+            if ((int)m_TileTypeSelected >= (int)GridTile.TileType.enumSize) m_TileTypeSelected = 0;
+        }
+
+        public void ResetSelectedMode()
+        {
+            m_SelectedMode = ModeSelected.None;
+        }
+
+        public SubMenuSelected SubMenu
+        {
+            get { return m_SubMenuSelected; }
+            set { m_SubMenuSelected = value; }
+        }
+
+        public GridTile.TileType TileTypeSelected
+        {
+            get { return m_TileTypeSelected; }
+            set { m_TileTypeSelected = value; }
         }
     }
 }

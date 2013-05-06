@@ -110,7 +110,7 @@ namespace XNA_ENGINE.Game.Objects
             else
                 selectedTile = null;
 
-            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.MoveMode;
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.VillagerMode;
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
             {

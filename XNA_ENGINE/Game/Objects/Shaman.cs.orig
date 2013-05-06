@@ -56,10 +56,7 @@ namespace XNA_ENGINE.Game.Objects
 
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.MoveMode;
 
-<<<<<<< HEAD:XNA_ENGINE/Game/Objects/Sjaman.cs
-            if (m_Model.PermanentSelected)
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
-=======
+<<<<<<< HEAD:XNA_ENGINE/Game/Objects/Shaman.cs
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
             {
 
@@ -70,7 +67,10 @@ namespace XNA_ENGINE.Game.Objects
                 if (selectedTile != null)
                     SetTargetTile(selectedTile);
             }
->>>>>>> Rewrote the gridfieldmanager + added some resources + changed how the building and units work:XNA_ENGINE/Game/Objects/Shaman.cs
+=======
+            if (m_Model.PermanentSelected)
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5:XNA_ENGINE/Game/Objects/Sjaman.cs
 
             base.Update(renderContext);
         }

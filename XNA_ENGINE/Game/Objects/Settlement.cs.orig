@@ -76,6 +76,7 @@ namespace XNA_ENGINE.Game.Objects
                     m_Timer = TIMEFORVILLAGER;
                     --m_AmountOfVillagersQueued;
 <<<<<<< HEAD
+=======
                     Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_RallyPointTile));
                 }
             }
@@ -86,8 +87,7 @@ namespace XNA_ENGINE.Game.Objects
                 case SettlementType.Basic1:
                     //m_Model.Texture2D = FinalScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
                     //m_Model.UseTexture = true;
-=======
->>>>>>> Rewrote the gridfieldmanager + added some resources + changed how the building and units work
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
 
                     m_Owner.AddPlaceable(new Villager(m_RallyPointTile));
                 }

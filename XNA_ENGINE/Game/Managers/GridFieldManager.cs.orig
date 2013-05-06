@@ -75,16 +75,16 @@ namespace XNA_ENGINE.Game.Managers
             }
 
 <<<<<<< HEAD
-            Menu.GetInstance().Player.NewPlaceable(new Sjaman(m_GameScene, m_GridField[5, 5]));
-            Menu.GetInstance().Player.NewPlaceable(new Army(m_GameScene, m_GridField[5, 6]));
-            Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));
-=======
             if (attackPlayer != null)
             {
                 attackPlayer.ResetAttack();
                 SceneManager.SetActiveScene("AttackScene");
             }
->>>>>>> Rewrote the gridfieldmanager + added some resources + changed how the building and units work
+=======
+            Menu.GetInstance().Player.NewPlaceable(new Sjaman(m_GameScene, m_GridField[5, 5]));
+            Menu.GetInstance().Player.NewPlaceable(new Army(m_GameScene, m_GridField[5, 6]));
+            Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));
+>>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
         }
 
         public void LoadMap(GameScene gameScene, string map)

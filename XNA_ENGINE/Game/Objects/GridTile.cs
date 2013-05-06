@@ -112,7 +112,7 @@ namespace XNA_ENGINE.Game.Objects
             
             OnSelected();
 
-            if (this.PermanentSelected)
+            if (m_PermanentSelected)
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
         }
 

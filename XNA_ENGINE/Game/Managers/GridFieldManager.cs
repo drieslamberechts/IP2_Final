@@ -67,18 +67,23 @@ namespace XNA_ENGINE.Game.Managers
             }
             
             //Iterate over every Player
+            foreach (var player in m_PlayersList)
+            {
+                player.Update(renderContext);
+            }
+/*
             Player attackPlayer = null;
             Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));
             {
-                player.Update(renderContext);
-                if (player.GetAttack()) attackPlayer = player; // If the player is under attack initiate the battlesequence!
+                attackPlayer.Update(renderContext);
+                if (attackPlayer.GetAttack()) attackPlayer = attackPlayer; // If the player is under attack initiate the battlesequence!
             }
 
             if (attackPlayer != null)
             {
                 attackPlayer.ResetAttack();
                 SceneManager.SetActiveScene("AttackScene");
-            }
+            }*/
         }
 
         public void LoadMap(GameScene gameScene, string map)
@@ -291,7 +296,6 @@ namespace XNA_ENGINE.Game.Managers
                 }
             }
             if (returnList.Any()) return returnList;
-Content\DaeSplashScreen.xnb
 
             return null;
         }
