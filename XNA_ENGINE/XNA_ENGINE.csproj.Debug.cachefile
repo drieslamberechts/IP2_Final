@@ -32,7 +32,6 @@ Content\Models\tree_TreeTall.xnb
 Content\Models\char_Goblin_Shaman.xnb
 Content\Models\building_School.xnb
 Content\tex_house_tent1+tent2+tent3+camp_0.xnb
-Content\tex_env_Tree1+Tree2+Bush1+Grass1_1.xnb
 Content\Models\building_Settlement.xnb
 Content\Models\building_Shrine.xnb
 Content\Models\tree_TreeWillow.xnb
@@ -69,3 +68,6 @@ Content\final Menu\iconStandard.xnb
 Content\final Menu\characterStats.xnb
 Content\final Menu\hoverVillager.xnb
 Content\final Menu\unitList.xnb
+Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1+Grass2.xnb
+Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
+Content\Textures\tex_house_tent1+tent2+tent3+campfire.xnb
