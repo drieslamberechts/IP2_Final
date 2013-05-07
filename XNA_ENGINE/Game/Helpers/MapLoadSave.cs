@@ -126,7 +126,7 @@ namespace XNA_ENGINE.Game.Objects
                             gridField[row, column].SetType(GridTile.TileType.TreeShort);
                             break;
                         case 3:
-                            gridField[row, column].SetType(GridTile.TileType.Normal4);
+                            gridField[row, column].SetType(GridTile.TileType.Pond);
                             break;
                         case 4:
                             gridField[row, column].SetType(GridTile.TileType.Cliff);

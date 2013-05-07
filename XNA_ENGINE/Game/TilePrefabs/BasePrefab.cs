@@ -10,7 +10,6 @@ namespace XNA_ENGINE.Game.TilePrefabs
     class BasePrefab
     {
         protected bool m_bOpen = true;
-        protected bool m_bShowTile = true;
         protected GameModelGrid m_TileModel;
         protected Texture2D m_Tiletexture;
         protected List<GameModelGrid> m_PropList;
@@ -30,11 +29,6 @@ namespace XNA_ENGINE.Game.TilePrefabs
         public bool Open 
         {
             get { return m_bOpen; }
-        }
-
-        public bool ShowTile
-        {
-            get { return m_bShowTile; }
         }
 
         public GameModelGrid TileModel

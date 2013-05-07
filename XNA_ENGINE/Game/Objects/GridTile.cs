@@ -45,7 +45,7 @@ namespace XNA_ENGINE.Game.Objects
             NormalGrass,
             TreeLong,
             TreeShort,
-            Normal4,
+            Pond,
             Water,
             Cliff,
             Spiked,
@@ -169,8 +169,8 @@ namespace XNA_ENGINE.Game.Objects
                 case TileType.TreeShort:
                     LoadTileType(new PrefabTreeShort(this));
                     break;
-                case TileType.Normal4:
-                    LoadTileType(new PrefabNormalGrass(this));
+                case TileType.Pond:
+                    LoadTileType(new PrefabPond(this));
                     break;
                 case TileType.Water:
                     LoadTileType(new PrefabNormalGrass(this));
@@ -210,8 +210,8 @@ namespace XNA_ENGINE.Game.Objects
                 prop.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
                 //prop.CanDraw = true;
                 prop.LoadContent(PlayScene.GetContentManager());
-                prop.Rotate(0, -90, 0);
-                prop.Translate(0, 0, 20);
+                //prop.Rotate(0, -90, 0);
+                //prop.Translate(0, 0, 20);
                 prop.DiffuseColor = new Vector3(1, 1, 1);
                 m_TileModel.AddChild(prop);
             }

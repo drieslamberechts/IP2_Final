@@ -43,7 +43,7 @@ namespace XNA_ENGINE.Game
 
         protected override void OnExiting(Object sender, EventArgs args)
         {
-            //MapLoadSave.GetInstance().SaveMap(GridFieldManager.GetInstance().GridField);
+            MapLoadSave.GetInstance().SaveMap(GridFieldManager.GetInstance().GridField);
             base.OnExiting(sender, args);
         }
 

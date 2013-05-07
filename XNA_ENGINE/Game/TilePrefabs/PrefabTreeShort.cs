@@ -16,8 +16,7 @@ namespace XNA_ENGINE.Game.TilePrefabs
             m_TileModel.LoadContent(PlayScene.GetContentManager());
             m_TileModel.UseTexture = true;
 
-            var m_TreeShort = new GameModelGrid("Models/tree_TreeShort");
-            m_TreeShort.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_Tall1");
+            var m_TreeShort = new GameModelGrid("Models/tree_TreeShort1");
             m_TreeShort.UseTexture = true;
 
             m_PropList.Add(m_TreeShort);
@@ -25,9 +24,7 @@ namespace XNA_ENGINE.Game.TilePrefabs
             m_bOpen = false;
 
             foreach (var prop in m_PropList)
-            {
                 prop.LoadContent(PlayScene.GetContentManager());
-            }
         }
     }
 }
