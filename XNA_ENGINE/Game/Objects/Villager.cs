@@ -23,14 +23,14 @@ namespace XNA_ENGINE.Game.Objects
 
             m_PlaceableType = PlaceableType.Villager;
 
-            m_Model = new GameModelGrid("Models/char_Villager");
+            m_Model = new GameModelGrid("Models/char_Goblin_Villager");
             m_Model.LocalPosition += new Vector3(0, 0, 0);
             m_Model.LocalScale = new Vector3(0.4f, 0.4f, 0.4f);
            // Quaternion rotation = new Quaternion(new Vector3(0, 1, 0), 0);
            // m_Model.LocalRotation += rotation;
             m_Model.CanDraw = true;
             m_Model.LoadContent(PlayScene.GetContentManager());
-            m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
+            m_Model.UseTexture = true;
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT+30, 0));
