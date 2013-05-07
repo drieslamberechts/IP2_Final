@@ -77,7 +77,7 @@ namespace XNA_ENGINE.Game.Objects
             enumSize
         }
 
-        private SubMenuSelected m_SubMenuSelected = SubMenuSelected.BaseMode;
+        private SubMenuSelected m_SubMenuSelected = SubMenuSelected.VillagerMode;
         private ModeSelected m_SelectedMode = ModeSelected.None;
         private GridTile.TileType m_TileTypeSelected = GridTile.TileType.NormalGrass;
         private SpriteFont m_DebugFont;
@@ -460,7 +460,7 @@ namespace XNA_ENGINE.Game.Objects
 
             // MENU ONDERKANT DRAW
             renderContext.SpriteBatch.Draw(m_TexMenuBackground, m_RectMenuBackground, Color.White);
-            renderContext.SpriteBatch.DrawString(m_DebugFont, "Influence Points: " + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 30), Color.White);
+           /* renderContext.SpriteBatch.DrawString(m_DebugFont, "Influence Points: " + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 200, 30), Color.White);*/
 
             // RESOURCE STATS
             renderContext.SpriteBatch.Draw(m_TexWoodResource, m_RectWoodResource, Color.White);
@@ -499,11 +499,6 @@ namespace XNA_ENGINE.Game.Objects
         {
             ++m_TileTypeSelected;
             if ((int)m_TileTypeSelected >= (int)GridTile.TileType.enumSize) m_TileTypeSelected = 0;
-        }
-
-        public void ResetSelectedMode()
-        {
-            m_SelectedMode = ModeSelected.None;
         }
 
         public SubMenuSelected SubMenu

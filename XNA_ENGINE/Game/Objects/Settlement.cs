@@ -75,7 +75,7 @@ namespace XNA_ENGINE.Game.Objects
                     Console.WriteLine("Villager built");
                     m_Timer = TIMEFORVILLAGER;
                     --m_AmountOfVillagersQueued;
-                    GridFieldManager.GetInstance().UserPlayer.AddPlaceable(new Villager(GridFieldManager.GetInstance().GameScene, m_RallyPointTile));
+                    GridFieldManager.GetInstance().UserPlayer.AddPlaceable(new Villager(m_RallyPointTile));
                 }
             }
 

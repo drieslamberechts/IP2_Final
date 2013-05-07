@@ -55,6 +55,32 @@ namespace XNA_ENGINE.Game.Managers
             return m_GridFieldManager;
         }
 
+        public void Initialize()
+        {
+             List<GridTile> settlementTiles = new List<GridTile>();
+             settlementTiles.Add(m_GridField[2, 2]);
+             settlementTiles.Add(m_GridField[2, 3]);
+             settlementTiles.Add(m_GridField[3, 2]);
+             settlementTiles.Add(m_GridField[3, 3]);
+             BuildPlaceable(Placeable.PlaceableType.Settlement, m_UserPlayer, settlementTiles);
+
+             settlementTiles.Clear();
+             settlementTiles.Add(m_GridField[5, 2]);
+             settlementTiles.Add(m_GridField[5, 2]);
+             settlementTiles.Add(m_GridField[6, 3]);
+             settlementTiles.Add(m_GridField[6, 3]);
+             BuildPlaceable(Placeable.PlaceableType.School, m_UserPlayer, settlementTiles);
+
+             settlementTiles.Clear();
+             settlementTiles.Add(m_GridField[7, 2]);
+             BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer, settlementTiles);
+
+             m_UserPlayer.AddPlaceable(new Villager(m_GridField[0,0]));
+             m_UserPlayer.AddPlaceable(new Army(m_GridField[1, 0]));
+             m_UserPlayer.AddPlaceable(new Shaman(m_GridField[2, 0]));
+
+        }
+
         public void Update(RenderContext renderContext)
         {
             //Iterate over every GridTile
@@ -103,9 +129,6 @@ namespace XNA_ENGINE.Game.Managers
             }
 
             m_PlayersList = new List<Player>();
-
-           // Menu.GetInstance().Player.NewPlaceable(new Shaman(m_GridField[5, 5]));
-           // Menu.GetInstance().Player.NewPlaceable(new Army(m_GridField[5, 6]));
         }
 
         public void HandleInput(RenderContext renderContext)
@@ -124,6 +147,7 @@ namespace XNA_ENGINE.Game.Managers
             {
                 //Raycast to grid
                 var hittedTile = HitTestField(PlayScene.CalculateCursorRay(renderContext));
+
                 //Raycast to placeables
                 var hittedPlaceable = HitTestPlaceables(PlayScene.CalculateCursorRay(renderContext));
 
@@ -134,7 +158,6 @@ namespace XNA_ENGINE.Game.Managers
                 else if (hittedTile != null)
                 {
                     Select(hittedTile);
-
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
                     {
                         switch (selectedMode)
@@ -149,16 +172,13 @@ namespace XNA_ENGINE.Game.Managers
                             case Menu.ModeSelected.Gather:
                                 break;
                             case Menu.ModeSelected.BuildSettlement:
-                                BuildStructure(Placeable.PlaceableType.Settlement, m_UserPlayer);
-                                Menu.GetInstance().ResetSelectedMode();
+                                BuildPlaceable(Placeable.PlaceableType.Settlement, m_UserPlayer);
                                 break;
                             case Menu.ModeSelected.BuildShrine:
-                                BuildStructure(Placeable.PlaceableType.Shrine, m_UserPlayer);
-                                Menu.GetInstance().ResetSelectedMode();
+                                BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer);
                                 break;
                             case Menu.ModeSelected.BuildSchool:
-                                BuildStructure(Placeable.PlaceableType.School, m_UserPlayer);
-                                Menu.GetInstance().ResetSelectedMode();
+                                BuildPlaceable(Placeable.PlaceableType.School, m_UserPlayer);
                                 break;
                             case Menu.ModeSelected.Delete:
                                 //RemoveSettlementModel();
@@ -167,16 +187,12 @@ namespace XNA_ENGINE.Game.Managers
                             // CREATE TILES WITH SHAMAN
                             case Menu.ModeSelected.BuildTile1:
                                 hittedTile.SetType(GridTile.TileType.Spiked);
-                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildTile2:
-                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildTile3:
-                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             case Menu.ModeSelected.BuildTile4:
-                                Menu.GetInstance().ResetSelectedMode();
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();
@@ -186,44 +202,6 @@ namespace XNA_ENGINE.Game.Managers
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
                     {
                         var selectedPlaceable = GetPermanentSelected();
-
-                        //Place flag of settlement
-                       /* if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasSettlement() != null)
-                        {
-                            //GetPermanentSelectedTile().HasSettlement().PlaceRallyPoint(hittedTile);
-                        }
-
-                        //Place flag of school
-                        if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasSchool() != null)
-                        {
-                           // GetPermanentSelectedTile().HasSchool().PlaceRallyPoint(hittedTile);
-                        }
-
-                        //Place flag of shrine
-                        if (GetPermanentSelectedTile() != null && GetPermanentSelectedTile().HasShrine() != null)
-                        {
-                            //GetPermanentSelectedTile().HasShrine().PlaceRallyPoint(hittedTile);
-                        }*/
-                        /*
-                        if (selectedPlaceable != null && GetSelectedTiles() != null &&
-                            selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Villager)
-                        {
-                            selectedPlaceable.SetTargetTile(GetSelectedTiles());
-                        }
-
-                        if (selectedPlaceable != null && GetSelectedTiles() != null &&
-                             selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Shaman)
-                        {
-                            selectedPlaceable.SetTargetTile(GetSelectedTiles());
-                        }
-
-                        if (selectedPlaceable != null && GetSelectedTiles() != null &&
-                             selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Army)
-                        {
-                            selectedPlaceable.SetTargetTile(GetSelectedTiles());
-                        }*/
-
-                        //if (GetSelectedTile() != null && GetSelectedTile().HasShrine() != null))
                     }
                 }
             }
@@ -334,20 +312,25 @@ namespace XNA_ENGINE.Game.Managers
             placeable.Model.Selected = true;
         }
 
-        public void BuildStructure(Placeable.PlaceableType structureType, Player owner)
+        public void BuildPlaceable(Placeable.PlaceableType structureType, Player owner, List<GridTile> tileList = null)
         {
+            List<GridTile> tileListToBuildOn  = new List<GridTile>();
+
+            if (tileList != null)
+                tileListToBuildOn = tileList;
+            else
+                tileListToBuildOn = GetSelectedTiles();
+
             switch (structureType)
             {
                 case Placeable.PlaceableType.Settlement:
-                    owner.AddPlaceable(new Settlement(GetSelectedTiles()));
+                    owner.AddPlaceable(new Settlement(tileListToBuildOn));
                     break;
                 case Placeable.PlaceableType.School:
-                    owner.AddPlaceable(new School(GetSelectedTiles()));
+                    owner.AddPlaceable(new School(tileListToBuildOn));
                     break;
                 case Placeable.PlaceableType.Shrine:
-                    owner.AddPlaceable(new Shrine(GetSelectedTiles()));
-                    break;
-                case Placeable.PlaceableType.RallyPoint:
+                    owner.AddPlaceable(new Shrine(tileListToBuildOn));
                     break;
                 case Placeable.PlaceableType.Villager:
                     break;
@@ -358,6 +341,8 @@ namespace XNA_ENGINE.Game.Managers
                 default:
                     throw new ArgumentOutOfRangeException("structureType");
             }
+
+            Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.None);
         }
 
         public void AddPlayer(Player player)

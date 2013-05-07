@@ -22,7 +22,7 @@ namespace XNA_ENGINE.Game.Objects
             m_PlaceableType = PlaceableType.Shaman;
 
             m_Model = new GameModelGrid("Models/char_Goblin_Shaman");
-            m_Model.LocalPosition += new Vector3(30, GRIDHEIGHT + 64, 64);
+            m_Model.LocalPosition += new Vector3(0, 0, 0);
            // m_Model.LocalScale = new Vector3(0.4f, 0.4f, 0.4f);
             // Quaternion rotation = new Quaternion(new Vector3(0, 1, 0), 0);
             // m_Model.LocalRotation += rotation;
@@ -31,8 +31,8 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
-            m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT + 30, 0));
-            //m_Model.DrawBoundingBox = true;
+            m_Model.CreateBoundingBox(30, 64, 30, new Vector3(0, 0, 0));
+            m_Model.DrawBoundingBox = true;
 
             m_TargetTile = startTile;
 
@@ -42,6 +42,40 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         public override void Update(Engine.RenderContext renderContext)
+        {
+            Vector3 newPos = m_TargetTile.Model.WorldPosition;
+            newPos.Y += 32;
+            m_Model.Translate(newPos);
+
+            if (m_Model.PermanentSelected)
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
+            base.Update(renderContext);
+        }
+
+        //Code to execute on hit with mouse
+        public override void OnSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+
+            //What mode is there selected in the menu to build?
+            Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
+            {
+
+            }
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+
+            }
+
+            base.OnSelected();
+        }
+
+        //Code to execute on Permanently selected
+        public override void OnPermanentSelected()
         {
             //Get the inputmanager
             var inputManager = PlayScene.GetInputManager();
@@ -67,21 +101,12 @@ namespace XNA_ENGINE.Game.Objects
                     SetTargetTile(selectedTile);
             }
 
-            base.Update(renderContext);
+            base.OnPermanentSelected();
         }
 
         public override void SetTargetTile(GridTile targetTile)
         {
             m_TargetTile = targetTile;
-        }
-
-        public virtual bool OnSelected()
-        {
-            if (!m_Model.PermanentSelected) return false;
-
-          
-
-            return true;
         }
     }
 }

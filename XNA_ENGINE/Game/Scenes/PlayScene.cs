@@ -118,6 +118,8 @@ namespace XNA_ENGINE.Game.Scenes
             SceneManager.RenderContext.Camera.Rotate(-45, 30, 150);
             m_CameraTargetPos = SceneManager.RenderContext.Camera.LocalPosition;
 
+            GridFieldManager.GetInstance().Initialize();
+
             base.Initialize();
         }
 

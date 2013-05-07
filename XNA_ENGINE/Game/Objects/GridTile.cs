@@ -91,29 +91,18 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             //What to do if the tile is selected
-            if (m_Selected)
+            /*if (m_Selected)
             {
                 m_TileModel.Selected = true;
             }
             else
             {
                 m_TileModel.Selected = false;
-            }
+            }*/
 
-            //What to do if the tile is permanently selected (until the tile is deselected)
-            if (m_PermanentSelected)
-            {
-                m_TileModel.PermanentSelected = true;
-            }
-            else
-            {
-                m_TileModel.PermanentSelected = false;
-            }
+        
             
             OnSelected();
-
-            if (m_PermanentSelected)
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
         }
 
         public bool HitTest(Ray ray)
@@ -128,7 +117,13 @@ namespace XNA_ENGINE.Game.Objects
 
         private bool OnSelected()
         {
-            if (!m_Selected) return false;
+            if (!m_Selected)
+            {
+                m_TileModel.Selected = false;
+                return false;
+            }
+
+            m_TileModel.Selected = true;
 
             bool creativeMode = GridFieldManager.GetInstance().CreativeMode;
             //Get the inputmanager
@@ -147,7 +142,7 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
                 {
-
+                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.VillagerMode;
                 }
 
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)

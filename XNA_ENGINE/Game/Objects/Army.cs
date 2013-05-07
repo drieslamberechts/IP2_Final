@@ -36,7 +36,7 @@ namespace XNA_ENGINE.Game.Objects
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT + 30, 0));
-            //m_Model.DrawBoundingBox = true;
+            m_Model.DrawBoundingBox = true;
 
             m_TargetTile = startTile;
 
@@ -104,7 +104,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.Translate(newPos);
 
             if (m_Model.PermanentSelected)
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
+                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SoldierMode;
             base.Update(renderContext);
         }
 
