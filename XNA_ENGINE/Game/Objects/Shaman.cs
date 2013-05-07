@@ -28,11 +28,12 @@ namespace XNA_ENGINE.Game.Objects
             // m_Model.LocalRotation += rotation;
             m_Model.CanDraw = true;
             m_Model.LoadContent(PlayScene.GetContentManager());
-            m_Model.DiffuseColor = new Vector3(0.1f, 0.1f, 0.5f);
+            m_Model.UseTexture = true;
+         
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(30, 64, 30, new Vector3(0, 0, 0));
-            m_Model.DrawBoundingBox = true;
+            m_Model.DrawBoundingBox = false;
 
             m_TargetTile = startTile;
 

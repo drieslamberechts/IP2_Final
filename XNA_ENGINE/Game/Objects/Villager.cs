@@ -34,7 +34,7 @@ namespace XNA_ENGINE.Game.Objects
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
             m_Model.CreateBoundingBox(45, 128, 45, new Vector3(0, GRIDHEIGHT+30, 0));
-            m_Model.DrawBoundingBox = true;
+            m_Model.DrawBoundingBox = false;
 
             m_TargetTile = startTile;
 

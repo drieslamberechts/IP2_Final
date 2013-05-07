@@ -142,7 +142,7 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
                 {
-                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.VillagerMode;
+                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
                 }
 
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)

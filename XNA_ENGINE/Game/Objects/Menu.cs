@@ -315,7 +315,7 @@ namespace XNA_ENGINE.Game.Objects
                                                            m_TexSchool.Width / 2,
                                                            m_TexSchool.Height / 2);
 
-                m_RectShrine = new Rectangle(10 + m_TexSchool.Width / 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height + 45,
+                m_RectShrine = new Rectangle(10 * 2 + m_TexSchool.Width / 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height + 45,
                                                            m_TexShrine.Width / 2,
                                                            m_TexShrine.Height / 2);
 
