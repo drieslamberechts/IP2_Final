@@ -176,7 +176,7 @@ namespace XNA_ENGINE.Game.Objects
                     LoadTileType(new PrefabNormalGrass(this));
                     break;
                 case TileType.Cliff:
-                    LoadTileType(new PrefabNormalGrass(this));
+                    LoadTileType(new PrefabCliff(this));
                     break;
                 case TileType.Spiked:
                     LoadTileType(new PrefabNormalGrass(this));

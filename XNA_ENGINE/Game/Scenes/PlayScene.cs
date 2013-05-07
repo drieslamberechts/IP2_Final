@@ -159,18 +159,21 @@ namespace XNA_ENGINE.Game.Scenes
                 // DrawGUI
                 Menu.GetInstance().Draw(renderContext);
 
+                // Creative mode
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "C: Creative mode: " + GridFieldManager.GetInstance().CreativeMode, new Vector2(10, 50), Color.White);
+
+                // TileType
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "B: Tiletype to build: " + Menu.GetInstance().TileTypeSelected, new Vector2(10, 70), Color.White);
+
+
                 /*
 
                 // Show Selection
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "Selected: " + Menu.GetInstance().GetSelectedMode(), new Vector2(10, 30), Color.White);
 
-                // Creative mode
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "C: Creative mode: " + GridFieldManager.GetInstance().CreativeMode, new Vector2(10, 50), Color.White);
-                // TileType
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "B: Tiletype to build: " + Menu.GetInstance().TileTypeSelected, new Vector2(10, 70), Color.White);
-
-                // Selection mode
+                                // Selection mode
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "V: Selection mode: " + GridFieldManager.GetInstance().SelectionModeMeth, new Vector2(10, 90), Color.White);
+
 
                 // Show Camera position (DEBUG)
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "Camera Pos: " + m_CameraTargetPos,
