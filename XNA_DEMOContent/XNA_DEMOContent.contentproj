@@ -422,6 +422,78 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_tile_Basic2.png">
+      <Name>tex_tile_Basic2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicGrass1.png">
+      <Name>tex_Tile_BasicGrass1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicGrass2.png">
+      <Name>tex_Tile_BasicGrass2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicGrass3.png">
+      <Name>tex_Tile_BasicGrass3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicGrass4.png">
+      <Name>tex_Tile_BasicGrass4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicGrass5.png">
+      <Name>tex_tile_BasicGrass5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicGround1.png">
+      <Name>tex_tile_BasicGround1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicGround2.png">
+      <Name>tex_tile_BasicGround2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicWithDirt1.png">
+      <Name>tex_Tile_BasicWithDirt1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicWithDirt2.png">
+      <Name>tex_Tile_BasicWithDirt2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicWithDirt3.png">
+      <Name>tex_Tile_BasicWithDirt3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicWithDirt4.png">
+      <Name>tex_Tile_BasicWithDirt4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicWithDirt4_test.png">
+      <Name>tex_Tile_BasicWithDirt4_test</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicWithDirt5.png">
+      <Name>tex_tile_BasicWithDirt5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
