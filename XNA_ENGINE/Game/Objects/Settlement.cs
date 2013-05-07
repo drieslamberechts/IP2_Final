@@ -114,6 +114,12 @@ namespace XNA_ENGINE.Game.Objects
                 m_Model.PermanentSelected = true;
                 m_RallyPointTile.ShowFlag(true);
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
+
+                if (Menu.GetInstance().m_Enable2)
+                {
+                    Menu.GetInstance().m_Enable2 = false;
+                    Menu.GetInstance().m_Enable3 = true;
+                }
             }
             else
             {

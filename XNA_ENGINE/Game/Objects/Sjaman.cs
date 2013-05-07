@@ -48,6 +48,12 @@ namespace XNA_ENGINE.Game.Objects
             if (m_Model.PermanentSelected)
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
 
+            if (Menu.GetInstance().m_Enable9)
+            {
+                Menu.GetInstance().m_Enable9 = false;
+                Menu.GetInstance().m_Enable10 = true;
+            }
+
             base.Update(renderContext);
         }
 

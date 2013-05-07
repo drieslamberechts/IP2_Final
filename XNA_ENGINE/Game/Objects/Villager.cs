@@ -67,7 +67,14 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             if (m_Model.PermanentSelected)
+            {
+                if (Menu.GetInstance().m_Enable1)
+                {
+                    Menu.GetInstance().m_Enable1 = false;
+                    Menu.GetInstance().m_Enable2 = true;
+                }
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.VillagerMode;
+            }
 
             base.Update(renderContext);
         }
@@ -75,6 +82,12 @@ namespace XNA_ENGINE.Game.Objects
         public override void SetTargetTile(GridTile targetTile)
         {
             m_TargetTile = targetTile;
+
+            if (Menu.GetInstance().m_Enable4)
+            {
+                Menu.GetInstance().m_Enable4 = false;
+                Menu.GetInstance().m_Enable5 = true;
+            }
         }
     }
 }

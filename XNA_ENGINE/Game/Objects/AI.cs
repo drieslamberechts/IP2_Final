@@ -94,6 +94,12 @@ namespace XNA_ENGINE.Game.Objects
             secondArmy.ArmySize += firstArmyCount;
 
             // remove firstArmy
+
+            if (Menu.GetInstance().m_Enable7)
+            {
+                Menu.GetInstance().m_Enable7 = false;
+                Menu.GetInstance().m_Enable8 = true;
+            }
         }
 
         // GETTERS AND SETTERS

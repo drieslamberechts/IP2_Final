@@ -102,6 +102,12 @@ namespace XNA_ENGINE.Game.Objects
                 m_Model.PermanentSelected = true;
                 m_DirectionTile.ShowFlag(true);
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
+
+                if (Menu.GetInstance().m_Enable8)
+                {
+                    Menu.GetInstance().m_Enable8 = false;
+                    Menu.GetInstance().m_Enable9 = true;
+                }
             }
             else
             {

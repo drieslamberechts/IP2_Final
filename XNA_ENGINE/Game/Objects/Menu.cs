@@ -48,6 +48,43 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectBuildTile,
                           m_RectSplit;
 
+        // tutorial variables
+        private Texture2D m_TexScreen1,
+                          m_TexScreen2,
+                          m_TexScreen3,
+                          m_TexScreen4,
+                          m_TexScreen5,
+                          m_TexScreen6,
+                          m_TexScreen7,
+                          m_TexScreen8,
+                          m_TexScreen9,
+                          m_TexScreen10,
+                          m_TexScreen11;
+
+        private Rectangle m_RectScreen1,
+                          m_RectScreen2,
+                          m_RectScreen3,
+                          m_RectScreen4,
+                          m_RectScreen5,
+                          m_RectScreen6,
+                          m_RectScreen7,
+                          m_RectScreen8,
+                          m_RectScreen9,
+                          m_RectScreen10,
+                          m_RectScreen11;
+
+        public bool m_Enable1,
+                     m_Enable2,
+                     m_Enable3,
+                     m_Enable4,
+                     m_Enable5,
+                     m_Enable6,
+                     m_Enable7,
+                     m_Enable8,
+                     m_Enable9,
+                     m_Enable10,
+                     m_Enable11;
+
         public enum SubMenuSelected
         {
             BaseMode,
@@ -134,6 +171,32 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TexBuildTile = Content.Load<Texture2D>("final Menu/iconStandard");
 
+            // TUTORIAL
+            m_Enable1 = true;
+            m_Enable2 = false;
+            m_Enable3 = false;
+            m_Enable4 = false;
+            m_Enable5 = false;
+            m_Enable6 = false;
+            m_Enable7 = false;
+            m_Enable8 = false;
+            m_Enable9 = false;
+            m_Enable10 = false;
+            m_Enable11 = false;
+
+            m_TexScreen1 = Content.Load<Texture2D>("tutorial/screen1");
+            m_TexScreen2 = Content.Load<Texture2D>("tutorial/screen2");
+            m_TexScreen3 = Content.Load<Texture2D>("tutorial/screen3");
+            m_TexScreen4 = Content.Load<Texture2D>("tutorial/screen4");
+            m_TexScreen5 = Content.Load<Texture2D>("tutorial/screen5");
+            m_TexScreen6 = Content.Load<Texture2D>("tutorial/screen6");
+            m_TexScreen7 = Content.Load<Texture2D>("tutorial/screen7");
+            m_TexScreen8 = Content.Load<Texture2D>("tutorial/screen8");
+            m_TexScreen9 = Content.Load<Texture2D>("tutorial/screen9");
+            m_TexScreen10 = Content.Load<Texture2D>("tutorial/screen10");
+            m_TexScreen11 = Content.Load<Texture2D>("tutorial/screen11");
+
+            // FONT
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
         }
 
@@ -235,6 +298,12 @@ namespace XNA_ENGINE.Game.Objects
                         m_Player.GetResources().DecreaseInfluence(COSTOFINFLUENCE_TILE1);
                         GridFieldManager.GetInstance(SceneManager.ActiveScene).SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildTile1;
+
+                        if (Menu.GetInstance().m_Enable10)
+                        {
+                            Menu.GetInstance().m_Enable10 = false;
+                            Menu.GetInstance().m_Enable11 = true;
+                        }
                         return true;
                     }
                     break;
@@ -260,12 +329,18 @@ namespace XNA_ENGINE.Game.Objects
                 // SETTLEMENT MODE
                 // --------------------------------------------
                 case SubMenuSelected.SettlementMode:
-                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
+                    if (inputManager.GetAction((int)FinalScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete      ))
                     {
                         if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                         {
                             selectedPlaceable.QueueVillager();
                             Console.WriteLine("Build Villager");
+                        }
+
+                        if (Menu.GetInstance().m_Enable3)
+                        {
+                            Menu.GetInstance().m_Enable3 = false;
+                            Menu.GetInstance().m_Enable4 = true;
                         }
 
                         return true;
@@ -275,13 +350,74 @@ namespace XNA_ENGINE.Game.Objects
                     throw new ArgumentOutOfRangeException();
             }
 
+            if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftClick).IsTriggered &&
+                CheckHitButton(mousePos, m_RectScreen11) && m_Enable11)
+            {
+                m_Enable11 = false;
+            }
+
             return false;
         }
 
         // Draw
         public void Draw(RenderContext renderContext)
         {
-            
+            // --------------------------------------------
+            // TUTORIAL
+            // --------------------------------------------
+            // windowed
+            if (renderContext.GraphicsDevice.Viewport.Height < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+            {
+                if (m_Enable1)
+                    m_RectScreen1 = new Rectangle(5, 5, m_TexScreen1.Width/2, m_TexScreen1.Height/2);
+                if (m_Enable2)
+                    m_RectScreen2 = new Rectangle(5, 5, m_TexScreen2.Width / 2, m_TexScreen2.Height / 2);
+                if (m_Enable3)
+                    m_RectScreen3 = new Rectangle(5, 5, m_TexScreen3.Width / 2, m_TexScreen3.Height / 2);
+                if (m_Enable4)
+                    m_RectScreen4 = new Rectangle(5, 5, m_TexScreen4.Width / 2, m_TexScreen4.Height / 2);
+                if (m_Enable5)
+                    m_RectScreen5 = new Rectangle(5, 5, m_TexScreen5.Width / 2, m_TexScreen5.Height / 2);
+                if (m_Enable6)
+                    m_RectScreen6 = new Rectangle(5, 5, m_TexScreen6.Width / 2, m_TexScreen6.Height / 2);
+                if (m_Enable7)
+                    m_RectScreen7 = new Rectangle(5, 5, m_TexScreen7.Width / 2, m_TexScreen7.Height / 2);
+                if (m_Enable8)
+                    m_RectScreen8 = new Rectangle(5, 5, m_TexScreen8.Width / 2, m_TexScreen8.Height / 2);
+                if (m_Enable9)
+                    m_RectScreen9 = new Rectangle(5, 5, m_TexScreen9.Width / 2, m_TexScreen9.Height / 2);
+                if (m_Enable10)
+                    m_RectScreen10 = new Rectangle(5, 5, m_TexScreen10.Width / 2, m_TexScreen10.Height / 2);
+                if (m_Enable11)
+                    m_RectScreen11 = new Rectangle(5, 5, m_TexScreen11.Width / 2, m_TexScreen11.Height / 2);
+            }
+            // fullscreen
+            else
+            {
+                if (m_Enable1)
+                    m_RectScreen1 = new Rectangle(10, 10, m_TexScreen1.Width, m_TexScreen1.Height);
+                if (m_Enable2)
+                    m_RectScreen2 = new Rectangle(10, 10, m_TexScreen2.Width, m_TexScreen2.Height);
+                if (m_Enable3)
+                    m_RectScreen3 = new Rectangle(10, 10, m_TexScreen3.Width, m_TexScreen3.Height);
+                if (m_Enable4)
+                    m_RectScreen4 = new Rectangle(10, 10, m_TexScreen4.Width, m_TexScreen4.Height);
+                if (m_Enable5)
+                    m_RectScreen5 = new Rectangle(10, 10, m_TexScreen5.Width, m_TexScreen5.Height);
+                if (m_Enable6)
+                    m_RectScreen6 = new Rectangle(10, 10, m_TexScreen6.Width, m_TexScreen6.Height);
+                if (m_Enable7)
+                    m_RectScreen7 = new Rectangle(10, 10, m_TexScreen7.Width, m_TexScreen7.Height);
+                if (m_Enable8)
+                    m_RectScreen8 = new Rectangle(10, 10, m_TexScreen8.Width, m_TexScreen8.Height);
+                if (m_Enable9)
+                    m_RectScreen9 = new Rectangle(10, 10, m_TexScreen9.Width, m_TexScreen9.Height);
+                if (m_Enable10)
+                    m_RectScreen10 = new Rectangle(10, 10, m_TexScreen10.Width, m_TexScreen10.Height);
+                if (m_Enable11)
+                    m_RectScreen11 = new Rectangle(10, 10, m_TexScreen11.Width, m_TexScreen11.Height);
+            }
+
             // ------------------------------------------
             // WINDOWED
             // ------------------------------------------
@@ -428,6 +564,30 @@ namespace XNA_ENGINE.Game.Objects
                     }
                     break;
             }
+
+            // DRAW TUTORIAL
+            if (m_Enable1)
+                renderContext.SpriteBatch.Draw(m_TexScreen1, m_RectScreen1, Color.White);
+            if (m_Enable2)
+                renderContext.SpriteBatch.Draw(m_TexScreen2, m_RectScreen2, Color.White);
+            if (m_Enable3)
+                renderContext.SpriteBatch.Draw(m_TexScreen3, m_RectScreen3, Color.White);
+            if (m_Enable4)
+                renderContext.SpriteBatch.Draw(m_TexScreen4, m_RectScreen4, Color.White);
+            if (m_Enable5)
+                renderContext.SpriteBatch.Draw(m_TexScreen5, m_RectScreen5, Color.White);
+            if (m_Enable6)
+                renderContext.SpriteBatch.Draw(m_TexScreen6, m_RectScreen6, Color.White);
+            if (m_Enable7)
+                renderContext.SpriteBatch.Draw(m_TexScreen7, m_RectScreen7, Color.White);
+            if (m_Enable8)
+                renderContext.SpriteBatch.Draw(m_TexScreen8, m_RectScreen8, Color.White);
+            if (m_Enable9)
+                renderContext.SpriteBatch.Draw(m_TexScreen9, m_RectScreen9, Color.White);
+            if (m_Enable10)
+                renderContext.SpriteBatch.Draw(m_TexScreen10, m_RectScreen10, Color.White);
+            if (m_Enable11)
+                renderContext.SpriteBatch.Draw(m_TexScreen11, m_RectScreen11, Color.White);
 
             // DRAW EXTRA INFORMATION (RESOURCES,...) IN TEXT
             // resources
