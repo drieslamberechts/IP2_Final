@@ -587,6 +587,79 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="final Menu\Button_Delete.png">
+      <Name>Button_Delete</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_AddSchool.png">
+      <Name>Button_AddSchool</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Button_AddSettlement.png">
+      <Name>Button_AddSettlement</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_AddShaman.png">
+      <Name>Button_AddShaman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Button_AddVIllager.png">
+      <Name>Button_AddVIllager</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_AddVIllagerHover.png">
+      <Name>Button_AddVIllagerHover</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_AddShamanHover.png">
+      <Name>Button_AddShamanHover</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\hoverSettlementInfo.png">
+      <Name>hoverSettlementInfo</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_AddSettlementHover.png">
+      <Name>Button_AddSettlementHover</Name>
+=======
+    <Compile Include="Textures\tex_env_FernLeaf.png">
+      <Name>tex_env_FernLeaf</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_env_grass.png">
+      <Name>tex_env_grass</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_env_rock1.png">
+      <Name>tex_env_rock1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_env_rock2.png">
+      <Name>tex_env_rock2</Name>
     <Compile Include="Textures\tex_env_grass.png">
       <Name>tex_env_grass</Name>
       <Importer>TextureImporter</Importer>
@@ -663,6 +736,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Textures\tex_env_Weed.png">
+      <Name>tex_env_Weed</Name>
+>>>>>>> bdffe4a721e5f8259a1f223a009b5dd4880c67aa
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="final Menu\Button_AddSettlementHover.png">

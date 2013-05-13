@@ -114,6 +114,12 @@ namespace XNA_ENGINE.Game.Objects
 
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SettlementMode;
 
+            if (Menu.GetInstance().m_Enable2)
+            {
+                Menu.GetInstance().m_Enable2 = false;
+                Menu.GetInstance().m_Enable3 = true;
+            }
+
             GridTile selectedTile;
             if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
                 selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
