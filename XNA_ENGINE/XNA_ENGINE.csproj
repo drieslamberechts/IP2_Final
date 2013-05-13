@@ -126,6 +126,7 @@
     <Compile Include="Game\Scenes\PlayScene.cs" />
     <Compile Include="Game\Scenes\MainMenuScene.cs" />
     <Compile Include="Game\TilePrefabs\BasePrefab.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabPond.cs" />
     <Compile Include="Game\TilePrefabs\PrefabCliff.cs" />
     <Compile Include="Game\TilePrefabs\PrefabTreeShort.cs" />
     <Compile Include="Game\TilePrefabs\PrefabTreeLong.cs" />
