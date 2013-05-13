@@ -128,9 +128,9 @@ namespace XNA_ENGINE.Game
 
             if (m_InputManager.GetAction((int)PlayerInput.FullScreen).IsTriggered && graphics.IsFullScreen == false)
             {
-                graphics.IsFullScreen = true;
-                graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-                graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                graphics.IsFullScreen = false;
+                graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height-100;
+                graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width-150;
                 graphics.ApplyChanges();
             }
 

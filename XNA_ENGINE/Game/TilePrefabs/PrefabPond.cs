@@ -29,7 +29,6 @@ namespace XNA_ENGINE.Game.TilePrefabs
             //Rock2
             var rock2 = new GameModelGrid("Models/prop_Rock2");
             rock2.LocalScale = new Vector3(0.3f, 0.3f, 0.3f);
-           // rock2.Rotate(0, -90, 0);
             rock2.LocalPosition += new Vector3(25, -5, 7);
             rock2.UseTexture = true;
             m_PropList.Add(rock2);
@@ -58,14 +57,36 @@ namespace XNA_ENGINE.Game.TilePrefabs
             rock5.UseTexture = true;
             m_PropList.Add(rock5);
 
-
-            //Rock5
+            //Leaves
             var grass1 = new GameModelGrid("Models/prop_Grass3");
-            grass1.LocalScale = new Vector3(1, 1, 1);
-            grass1.Rotate(0, 0, 0);
-            grass1.LocalPosition += new Vector3(0, 0, 0);
+            grass1.LocalScale = new Vector3(2, 2, 2);
+            grass1.Rotate(10, 180, 10);
+            grass1.LocalPosition += new Vector3(15, 0, -10);
             grass1.UseTexture = true;
             m_PropList.Add(grass1);
+
+            //Grasses
+            var grass2 = new GameModelGrid("Models/prop_Grass2");
+            grass2.LocalScale = new Vector3(2, 2, 2);
+            grass2.Rotate(0, -90, 0);
+            grass2.LocalPosition += new Vector3(-20, 0, -25);
+            grass2.UseTexture = true;
+            m_PropList.Add(grass2);
+
+            var grass3 = new GameModelGrid("Models/prop_Grass2");
+            grass3.LocalScale = new Vector3(2, 2, 2);
+            grass3.Rotate(0, -90, 0);
+            grass3.LocalPosition += new Vector3(-10, 0, -25);
+            grass3.UseTexture = true;
+            m_PropList.Add(grass3);
+
+            var grass4 = new GameModelGrid("Models/prop_Grass2");
+            grass4.LocalScale = new Vector3(2, 2, 2);
+            grass4.Rotate(0, -90, 0);
+            grass4.LocalPosition += new Vector3(20, 0, -25);
+            grass4.UseTexture = true;
+            m_PropList.Add(grass4);
+
 
             m_bOpen = false;
             foreach (var prop in m_PropList)

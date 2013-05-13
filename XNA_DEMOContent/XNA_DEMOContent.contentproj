@@ -587,11 +587,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Textures\tex_env_FernLeaf.png">
-      <Name>tex_env_FernLeaf</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Textures\tex_env_grass.png">
       <Name>tex_env_grass</Name>
       <Importer>TextureImporter</Importer>
@@ -609,6 +604,13 @@
     </Compile>
     <Compile Include="Textures\tex_env_Weed.png">
       <Name>tex_env_Weed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_env_FernLeaf.png">
+      <Name>tex_env_FernLeaf</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

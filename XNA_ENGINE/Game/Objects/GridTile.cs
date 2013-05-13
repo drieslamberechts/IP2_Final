@@ -208,10 +208,7 @@ namespace XNA_ENGINE.Game.Objects
             foreach (var prop in tilePrefab.PropList)
             {
                 prop.LocalPosition += new Vector3(0, GRIDHEIGHT, 0);
-                //prop.CanDraw = true;
-                prop.LoadContent(PlayScene.GetContentManager());
-                //prop.Rotate(0, -90, 0);
-                //prop.Translate(0, 0, 20);
+
                 prop.DiffuseColor = new Vector3(1, 1, 1);
                 m_TileModel.AddChild(prop);
             }
@@ -220,9 +217,7 @@ namespace XNA_ENGINE.Game.Objects
         private void UnloadTileType()
         {
             foreach (var prop in m_PropsList)
-            {
                 m_TileModel.RemoveChild(prop);
-            }
 
             GridFieldManager.GetInstance().GameScene.RemoveSceneObject(m_TileModel);
 
