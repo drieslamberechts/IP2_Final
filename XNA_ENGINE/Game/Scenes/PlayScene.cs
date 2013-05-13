@@ -176,6 +176,11 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
+            
+            //graphics.GraphicsDevice.
+           // renderContext.GraphicsDevice.DepthStencilState.DepthBufferEnable = true;
+            //renderContext.GraphicsDevice.DepthStencilState.DepthBufferWriteEnable = true;
+
 
             if (drawBefore3D == false) // draw after the 3D is drawn
             {
