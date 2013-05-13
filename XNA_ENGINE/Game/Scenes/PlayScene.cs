@@ -145,6 +145,32 @@ namespace XNA_ENGINE.Game.Scenes
             //Update the gridfield manager
             GridFieldManager.GetInstance().Update(renderContext);
 
+            // MOVE ENEMY ARMY
+            // move 1
+            GridFieldManager.GetInstance()
+                            .AiPlayer.GetOwnedList()
+                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                            .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 10]);
+
+            // move 2
+            GridFieldManager.GetInstance()
+                            .AiPlayer.GetOwnedList()
+                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                            .SetTargetTile(GridFieldManager.GetInstance().GridField[20, 10]);
+
+            // move 3
+            GridFieldManager.GetInstance()
+                            .AiPlayer.GetOwnedList()
+                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                            .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 10]);
+
+            // move 4
+            GridFieldManager.GetInstance()
+                            .AiPlayer.GetOwnedList()
+                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                            .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 6]);
+
+
             base.Update(renderContext);
         }
 

@@ -133,6 +133,7 @@ namespace XNA_ENGINE.Game.Objects
         {
             //Get the inputmanager
             var inputManager = PlayScene.GetInputManager();
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShrineMode;
 
             base.OnPermanentSelected();
         }

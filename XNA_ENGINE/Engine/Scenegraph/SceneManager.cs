@@ -89,9 +89,9 @@ namespace XNA_ENGINE.Engine.Scenegraph
 
                 //DRAW 3D
                 //Reset Renderstate
-                RenderContext.GraphicsDevice.BlendState = BlendState.Opaque;
+                RenderContext.GraphicsDevice.BlendState = BlendState.AlphaBlend;
                 RenderContext.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-                RenderContext.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+                RenderContext.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
                 ActiveScene.Draw3D(RenderContext);
 
                 //2D After 3D
