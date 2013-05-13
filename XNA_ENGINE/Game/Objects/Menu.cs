@@ -396,7 +396,7 @@ namespace XNA_ENGINE.Game.Objects
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (inputManager.GetAction((int) FinalScene.PlayerInput.LeftClick).IsTriggered &&
+            if (inputManager.GetAction((int) PlayScene.PlayerInput.LeftClick).IsTriggered &&
                 CheckHitButton(mousePos, m_RectScreen11) && m_Enable11)
             {
                 m_Enable11 = false;
