@@ -94,6 +94,12 @@ namespace XNA_ENGINE.Game.Objects
 
             }
 
+            if (Menu.GetInstance().m_Enable5)
+            {
+                Menu.GetInstance().m_Enable5 = false;
+                Menu.GetInstance().m_Enable6 = true;
+            }
+
             base.OnSelected();
         }
 

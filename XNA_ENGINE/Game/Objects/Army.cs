@@ -105,6 +105,13 @@ namespace XNA_ENGINE.Game.Objects
 
             if (m_Model.PermanentSelected)
                 Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SoldierMode;
+
+            if (Menu.GetInstance().m_Enable6)
+            {
+                Menu.GetInstance().m_Enable6 = false;
+                Menu.GetInstance().m_Enable7 = true;
+            }
+
             base.Update(renderContext);
         }
 

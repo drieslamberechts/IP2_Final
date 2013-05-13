@@ -64,6 +64,12 @@ namespace XNA_ENGINE.Game.Objects
                 //Menu.GetInstance().Player.GetResources().AddInfluence(1);
             }
 
+            if (Menu.GetInstance().m_Enable8)
+                {
+                    Menu.GetInstance().m_Enable8 = false;
+                    Menu.GetInstance().m_Enable9 = true;
+                }
+
             base.Update(renderContext);
         }
 
