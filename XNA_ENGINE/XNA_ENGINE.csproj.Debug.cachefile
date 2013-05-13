@@ -119,7 +119,14 @@ Content\Models\tree_TreeShort5.xnb
 Content\Models\tree_TreeShort6.xnb
 Content\Models\tree_TreeTall1.xnb
 Content\Models\tree_TreeTall2.xnb
-Content\tex_env_Treetrunk2_0.xnb
-Content\tex_env_Foliage1_0.xnb
-Content\foliage2_0.xnb
 Content\Textures\tex_env_Treetrunk2_0.xnb
+Content\final Menu\Button_Delete.xnb
+Content\final Menu\Button_AddSchool.xnb
+Content\final Menu\Button_AddSettlement.xnb
+Content\final Menu\Button_AddShaman.xnb
+Content\final Menu\Button_AddVIllager.xnb
+Content\final Menu\Button_AddVIllagerHover.xnb
+Content\final Menu\Button_AddShamanHover.xnb
+Content\final Menu\hoverSettlementInfo.xnb
+Content\final Menu\Button_AddSettlementHover.xnb
+Content\Textures\tex_env_Foliage1_0.xnb
