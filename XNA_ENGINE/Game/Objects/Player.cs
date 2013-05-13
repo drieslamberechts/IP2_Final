@@ -88,7 +88,7 @@ namespace XNA_ENGINE.Game.Objects
                     // Search for resources
                     m_Ai.Scout();
                 }
-
+                
                 // need to be able to get current tile for army
             }
             else

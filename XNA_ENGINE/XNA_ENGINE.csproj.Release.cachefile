@@ -4,9 +4,6 @@ Content\Models\settlement_TestSettlementBlue.xnb
 Content\Models\tree_TreeShort.xnb
 Content\Models\tile_Normal.xnb
 Content\Models\building_FlagNormal.xnb
-Content\Models\building_Settlement.xnb
-Content\Models\building_School.xnb
-Content\Models\building_Shrine.xnb
 Content\Models\char_Soldier.xnb
 Content\Models\char_Villager.xnb
 Content\Models\prop_Wood.xnb
@@ -38,7 +35,71 @@ Content\final Menu\iconStandard.xnb
 Content\final Menu\characterStats.xnb
 Content\final Menu\hoverVillager.xnb
 Content\final Menu\unitList.xnb
+Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1+Grass2.xnb
+Content\Textures\tex_house_tent1+tent2+tent3+campfire.xnb
 Content\Models\tree_TreeTall.xnb
 Content\Models\char_Goblin_Shaman.xnb
-Content\DaeSplashScreen.xnb
-Content\FBX\B84D346A\tree_TreeTall.fbm\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
+Content\Models\building_School.xnb
+Content\Models\building_Settlement.xnb
+Content\Models\building_Shrine.xnb
+Content\Models\tree_TreeWillow.xnb
+Content\Models\tile_Dirt1.xnb
+Content\Models\tile_Dirt2.xnb
+Content\Models\tile_Grass.xnb
+Content\Models\tile_Grass2.xnb
+Content\Models\tile_GrassRock1.xnb
+Content\Models\tile_GrassRock2.xnb
+Content\Models\tile_GrassRock3.xnb
+Content\Models\tile_GrassWithDirt.xnb
+Content\Models\tile_LightGrass1.xnb
+Content\Models\tile_LightGrass2.xnb
+Content\Models\tile_OrangeGrass.xnb
+Content\Models\tile_Pond.xnb
+Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
+Content\Textures\tex_house_tent1+tent2+tent3+camp_0.xnb
+Content\Textures\tex_env_Foliage2.xnb
+Content\Textures\tex_env_Treetrunk1.xnb
+Content\Textures\tex_env_Treetrunk1_0.xnb
+Content\Textures\tex_env_Foliage2_0.xnb
+Content\Textures\tex_tile_Basic2.xnb
+Content\Textures\tex_Tile_BasicGrass1.xnb
+Content\Textures\tex_Tile_BasicGrass2.xnb
+Content\Textures\tex_Tile_BasicGrass3.xnb
+Content\Textures\tex_Tile_BasicGrass4.xnb
+Content\Textures\tex_tile_BasicGrass5.xnb
+Content\Textures\tex_tile_BasicGround1.xnb
+Content\Textures\tex_tile_BasicGround2.xnb
+Content\Textures\tex_Tile_BasicWithDirt1.xnb
+Content\Textures\tex_Tile_BasicWithDirt2.xnb
+Content\Textures\tex_Tile_BasicWithDirt3.xnb
+Content\Textures\tex_Tile_BasicWithDirt4.xnb
+Content\Textures\tex_Tile_BasicWithDirt4_test.xnb
+Content\Textures\tex_tile_BasicWithDirt5.xnb
+Content\Textures\tex_tile_BasicGround2_0.xnb
+Content\Textures\tex_tile_BasicGround1_0.xnb
+Content\Textures\tex_tile_Basic2_0.xnb
+Content\Textures\tex_Tile_BasicGrass2_0.xnb
+Content\Textures\tex_Tile_BasicWithDirt4_0.xnb
+Content\Textures\tex_Tile_BasicWithDirt2_0.xnb
+Content\Textures\tex_Tile_BasicWithDirt1_0.xnb
+Content\Textures\tex_tile_BasicWithDirt_0.xnb
+Content\Textures\tex_Tile_BasicGrass1_0.xnb
+Content\Textures\tex_Tile_BasicGrass3_0.xnb
+Content\Textures\tex_Tile_BasicGrass4_0.xnb
+Content\Textures\tex_Tile_Oasis_0.xnb
+Content\Textures\tex_char_GoblinShaman_Body.xnb
+Content\Textures\tex_char_GoblinShaman_Hair+Staff.xnb
+Content\Textures\tex_char_GoblinShaman_Body_0.xnb
+Content\Textures\tex_char_GoblinShaman_Hair+Staff_0.xnb
+Content\Models\char_Goblin_Villager.xnb
+Content\Textures\tex_char_GoblinVillager_Hair+Acc_0.xnb
+Content\Textures\tex_char_GoblinVillager_Body_0.xnb
+Content\final Menu\Button_Delete.xnb
+Content\final Menu\Button_AddSchool.xnb
+Content\final Menu\Button_AddSettlement.xnb
+Content\final Menu\Button_AddShaman.xnb
+Content\final Menu\Button_AddVIllager.xnb
+Content\final Menu\Button_AddVIllagerHover.xnb
+Content\final Menu\Button_AddShamanHover.xnb
+Content\final Menu\hoverSettlementInfo.xnb
+Content\final Menu\Button_AddSettlementHover.xnb

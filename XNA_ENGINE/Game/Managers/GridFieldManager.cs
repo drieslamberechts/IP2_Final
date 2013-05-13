@@ -75,9 +75,12 @@ namespace XNA_ENGINE.Game.Managers
              settlementTiles.Add(m_GridField[7, 2]);
              BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer, settlementTiles);
 
+            // TEST PLACEABLES
              m_UserPlayer.AddPlaceable(new Villager(m_GridField[0,0]));
              m_UserPlayer.AddPlaceable(new Army(m_GridField[1, 0]));
              m_UserPlayer.AddPlaceable(new Shaman(m_GridField[2, 0]));
+
+            m_PlayersList.ElementAt(1).AddPlaceable(new Army(m_GridField[15, 6]));
 
         }
 
@@ -480,6 +483,11 @@ namespace XNA_ENGINE.Game.Managers
         public Player UserPlayer
         {
             get { return m_UserPlayer; }
+        }
+
+        public Player AiPlayer
+        {
+            get { return m_PlayersList.ElementAt(1); }
         }
 
         public void NextSelectionMode()

@@ -38,10 +38,16 @@ namespace XNA_ENGINE.Game.Objects
         }
 
         // MOVE
-        public void Move()
+        public GridTile Move(GridTile currentTile, GridTile destinationTile)
         {
             Console.WriteLine("The army starts moving.");
             // Only move the selected army
+
+            /*if (currentTile.Row < destinationTile.Row)
+            {
+            }*/
+
+            return destinationTile;
         }
 
         // ATTACK
