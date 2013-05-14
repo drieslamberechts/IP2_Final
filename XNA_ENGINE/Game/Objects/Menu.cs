@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
 
@@ -68,17 +69,17 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectSplit;
 
         // tutorial variables
-        private Texture2D m_TexScreen1,
-                          m_TexScreen2,
-                          m_TexScreen3,
-                          m_TexScreen4,
-                          m_TexScreen5,
-                          m_TexScreen6,
-                          m_TexScreen7,
-                          m_TexScreen8,
-                          m_TexScreen9,
-                          m_TexScreen10,
-                          m_TexScreen11;
+        private readonly Texture2D m_TexScreen1,
+                                    m_TexScreen2,
+                                    m_TexScreen3,
+                                    m_TexScreen4,
+                                    m_TexScreen5,
+                                    m_TexScreen6,
+                                    m_TexScreen7,
+                                    m_TexScreen8,
+                                    m_TexScreen9,
+                                    m_TexScreen10,
+                                    m_TexScreen11;
 
         private Rectangle m_RectScreen1,
                           m_RectScreen2,
@@ -137,15 +138,6 @@ namespace XNA_ENGINE.Game.Objects
         private ModeSelected m_SelectedMode = ModeSelected.None;
         private GridTile.TileType m_TileTypeSelected = GridTile.TileType.NormalGrass;
         private SpriteFont m_DebugFont;
-
-        private const int COSTOFWOOD_SETTLEMENT = 20;
-        private const int COSTOFWOOD_SCHOOL = 30;
-        private const int COSTOFWOOD_SHRINE = 50;
-        private const int COSTOFINFLUENCE_SETTLEMENT = 0;
-        private const int COSTOFINFLUENCE_SCHOOL = 0;
-        private const int COSTOFINFLUENCE_SHRINE = 0;
-        private const int COSTOFWOOD_TILE1 = 0;
-        private const int COSTOFINFLUENCE_TILE1 = 20;
 
         // HOVERING
         private bool m_bShowVillagerHover,
@@ -301,8 +293,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
                     {
                         // DELETE ITEM THAT WILL BE SELECTED
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SETTLEMENT);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         return true;
                     }
@@ -315,8 +307,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
                     {
                         // SET DECREASE RESOURCES
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SCHOOL);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SCHOOL);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SCHOOL);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SCHOOL);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSchool;
                         return true;
@@ -325,8 +317,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
                     {
                         // SET DECREASE RESOURCES
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SETTLEMENT);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSettlement;
                         return true;
@@ -335,8 +327,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
                     {
                         // SET DECREASE RESOURCES
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SHRINE);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SHRINE);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SHRINE);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SHRINE);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildShrine;
                         return true;
@@ -366,8 +358,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuildTile))
                     {
                         Console.WriteLine("Create Tile 1");
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_TILE1);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_TILE1);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_TILE1);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_TILE1);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildTile1;
 
@@ -409,10 +401,10 @@ namespace XNA_ENGINE.Game.Objects
                             Console.WriteLine("Build Villager");
                         }
 
-                        if (Menu.GetInstance().m_Enable3)
+                        if (m_Enable3)
                         {
-                            Menu.GetInstance().m_Enable3 = false;
-                            Menu.GetInstance().m_Enable4 = true;
+                            m_Enable3 = false;
+                            m_Enable4 = true;
                         }
 
                         return true;
@@ -452,27 +444,27 @@ namespace XNA_ENGINE.Game.Objects
                 if (m_Enable1)
                     m_RectScreen1 = new Rectangle(5, 5, m_TexScreen1.Width/2, m_TexScreen1.Height/2);
                 if (m_Enable2)
-                    m_RectScreen2 = new Rectangle(5, 5, m_TexScreen2.Width / 2, m_TexScreen2.Height / 2);
+                    m_RectScreen2 = new Rectangle(5, 5, m_TexScreen2.Width/2, m_TexScreen2.Height/2);
                 if (m_Enable3)
-                    m_RectScreen3 = new Rectangle(5, 5, m_TexScreen3.Width / 2, m_TexScreen3.Height / 2);
+                    m_RectScreen3 = new Rectangle(5, 5, m_TexScreen3.Width/2, m_TexScreen3.Height/2);
                 if (m_Enable4)
-                    m_RectScreen4 = new Rectangle(5, 5, m_TexScreen4.Width / 2, m_TexScreen4.Height / 2);
+                    m_RectScreen4 = new Rectangle(5, 5, m_TexScreen4.Width/2, m_TexScreen4.Height/2);
                 if (m_Enable5)
-                    m_RectScreen5 = new Rectangle(5, 5, m_TexScreen5.Width / 2, m_TexScreen5.Height / 2);
+                    m_RectScreen5 = new Rectangle(5, 5, m_TexScreen5.Width/2, m_TexScreen5.Height/2);
                 if (m_Enable6)
-                    m_RectScreen6 = new Rectangle(5, 5, m_TexScreen6.Width / 2, m_TexScreen6.Height / 2);
+                    m_RectScreen6 = new Rectangle(5, 5, m_TexScreen6.Width/2, m_TexScreen6.Height/2);
                 if (m_Enable7)
-                    m_RectScreen7 = new Rectangle(5, 5, m_TexScreen7.Width / 2, m_TexScreen7.Height / 2);
+                    m_RectScreen7 = new Rectangle(5, 5, m_TexScreen7.Width/2, m_TexScreen7.Height/2);
                 if (m_Enable8)
-                    m_RectScreen8 = new Rectangle(5, 5, m_TexScreen8.Width / 2, m_TexScreen8.Height / 2);
+                    m_RectScreen8 = new Rectangle(5, 5, m_TexScreen8.Width/2, m_TexScreen8.Height/2);
                 if (m_Enable9)
-                    m_RectScreen9 = new Rectangle(5, 5, m_TexScreen9.Width / 2, m_TexScreen9.Height / 2);
+                    m_RectScreen9 = new Rectangle(5, 5, m_TexScreen9.Width/2, m_TexScreen9.Height/2);
                 if (m_Enable10)
-                    m_RectScreen10 = new Rectangle(5, 5, m_TexScreen10.Width / 2, m_TexScreen10.Height / 2);
+                    m_RectScreen10 = new Rectangle(5, 5, m_TexScreen10.Width/2, m_TexScreen10.Height/2);
                 if (m_Enable11)
-                    m_RectScreen11 = new Rectangle(5, 5, m_TexScreen11.Width / 2, m_TexScreen11.Height / 2);
+                    m_RectScreen11 = new Rectangle(5, 5, m_TexScreen11.Width/2, m_TexScreen11.Height/2);
             }
-            // fullscreen
+                // fullscreen
             else
             {
                 if (m_Enable1)
@@ -498,97 +490,157 @@ namespace XNA_ENGINE.Game.Objects
                 if (m_Enable11)
                     m_RectScreen11 = new Rectangle(10, 10, m_TexScreen11.Width, m_TexScreen11.Height);
             }
-            
+
             // ------------------------------------------
             // WINDOWED
             // ------------------------------------------
             if (renderContext.GraphicsDevice.Viewport.Height < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
             {
                 // MENU ONDERKANT RECTANGLES
-                m_RectMenuBackground = new Rectangle(0, renderContext.GraphicsDevice.Viewport.Height - m_TexMenuBackground.Height / 2, m_TexMenuBackground.Width / 2, m_TexMenuBackground.Height / 2);
+                m_RectMenuBackground = new Rectangle(0,
+                                                     renderContext.GraphicsDevice.Viewport.Height -
+                                                     m_TexMenuBackground.Height/2, m_TexMenuBackground.Width/2,
+                                                     m_TexMenuBackground.Height/2);
 
                 // RESOURCE STATS RECTANGLES
-                m_RectWoodResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 - m_TexWoodResource.Width / 2, 5, m_TexWoodResource.Width / 2, m_TexWoodResource.Height / 2);
+                m_RectWoodResource =
+                    new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 - m_TexWoodResource.Width/2, 5,
+                                  m_TexWoodResource.Width/2, m_TexWoodResource.Height/2);
 
-                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 + 10, 5, m_TexInfluenceResource.Width / 2, m_TexInfluenceResource.Height / 2);
+                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 + 10, 5,
+                                                        m_TexInfluenceResource.Width/2, m_TexInfluenceResource.Height/2);
 
                 // CHARACTER STATS RECTANGLES
-                m_RectCharacterStats = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2, 0, m_TexCharacterStats.Width/2, m_TexCharacterStats.Height/2);
+                m_RectCharacterStats =
+                    new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2, 0,
+                                  m_TexCharacterStats.Width/2, m_TexCharacterStats.Height/2);
 
-                m_RectUnitList = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width / 2 + 10, 10, m_TexUnitList.Width/2, m_TexUnitList.Height/2);
+                m_RectUnitList =
+                    new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2 + 10, 10,
+                                  m_TexUnitList.Width/2, m_TexUnitList.Height/2);
 
                 // ICONS
-                m_RectDelete = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height + 45, m_TexDelete.Width / 2, m_TexDelete.Height / 2);
+                m_RectDelete = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height + 45,
+                                             m_TexDelete.Width/2, m_TexDelete.Height/2);
 
-                m_RectDeleteHover = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDeleteHover.Height + 45, m_TexDeleteHover.Width / 2, m_TexDeleteHover.Height / 2);
+                m_RectDeleteHover = new Rectangle(10,
+                                                  renderContext.GraphicsDevice.Viewport.Height - m_TexDeleteHover.Height +
+                                                  45, m_TexDeleteHover.Width/2, m_TexDeleteHover.Height/2);
 
-                m_RectVillager = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height + 45, m_TexDelete.Width / 2, m_TexDelete.Height / 2);
+                m_RectVillager = new Rectangle(10,
+                                               renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height + 45,
+                                               m_TexDelete.Width/2, m_TexDelete.Height/2);
 
-                m_RectShaman = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexShaman.Height + 45, m_TexShaman.Width / 2, m_TexShaman.Height / 2);
+                m_RectShaman = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexShaman.Height + 45,
+                                             m_TexShaman.Width/2, m_TexShaman.Height/2);
 
-                m_RectSchool = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45, m_TexSchool.Width / 2, m_TexSchool.Height / 2);
+                m_RectSchool = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45,
+                                             m_TexSchool.Width/2, m_TexSchool.Height/2);
 
-                m_RectSchoolHover = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45, m_TexSchool.Width / 2, m_TexSchool.Height / 2);
+                m_RectSchoolHover = new Rectangle(10,
+                                                  renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45,
+                                                  m_TexSchool.Width/2, m_TexSchool.Height/2);
 
-                m_RectSchoolInfo = new Rectangle(m_RectSchoolInfo.X, m_RectDelete.Y - m_TexSchoolInfo.Height / 2 - 10, m_TexSchoolInfo.Width / 2, m_TexSchoolInfo.Height / 2);
+                m_RectSchoolInfo = new Rectangle(m_RectSchoolInfo.X, m_RectDelete.Y - m_TexSchoolInfo.Height/2 - 10,
+                                                 m_TexSchoolInfo.Width/2, m_TexSchoolInfo.Height/2);
 
-                m_RectShrine = new Rectangle(10 * 2 + m_TexSchool.Width / 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height + 45, m_TexShrine.Width / 2, m_TexShrine.Height / 2);
+                m_RectShrine = new Rectangle(10*2 + m_TexSchool.Width/2,
+                                             renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height + 45,
+                                             m_TexShrine.Width/2, m_TexShrine.Height/2);
 
-                m_RectSettlement = new Rectangle(10 * 3 + m_TexSchool.Width, renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height + 45, m_TexSettlement.Width / 2, m_TexSettlement.Height / 2);
+                m_RectSettlement = new Rectangle(10*3 + m_TexSchool.Width,
+                                                 renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height +
+                                                 45, m_TexSettlement.Width/2, m_TexSettlement.Height/2);
 
-                m_RectSplit = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSplit.Height + 45, m_TexSplit.Width / 2, m_TexSplit.Height / 2);
+                m_RectSplit = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSplit.Height + 45,
+                                            m_TexSplit.Width/2, m_TexSplit.Height/2);
 
                 // HOVERING
-                m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height / 2 - 10, m_TexHoverVillager.Width / 2, m_TexHoverVillager.Height / 2);
+                m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10,
+                                                    m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
 
-                m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height / 2 - 10, m_TexHoverVillager.Width / 2, m_TexHoverVillager.Height / 2);
+                m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10,
+                                                     m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
 
             }
-            // ------------------------------------------
-            // FULLSCREEN
-            // ------------------------------------------
+                // ------------------------------------------
+                // FULLSCREEN
+                // ------------------------------------------
             else
             {
                 // MENU ONDERKANT RECTANGLES
-                m_RectMenuBackground = new Rectangle(0, renderContext.GraphicsDevice.Viewport.Height - m_TexMenuBackground.Height, m_TexMenuBackground.Width, m_TexMenuBackground.Height);
+                m_RectMenuBackground = new Rectangle(0,
+                                                     renderContext.GraphicsDevice.Viewport.Height -
+                                                     m_TexMenuBackground.Height, m_TexMenuBackground.Width,
+                                                     m_TexMenuBackground.Height);
 
                 // RESOURCE STATS RECTANGLES
-                m_RectWoodResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 - m_TexWoodResource.Width, 5, m_TexWoodResource.Width, m_TexWoodResource.Height);
+                m_RectWoodResource =
+                    new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 - m_TexWoodResource.Width, 5,
+                                  m_TexWoodResource.Width, m_TexWoodResource.Height);
 
-                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 + 10, 5, m_TexInfluenceResource.Width, m_TexInfluenceResource.Height);
+                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 + 10, 5,
+                                                        m_TexInfluenceResource.Width, m_TexInfluenceResource.Height);
 
                 // CHARACTER STATS RECTANGLES
-                m_RectCharacterStats = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width, 0, m_TexCharacterStats.Width, m_TexCharacterStats.Height);
+                m_RectCharacterStats =
+                    new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width, 0,
+                                  m_TexCharacterStats.Width, m_TexCharacterStats.Height);
 
-                m_RectUnitList = new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width + 20, 20, m_TexUnitList.Width, m_TexUnitList.Height);
+                m_RectUnitList =
+                    new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width + 20, 20,
+                                  m_TexUnitList.Width, m_TexUnitList.Height);
 
                 // ICONS
-                m_RectDelete = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20, m_TexDelete.Width, m_TexDelete.Height);
+                m_RectDelete = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20,
+                                             m_TexDelete.Width, m_TexDelete.Height);
 
-                m_RectDeleteHover = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20, m_TexDelete.Width, m_TexDelete.Height);
+                m_RectDeleteHover = new Rectangle(10,
+                                                  renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20,
+                                                  m_TexDelete.Width, m_TexDelete.Height);
 
-                m_RectVillager = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20, m_TexDelete.Width, m_TexDelete.Height);
+                m_RectVillager = new Rectangle(10,
+                                               renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20,
+                                               m_TexDelete.Width, m_TexDelete.Height);
 
-                m_RectShaman = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexShaman.Height - 20, m_TexShaman.Width, m_TexShaman.Height);
+                m_RectShaman = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexShaman.Height - 20,
+                                             m_TexShaman.Width, m_TexShaman.Height);
 
-                m_RectSettlement = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height - 20, m_TexSettlement.Width, m_TexSettlement.Height);
+                m_RectSettlement = new Rectangle(10,
+                                                 renderContext.GraphicsDevice.Viewport.Height - m_TexSettlement.Height -
+                                                 20, m_TexSettlement.Width, m_TexSettlement.Height);
 
-                m_RectSchool = new Rectangle(10 + m_TexSchoolHover.Width + 4, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20, m_TexSchool.Width, m_TexSchool.Height);
+                m_RectSchool = new Rectangle(10 + m_TexSchoolHover.Width + 4,
+                                             renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20,
+                                             m_TexSchool.Width, m_TexSchool.Height);
 
-                m_RectSchoolHover = new Rectangle(10 + m_TexSchoolHover.Width + 4, renderContext.GraphicsDevice.Viewport.Height - m_TexSchoolHover.Height - 17, m_TexSchoolHover.Width, m_TexSchoolHover.Height);
+                m_RectSchoolHover = new Rectangle(10 + m_TexSchoolHover.Width + 4,
+                                                  renderContext.GraphicsDevice.Viewport.Height - m_TexSchoolHover.Height -
+                                                  17, m_TexSchoolHover.Width, m_TexSchoolHover.Height);
 
-                m_RectShrine = new Rectangle(10 * 3 + m_TexShrine.Width * 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height - 20, m_TexShrine.Width, m_TexShrine.Height);
+                m_RectShrine = new Rectangle(10*3 + m_TexShrine.Width*2,
+                                             renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height - 20,
+                                             m_TexShrine.Width, m_TexShrine.Height);
+
+                m_RectBuildTile = new Rectangle(10,
+                                                renderContext.GraphicsDevice.Viewport.Height - m_TexBuildTile.Height -
+                                                20, m_TexBuildTile.Width, m_TexBuildTile.Height);
 
                 // HOVERING
-                m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20, m_TexHoverVillager.Width, m_TexHoverVillager.Height);
+                m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20,
+                                                    m_TexHoverVillager.Width, m_TexHoverVillager.Height);
 
-                m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20, m_TexHoverVillager.Width, m_TexHoverVillager.Height);
+                m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20,
+                                                     m_TexHoverVillager.Width, m_TexHoverVillager.Height);
 
-                m_RectSchoolInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexSchoolInfo.Height - 20, m_TexSchoolInfo.Width, m_TexSchoolInfo.Height);
+                m_RectSchoolInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexSchoolInfo.Height - 20,
+                                                 m_TexSchoolInfo.Width, m_TexSchoolInfo.Height);
 
-                m_RectShamanInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShamanInfo.Height - 20, m_TexShamanInfo.Width, m_TexShamanInfo.Height);
+                m_RectShamanInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShamanInfo.Height - 20,
+                                                 m_TexShamanInfo.Width, m_TexShamanInfo.Height);
 
-                m_RectShrineInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShrineInfo.Height - 20, m_TexShrineInfo.Width, m_TexShrineInfo.Height);
+                m_RectShrineInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShrineInfo.Height - 20,
+                                                 m_TexShrineInfo.Width, m_TexShrineInfo.Height);
             }
 
             // MENU ONDERKANT DRAW
@@ -596,16 +648,16 @@ namespace XNA_ENGINE.Game.Objects
 
             switch (m_SubMenuSelected)
             {
-                // --------------------------------------------
-                // BASE MODE
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // BASE MODE
+                    // --------------------------------------------
                 case SubMenuSelected.BaseMode:
                     renderContext.SpriteBatch.Draw(m_TexDelete, m_RectDelete, Color.White);
                     break;
 
-                // --------------------------------------------
-                // VILLAGER MODE
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // VILLAGER MODE
+                    // --------------------------------------------
                 case SubMenuSelected.VillagerMode:
                     if (m_bShowSettlementHover)
                     {
@@ -632,23 +684,23 @@ namespace XNA_ENGINE.Game.Objects
                         renderContext.SpriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
                     break;
 
-                // --------------------------------------------
-                // SHAMAN MODE
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // SHAMAN MODE
+                    // --------------------------------------------
                 case SubMenuSelected.ShamanMode:
-                    m_RectBuildTile = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexBuildTile.Width, m_TexBuildTile.Height);
+                    renderContext.SpriteBatch.Draw(m_TexBuildTile, m_RectBuildTile, Color.White);
                     break;
 
-                // --------------------------------------------
-                // SOLDIER MODE
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // SOLDIER MODE
+                    // --------------------------------------------
                 case SubMenuSelected.SoldierMode:
                     // Do nothing
                     break;
 
-                // --------------------------------------------
-                // SHRINE MODE
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // SHRINE MODE
+                    // --------------------------------------------
                 case SubMenuSelected.ShrineMode:
                     if (m_bShowShamanHover)
                     {
@@ -658,9 +710,9 @@ namespace XNA_ENGINE.Game.Objects
                     else
                         renderContext.SpriteBatch.Draw(m_TexShaman, m_RectShaman, Color.White);
                     break;
-                // --------------------------------------------
-                // SETTLEMENT MODE
-                // --------------------------------------------
+                    // --------------------------------------------
+                    // SETTLEMENT MODE
+                    // --------------------------------------------
                 case SubMenuSelected.SettlementMode:
                     // HOVERING
                     if (m_bShowVillagerHover)
@@ -673,7 +725,7 @@ namespace XNA_ENGINE.Game.Objects
                     break;
 
                 case SubMenuSelected.SchoolMode:
-                    
+
                     break;
             }
 
@@ -705,13 +757,13 @@ namespace XNA_ENGINE.Game.Objects
             // resources
             if (renderContext.GraphicsDevice.Viewport.Height < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
             {
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 45, 8), Color.White);
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 + 90, 8), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width/2 - 45, 8), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width/2 + 90, 8), Color.White);
             }
             else
             {
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 90, 20), Color.White);
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 + 180, 20), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(0), new Vector2(renderContext.GraphicsDevice.Viewport.Width/2 - 90, 20), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetResources().GetAllResources().ElementAt(1), new Vector2(renderContext.GraphicsDevice.Viewport.Width/2 + 180, 20), Color.White);
             }
 
             // RESOURCE STATS
@@ -722,8 +774,19 @@ namespace XNA_ENGINE.Game.Objects
             renderContext.SpriteBatch.Draw(m_TexCharacterStats, m_RectCharacterStats, Color.White);
             renderContext.SpriteBatch.Draw(m_TexUnitList, m_RectUnitList, Color.White);
 
-            // ARMY STATS
-            // renderContext.SpriteBatch.DrawString(m_DebugFont, "Army Size: " + m_Player.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width / 2 - 25, 10), Color.White);
+            // COUNT STATS
+            if (renderContext.GraphicsDevice.Viewport.Height < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+            {
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + GridFieldManager.GetInstance().UserPlayer.GetVillagerCount(), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 50, 25), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + GridFieldManager.GetInstance().UserPlayer.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 50, 65), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + GridFieldManager.GetInstance().UserPlayer.GetShamanCount(), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 50, 105), Color.White);
+            }
+            else
+            {
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + GridFieldManager.GetInstance().UserPlayer.GetVillagerCount(), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 50), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + GridFieldManager.GetInstance().UserPlayer.GetArmySize(), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 130), Color.White);
+                renderContext.SpriteBatch.DrawString(m_DebugFont, "" + GridFieldManager.GetInstance().UserPlayer.GetShamanCount(), new Vector2(renderContext.GraphicsDevice.Viewport.Width - 100, 210), Color.White);
+            }
         }
 
         private bool CheckHitButton(Vector2 mousePos, Rectangle buttonRect)

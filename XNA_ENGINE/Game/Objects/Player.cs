@@ -148,9 +148,41 @@ namespace XNA_ENGINE.Game.Objects
 
         public int GetArmySize()
         {
+            var count = 0;
+            for (int t = 0; t < m_OwnedPlaceablesList.Count; ++t)
+            {
+                if (m_OwnedPlaceablesList.ElementAt(t).PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                    count++;
+            }
+            m_ArmyCount = count;
+
             return m_ArmyCount;
         }
 
+        public int GetVillagerCount()
+        {
+            var count = 0;
+            for (int t = 0; t < m_OwnedPlaceablesList.Count; ++t)
+            {
+                if (m_OwnedPlaceablesList.ElementAt(t).PlaceableTypeMeth == Placeable.PlaceableType.Villager)
+                    count++;
+            }
+
+            return count;
+        }
+
+        public int GetShamanCount()
+        {
+            var count = 0;
+            for (int t = 0; t < m_OwnedPlaceablesList.Count; ++t)
+            {
+                if (m_OwnedPlaceablesList.ElementAt(t).PlaceableTypeMeth == Placeable.PlaceableType.Shaman)
+                    count++;
+            }
+
+            return count;
+        }
+        
         public bool GetAttack()
         {
            return m_Ai.GetAttack();
