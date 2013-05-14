@@ -51,6 +51,9 @@ namespace XNA_ENGINE.Game.Scenes
         private int m_FrameCounter;
         private int m_Fps;
 
+        private const float PATROLINTERVAL = 2;
+        private float m_ArmyPatrolTimer = 0;
+
         private bool m_DrawDebug = true;
 
 
@@ -152,29 +155,42 @@ namespace XNA_ENGINE.Game.Scenes
             GridFieldManager.GetInstance().Update(renderContext);
 
             // MOVE ENEMY ARMY
-            // move 1
-            GridFieldManager.GetInstance()
-                            .AiPlayer.GetOwnedList()
-                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
-                            .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 10]);
+            m_ArmyPatrolTimer += renderContext.GameTime.ElapsedGameTime.Milliseconds/1000.0f;
+            int spot = (int)((m_ArmyPatrolTimer % (4 * PATROLINTERVAL)) / PATROLINTERVAL);
+            switch (spot)
+            {
+                case 0:
+                    // move 1
+                    GridFieldManager.GetInstance()
+                                    .AiPlayer.GetOwnedList()
+                                    .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                                    .SetTargetTile(GridFieldManager.GetInstance().GridField[12, 12]);
+                    break;
+                case 1:
+                    // move 2
+                    GridFieldManager.GetInstance()
+                                    .AiPlayer.GetOwnedList()
+                                    .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                                    .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 12]);
 
-            // move 2
-            GridFieldManager.GetInstance()
-                            .AiPlayer.GetOwnedList()
-                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
-                            .SetTargetTile(GridFieldManager.GetInstance().GridField[20, 10]);
+                    break;
+                case 2:
+                    // move 3
+                    GridFieldManager.GetInstance()
+                                    .AiPlayer.GetOwnedList()
+                                    .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                                    .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 15]);
 
-            // move 3
-            GridFieldManager.GetInstance()
-                            .AiPlayer.GetOwnedList()
-                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
-                            .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 10]);
+                    break;
+                case 3:
+                    // move 4
+                    GridFieldManager.GetInstance()
+                                    .AiPlayer.GetOwnedList()
+                                    .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
+                                    .SetTargetTile(GridFieldManager.GetInstance().GridField[12, 15]);
+                    break;
 
-            // move 4
-            GridFieldManager.GetInstance()
-                            .AiPlayer.GetOwnedList()
-                            .Find(x => x.GetOwner() == GridFieldManager.GetInstance().AiPlayer)
-                            .SetTargetTile(GridFieldManager.GetInstance().GridField[15, 6]);
+            }
 
 
             base.Update(renderContext);

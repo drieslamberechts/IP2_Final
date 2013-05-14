@@ -7,6 +7,7 @@ using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
 
 using XNA_ENGINE.Engine.Helpers;
+using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Objects;
 
 namespace XNA_ENGINE.Game.Scenes
@@ -66,7 +67,7 @@ namespace XNA_ENGINE.Game.Scenes
 
             var rightClick = new InputAction((int)PlayerInput.RightClick, TriggerState.Pressed);
 
-            rightClick.MouseButton = MouseButtons.RightButton;
+            rightClick.MouseButton = MouseButtons.LeftButton;
             m_InputManager.MapAction(rightClick);
 
             // Throw Dice
@@ -95,7 +96,7 @@ namespace XNA_ENGINE.Game.Scenes
             // Exit Attack scene
             if (m_InputManager.IsActionTriggered((int) PlayerInput.RightClick))
             {
-                SceneManager.SetActiveScene("FinalScene");
+                SceneManager.SetActiveScene("PlayScene");
             }
 
             base.Update(renderContext);
@@ -141,7 +142,7 @@ namespace XNA_ENGINE.Game.Scenes
         // Throws Dice for both the Attackers as Defenders
         private void ThrowDice()
         {
-            var random = new Random();
+            var random = GridFieldManager.GetInstance().Random;
 
             for (var t = 0; t < m_Attacker.ArmySize; ++t)
             {
@@ -168,6 +169,7 @@ namespace XNA_ENGINE.Game.Scenes
         private void EndAttack()
         {
             m_bEnd = true;
+            SceneManager.RemoveGameScene(this);
             //SceneManager.SetActiveScene("FinalScene");
         }
 

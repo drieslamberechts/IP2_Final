@@ -95,9 +95,10 @@ namespace XNA_ENGINE.Game.Objects
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
                 Placeable permaSelected = GridFieldManager.GetInstance().GetPermanentSelected();
-                if (permaSelected.PlaceableTypeMeth == PlaceableType.Villager)
+                if (permaSelected != null && permaSelected.PlaceableTypeMeth == PlaceableType.Villager)
                 {
                     permaSelected.GetOwner().RemovePlaceable(permaSelected);
+                    m_Owner.GetResources().DecreaseWood(20);
                     QueueSoldier();
                 }
             }
