@@ -117,7 +117,8 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void SetTargetTile(GridTile targetTile)
         {
-            m_TargetTile = targetTile;
+            if (targetTile.IsWalkable())
+                m_TargetTile = targetTile;
         }
 
         public override GridTile GetTargetTile()

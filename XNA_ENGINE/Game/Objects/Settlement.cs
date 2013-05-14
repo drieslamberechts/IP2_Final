@@ -31,6 +31,7 @@ namespace XNA_ENGINE.Game.Objects
             foreach (var gridTile in tileList)
             {
                 gridTile.SetIsUsedByStructure(true);
+                gridTile.LevelOut(0,2);
                 m_LinkedTileList.Add(gridTile);
             }
                 
@@ -143,7 +144,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public bool PlaceRallyPoint(GridTile gridTile)
         {
-            if (gridTile.IsOpen())
+            if (gridTile.IsOpen() && gridTile.GetIsUsedByStructure() == false)
             {
                 m_RallyPointTile = gridTile;
                 m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);

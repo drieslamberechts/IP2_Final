@@ -28,8 +28,11 @@ namespace XNA_ENGINE.Game.Objects
             m_LinkedTileList = new List<GridTile>();
 
             foreach (var gridTile in tileList)
+            {
+                gridTile.SetIsUsedByStructure(true);
+                gridTile.LevelOut(0, 2);
                 m_LinkedTileList.Add(gridTile);
-
+            }
             m_RallyPointTile = tileList.ElementAt(0);
 
             m_Model = new GameModelGrid("Models/building_Shrine");
@@ -96,6 +99,32 @@ namespace XNA_ENGINE.Game.Objects
             base.OnSelected();
         }
 
+        //Code to execute on Permanently selected
+        public override void OnPermanentSelected()
+        {
+            //Get the inputmanager
+            var inputManager = PlayScene.GetInputManager();
+            var gridFieldManager = GridFieldManager.GetInstance();
+            m_Rallypoint.CanDraw = true;
+
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShrineMode;
+
+            GridTile selectedTile;
+            if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
+                selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
+            else
+                selectedTile = null;
+
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+                if (selectedTile != null)
+                    PlaceRallyPoint(selectedTile);
+            }
+
+            base.OnPermanentSelected();
+        }
+
         private void SearchForDefaultRallyPointSpot()
         {
             List<GridTile> totalSurroundingTiles = new List<GridTile>();
@@ -128,25 +157,13 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             foreach (var surroundingTile in totalSurroundingTiles)
-            {
                 if (PlaceRallyPoint(surroundingTile))
                     return;
-            }
-        }
-
-        //Code to execute on Permanently selected
-        public override void OnPermanentSelected()
-        {
-            //Get the inputmanager
-            var inputManager = PlayScene.GetInputManager();
-            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShrineMode;
-
-            base.OnPermanentSelected();
         }
 
         public bool PlaceRallyPoint(GridTile gridTile)
         {
-            if (gridTile.IsOpen())
+            if (gridTile.IsOpen() && gridTile.GetIsUsedByStructure() == false)
             {
                 m_RallyPointTile = gridTile;
                 m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);

@@ -345,10 +345,10 @@ namespace XNA_ENGINE.Game.Objects
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildTile1;
 
-                        if (Menu.GetInstance().m_Enable10)
+                        if (m_Enable10)
                         {
-                            Menu.GetInstance().m_Enable10 = false;
-                            Menu.GetInstance().m_Enable11 = true;
+                            m_Enable10 = false;
+                            m_Enable11 = true;
                         }
                         return true;
                     }
