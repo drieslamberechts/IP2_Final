@@ -281,15 +281,7 @@ namespace XNA_ENGINE.Game.Objects
             }
             else m_bShowSettlementHover = false;
 
-            /*
-            {
-                if (m_SubMenuSelected == SubMenuSelected.MoveMode) m_SubMenuSelected = SubMenuSelected.VillagerMode;
-                else m_SubMenuSelected = SubMenuSelected.MoveMode;
-                return true;
-            }
-            */
-            // --------------------------------------------
-            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
+            //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
             switch (m_SubMenuSelected)
             {
 
@@ -348,6 +340,7 @@ namespace XNA_ENGINE.Game.Objects
                         if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                         {
                             Console.WriteLine("Build Shaman");
+                            // Actually build Shaman
                         }
                         return true;
                     }
@@ -413,11 +406,19 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
                     break;
+
+                // --------------------------------------------
+                // SCHOOL MODE
+                // --------------------------------------------
+                case SubMenuSelected.SchoolMode:
+                    // do nothing
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (inputManager.GetAction((int) PlayScene.PlayerInput.LeftClick).IsTriggered &&
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered &&
                 CheckHitButton(mousePos, m_RectScreen11) && m_Enable11)
             {
                 m_Enable11 = false;
@@ -486,7 +487,6 @@ namespace XNA_ENGINE.Game.Objects
                 if (m_Enable11)
                     m_RectScreen11 = new Rectangle(10, 10, m_TexScreen11.Width, m_TexScreen11.Height);
             }
-
             
             // ------------------------------------------
             // WINDOWED
@@ -610,7 +610,7 @@ namespace XNA_ENGINE.Game.Objects
                                                            m_TexSettlement.Width,
                                                            m_TexSettlement.Height);
 
-                m_RectSchool = new Rectangle(10 + m_TexSettlement.Width + 10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20,
+                m_RectSchool = new Rectangle(10 + m_TexSchoolHover.Width + 4, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20,
                                                            m_TexSchool.Width,
                                                            m_TexSchool.Height);
 
