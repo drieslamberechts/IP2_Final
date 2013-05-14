@@ -20,6 +20,8 @@ namespace XNA_ENGINE.Game.TilePrefabs
         protected const int YOFFSETMIN = 0;
         protected const int YOFFSETMAX = 15;
 
+        protected int m_WoodCount = 0;
+
 
         public BasePrefab()
         {
@@ -44,6 +46,11 @@ namespace XNA_ENGINE.Game.TilePrefabs
         public List<GameModelGrid> PropList
         {
             get { return m_PropList; }
+        }
+
+        public int WoodCount
+        {
+            get { return m_WoodCount; }
         }
     }
 }

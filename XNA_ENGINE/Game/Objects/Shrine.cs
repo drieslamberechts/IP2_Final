@@ -183,6 +183,5 @@ namespace XNA_ENGINE.Game.Objects
             //Couldn't place the rallypoint
             return false;
         }
-
     }
 }

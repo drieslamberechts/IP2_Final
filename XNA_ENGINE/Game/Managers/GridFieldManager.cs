@@ -315,7 +315,7 @@ namespace XNA_ENGINE.Game.Managers
             placeable.Model.Selected = true;
         }
 
-        public void BuildPlaceable(Placeable.PlaceableType structureType, Player owner, List<GridTile> tileList = null)
+        public bool BuildPlaceable(Placeable.PlaceableType structureType, Player owner, List<GridTile> tileList = null)
         {
             List<GridTile> tileListToBuildOn  = new List<GridTile>();
 
@@ -323,6 +323,12 @@ namespace XNA_ENGINE.Game.Managers
                 tileListToBuildOn = tileList;
             else
                 tileListToBuildOn = GetSelectedTiles();
+
+            bool proceed = true;
+            foreach (GridTile gridTile in tileListToBuildOn)
+                if (gridTile.IsOpen() == false) proceed = false;
+
+            if (!proceed) return false;
 
             switch (structureType)
             {
@@ -345,7 +351,9 @@ namespace XNA_ENGINE.Game.Managers
                     throw new ArgumentOutOfRangeException("structureType");
             }
 
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
             Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.None);
+            return true;
         }
 
         public void AddPlayer(Player player)

@@ -88,27 +88,6 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(RenderContext renderContext)
         {
-            if (m_WoodCount > 0)
-            {
-               // m_Wood.DiffuseColor = new Vector3(0.36f, 0.25f, 0.20f);
-              //  m_Wood.CanDraw = true;
-            }
-            else
-            {
-               // m_Wood.DiffuseColor = new Vector3(0.36f, 0.25f, 0.20f);
-               // m_Wood.CanDraw = false;
-            }
-
-            //What to do if the tile is selected
-            /*if (m_Selected)
-            {
-                m_TileModel.Selected = true;
-            }
-            else
-            {
-                m_TileModel.Selected = false;
-            }*/
-
             if (m_YOffset != m_YOffsetTarget)
             {
                 float delta = m_YOffsetTarget - m_YOffset;
@@ -157,8 +136,11 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
                 {
-                    GridFieldManager.GetInstance().PermanentDeselect();
-                    Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
+                    if (Menu.GetInstance().GetSelectedMode() == Menu.ModeSelected.None)
+                    {
+                        GridFieldManager.GetInstance().PermanentDeselect();
+                        Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
+                    }
                 }
 
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
@@ -234,6 +216,7 @@ namespace XNA_ENGINE.Game.Objects
             else
                 m_Open = false;
 
+            m_WoodCount = tilePrefab.WoodCount;
             m_TileModel = tilePrefab.TileModel;
 
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_TileModel);
@@ -328,8 +311,10 @@ namespace XNA_ENGINE.Game.Objects
             if (pickup)
             {
                 player.GetResources().AddWood(m_WoodCount);
+
+                if (m_WoodCount > 0)
+                    SetType(TileType.NormalGrass);
                 m_WoodCount = 0;
-                //m_Wood.CanDraw = false;
 
                 return true;
             }
