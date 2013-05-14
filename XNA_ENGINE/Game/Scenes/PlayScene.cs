@@ -104,7 +104,9 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction toggleDebug = new InputAction((int)PlayerInput.ToggleDebug,TriggerState.Pressed);
 
             leftClick.MouseButton = MouseButtons.LeftButton;
+            leftClick.GamePadButton = Buttons.A;
             rightClick.MouseButton = MouseButtons.RightButton;
+            rightClick.GamePadButton = Buttons.B;
             leftHold.MouseButton = MouseButtons.LeftButton;
             scrollWheelDown.MouseButton = MouseButtons.MiddleButton;
             toggleCreativeMode.KeyButton = Keys.C;
@@ -230,9 +232,6 @@ namespace XNA_ENGINE.Game.Scenes
                     // TileType
                     relativeDrawPos += 20;
                     renderContext.SpriteBatch.DrawString(m_DebugFont, "B: Tiletype to build: " + Menu.GetInstance().TileTypeSelected, new Vector2(10, relativeDrawPos), Color.Red);
-           
-
-
 
                 /*
 

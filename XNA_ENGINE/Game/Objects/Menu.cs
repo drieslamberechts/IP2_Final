@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
 
@@ -68,17 +69,17 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectSplit;
 
         // tutorial variables
-        private Texture2D m_TexScreen1,
-                          m_TexScreen2,
-                          m_TexScreen3,
-                          m_TexScreen4,
-                          m_TexScreen5,
-                          m_TexScreen6,
-                          m_TexScreen7,
-                          m_TexScreen8,
-                          m_TexScreen9,
-                          m_TexScreen10,
-                          m_TexScreen11;
+        private readonly Texture2D m_TexScreen1,
+                                    m_TexScreen2,
+                                    m_TexScreen3,
+                                    m_TexScreen4,
+                                    m_TexScreen5,
+                                    m_TexScreen6,
+                                    m_TexScreen7,
+                                    m_TexScreen8,
+                                    m_TexScreen9,
+                                    m_TexScreen10,
+                                    m_TexScreen11;
 
         private Rectangle m_RectScreen1,
                           m_RectScreen2,
@@ -137,15 +138,6 @@ namespace XNA_ENGINE.Game.Objects
         private ModeSelected m_SelectedMode = ModeSelected.None;
         private GridTile.TileType m_TileTypeSelected = GridTile.TileType.NormalGrass;
         private SpriteFont m_DebugFont;
-
-        private const int COSTOFWOOD_SETTLEMENT = 20;
-        private const int COSTOFWOOD_SCHOOL = 30;
-        private const int COSTOFWOOD_SHRINE = 50;
-        private const int COSTOFINFLUENCE_SETTLEMENT = 0;
-        private const int COSTOFINFLUENCE_SCHOOL = 0;
-        private const int COSTOFINFLUENCE_SHRINE = 0;
-        private const int COSTOFWOOD_TILE1 = 0;
-        private const int COSTOFINFLUENCE_TILE1 = 20;
 
         // HOVERING
         private bool m_bShowVillagerHover,
@@ -301,8 +293,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
                     {
                         // DELETE ITEM THAT WILL BE SELECTED
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SETTLEMENT);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         return true;
                     }
@@ -315,8 +307,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
                     {
                         // SET DECREASE RESOURCES
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SCHOOL);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SCHOOL);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SCHOOL);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SCHOOL);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSchool;
                         return true;
@@ -325,8 +317,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
                     {
                         // SET DECREASE RESOURCES
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SETTLEMENT);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SETTLEMENT);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SETTLEMENT);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                         m_SelectedMode = ModeSelected.BuildSettlement;
                         return true;
@@ -335,8 +327,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
                     {
                         // SET DECREASE RESOURCES
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_SHRINE);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_SHRINE);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SHRINE);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SHRINE);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildShrine;
                         return true;
@@ -366,8 +358,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuildTile))
                     {
                         Console.WriteLine("Create Tile 1");
-                        userPlayer.GetResources().DecreaseWood(COSTOFWOOD_TILE1);
-                        userPlayer.GetResources().DecreaseInfluence(COSTOFINFLUENCE_TILE1);
+                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_TILE1);
+                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_TILE1);
                         GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
                         m_SelectedMode = ModeSelected.BuildTile1;
 
@@ -409,10 +401,10 @@ namespace XNA_ENGINE.Game.Objects
                             Console.WriteLine("Build Villager");
                         }
 
-                        if (Menu.GetInstance().m_Enable3)
+                        if (m_Enable3)
                         {
-                            Menu.GetInstance().m_Enable3 = false;
-                            Menu.GetInstance().m_Enable4 = true;
+                            m_Enable3 = false;
+                            m_Enable4 = true;
                         }
 
                         return true;

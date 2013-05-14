@@ -7,15 +7,15 @@ namespace XNA_ENGINE.Game.Helpers
 {
     class StandardCost
     {
-        private static int COSTOFWOOD_SETTLEMENT = 20;
-        private static int COSTOFWOOD_SCHOOL = 30;
-        private static int COSTOFWOOD_SHRINE = 50;
-        private static int COSTOFINFLUENCE_SETTLEMENT = 0;
-        private static int COSTOFINFLUENCE_SCHOOL = 0;
-        private static int COSTOFINFLUENCE_SHRINE = 0;
+        public static int COSTOFWOOD_SETTLEMENT = 20;
+        public static int COSTOFWOOD_SCHOOL = 30;
+        public static int COSTOFWOOD_SHRINE = 50;
+        public static int COSTOFINFLUENCE_SETTLEMENT = 0;
+        public static int COSTOFINFLUENCE_SCHOOL = 0;
+        public static int COSTOFINFLUENCE_SHRINE = 0;
 
-        private static int COSTOFWOOD_TILE1 = 0;
-        private static int COSTOFINFLUENCE_TILE1 = 20;
+        public static int COSTOFWOOD_TILE1 = 0;
+        public static int COSTOFINFLUENCE_TILE1 = 20;
 
         public StandardCost()
         {
