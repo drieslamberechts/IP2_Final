@@ -33,6 +33,9 @@ namespace XNA_ENGINE.Game.Scenes
         private static ContentManager m_Content;
         private static InputManager m_InputManager;
 
+        // Handle GamePad Input
+        private static GamePadState m_GamePadState;
+
         private SpriteFont m_DebugFont;
 
         private readonly Texture2D m_TexBackground;
@@ -73,6 +76,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            m_GamePadState = GamePad.GetState(PlayerIndex.One);
+
             // Initialize player and AI
             var userplayer = new Player(Player.PlayerColor.Blue);
             var enemyPlayer = new Player(Player.PlayerColor.Red);
@@ -277,12 +282,6 @@ namespace XNA_ENGINE.Game.Scenes
                 SceneManager.RemoveGameScene(this);
                 SceneManager.SetActiveScene("MainMenuScene");
             }
-            
-
-            
-
-            // Handle GamePad Input
-            var gamePadState = GamePad.GetState(PlayerIndex.One);
 
             //CAMERA
             #region Camera
@@ -299,16 +298,16 @@ namespace XNA_ENGINE.Game.Scenes
             rightVecCam.Normalize();
 
             //Gamepad
-            if (gamePadState.IsConnected)
+            if (m_GamePadState.IsConnected)
             {
-                if (gamePadState.ThumbSticks.Left.Y > 0)
-                    m_CameraTargetPos += -forwardVecCam * gamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
-                if (gamePadState.ThumbSticks.Left.X < 0)
-                    m_CameraTargetPos += rightVecCam * gamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
-                if (gamePadState.ThumbSticks.Left.Y < 0)
-                    m_CameraTargetPos += forwardVecCam * gamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
-                if (gamePadState.ThumbSticks.Left.X > 0)
-                    m_CameraTargetPos += -rightVecCam * gamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
+                if (m_GamePadState.ThumbSticks.Left.Y > 0)
+                    m_CameraTargetPos += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
+                if (m_GamePadState.ThumbSticks.Left.X < 0)
+                    m_CameraTargetPos += rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
+                if (m_GamePadState.ThumbSticks.Left.Y < 0)
+                    m_CameraTargetPos += forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
+                if (m_GamePadState.ThumbSticks.Left.X > 0)
+                    m_CameraTargetPos += -rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
             }
 
 
@@ -406,6 +405,13 @@ namespace XNA_ENGINE.Game.Scenes
 
             int mouseX = renderContext.Input.CurrentMouseState.X;
             int mouseY = renderContext.Input.CurrentMouseState.Y;
+
+            // Change selection if you're using a Controller
+            if (m_GamePadState.IsConnected)
+            {
+                mouseX = renderContext.GraphicsDevice.Viewport.Width / 2;
+                mouseY = renderContext.GraphicsDevice.Viewport.Height / 2;
+            }
 
             // create 2 positions in screenspace using the cursor position. 0 is as
             // close as possible to the camera, 1 is as far away as possible.

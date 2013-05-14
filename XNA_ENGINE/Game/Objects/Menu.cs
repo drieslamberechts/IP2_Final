@@ -579,6 +579,8 @@ namespace XNA_ENGINE.Game.Objects
 
                 m_RectShrine = new Rectangle(10 * 3 + m_TexShrine.Width * 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height - 20, m_TexShrine.Width, m_TexShrine.Height);
 
+                m_RectBuildTile = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexBuildTile.Height - 20, m_TexBuildTile.Width, m_TexBuildTile.Height);
+
                 // HOVERING
                 m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20, m_TexHoverVillager.Width, m_TexHoverVillager.Height);
 
@@ -636,7 +638,7 @@ namespace XNA_ENGINE.Game.Objects
                 // SHAMAN MODE
                 // --------------------------------------------
                 case SubMenuSelected.ShamanMode:
-                    m_RectBuildTile = new Rectangle(40, renderContext.GraphicsDevice.Viewport.Height - 80, m_TexBuildTile.Width, m_TexBuildTile.Height);
+                    renderContext.SpriteBatch.Draw(m_TexBuildTile, m_RectBuildTile, Color.White);
                     break;
 
                 // --------------------------------------------
