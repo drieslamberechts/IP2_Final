@@ -196,7 +196,7 @@ namespace XNA_ENGINE.Game.Objects
 
             // BUILDING ICONS
             m_TexSettlement = Content.Load<Texture2D>("final Menu/Button_AddSettlement");
-            m_TexSettlementHover = Content.Load<Texture2D>("final Menu/Button_AddSettlement");
+            m_TexSettlementHover = Content.Load<Texture2D>("final Menu/Button_AddSettlementHover");
             m_TexSchool = Content.Load<Texture2D>("final Menu/Button_AddSchool");
             m_TexSchoolHover = Content.Load<Texture2D>("final Menu/Button_AddSchoolHover");
             m_TexShrine = Content.Load<Texture2D>("final Menu/iconStandard");
