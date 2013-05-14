@@ -26,17 +26,21 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexWoodResource,
                                    m_TexInfluenceResource,
                                    m_TexDelete,
+                                   m_TexDeleteHover,
                                    m_TexCharacterStats,
                                    m_TexHoverVillager,
                                    m_TexVillager,
                                    m_TexVillagerHover,
                                    m_TexShaman,
                                    m_TexShamanHover,
+                                   m_TexShamanInfo,
                                    m_TexUnitList,
                                    m_TexSettlement,
                                    m_TexSettlementHover,
                                    m_TexSettlementInfo,
                                    m_TexSchool,
+                                   m_TexSchoolHover,
+                                   m_TexSchoolInfo,
                                    m_TexShrine,
                                    m_TexBuildTile,
                                    m_TexSplit;
@@ -45,14 +49,18 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectWoodResource,
                           m_RectInfluenceResource,
                           m_RectDelete,
+                          m_RectDeleteHover,
                           m_RectCharacterStats,
                           m_RectHoverVillager,
                           m_RectVillager,
                           m_RectShaman,
+                          m_RectShamanInfo,
                           m_RectUnitList,
                           m_RectSettlement,
                           m_RectSettlementInfo,
                           m_RectSchool,
+                          m_RectSchoolHover,
+                          m_RectSchoolInfo,
                           m_RectShrine,
                           m_RectBuildTile,
                           m_RectSplit;
@@ -140,7 +148,8 @@ namespace XNA_ENGINE.Game.Objects
         // HOVERING
         private bool m_bShowVillagerHover,
                      m_bShowSettlementHover,
-                     m_bShowShamanHover;
+                     m_bShowShamanHover,
+                     m_bShowSchoolHover;
 
         //Singleton implementation
         static public Menu GetInstance()
@@ -157,6 +166,7 @@ namespace XNA_ENGINE.Game.Objects
             m_bShowVillagerHover = false;
             m_bShowSettlementHover = false;
             m_bShowShamanHover = false;
+            m_bShowSchoolHover = false;
 
             // MENU ONDERKANT BACKGROUND
             m_TexMenuBackground = Content.Load<Texture2D>("final Menu/grootMenu_Onderkant");
@@ -171,6 +181,7 @@ namespace XNA_ENGINE.Game.Objects
 
             // ICONS
             m_TexDelete = Content.Load<Texture2D>("final Menu/Button_Delete");
+            m_TexDeleteHover = Content.Load<Texture2D>("final Menu/Button_DeleteHover");
             m_TexSplit = Content.Load<Texture2D>("final Menu/iconStandard");
             m_TexVillager = Content.Load<Texture2D>("final Menu/Button_AddVillager");
             m_TexShaman = Content.Load<Texture2D>("final Menu/Button_AddShaman");
@@ -178,13 +189,16 @@ namespace XNA_ENGINE.Game.Objects
             m_TexShamanHover = Content.Load<Texture2D>("final Menu/Button_AddShamanHover");
 
             // HOVERING
+            m_TexShamanInfo = Content.Load<Texture2D>("final Menu/hoverShaman");
             m_TexHoverVillager = Content.Load<Texture2D>("final Menu/hoverVillager");
             m_TexSettlementInfo = Content.Load<Texture2D>("final Menu/hoverSettlementInfo");
+            m_TexSchoolInfo = Content.Load<Texture2D>("final Menu/hoverSchool");
 
             // BUILDING ICONS
             m_TexSettlement = Content.Load<Texture2D>("final Menu/Button_AddSettlement");
             m_TexSettlementHover = Content.Load<Texture2D>("final Menu/Button_AddSettlement");
             m_TexSchool = Content.Load<Texture2D>("final Menu/Button_AddSchool");
+            m_TexSchoolHover = Content.Load<Texture2D>("final Menu/Button_AddSchoolHover");
             m_TexShrine = Content.Load<Texture2D>("final Menu/iconStandard");
 
             m_TexBuildTile = Content.Load<Texture2D>("final Menu/iconStandard");
@@ -253,6 +267,13 @@ namespace XNA_ENGINE.Game.Objects
             }
             else m_bShowShamanHover = false;
 
+            // HOVER SCHOOL BUTTON
+            if (CheckHitButton(mousePos, m_RectSchool) && m_SubMenuSelected == SubMenuSelected.VillagerMode)
+            {
+                m_bShowSchoolHover = true;
+            }
+            else m_bShowSchoolHover = false;
+
             // HOVER SETTLEMENT BUTTON
             if (CheckHitButton(mousePos, m_RectSettlement) && m_SubMenuSelected == SubMenuSelected.VillagerMode)
             {
@@ -260,15 +281,7 @@ namespace XNA_ENGINE.Game.Objects
             }
             else m_bShowSettlementHover = false;
 
-            /*
-            {
-                if (m_SubMenuSelected == SubMenuSelected.MoveMode) m_SubMenuSelected = SubMenuSelected.VillagerMode;
-                else m_SubMenuSelected = SubMenuSelected.MoveMode;
-                return true;
-            }
-            */
-            // --------------------------------------------
-            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
+            //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
             switch (m_SubMenuSelected)
             {
 
@@ -327,6 +340,7 @@ namespace XNA_ENGINE.Game.Objects
                         if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                         {
                             Console.WriteLine("Build Shaman");
+                            // Actually build Shaman
                         }
                         return true;
                     }
@@ -392,11 +406,19 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
                     break;
+
+                // --------------------------------------------
+                // SCHOOL MODE
+                // --------------------------------------------
+                case SubMenuSelected.SchoolMode:
+                    // do nothing
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (inputManager.GetAction((int) PlayScene.PlayerInput.LeftClick).IsTriggered &&
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered &&
                 CheckHitButton(mousePos, m_RectScreen11) && m_Enable11)
             {
                 m_Enable11 = false;
@@ -465,7 +487,6 @@ namespace XNA_ENGINE.Game.Objects
                 if (m_Enable11)
                     m_RectScreen11 = new Rectangle(10, 10, m_TexScreen11.Width, m_TexScreen11.Height);
             }
-
             
             // ------------------------------------------
             // WINDOWED
@@ -474,7 +495,7 @@ namespace XNA_ENGINE.Game.Objects
             {
                 // MENU ONDERKANT RECTANGLES
                 m_RectMenuBackground = new Rectangle(0, renderContext.GraphicsDevice.Viewport.Height - m_TexMenuBackground.Height / 2, m_TexMenuBackground.Width / 2,
-                                                     m_TexMenuBackground.Height / 2);
+                                                    m_TexMenuBackground.Height / 2);
 
                 // RESOURCE STATS RECTANGLES
                 m_RectWoodResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width / 2 - m_TexWoodResource.Width / 2,
@@ -497,6 +518,10 @@ namespace XNA_ENGINE.Game.Objects
                                                            m_TexDelete.Width / 2,
                                                            m_TexDelete.Height / 2);
 
+                m_RectDeleteHover = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDeleteHover.Height + 45,
+                                                           m_TexDeleteHover.Width / 2,
+                                                           m_TexDeleteHover.Height / 2);
+
                 m_RectVillager = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height + 45,
                                                            m_TexDelete.Width / 2,
                                                            m_TexDelete.Height / 2);
@@ -508,6 +533,14 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectSchool = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45,
                                                            m_TexSchool.Width / 2,
                                                            m_TexSchool.Height / 2);
+
+                m_RectSchoolHover = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height + 45,
+                                                           m_TexSchool.Width / 2,
+                                                           m_TexSchool.Height / 2);
+
+                m_RectSchoolInfo = new Rectangle(m_RectSchoolInfo.X, m_RectDelete.Y - m_TexSchoolInfo.Height / 2 - 10,
+                                                           m_TexSchoolInfo.Width / 2,
+                                                           m_TexSchoolInfo.Height / 2);
 
                 m_RectShrine = new Rectangle(10 * 2 + m_TexSchool.Width / 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height + 45,
                                                            m_TexShrine.Width / 2,
@@ -561,6 +594,10 @@ namespace XNA_ENGINE.Game.Objects
                                                            m_TexDelete.Width,
                                                            m_TexDelete.Height);
 
+                m_RectDeleteHover = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20,
+                                                           m_TexDelete.Width,
+                                                           m_TexDelete.Height);
+
                 m_RectVillager = new Rectangle(10, renderContext.GraphicsDevice.Viewport.Height - m_TexDelete.Height - 20,
                                                            m_TexDelete.Width,
                                                            m_TexDelete.Height);
@@ -573,9 +610,13 @@ namespace XNA_ENGINE.Game.Objects
                                                            m_TexSettlement.Width,
                                                            m_TexSettlement.Height);
 
-                m_RectSchool = new Rectangle(10 + m_TexSettlement.Width + 10, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20,
+                m_RectSchool = new Rectangle(10 + m_TexSchoolHover.Width + 4, renderContext.GraphicsDevice.Viewport.Height - m_TexSchool.Height - 20,
                                                            m_TexSchool.Width,
                                                            m_TexSchool.Height);
+
+                m_RectSchoolHover = new Rectangle(10 + m_TexSchoolHover.Width + 4, renderContext.GraphicsDevice.Viewport.Height - m_TexSchoolHover.Height - 17,
+                                                           m_TexSchoolHover.Width,
+                                                           m_TexSchoolHover.Height);
 
                 m_RectShrine = new Rectangle(10 * 3 + m_TexShrine.Width * 2, renderContext.GraphicsDevice.Viewport.Height - m_TexShrine.Height - 20,
                                                            m_TexShrine.Width,
@@ -589,6 +630,14 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height - 20,
                                                            m_TexHoverVillager.Width,
                                                            m_TexHoverVillager.Height);
+
+                m_RectSchoolInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexSchoolInfo.Height - 20,
+                                                           m_TexSchoolInfo.Width,
+                                                           m_TexSchoolInfo.Height);
+
+                m_RectShamanInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShamanInfo.Height - 20,
+                                                           m_TexShamanInfo.Width,
+                                                           m_TexShamanInfo.Height);
             }
 
             // MENU ONDERKANT DRAW
@@ -615,7 +664,14 @@ namespace XNA_ENGINE.Game.Objects
                     else
                         renderContext.SpriteBatch.Draw(m_TexSettlement, m_RectSettlement, Color.White);
 
-                    renderContext.SpriteBatch.Draw(m_TexSchool, m_RectSchool, Color.White);
+                    if (m_bShowSchoolHover)
+                    {
+                        renderContext.SpriteBatch.Draw(m_TexSchoolHover, m_RectSchoolHover, Color.White);
+                        renderContext.SpriteBatch.Draw(m_TexSchoolInfo, m_RectSchoolInfo, Color.White);
+                    }
+                    else
+                        renderContext.SpriteBatch.Draw(m_TexSchool, m_RectSchool, Color.White);
+
                     renderContext.SpriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
                     break;
 
@@ -638,7 +694,10 @@ namespace XNA_ENGINE.Game.Objects
                 // --------------------------------------------
                 case SubMenuSelected.ShrineMode:
                     if (m_bShowShamanHover)
+                    {
                         renderContext.SpriteBatch.Draw(m_TexShamanHover, m_RectShaman, Color.White);
+                        renderContext.SpriteBatch.Draw(m_TexShamanInfo, m_RectShamanInfo, Color.White);
+                    }
                     else
                         renderContext.SpriteBatch.Draw(m_TexShaman, m_RectShaman, Color.White);
                     break;
