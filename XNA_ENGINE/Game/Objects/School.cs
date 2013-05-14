@@ -16,7 +16,6 @@ namespace XNA_ENGINE.Game.Objects
     {
         private GridTile m_RallyPointTile;
         
-
         private const float GRIDHEIGHT = 32;
         private const float TIMEFORVILLAGER = 2;
         private double m_Timer = TIMEFORVILLAGER;
@@ -30,7 +29,11 @@ namespace XNA_ENGINE.Game.Objects
             m_LinkedTileList = new List<GridTile>();
 
             foreach (var gridTile in tileList)
+            {
+                gridTile.SetIsUsedByStructure(true);
+                gridTile.LevelOut(0, 2);
                 m_LinkedTileList.Add(gridTile);
+            }
 
             m_RallyPointTile = tileList.ElementAt(0);
 
@@ -174,7 +177,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public bool PlaceRallyPoint(GridTile gridTile)
         {
-            if (gridTile.IsOpen())
+            if (gridTile.IsOpen() && gridTile.GetIsUsedByStructure() == false)
             {
                 m_RallyPointTile = gridTile;
                 m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);

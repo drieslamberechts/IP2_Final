@@ -25,7 +25,8 @@ namespace XNA_ENGINE.Game.Scenes
             RotateCounterClockWise,
             ToggleSelectionMode,
             ToggleTileType,
-            GoBackToMainMenu
+            GoBackToMainMenu,
+            ToggleDebug
         }
 
         //DATAMEMBERS
@@ -49,6 +50,8 @@ namespace XNA_ENGINE.Game.Scenes
         private float m_ElapseTime;
         private int m_FrameCounter;
         private int m_Fps;
+
+        private bool m_DrawDebug = true;
 
 
         public PlayScene(ContentManager content, string map)
@@ -90,6 +93,7 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction toggleSelectionMode = new InputAction((int)PlayerInput.ToggleSelectionMode, TriggerState.Pressed);
             InputAction toggleTileType = new InputAction((int)PlayerInput.ToggleTileType, TriggerState.Pressed);
             InputAction goBackToMainMenu = new InputAction((int)PlayerInput.GoBackToMainMenu,TriggerState.Pressed);
+            InputAction toggleDebug = new InputAction((int)PlayerInput.ToggleDebug,TriggerState.Pressed);
 
             leftClick.MouseButton = MouseButtons.LeftButton;
             rightClick.MouseButton = MouseButtons.RightButton;
@@ -101,6 +105,7 @@ namespace XNA_ENGINE.Game.Scenes
             toggleSelectionMode.KeyButton = Keys.V;
             toggleTileType.KeyButton = Keys.B;
             goBackToMainMenu.KeyButton = Keys.Escape;
+            toggleDebug.KeyButton = Keys.N;
 
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
@@ -112,6 +117,7 @@ namespace XNA_ENGINE.Game.Scenes
             m_InputManager.MapAction(toggleSelectionMode);
             m_InputManager.MapAction(toggleTileType);
             m_InputManager.MapAction(goBackToMainMenu);
+            m_InputManager.MapAction(toggleDebug);
 
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(800, 1000, 800);
@@ -190,11 +196,21 @@ namespace XNA_ENGINE.Game.Scenes
                 // DrawGUI
                 Menu.GetInstance().Draw(renderContext);
 
-                // Creative mode
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "C: Creative mode: " + GridFieldManager.GetInstance().CreativeMode, new Vector2(10, 50), Color.White);
+                if (m_DrawDebug)
+                {
+                    int relativeDrawPos = 100;
+                    // Creative mode
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "N: DEBUG: " + GridFieldManager.GetInstance().CreativeMode, new Vector2(10, relativeDrawPos), Color.Red);
 
-                // TileType
-                renderContext.SpriteBatch.DrawString(m_DebugFont, "B: Tiletype to build: " + Menu.GetInstance().TileTypeSelected, new Vector2(10, 70), Color.White);
+                    // Creative mode
+                    relativeDrawPos += 20;
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "C: Creative mode: " + GridFieldManager.GetInstance().CreativeMode, new Vector2(10, relativeDrawPos), Color.Red);
+
+                    // TileType
+                    relativeDrawPos += 20;
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "B: Tiletype to build: " + Menu.GetInstance().TileTypeSelected, new Vector2(10, relativeDrawPos), Color.Red);
+           
+
 
 
                 /*
@@ -210,6 +226,7 @@ namespace XNA_ENGINE.Game.Scenes
                 renderContext.SpriteBatch.DrawString(m_DebugFont, "Camera Pos: " + m_CameraTargetPos,
                                                      new Vector2(10, 150), Color.White);
                  */
+                }
 
             }
             else // Draw before the 3D is drawn
@@ -251,11 +268,17 @@ namespace XNA_ENGINE.Game.Scenes
             if (m_InputManager.IsActionTriggered((int)PlayerInput.ToggleTileType))
                 Menu.GetInstance().NextTileType();
 
+            //DebugMode
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleDebug))
+                m_DrawDebug = !m_DrawDebug;
+
             if (m_InputManager.IsActionTriggered((int) PlayerInput.GoBackToMainMenu))
             {
                 SceneManager.RemoveGameScene(this);
                 SceneManager.SetActiveScene("MainMenuScene");
             }
+            
+
             
 
             // Handle GamePad Input

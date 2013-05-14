@@ -37,13 +37,12 @@ namespace XNA_ENGINE.Game.Objects
         public virtual void Initialize()
         {
             //Load a rallyPointFlag
-            m_Rallypoint = new GameModelGrid("Models/tree_TreeWillow");
-            m_Rallypoint.LocalPosition += new Vector3(0, 200, 0);
+            m_Rallypoint = new GameModelGrid("Models/prop_Flag");
             m_Rallypoint.CanDraw = true;
             m_Rallypoint.LoadContent(PlayScene.GetContentManager());
             m_Rallypoint.DiffuseColor = new Vector3(0.0f, 0.8f, 0.0f);
-            m_Rallypoint.Scale(0.3f, 0.3f, 0.3f);
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Rallypoint);
+            m_Rallypoint.LocalPosition += new Vector3(0, 300, 0);
         }
 
         public virtual void Update(RenderContext renderContext)

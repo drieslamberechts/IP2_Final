@@ -58,16 +58,16 @@ namespace XNA_ENGINE.Game.Managers
         public void Initialize()
         {
              List<GridTile> settlementTiles = new List<GridTile>();
-             settlementTiles.Add(m_GridField[2, 2]);
              settlementTiles.Add(m_GridField[2, 3]);
-             settlementTiles.Add(m_GridField[3, 2]);
+             settlementTiles.Add(m_GridField[2, 4]);
              settlementTiles.Add(m_GridField[3, 3]);
+             settlementTiles.Add(m_GridField[3, 4]);
              BuildPlaceable(Placeable.PlaceableType.Settlement, m_UserPlayer, settlementTiles);
 
              settlementTiles.Clear();
              settlementTiles.Add(m_GridField[5, 2]);
-             settlementTiles.Add(m_GridField[5, 2]);
-             settlementTiles.Add(m_GridField[6, 3]);
+             settlementTiles.Add(m_GridField[6, 2]);
+             settlementTiles.Add(m_GridField[5, 3]);
              settlementTiles.Add(m_GridField[6, 3]);
              BuildPlaceable(Placeable.PlaceableType.School, m_UserPlayer, settlementTiles);
 
@@ -76,9 +76,9 @@ namespace XNA_ENGINE.Game.Managers
              BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer, settlementTiles);
 
             // TEST PLACEABLES
-             m_UserPlayer.AddPlaceable(new Villager(m_GridField[0,0]));
-             m_UserPlayer.AddPlaceable(new Army(m_GridField[1, 0]));
-             m_UserPlayer.AddPlaceable(new Shaman(m_GridField[2, 0]));
+             m_UserPlayer.AddPlaceable(new Villager(m_GridField[0,1]));
+             m_UserPlayer.AddPlaceable(new Army(m_GridField[1, 1]));
+             m_UserPlayer.AddPlaceable(new Shaman(m_GridField[2, 1]));
 
             m_PlayersList.ElementAt(1).AddPlaceable(new Army(m_GridField[15, 6]));
 
@@ -373,6 +373,11 @@ namespace XNA_ENGINE.Game.Managers
             foreach (var player in m_PlayersList)
                 foreach (var placeable in player.GetOwnedList())
                     placeable.Model.PermanentSelected = false;
+
+            foreach (GridTile gridTile in m_GridField)
+            {
+                gridTile.Model.PermanentSelected = false;
+            }
         }
 
         //Functions that pick a surrounding tile of another tile

@@ -38,6 +38,11 @@ namespace XNA_ENGINE.Game.Objects
 
         private int m_WoodCount = 0;
 
+        private float m_YOffset;
+
+        private float m_YOffsetTarget;
+        private float m_OffsetTransitionTime;
+
         private readonly GameScene m_GameScene;
 
         public enum TileType
@@ -49,6 +54,13 @@ namespace XNA_ENGINE.Game.Objects
             Water,
             Cliff,
             Spiked,
+            Rock1,
+            Rock2,
+            Rock3,
+            Rock4,
+            DirtGrass1,
+            Dirt1,
+            Dirt2,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -67,14 +79,11 @@ namespace XNA_ENGINE.Game.Objects
         public void Initialize()
         {
             m_PropsList = new List<GameModelGrid>();
-            SetType(m_TileType);
 
-
-            int woodCount = GridFieldManager.GetInstance().Random.Next(0, 10);
-            if (woodCount == 1)
-            {
-                m_WoodCount = 20;
-            } 
+            m_YOffset = GridFieldManager.GetInstance().Random.Next(YOFFSETMIN, YOFFSETMAX);
+            m_YOffsetTarget = m_YOffset;
+            
+            SetType(m_TileType); 
         }
 
         public void Update(RenderContext renderContext)
@@ -100,8 +109,14 @@ namespace XNA_ENGINE.Game.Objects
                 m_TileModel.Selected = false;
             }*/
 
-        
-            
+            if (m_YOffset != m_YOffsetTarget)
+            {
+                float delta = m_YOffsetTarget - m_YOffset;
+                delta = delta * (m_OffsetTransitionTime*(renderContext.GameTime.ElapsedGameTime.Milliseconds/1000.0f));
+                m_YOffset += delta;
+                m_TileModel.Translate(m_TileModel.LocalPosition.X, m_YOffset, m_TileModel.LocalPosition.Z);
+            }
+
             OnSelected();
         }
 
@@ -142,12 +157,13 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
                 {
+                    GridFieldManager.GetInstance().PermanentDeselect();
                     Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
                 }
 
                 if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
                 {
-
+                    
                 }
             }
 
@@ -181,6 +197,27 @@ namespace XNA_ENGINE.Game.Objects
                 case TileType.Spiked:
                     LoadTileType(new PrefabNormalGrass(this));
                     break;
+                case TileType.Rock1:
+                    LoadTileType(new PrefabRock1(this));
+                    break;
+                case TileType.Rock2:
+                    LoadTileType(new PrefabRock2(this));
+                    break;
+                case TileType.Rock3:
+                    LoadTileType(new PrefabRock3(this));
+                    break;
+                case TileType.Rock4:
+                    LoadTileType(new PrefabRock4(this));
+                    break;
+                case TileType.DirtGrass1:
+                    LoadTileType(new PrefabDirtGrass1(this));
+                    break;
+                case TileType.Dirt1:
+                    LoadTileType(new PrefabDirt1(this));
+                    break;
+                case TileType.Dirt2:
+                    LoadTileType(new PrefabDirt2(this));
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException("type");
             }
@@ -199,9 +236,14 @@ namespace XNA_ENGINE.Game.Objects
 
             m_TileModel = tilePrefab.TileModel;
 
-            int yOffset = GridFieldManager.GetInstance().Random.Next(YOFFSETMIN, YOFFSETMAX);
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_TileModel);
-            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, yOffset, GRIDDEPTH * m_Column));
+            m_TileModel.Translate(new Vector3(GRIDWIDTH * m_Row, m_YOffset, GRIDDEPTH * m_Column));
+
+            //Give it a random spin
+            int rand = GridFieldManager.GetInstance().Random.Next(0,4);
+            m_TileModel.Rotate( 0, 90 * rand, 0);
+
+
             m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
             m_TileModel.DrawBoundingBox = false;
 
@@ -230,9 +272,22 @@ namespace XNA_ENGINE.Game.Objects
             SetType(m_TileType);
         }
 
+        public bool GetIsUsedByStructure()
+        {
+            return m_IsUsedbyStructure;
+        }
+
         public bool IsOpen()
         {
             return m_Open;
+        }
+
+        public bool IsWalkable()
+        {
+            if (m_Open && m_IsUsedbyStructure == false)
+                return true;
+
+            return false;
         }
 
         public bool Selected
@@ -260,6 +315,12 @@ namespace XNA_ENGINE.Game.Objects
         public GameModelGrid Model
         {
             get { return m_TileModel; }
+        }
+
+        public void LevelOut(int offset, float time)
+        {
+            m_YOffsetTarget = offset;
+            m_OffsetTransitionTime = time;
         }
 
         public bool PickupWood(Player player, bool pickup = true)

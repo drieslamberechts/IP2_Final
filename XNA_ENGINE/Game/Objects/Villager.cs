@@ -119,12 +119,15 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void SetTargetTile(GridTile targetTile)
         {
-            m_TargetTile = targetTile;
-
-            if (Menu.GetInstance().m_Enable4)
+            if (targetTile.IsWalkable())
             {
-                Menu.GetInstance().m_Enable4 = false;
-                Menu.GetInstance().m_Enable5 = true;
+                m_TargetTile = targetTile;
+
+                if (Menu.GetInstance().m_Enable4)
+                {
+                    Menu.GetInstance().m_Enable4 = false;
+                    Menu.GetInstance().m_Enable5 = true;
+                }
             }
         }
     }
