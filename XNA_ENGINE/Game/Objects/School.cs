@@ -67,10 +67,10 @@ namespace XNA_ENGINE.Game.Objects
 
                 if (m_Timer <= 0)
                 {
-                    //Console.WriteLine("Soldier built");
+                    Console.WriteLine("Soldier built");
                     m_Timer = TIMEFORVILLAGER;
                     --m_AmountOfSoldiersQueued;
-                    //Menu.GetInstance().Player.NewPlaceable(new Army(m_RallyPointTile));
+                    GetOwner().AddPlaceable(new Army(m_RallyPointTile));
                 }
             }
 
@@ -94,7 +94,12 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-
+                Placeable permaSelected = GridFieldManager.GetInstance().GetPermanentSelected();
+                if (permaSelected.PlaceableTypeMeth == PlaceableType.Villager)
+                {
+                    permaSelected.GetOwner().RemovePlaceable(permaSelected);
+                    QueueSoldier();
+                }
             }
 
             if (Menu.GetInstance().m_Enable5)

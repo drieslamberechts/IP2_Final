@@ -64,7 +64,7 @@ namespace XNA_ENGINE.Game.Objects
             if (m_InfluenceTimer <= 0)
             {
                 m_InfluenceTimer = TIMEPERINFLUENCEPOINT;
-                //Menu.GetInstance().Player.GetResources().AddInfluence(1);
+                m_Owner.GetResources().AddInfluence(1);
             }
 
             if (Menu.GetInstance().m_Enable8)
@@ -93,10 +93,20 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-
+                Placeable permaSelected = GridFieldManager.GetInstance().GetPermanentSelected();
+                if (permaSelected.PlaceableTypeMeth == PlaceableType.Villager)
+                {
+                    permaSelected.GetOwner().RemovePlaceable(permaSelected);
+                    Sacrifice();
+                }
             }
 
             base.OnSelected();
+        }
+
+        private void Sacrifice()
+        {
+            m_Owner.GetResources().AddInfluence(10);
         }
 
         //Code to execute on Permanently selected
