@@ -96,13 +96,18 @@ namespace XNA_ENGINE.Game.Objects
                 if (selectedTile != null)
                     SetTargetTile(selectedTile);
 
-
-                if (selectedPlaceableList != null)
-                    if (selectedPlaceableList.ElementAt(0).PlaceableTypeMeth == PlaceableType.Army)
+                if (selectedPlaceableList != null && selectedPlaceableList.ElementAt(0).PlaceableTypeMeth == PlaceableType.Army)
+                {
+                    if (selectedPlaceableList.ElementAt(0).GetOwner() != m_Owner)
                     {
                         SceneManager.AddGameScene(new AttackScene(PlayScene.GetContentManager(), this, (Army)selectedPlaceableList.ElementAt(0)));
                         SceneManager.SetActiveScene("AttackScene");
                     }
+                    else
+                    {
+                        MergeArmies((Army)selectedPlaceableList.ElementAt(0),true);   
+                    }
+                }
             }
 
             base.OnPermanentSelected();
@@ -132,10 +137,18 @@ namespace XNA_ENGINE.Game.Objects
                 m_TargetTile = targetTile;
         }
 
-        public void MergeArmies(Army otherArmy)
+        public void MergeArmies(Army otherArmy, bool deleteThisArmy = false)
         {
-            ArmySize += otherArmy.ArmySize; 
-            m_Owner.RemovePlaceable(otherArmy);
+            if (deleteThisArmy)
+            {
+                otherArmy.ArmySize+=ArmySize;
+                m_Owner.RemovePlaceable(this);
+            }
+            else
+            {
+                ArmySize += otherArmy.ArmySize;
+                m_Owner.RemovePlaceable(otherArmy);
+            }
         }
 
         public override GridTile GetTargetTile()

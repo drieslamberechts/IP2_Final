@@ -214,7 +214,7 @@ namespace XNA_ENGINE.Game.Scenes
 
                 if (m_DrawDebug)
                 {
-                    int relativeDrawPos = 100;
+                    int relativeDrawPos = renderContext.GraphicsDevice.Viewport.Height/2;
                     // Creative mode
                     renderContext.SpriteBatch.DrawString(m_DebugFont, "N: DEBUG: " + GridFieldManager.GetInstance().CreativeMode, new Vector2(10, relativeDrawPos), Color.Red);
 

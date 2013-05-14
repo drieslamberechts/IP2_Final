@@ -131,11 +131,6 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\tile_Normal.X">
-      <Name>tile_Normal</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\building_FlagNormal.X">
       <Name>building_FlagNormal</Name>
       <Importer>XImporter</Importer>

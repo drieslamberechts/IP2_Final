@@ -127,6 +127,9 @@
     <Compile Include="Game\Scenes\PlayScene.cs" />
     <Compile Include="Game\Scenes\MainMenuScene.cs" />
     <Compile Include="Game\TilePrefabs\BasePrefab.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeDead2.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeDead1.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeWillow.cs" />
     <Compile Include="Game\TilePrefabs\PrefabDirt2.cs" />
     <Compile Include="Game\TilePrefabs\PrefabDirt1.cs" />
     <Compile Include="Game\TilePrefabs\PrefabDirtGrass1.cs" />

@@ -71,7 +71,7 @@ namespace XNA_ENGINE.Game.Objects
                     //Selected
                     if (m_PermanentSelected)
                     {
-                        effect.SpecularColor = new Vector3(1.0f, 1.0f, 1.0f); 
+                        effect.SpecularColor = new Vector3(0.5f, 0.5f, 0.5f); 
                         effect.EmissiveColor = new Vector3(0.5f, 0.5f, 0.5f);
                     }
                     else if (m_Selected)

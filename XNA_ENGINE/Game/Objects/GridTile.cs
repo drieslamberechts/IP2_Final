@@ -61,6 +61,9 @@ namespace XNA_ENGINE.Game.Objects
             DirtGrass1,
             Dirt1,
             Dirt2,
+            TreeWillow,
+            TreeDead1,
+            TreeDead2,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -199,6 +202,15 @@ namespace XNA_ENGINE.Game.Objects
                     break;
                 case TileType.Dirt2:
                     LoadTileType(new PrefabDirt2(this));
+                    break;
+                case TileType.TreeWillow:
+                    LoadTileType(new PrefabTreeWillow(this));
+                    break;
+                case TileType.TreeDead1:
+                    LoadTileType(new PrefabTreeDead1(this));
+                    break;
+                case TileType.TreeDead2:
+                    LoadTileType(new PrefabTreeDead2(this));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("type");

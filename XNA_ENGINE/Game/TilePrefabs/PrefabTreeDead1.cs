@@ -8,19 +8,20 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.TilePrefabs
 {
-    class PrefabTreeShort : BasePrefab
+    class PrefabTreeDead1 : BasePrefab
     {
-        public PrefabTreeShort(GridTile tile)
+        public PrefabTreeDead1(GridTile tile)
         {
             m_TileModel = new GameModelGrid("Models/tile_Grass");
             m_TileModel.LoadContent(PlayScene.GetContentManager());
             m_TileModel.UseTexture = true;
 
-            var m_TreeShort = new GameModelGrid("Models/tree_TreeShort1");
-            m_TreeShort.UseTexture = true;
+            var treeDead1 = new GameModelGrid("Models/tree_TreeDead1");
+           // treeLong.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_tree_Tall1");
+            treeDead1.UseTexture = true;
 
-            m_PropList.Add(m_TreeShort);
-
+            m_PropList.Add(treeDead1);
+           
             m_bOpen = true;
             m_WoodCount = 20;
 

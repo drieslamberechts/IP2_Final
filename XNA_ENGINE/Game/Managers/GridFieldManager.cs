@@ -75,13 +75,12 @@ namespace XNA_ENGINE.Game.Managers
              settlementTiles.Add(m_GridField[7, 2]);
              BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer, settlementTiles);
 
-            // TEST PLACEABLES
-             m_UserPlayer.AddPlaceable(new Villager(m_GridField[0,1]));
-             m_UserPlayer.AddPlaceable(new Army(m_GridField[1, 1]));
-             m_UserPlayer.AddPlaceable(new Shaman(m_GridField[2, 1]));
+             //TEST PLACEABLES
+             m_UserPlayer.AddPlaceable(new Villager(m_GridField[5,5]));
+             m_UserPlayer.AddPlaceable(new Army(m_GridField[6, 4]));
+             m_UserPlayer.AddPlaceable(new Shaman(m_GridField[7, 3]));
 
-            m_PlayersList.ElementAt(1).AddPlaceable(new Army(m_GridField[15, 6]));
-
+             m_PlayersList.ElementAt(1).AddPlaceable(new Army(m_GridField[15, 6]));
         }
 
         public void Update(RenderContext renderContext)
@@ -137,22 +136,26 @@ namespace XNA_ENGINE.Game.Managers
 
                 armyMergeList.Clear();
             }
-                
-                
 
-/*
-            Player attackPlayer = null;
-            Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));
-            {
-                attackPlayer.Update(renderContext);
-                if (attackPlayer.GetAttack()) attackPlayer = attackPlayer; // If the player is under attack initiate the battlesequence!
-            }
+            //GO OVER ALL PLACEABLES
+            //CHECK IF AN ARMY AND VILLAGER INTERSECT
+           /* List<Placeable> allPlaceables = GetAllPlaceables();
+            foreach (Placeable placeable1 in allPlaceables)
+                foreach (Placeable placeable2 in allPlaceables)
+                {
+                    if (placeable1 != placeable2)
+                    {
+                        if (placeable1.GetTargetTile() == placeable2.GetTargetTile())
+                        {
+                            if (placeable1.PlaceableTypeMeth == Placeable.PlaceableType.Villager &&
+                                placeable2.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                            {
+                                placeable1.GetOwner().RemovePlaceable(placeable1);
 
-            if (attackPlayer != null)
-            {
-                attackPlayer.ResetAttack();
-                SceneManager.SetActiveScene("AttackScene");
-            }*/
+                            }
+                        }
+                    }
+                }*/
         }
 
         public void LoadMap(GameScene gameScene, string map)
@@ -278,6 +281,18 @@ namespace XNA_ENGINE.Game.Managers
             }
 
             return null;
+        }
+
+        public List<Placeable> GetAllPlaceables()
+        {
+            List<Placeable> returnList = new List<Placeable>();
+            foreach (Player player in m_PlayersList)
+                foreach (Placeable placeable in player.GetOwnedList())
+                {
+                    returnList.Add(placeable);
+                }
+
+            return returnList;
         }
 
         public Placeable GetPermanentSelected()

@@ -12,7 +12,7 @@ namespace XNA_ENGINE.Game.TilePrefabs
     {
         public PrefabTreeLong(GridTile tile)
         {
-            m_TileModel = new GameModelGrid("Models/tile_Normal");
+            m_TileModel = new GameModelGrid("Models/tile_Grass");
             m_TileModel.LoadContent(PlayScene.GetContentManager());
             m_TileModel.UseTexture = true;
 
