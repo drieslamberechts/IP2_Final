@@ -587,6 +587,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
     <Compile Include="Textures\tex_env_grass.png">
       <Name>tex_env_grass</Name>
       <Importer>TextureImporter</Importer>
@@ -609,13 +612,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Textures\tex_env_FernLeaf.png">
       <Name>tex_env_FernLeaf</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+=======
+>>>>>>> 9984063bd4795e727030ad41c5cb578e8b1b701e
     <Compile Include="final Menu\Button_Delete.png">
       <Name>Button_Delete</Name>
       <Importer>TextureImporter</Importer>
@@ -670,85 +671,34 @@
   <ItemGroup>
     <Compile Include="final Menu\Button_AddSettlementHover.png">
       <Name>Button_AddSettlementHover</Name>
+<<<<<<< HEAD
+=======
+    <Compile Include="Textures\tex_env_FernLeaf.png">
+      <Name>tex_env_FernLeaf</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="tutorial\screen1.png">
-      <Name>screen1</Name>
+    <Compile Include="Textures\tex_env_grass.png">
+      <Name>tex_env_grass</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="tutorial\screen10.png">
-      <Name>screen10</Name>
+    <Compile Include="Textures\tex_env_rock1.png">
+      <Name>tex_env_rock1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="tutorial\screen11.png">
-      <Name>screen11</Name>
+    <Compile Include="Textures\tex_env_rock2.png">
+      <Name>tex_env_rock2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="tutorial\screen2.png">
-      <Name>screen2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="tutorial\screen3.png">
-      <Name>screen3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="tutorial\screen4.png">
-      <Name>screen4</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="tutorial\screen5.png">
-      <Name>screen5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="tutorial\screen6.png">
-      <Name>screen6</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="tutorial\screen7.png">
-      <Name>screen7</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="tutorial\screen8.png">
-      <Name>screen8</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="tutorial\screen9.png">
-      <Name>screen9</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="final Menu\Button_AddSchoolHover.png">
-      <Name>Button_AddSchoolHover</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="final Menu\Button_DeleteHover.png">
-      <Name>Button_DeleteHover</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="final Menu\hoverSchool.png">
-      <Name>hoverSchool</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="final Menu\hoverShaman.png">
-      <Name>hoverShaman</Name>
+    <Compile Include="Textures\tex_env_Weed.png">
+      <Name>tex_env_Weed</Name>
+>>>>>>> bdffe4a721e5f8259a1f223a009b5dd4880c67aa
+=======
+>>>>>>> 661f95e9777fe22acef761c2756604d076956ea3
+>>>>>>> 9984063bd4795e727030ad41c5cb578e8b1b701e
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

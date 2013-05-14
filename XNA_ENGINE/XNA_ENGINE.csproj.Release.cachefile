@@ -103,3 +103,45 @@ Content\final Menu\Button_AddVIllagerHover.xnb
 Content\final Menu\Button_AddShamanHover.xnb
 Content\final Menu\hoverSettlementInfo.xnb
 Content\final Menu\Button_AddSettlementHover.xnb
+Content\Textures\tex_env_FernLeaf.xnb
+Content\Textures\tex_env_grass.xnb
+Content\Textures\tex_env_rock1.xnb
+Content\Textures\tex_env_rock2.xnb
+Content\Textures\tex_env_Weed.xnb
+Content\Models\prop_Grass1.xnb
+Content\Models\prop_Grass2.xnb
+Content\Models\prop_Grass3.xnb
+Content\Models\prop_Rock1.xnb
+Content\Models\prop_Rock2.xnb
+Content\Models\tree_TreeDead1.xnb
+Content\Models\tree_TreeDead2.xnb
+Content\Models\tree_TreeShort1.xnb
+Content\Models\tree_TreeShort2.xnb
+Content\Models\tree_TreeShort3.xnb
+Content\Models\tree_TreeShort4.xnb
+Content\Models\tree_TreeShort5.xnb
+Content\Models\tree_TreeShort6.xnb
+Content\Models\tree_TreeTall1.xnb
+Content\Models\tree_TreeTall2.xnb
+Content\Textures\tex_tree_Tall1_0.xnb
+Content\Textures\tex_env_grass_0.xnb
+Content\Textures\tex_env_FernLeaf_0.xnb
+Content\Textures\tex_env_rock1_0.xnb
+Content\Textures\tex_env_rock2_0.xnb
+Content\Textures\tex_env_Treetrunk2_0.xnb
+Content\tutorial\screen1.xnb
+Content\tutorial\screen10.xnb
+Content\tutorial\screen11.xnb
+Content\tutorial\screen2.xnb
+Content\tutorial\screen3.xnb
+Content\tutorial\screen4.xnb
+Content\tutorial\screen5.xnb
+Content\tutorial\screen6.xnb
+Content\tutorial\screen7.xnb
+Content\tutorial\screen8.xnb
+Content\tutorial\screen9.xnb
+Content\Textures\tex_env_Foliage1_0.xnb
+Content\final Menu\Button_AddSchoolHover.xnb
+Content\final Menu\Button_DeleteHover.xnb
+Content\final Menu\hoverSchool.xnb
+Content\final Menu\hoverShaman.xnb
