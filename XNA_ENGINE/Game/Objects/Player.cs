@@ -175,6 +175,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public void RemovePlaceable(Placeable placeable)
         {
+            GridFieldManager.GetInstance().GameScene.RemoveSceneObject(placeable.Model);
             m_ObjectsNeedToBeRemoved.Add(placeable);
         }
 

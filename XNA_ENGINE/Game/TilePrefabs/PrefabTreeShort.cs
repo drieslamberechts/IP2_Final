@@ -21,7 +21,8 @@ namespace XNA_ENGINE.Game.TilePrefabs
 
             m_PropList.Add(m_TreeShort);
 
-            m_bOpen = false;
+            m_bOpen = true;
+            m_WoodCount = 20;
 
             foreach (var prop in m_PropList)
                 prop.LoadContent(PlayScene.GetContentManager());
