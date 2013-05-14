@@ -808,7 +808,7 @@
 	<tile>
 		<positionX>11</positionX>
 		<positionY>5</positionY>
-		<TileType>5</TileType>
+		<TileType>6</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
@@ -958,7 +958,7 @@
 	<tile>
 		<positionX>11</positionX>
 		<positionY>6</positionY>
-		<TileType>5</TileType>
+		<TileType>6</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
@@ -1103,12 +1103,12 @@
 	<tile>
 		<positionX>10</positionX>
 		<positionY>7</positionY>
-		<TileType>5</TileType>
+		<TileType>6</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
 		<positionY>7</positionY>
-		<TileType>5</TileType>
+		<TileType>6</TileType>
 	</tile>
 	<tile>
 		<positionX>12</positionX>
@@ -1508,7 +1508,7 @@
 	<tile>
 		<positionX>1</positionX>
 		<positionY>10</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>2</positionX>
@@ -1873,12 +1873,12 @@
 	<tile>
 		<positionX>14</positionX>
 		<positionY>12</positionY>
-		<TileType>0</TileType>
+		<TileType>13</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>12</positionY>
-		<TileType>0</TileType>
+		<TileType>13</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
@@ -2018,12 +2018,12 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>13</positionY>
-		<TileType>13</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>13</positionY>
-		<TileType>13</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
@@ -2163,7 +2163,7 @@
 	<tile>
 		<positionX>12</positionX>
 		<positionY>14</positionY>
-		<TileType>0</TileType>
+		<TileType>13</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
@@ -2173,7 +2173,7 @@
 	<tile>
 		<positionX>14</positionX>
 		<positionY>14</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
@@ -2313,12 +2313,12 @@
 	<tile>
 		<positionX>12</positionX>
 		<positionY>15</positionY>
-		<TileType>0</TileType>
+		<TileType>13</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
 		<positionY>15</positionY>
-		<TileType>0</TileType>
+		<TileType>13</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
@@ -2328,7 +2328,7 @@
 	<tile>
 		<positionX>15</positionX>
 		<positionY>15</positionY>
-		<TileType>0</TileType>
+		<TileType>13</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>

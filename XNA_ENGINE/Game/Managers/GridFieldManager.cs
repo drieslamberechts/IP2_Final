@@ -100,6 +100,46 @@ namespace XNA_ENGINE.Game.Managers
             {
                 player.Update(renderContext);
             }
+            
+            //Check if armies need to be merged
+            foreach (Player player in m_PlayersList)
+            {
+                List<Placeable> armyMergeList = new List<Placeable>();
+
+                foreach (Placeable ownedObject in player.GetOwnedList())
+                {
+                    if(ownedObject.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                        armyMergeList.Add(ownedObject);
+                }
+
+                List<Placeable> ArmiesAlreadyMerged = new List<Placeable>();
+
+                foreach (Army army1 in armyMergeList)
+                    foreach (Army army2 in armyMergeList)
+                    {
+                        if (army1.GetTargetTile() == army2.GetTargetTile() && army1 != army2)
+                        {
+                            bool mayProceed = true;
+                            foreach (Army armyAlreadyMerged in ArmiesAlreadyMerged)
+                            {
+                                if (armyAlreadyMerged == army1 || armyAlreadyMerged == army2) mayProceed = false;
+                            }
+
+                            if (mayProceed)
+                            {
+                                ArmiesAlreadyMerged.Add(army1);
+                                ArmiesAlreadyMerged.Add(army2);
+
+                                army1.MergeArmies(army2);
+                            }
+                        }
+                    }
+
+                armyMergeList.Clear();
+            }
+                
+                
+
 /*
             Player attackPlayer = null;
             Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));

@@ -76,6 +76,9 @@ namespace XNA_ENGINE.Game.Objects
             m_Rallypoint.CanDraw = false;
 
             GridTile selectedTile;
+
+            List<Placeable> selectedPlaceableList = gridFieldManager.GetSelectedPlaceables();
+
             if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
                 selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
             else
@@ -92,6 +95,14 @@ namespace XNA_ENGINE.Game.Objects
             {
                 if (selectedTile != null)
                     SetTargetTile(selectedTile);
+
+
+                if (selectedPlaceableList != null)
+                    if (selectedPlaceableList.ElementAt(0).PlaceableTypeMeth == PlaceableType.Army)
+                    {
+                        SceneManager.AddGameScene(new AttackScene(PlayScene.GetContentManager(), this, (Army)selectedPlaceableList.ElementAt(0)));
+                        SceneManager.SetActiveScene("AttackScene");
+                    }
             }
 
             base.OnPermanentSelected();
@@ -119,6 +130,12 @@ namespace XNA_ENGINE.Game.Objects
         {
             if (targetTile.IsWalkable())
                 m_TargetTile = targetTile;
+        }
+
+        public void MergeArmies(Army otherArmy)
+        {
+            ArmySize += otherArmy.ArmySize; 
+            m_Owner.RemovePlaceable(otherArmy);
         }
 
         public override GridTile GetTargetTile()
