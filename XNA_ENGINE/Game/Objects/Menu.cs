@@ -42,6 +42,7 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexSchoolHover,
                                    m_TexSchoolInfo,
                                    m_TexShrine,
+                                   m_TexShrineInfo,
                                    m_TexBuildTile,
                                    m_TexSplit;
 
@@ -62,6 +63,7 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectSchoolHover,
                           m_RectSchoolInfo,
                           m_RectShrine,
+                          m_RectShrineInfo,
                           m_RectBuildTile,
                           m_RectSplit;
 
@@ -149,6 +151,7 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_bShowVillagerHover,
                      m_bShowSettlementHover,
                      m_bShowShamanHover,
+                     m_bShowShrineHover,
                      m_bShowSchoolHover;
 
         //Singleton implementation
@@ -165,6 +168,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_bShowVillagerHover = false;
             m_bShowSettlementHover = false;
+            m_bShowShrineHover = false;
             m_bShowShamanHover = false;
             m_bShowSchoolHover = false;
 
@@ -193,6 +197,7 @@ namespace XNA_ENGINE.Game.Objects
             m_TexHoverVillager = Content.Load<Texture2D>("final Menu/hoverVillager");
             m_TexSettlementInfo = Content.Load<Texture2D>("final Menu/hoverSettlementInfo");
             m_TexSchoolInfo = Content.Load<Texture2D>("final Menu/hoverSchool");
+            m_TexShrineInfo = Content.Load<Texture2D>("final Menu/hoverSchool");
 
             // BUILDING ICONS
             m_TexSettlement = Content.Load<Texture2D>("final Menu/Button_AddSettlement");
@@ -266,6 +271,13 @@ namespace XNA_ENGINE.Game.Objects
                 m_bShowShamanHover = true;
             }
             else m_bShowShamanHover = false;
+
+            // HOVER SHRINE BUTTON
+            if (CheckHitButton(mousePos, m_RectShrine) && m_SubMenuSelected == SubMenuSelected.VillagerMode)
+            {
+                m_bShowShrineHover = true;
+            }
+            else m_bShowShrineHover = false;
 
             // HOVER SCHOOL BUTTON
             if (CheckHitButton(mousePos, m_RectSchool) && m_SubMenuSelected == SubMenuSelected.VillagerMode)
@@ -575,6 +587,8 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectSchoolInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexSchoolInfo.Height - 20, m_TexSchoolInfo.Width, m_TexSchoolInfo.Height);
 
                 m_RectShamanInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShamanInfo.Height - 20, m_TexShamanInfo.Width, m_TexShamanInfo.Height);
+
+                m_RectShrineInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShrineInfo.Height - 20, m_TexShrineInfo.Width, m_TexShrineInfo.Height);
             }
 
             // MENU ONDERKANT DRAW
@@ -609,7 +623,13 @@ namespace XNA_ENGINE.Game.Objects
                     else
                         renderContext.SpriteBatch.Draw(m_TexSchool, m_RectSchool, Color.White);
 
-                    renderContext.SpriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
+                    if (m_bShowShrineHover)
+                    {
+                        renderContext.SpriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
+                        renderContext.SpriteBatch.Draw(m_TexShrineInfo, m_RectShrineInfo, Color.White);
+                    }
+                    else
+                        renderContext.SpriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
                     break;
 
                 // --------------------------------------------
@@ -623,7 +643,7 @@ namespace XNA_ENGINE.Game.Objects
                 // SOLDIER MODE
                 // --------------------------------------------
                 case SubMenuSelected.SoldierMode:
-                    
+                    // Do nothing
                     break;
 
                 // --------------------------------------------
