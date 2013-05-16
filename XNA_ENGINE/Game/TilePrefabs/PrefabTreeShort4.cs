@@ -8,15 +8,15 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.TilePrefabs
 {
-    class PrefabTreeShort : BasePrefab
+    class PrefabTreeShort4 : BasePrefab
     {
-        public PrefabTreeShort(GridTile tile)
+        public PrefabTreeShort4(GridTile tile)
         {
             m_TileModel = new GameModelGrid("Models/tile_Grass");
             m_TileModel.LoadContent(PlayScene.GetContentManager());
             m_TileModel.UseTexture = true;
 
-            var m_TreeShort = new GameModelGrid("Models/tree_TreeShort1");
+            var m_TreeShort = new GameModelGrid("Models/tree_TreeShort4");
             m_TreeShort.UseTexture = true;
 
             m_PropList.Add(m_TreeShort);

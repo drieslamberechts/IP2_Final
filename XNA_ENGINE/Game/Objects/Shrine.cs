@@ -52,7 +52,7 @@ namespace XNA_ENGINE.Game.Objects
             SearchForDefaultRallyPointSpot();
         }
 
-        public virtual void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
         }

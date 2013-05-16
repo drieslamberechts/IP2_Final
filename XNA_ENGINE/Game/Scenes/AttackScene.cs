@@ -37,14 +37,13 @@ namespace XNA_ENGINE.Game.Scenes
         private int m_AttackersDice;
         private int m_DefendersDice;
         private bool m_bEnd;
-        private bool m_AttackerWon, m_DefenderWon;
+        private bool m_AttackerWon;
 
         public AttackScene(ContentManager content, Army attackerArmy, Army defenderArmy)
             : base("AttackScene")
         {
             m_bEnd = false;
             m_AttackerWon = false;
-            m_DefenderWon = false;
 
             //CONTENT
             m_Content = content;
@@ -127,7 +126,7 @@ namespace XNA_ENGINE.Game.Scenes
                 {
                     renderContext.SpriteBatch.DrawString(m_DebugFont, "Defender won!", new Vector2(300, 300),
                                                          Color.White);
-                    m_DefenderWon = true;
+                    m_AttackerWon = false;
                 }
             }
 

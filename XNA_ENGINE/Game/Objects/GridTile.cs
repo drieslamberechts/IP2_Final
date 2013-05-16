@@ -32,7 +32,6 @@ namespace XNA_ENGINE.Game.Objects
         private TileType m_TileType;
 
         private bool m_Selected;
-        private bool m_PermanentSelected;
         private bool m_Open = true;
         private bool m_IsUsedbyStructure = false;
 
@@ -64,6 +63,11 @@ namespace XNA_ENGINE.Game.Objects
             TreeWillow,
             TreeDead1,
             TreeDead2,
+            OrangeGrass,
+            TreeShort3,
+            TreeShort4,
+            TreeShort5,
+            TreeShort6,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -168,7 +172,7 @@ namespace XNA_ENGINE.Game.Objects
                     LoadTileType(new PrefabTreeLong(this));
                     break;
                 case TileType.TreeShort:
-                    LoadTileType(new PrefabTreeShort(this));
+                    LoadTileType(new PrefabTreeShort1(this));
                     break;
                 case TileType.Pond:
                     LoadTileType(new PrefabPond(this));
@@ -211,6 +215,21 @@ namespace XNA_ENGINE.Game.Objects
                     break;
                 case TileType.TreeDead2:
                     LoadTileType(new PrefabTreeDead2(this));
+                    break;
+                case TileType.OrangeGrass:
+                    LoadTileType(new PrefabOrangeGrass(this));
+                    break;
+                case TileType.TreeShort3:
+                    LoadTileType(new PrefabTreeShort3(this));
+                    break;
+                case TileType.TreeShort4:
+                    LoadTileType(new PrefabTreeShort4(this));
+                    break;
+                case TileType.TreeShort5:
+                    LoadTileType(new PrefabTreeShort5(this));
+                    break;
+                case TileType.TreeShort6:
+                    LoadTileType(new PrefabTreeShort6(this));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("type");

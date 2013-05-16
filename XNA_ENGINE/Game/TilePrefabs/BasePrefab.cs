@@ -11,7 +11,6 @@ namespace XNA_ENGINE.Game.TilePrefabs
     {
         protected bool m_bOpen = true;
         protected GameModelGrid m_TileModel;
-        protected Texture2D m_Tiletexture;
         protected List<GameModelGrid> m_PropList;
 
         protected const float GRIDWIDTH = 64;
@@ -21,7 +20,6 @@ namespace XNA_ENGINE.Game.TilePrefabs
         protected const int YOFFSETMAX = 15;
 
         protected int m_WoodCount = 0;
-
 
         public BasePrefab()
         {
@@ -36,11 +34,6 @@ namespace XNA_ENGINE.Game.TilePrefabs
         public GameModelGrid TileModel
         {
             get { return m_TileModel; }
-        }
-
-        public Texture2D TileTexture
-        {
-            get { return m_Tiletexture; }
         }
 
         public List<GameModelGrid> PropList

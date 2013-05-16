@@ -1548,7 +1548,7 @@
 	<tile>
 		<positionX>9</positionX>
 		<positionY>10</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>10</positionX>
@@ -1568,17 +1568,17 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>10</positionY>
-		<TileType>0</TileType>
+		<TileType>17</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>10</positionY>
-		<TileType>0</TileType>
+		<TileType>17</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>10</positionY>
-		<TileType>0</TileType>
+		<TileType>17</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
@@ -3573,22 +3573,22 @@
 	<tile>
 		<positionX>24</positionX>
 		<positionY>23</positionY>
-		<TileType>4</TileType>
+		<TileType>21</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>21</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>20</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>23</positionY>
-		<TileType>0</TileType>
+		<TileType>19</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -3738,7 +3738,7 @@
 	<tile>
 		<positionX>27</positionX>
 		<positionY>24</positionY>
-		<TileType>0</TileType>
+		<TileType>18</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -3858,12 +3858,12 @@
 	<tile>
 		<positionX>21</positionX>
 		<positionY>25</positionY>
-		<TileType>13</TileType>
+		<TileType>17</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
 		<positionY>25</positionY>
-		<TileType>4</TileType>
+		<TileType>16</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
@@ -4013,27 +4013,27 @@
 	<tile>
 		<positionX>22</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>4</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>26</positionY>
-		<TileType>4</TileType>
+		<TileType>5</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>26</positionY>
-		<TileType>4</TileType>
+		<TileType>20</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>19</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>26</positionY>
-		<TileType>0</TileType>
+		<TileType>18</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
@@ -4158,32 +4158,32 @@
 	<tile>
 		<positionX>21</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>22</positionX>
 		<positionY>27</positionY>
-		<TileType>8</TileType>
+		<TileType>3</TileType>
 	</tile>
 	<tile>
 		<positionX>23</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>15</TileType>
 	</tile>
 	<tile>
 		<positionX>24</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>14</TileType>
 	</tile>
 	<tile>
 		<positionX>25</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>16</TileType>
 	</tile>
 	<tile>
 		<positionX>26</positionX>
 		<positionY>27</positionY>
-		<TileType>0</TileType>
+		<TileType>17</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>

@@ -1,6 +1,5 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
-Content\Models\settlement_TestSettlementBlue.xnb
 Content\defend.xnb
 Content\gather.xnb
 Content\Textures\RainbowTexture.xnb
@@ -12,23 +11,16 @@ Content\Tile3.xnb
 Content\Tile4.xnb
 Content\BuildBase.xnb
 Content\BuildTile.xnb
-Content\Models\tree_TreeShort.xnb
-Content\Models\tile_Normal.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
 Content\Build.xnb
 Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
 Content\Textures\Background.xnb
-Content\Models\building_FlagNormal.xnb
 Content\Tile1.xnb
 Content\Tile2.xnb
-Content\Models\char_Soldier.xnb
-Content\Models\char_Villager.xnb
-Content\Models\prop_Wood.xnb
 Content\Textures\tex_tree_Tall1.xnb
 Content\DaeSplashScreen.xnb
-Content\Models\tree_TreeTall.xnb
 Content\Models\char_Goblin_Shaman.xnb
 Content\Models\building_School.xnb
 Content\Models\building_Settlement.xnb
@@ -54,7 +46,6 @@ Content\final Menu\characterStats.xnb
 Content\final Menu\hoverVillager.xnb
 Content\final Menu\unitList.xnb
 Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1+Grass2.xnb
-Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
 Content\Textures\tex_house_tent1+tent2+tent3+campfire.xnb
 Content\Textures\tex_env_Foliage2.xnb
 Content\Textures\tex_env_Treetrunk1.xnb
@@ -112,13 +103,11 @@ Content\Textures\tex_env_rock2_0.xnb
 Content\Models\tree_TreeDead1.xnb
 Content\Models\tree_TreeDead2.xnb
 Content\Models\tree_TreeShort1.xnb
-Content\Models\tree_TreeShort2.xnb
 Content\Models\tree_TreeShort3.xnb
 Content\Models\tree_TreeShort4.xnb
 Content\Models\tree_TreeShort5.xnb
 Content\Models\tree_TreeShort6.xnb
 Content\Models\tree_TreeTall1.xnb
-Content\Models\tree_TreeTall2.xnb
 Content\Textures\tex_env_Treetrunk2_0.xnb
 Content\final Menu\Button_Delete.xnb
 Content\final Menu\Button_AddSchool.xnb
@@ -146,3 +135,4 @@ Content\final Menu\Button_AddSchoolHover.xnb
 Content\final Menu\Button_DeleteHover.xnb
 Content\final Menu\hoverSchool.xnb
 Content\final Menu\hoverShaman.xnb
+Content\Models\char_Soldier.xnb
