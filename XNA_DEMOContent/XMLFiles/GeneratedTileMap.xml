@@ -3368,12 +3368,12 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>22</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>22</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
@@ -3518,7 +3518,7 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>23</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>

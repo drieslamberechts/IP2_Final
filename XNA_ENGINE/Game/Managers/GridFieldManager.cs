@@ -348,13 +348,50 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
-        public bool IsTileAccesible(GridTile currentTile , GridTile target)
+        public bool IsTileAccesible(GridTile currentTile , GridTile destinationTile, int radius = 1)
         {
-            if (!target.IsWalkable()) return false;
-            if (GetNWTile(currentTile) == target) return true;
-            if (GetSWTile(currentTile) == target) return true;
-            if (GetNETile(currentTile) == target) return true;
-            if (GetSETile(currentTile) == target) return true;
+            //If the destinationtile is not walkable, return
+            if (!destinationTile.IsWalkable()) return false;
+
+            //If the destinationtile = the current tile
+            if (currentTile == destinationTile && destinationTile.IsWalkable()) return true;
+
+            //Loop over NorthWest tiles
+            GridTile tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetNWTile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+            
+            //Loop over SouthWest tiles
+            tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetSWTile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+
+            //Loop over NorthEast tiles
+            tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetNETile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+
+            //Loop over SouthEast tiles
+            tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetSETile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+
             return false;
         }
 
