@@ -25,7 +25,7 @@ namespace XNA_ENGINE.Game.Scenes
             RotateCounterClockWise,
             ToggleSelectionMode,
             ToggleTileType,
-            GoBackToMainMenu,
+            ShowMenu,
             ToggleDebug,
             LeftShift
         }
@@ -101,7 +101,7 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction rotateCounterClockwise = new InputAction((int)PlayerInput.RotateCounterClockWise, TriggerState.Down);
             InputAction toggleSelectionMode = new InputAction((int)PlayerInput.ToggleSelectionMode, TriggerState.Pressed);
             InputAction toggleTileType = new InputAction((int)PlayerInput.ToggleTileType, TriggerState.Pressed);
-            InputAction goBackToMainMenu = new InputAction((int)PlayerInput.GoBackToMainMenu,TriggerState.Pressed);
+            InputAction goBackToMainMenu = new InputAction((int)PlayerInput.ShowMenu, TriggerState.Pressed);
             InputAction toggleDebug = new InputAction((int)PlayerInput.ToggleDebug,TriggerState.Pressed);
             InputAction shift = new InputAction((int)PlayerInput.LeftShift, TriggerState.Down);
 
@@ -300,8 +300,9 @@ namespace XNA_ENGINE.Game.Scenes
             if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleDebug))
                 m_DrawDebug = !m_DrawDebug;
 
-            if (m_InputManager.IsActionTriggered((int) PlayerInput.GoBackToMainMenu))
+            if (m_InputManager.IsActionTriggered((int)PlayerInput.ShowMenu))
             {
+                Menu.GetInstance().ToggleIngameMenu();
                 SceneManager.RemoveGameScene(this);
                 SceneManager.SetActiveScene("MainMenuScene");
             }

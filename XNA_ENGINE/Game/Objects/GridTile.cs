@@ -44,6 +44,9 @@ namespace XNA_ENGINE.Game.Objects
 
         private readonly GameScene m_GameScene;
 
+        private Army m_BoundArmy;
+        private bool m_ShamanGoal;
+
         public enum TileType
         {
             NormalGrass,
@@ -102,6 +105,9 @@ namespace XNA_ENGINE.Game.Objects
                 m_YOffset += delta;
                 m_TileModel.Translate(m_TileModel.LocalPosition.X, m_YOffset, m_TileModel.LocalPosition.Z);
             }
+
+
+            m_TileModel.ShamanGoal = m_ShamanGoal;
 
             OnSelected();
         }
@@ -238,6 +244,10 @@ namespace XNA_ENGINE.Game.Objects
 
         private void LoadTileType(BasePrefab tilePrefab)
         {
+            bool isDangerous = false;
+            if (m_TileModel!= null)
+                isDangerous = m_TileModel.Danger;
+
             //Unload the previous model
             UnloadTileType();
 
@@ -268,6 +278,14 @@ namespace XNA_ENGINE.Game.Objects
                 prop.DiffuseColor = new Vector3(1, 1, 1);
                 m_TileModel.AddChild(prop);
             }
+
+            if (m_TileModel != null)
+                m_TileModel.Danger = isDangerous;
+
+            if (m_ShamanGoal)
+                m_TileModel.ShamanGoal = true;
+            else
+                m_TileModel.ShamanGoal = false;
         }
 
         private void UnloadTileType()
@@ -303,6 +321,11 @@ namespace XNA_ENGINE.Game.Objects
 
             return false;
         }
+        public bool ShamanGoal
+        {
+            get { return m_ShamanGoal; }
+            set { m_ShamanGoal = value; }
+        }
 
         public bool Selected
         {
@@ -335,6 +358,18 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_YOffsetTarget = offset;
             m_OffsetTransitionTime = time;
+        }
+
+        public void BoundArmy(Army army)
+        {
+            m_TileModel.Danger = true;
+            m_BoundArmy = army;
+        }
+
+        public void UnBoundArmy(Army army = null)
+        {
+            m_TileModel.Danger = false;
+            m_BoundArmy = null;
         }
 
         public bool PickupWood(Player player, bool pickup = true)

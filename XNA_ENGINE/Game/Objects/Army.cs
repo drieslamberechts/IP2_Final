@@ -17,10 +17,12 @@ namespace XNA_ENGINE.Game.Objects
 
         private const float GRIDHEIGHT = 32;
 
-        private int m_ArmySize = 1;
+        private int m_ArmySize;
 
-        public Army(GridTile startTile)
+        public Army(GridTile startTile, int armySize = 1)
         {
+            m_ArmySize = armySize;
+
             m_LinkedTileList = null;
 
             m_PlaceableType = PlaceableType.Army;
