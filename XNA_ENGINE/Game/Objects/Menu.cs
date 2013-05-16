@@ -341,10 +341,10 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.ShrineMode:
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShaman))
                     {
-                        if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                        if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
                         {
                             Console.WriteLine("Build Shaman");
-                            // Actually build Shaman
+                            selectedPlaceable.QueueShaman();
                         }
                         return true;
                     }

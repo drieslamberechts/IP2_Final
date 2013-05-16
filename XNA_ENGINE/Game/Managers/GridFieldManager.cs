@@ -78,7 +78,7 @@ namespace XNA_ENGINE.Game.Managers
              //TEST PLACEABLES
              m_UserPlayer.AddPlaceable(new Villager(m_GridField[5,5]));
              m_UserPlayer.AddPlaceable(new Army(m_GridField[6, 4]));
-             m_UserPlayer.AddPlaceable(new Shaman(m_GridField[7, 3]));
+            // m_UserPlayer.AddPlaceable(new Shaman(m_GridField[7, 3]));
 
              m_PlayersList.ElementAt(1).AddPlaceable(new Army(m_GridField[15, 6]));
         }
@@ -338,7 +338,7 @@ namespace XNA_ENGINE.Game.Managers
 
         public bool IsTileAccesible(GridTile currentTile , GridTile target)
         {
-            if (!currentTile.IsWalkable()) return false;
+            if (!target.IsWalkable()) return false;
             if (GetNWTile(currentTile) == target) return true;
             if (GetSWTile(currentTile) == target) return true;
             if (GetNETile(currentTile) == target) return true;
