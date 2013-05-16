@@ -809,10 +809,15 @@ namespace XNA_ENGINE.Game.Objects
             m_SelectedMode = mode;
         }
 
-        public void NextTileType()
+        public void NextTileType(bool previous = false)
         {
-            ++m_TileTypeSelected;
+            if (!previous)
+                ++m_TileTypeSelected;
+            else
+                --m_TileTypeSelected;
+            
             if ((int)m_TileTypeSelected >= (int)GridTile.TileType.enumSize) m_TileTypeSelected = 0;
+            if ((int)m_TileTypeSelected < 0) m_TileTypeSelected = GridTile.TileType.enumSize-1;
         }
 
         public SubMenuSelected SubMenu

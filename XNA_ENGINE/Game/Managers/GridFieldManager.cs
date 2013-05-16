@@ -139,7 +139,7 @@ namespace XNA_ENGINE.Game.Managers
 
             //GO OVER ALL PLACEABLES
             //CHECK IF AN ARMY AND VILLAGER INTERSECT
-           /* List<Placeable> allPlaceables = GetAllPlaceables();
+            /*List<Placeable> allPlaceables = GetAllPlaceables();
             foreach (Placeable placeable1 in allPlaceables)
                 foreach (Placeable placeable2 in allPlaceables)
                 {
@@ -334,6 +334,16 @@ namespace XNA_ENGINE.Game.Managers
             if (returnList.Any()) return returnList;
 
             return null;
+        }
+
+        public bool IsTileAccesible(GridTile currentTile , GridTile target)
+        {
+            if (!currentTile.IsWalkable()) return false;
+            if (GetNWTile(currentTile) == target) return true;
+            if (GetSWTile(currentTile) == target) return true;
+            if (GetNETile(currentTile) == target) return true;
+            if (GetSETile(currentTile) == target) return true;
+            return false;
         }
 
         public void Select(GridTile tile)

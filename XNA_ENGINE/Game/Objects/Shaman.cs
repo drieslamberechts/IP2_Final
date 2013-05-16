@@ -105,17 +105,21 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                if (selectedTile != null)
-                    SetTargetTile(selectedTile);
+                SetTargetTile(selectedTile);
             }
 
             base.OnPermanentSelected();
         }
 
-        public override void SetTargetTile(GridTile targetTile)
+        public override bool SetTargetTile(GridTile targetTile)
         {
-            if (targetTile.IsWalkable())
+            if (targetTile != null && GridFieldManager.GetInstance().IsTileAccesible(m_TargetTile, targetTile))
+            {
                 m_TargetTile = targetTile;
+
+                return true;
+            }
+            return false;
         }
     }
 }

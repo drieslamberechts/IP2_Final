@@ -16,6 +16,7 @@ namespace XNA_ENGINE.Game.Objects
         private GridTile m_TargetTile;
 
         private const float GRIDHEIGHT = 32;
+        private const int m_MoveRadius = 1;
 
         public Villager(GridTile startTile)
         {
@@ -37,6 +38,8 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.DrawBoundingBox = false;
 
             m_TargetTile = startTile;
+
+            
 
             m_Model.Translate(m_TargetTile.Model.WorldPosition);
 
@@ -95,11 +98,9 @@ namespace XNA_ENGINE.Game.Objects
             var gridFieldManager = GridFieldManager.GetInstance();
             m_Rallypoint.CanDraw = false;
 
-            GridTile selectedTile;
-            if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
+            GridTile selectedTile = null;
+            if (gridFieldManager.GetSelectedTiles() != null)
                 selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
-            else
-                selectedTile = null;
 
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.VillagerMode;
 
@@ -110,16 +111,15 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                if (selectedTile != null)
-                    SetTargetTile(selectedTile);
+                SetTargetTile(selectedTile);
             }
 
             base.OnPermanentSelected();
         }
 
-        public override void SetTargetTile(GridTile targetTile)
+        public override bool SetTargetTile(GridTile targetTile)
         {
-            if (targetTile.IsWalkable())
+            if (targetTile != null && GridFieldManager.GetInstance().IsTileAccesible(m_TargetTile, targetTile))
             {
                 m_TargetTile = targetTile;
 
@@ -128,7 +128,9 @@ namespace XNA_ENGINE.Game.Objects
                     Menu.GetInstance().m_Enable4 = false;
                     Menu.GetInstance().m_Enable5 = true;
                 }
+                return true;
             }
+            return false;
         }
     }
 }

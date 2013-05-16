@@ -100,10 +100,11 @@ namespace XNA_ENGINE.Game.Objects
 
         }
 
-        public virtual void SetTargetTile(GridTile targetTile)
+        public virtual bool SetTargetTile(GridTile targetTile)
         {
-            
+            return false;
         }
+
         public virtual GridTile GetTargetTile()
         {
             return null;
