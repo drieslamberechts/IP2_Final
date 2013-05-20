@@ -134,7 +134,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public override bool SetTargetTile(GridTile targetTile)
         {
-            if (targetTile != null && GridFieldManager.GetInstance().IsTileAccesible(m_TargetTile, targetTile))
+            if (targetTile != null)
             {
                 m_TargetTile = targetTile;
 

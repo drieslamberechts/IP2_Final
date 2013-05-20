@@ -21,6 +21,7 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_PermanentSelected { get; set; }
         private bool m_DangerHighlight { get; set; }
         private bool m_ShamanGoalHighlight { get; set; }
+        private bool m_GreenHighlight { get; set; }
 
         private Vector3 m_DiffuseColor { get; set; }
         private float m_Alpha { get; set; }
@@ -101,6 +102,17 @@ namespace XNA_ENGINE.Game.Objects
                         effect.SpecularColor += new Vector3(0.0f, 0.0f,1.0f * smooth + 0.2f);
                         effect.EmissiveColor += new Vector3(0.0f, 0.0f, 0.1f * smooth + 0.04f);
                     }
+
+                    if (m_GreenHighlight)
+                    {
+                        float totalTimeInMilliseconds = renderContext.GameTime.TotalGameTime.Milliseconds + (renderContext.GameTime.TotalGameTime.Seconds * 1000);
+                        totalTimeInMilliseconds /= 150.0f;
+
+                        float smooth = ((float)Math.Cos(totalTimeInMilliseconds) + 1) / 2;
+
+                        effect.SpecularColor += new Vector3(0.0f, 0.8f * smooth, 0.0f);
+                        effect.EmissiveColor += new Vector3(0.0f, 0.1f * smooth, 0.0f);
+                    }
                     
                     effect.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
                 }
@@ -146,6 +158,11 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_ShamanGoalHighlight; }
             set { m_ShamanGoalHighlight = value; }
+        }
+        public bool GreenHighLight
+        {
+            get { return m_GreenHighlight; }
+            set { m_GreenHighlight = value; }
         }
 
         public Vector3 DiffuseColor

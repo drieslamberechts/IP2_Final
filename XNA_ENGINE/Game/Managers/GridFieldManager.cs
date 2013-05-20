@@ -348,7 +348,226 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
-        public bool IsTileAccesible(GridTile currentTile , GridTile destinationTile, int radius = 1)
+        public List<GridTile> CalculatePath(GridTile startTile, GridTile targetTile)
+        {
+            ///////////////////////////////////////////
+            ////FIRST SOLUTION/////////////////////////
+            /////////////////////////////////////////// 
+            ///////////////////////////////////////////
+            foreach (var gridTile in m_GridField)
+            {
+                gridTile.PFResetValues();//Reset all values for calculating the path
+                PFCalculateH(gridTile, targetTile);//Calculate the H value
+            }
+
+
+            //Create the lists
+            List<GridTile> returnPath = new List<GridTile>();
+            List<GridTile> openNodeList = new List<GridTile>(); //Create the open list of nodes, initially containing only our starting node
+            List<GridTile> closedNodeList = new List<GridTile>(); //Create the closed list of nodes, initially empty
+
+            //Add the startTile
+            openNodeList.Add(startTile);
+
+            bool finished = true;
+            while (finished)
+            {
+                GridTile lowestFTile;
+                if (openNodeList.Any())
+                {
+                    //Get the lowest F tile
+                    lowestFTile = PFGetLowestFTile(openNodeList);
+                    //Drop it from the open list and add it to the closed list.
+                    PFMoveFromOpenToClose(lowestFTile, ref openNodeList, ref closedNodeList);
+                }
+                else
+                {
+                    return returnPath;
+                }
+
+                if (lowestFTile == targetTile)
+                {
+                    finished = false;
+                }
+                else
+                {
+                    //Check for all neighbours
+                    List<GridTile> neighbourList = PFCheckAllNeighboursAndParentThem(lowestFTile);
+
+                    //Add the neighbours to the open node list if they aren't in the closed list and check the G value if they are in the open list
+                    foreach (var currentNeighbourTile in neighbourList)
+                    {
+                        if (PFIsTileInNodeList(currentNeighbourTile, closedNodeList))
+                        {
+                        }
+                        else if (PFIsTileInNodeList(currentNeighbourTile, openNodeList))
+                        {
+                            if (currentNeighbourTile.PFG > lowestFTile.PFG) //if current tile has better G score than the other tile, and because of that a better path to the start tile
+                            {
+                                currentNeighbourTile.PFParent = lowestFTile;
+                                currentNeighbourTile.PFG = lowestFTile.PFG + 10;
+                            }
+                        }
+                        else
+                        {
+                            currentNeighbourTile.PFParent = lowestFTile;
+                            currentNeighbourTile.PFG = lowestFTile.PFG + 10;
+                            openNodeList.Add(currentNeighbourTile);
+                        }
+
+                    }
+                }
+            }
+
+            GridTile parent = targetTile;
+            while (parent != startTile)
+            {
+                returnPath.Insert(0, parent);
+                parent = parent.PFParent;
+            }
+
+            return returnPath;
+            
+
+            /* ///////////////////////////////////////////
+            ////SECOND SOLUTION////////////////////////
+            /////////////////////////////////////////// 
+            ///////////////////////////////////////////
+            //Reset all values for calculating the path
+            foreach (var gridTile in m_GridField)
+               gridTile.PFResetValues();
+
+            //G : the exact cost to reach this node from the starting node.
+            //H : the estimated(heuristic) cost to reach the destination from here.
+            //F = G + H : As the algorithm runs the F value of a node tells us how expensive we think it will be to reach our goal by way of that node.
+
+            List<GridTile> returnPath = new List<GridTile>();
+
+            //Create the open list of nodes, initially containing only our starting node
+            List<GridTile> openNodeList = new List<GridTile>();
+            PFCalculateH(startTile, targetTile);
+            openNodeList.Add(startTile);
+
+            //Create the closed list of nodes, initially empty
+            List<GridTile> closedNodeList = new List<GridTile>();
+
+            GridTile currentNode = startTile;
+
+            bool finished = true;
+            while (finished)
+            {
+                //Check for the node with the lowest f
+                GridTile lowestFNode = openNodeList.ElementAt(0);
+                foreach (GridTile gridNode in openNodeList)
+                {
+                    if (lowestFNode.PFF > gridNode.PFF) lowestFNode = gridNode;
+                }
+                currentNode = lowestFNode;
+
+                if (currentNode == targetTile) // check if this node is the goal
+                {
+                    //TODO
+                    //Finish the stuff
+                    finished = false;
+                }
+                else
+                {
+                    //Move the current node to the closed list and consider all of its neighbors
+                    closedNodeList.Add(currentNode);
+                    List<GridTile> neighbourList = PFCheckAllNeighbours(currentNode);
+
+                    foreach (var neighbourNode in neighbourList)
+                    {
+                        GridTile closedNode = PFIsTileInNodeList(neighbourNode, closedNodeList);
+                        GridTile opendNode = PFIsTileInNodeList(neighbourNode, openNodeList);
+                        if (closedNode != null && closedNode.PFG > currentNode.PFG) //This neighbor is in the closed list and our current g value is lower
+                        {
+                            //update the neighbor with the new, lower, g value 
+                            closedNode.PFG = currentNode.PFG;
+                            //change the neighbor's parent to our current node
+                            closedNode = currentNode;
+                        }
+                        else if (opendNode != null && opendNode.PFG > currentNode.PFG) //This neighbor is in the open list and our current g value is lower
+                        {
+                            //update the neighbor with the new, lower, g value 
+                            opendNode.PFG = currentNode.PFG;
+                            //change the neighbor's parent to our current node
+                            opendNode.PFParent = currentNode;
+                        }
+                        else //this neighbor is not in either the open or closed list
+                        {
+                            //add the neighbor to the open list and set its g value
+                            //openNodeList.Add(new GridNode(neighbourNode, currentNode.m_GridTile, currentNode.m_G + 1));
+                        }
+                    }
+
+                }
+            }*/
+        }
+
+        private int PFCalculateH(GridTile startTile, GridTile endTile)
+        {
+            int returnValue = Math.Abs(startTile.Row-endTile.Row) + Math.Abs(startTile.Column-endTile.Column);
+            startTile.PFH = returnValue;
+            return returnValue;
+        }
+
+        private GridTile PFGetLowestFTile(List<GridTile> list)
+        {
+            GridTile lowestFTile;
+            lowestFTile = list.ElementAt(0);
+            foreach (var gridTile in list)
+            {
+                if (gridTile.PFGetF() < lowestFTile.PFGetF()) lowestFTile = gridTile;
+            }
+
+            return lowestFTile;
+        }
+
+        private bool PFMoveFromOpenToClose(GridTile tile, ref List<GridTile> openList, ref List<GridTile> closedList)
+        {
+            bool removed = openList.Remove(tile);
+            closedList.Add(tile);
+
+            return removed;
+        }
+
+        private List<GridTile> PFCheckAllNeighboursAndParentThem(GridTile parentTile)
+        {
+            const int gHorVer = 10;
+
+            List<GridTile> returnList = new List<GridTile>();
+
+            GridTile nwTile = GetNWTile(parentTile);
+            if (nwTile != null && nwTile.IsWalkable())
+                returnList.Add(nwTile);
+
+            GridTile neTile = GetNETile(parentTile);
+            if (neTile != null && neTile.IsWalkable())
+                returnList.Add(neTile);
+
+            GridTile seTile = GetSETile(parentTile);
+            if (seTile != null && seTile.IsWalkable())
+                returnList.Add(seTile);
+
+            GridTile swTile = GetSWTile(parentTile);
+            if (swTile != null && swTile.IsWalkable())
+                returnList.Add(swTile);
+
+            return returnList;
+        }
+
+        private bool PFIsTileInNodeList(GridTile gridTile, List<GridTile> listTile)
+        {
+            foreach (var tile in listTile)
+            {
+                if (gridTile == tile) return true;
+            }
+
+            return false;
+        }
+
+       /* public bool IsTileAccesible(GridTile currentTile , GridTile destinationTile, int radius = 1)
         {
             //If the destinationtile is not walkable, return
             if (!destinationTile.IsWalkable()) return false;
@@ -393,7 +612,7 @@ namespace XNA_ENGINE.Game.Managers
             }
 
             return false;
-        }
+        }*/
 
         public void Select(GridTile tile)
         {

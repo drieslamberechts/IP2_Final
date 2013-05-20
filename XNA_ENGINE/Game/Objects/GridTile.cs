@@ -47,6 +47,11 @@ namespace XNA_ENGINE.Game.Objects
         private Army m_BoundArmy;
         private bool m_ShamanGoal;
 
+        //PathFinding
+        private int m_PFH;
+        private int m_PFG;
+        private GridTile m_PFParent;
+
         public enum TileType
         {
             NormalGrass,
@@ -286,6 +291,37 @@ namespace XNA_ENGINE.Game.Objects
                 m_TileModel.ShamanGoal = true;
             else
                 m_TileModel.ShamanGoal = false;
+        }
+
+        public void PFResetValues()
+        {
+            m_PFG = 0;
+            m_PFH = 0;
+            m_PFParent = null;
+        }
+
+        public GridTile PFParent
+        {
+            get { return m_PFParent; }
+            set { m_PFParent = value; }
+        }
+
+
+        public int PFH
+        {
+            get { return m_PFH; }
+            set { m_PFH = value; }
+        }
+
+        public int PFG
+        {
+            get { return m_PFG; }
+            set { m_PFG = value; }
+        }
+
+        public int PFGetF()
+        {
+            return m_PFG + m_PFH;
         }
 
         private void UnloadTileType()
