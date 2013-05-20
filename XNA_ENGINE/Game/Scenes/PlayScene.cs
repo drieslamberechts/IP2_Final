@@ -407,16 +407,8 @@ namespace XNA_ENGINE.Game.Scenes
             #endregion
             #endregion
 
-            if (m_GamePadState.Buttons.RightShoulder != 0)
-            {
-                System.Console.WriteLine("Right shoulder pressed");
-            }
-            if (m_GamePadState.Buttons.LeftShoulder != 0)
-            {
-                System.Console.WriteLine("Left shoulder pressed");
-            }
-
-            // Work with X Y B to select meu options
+            // CONTROLLER
+            // Work with X Y B to select menu options
             if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.VillagerMode)
             {
                 if (m_GamePadState.IsButtonDown(Buttons.X))
@@ -429,6 +421,28 @@ namespace XNA_ENGINE.Game.Scenes
                 {
                     GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                     Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.BuildSchool);
+                }
+
+                if (m_GamePadState.IsButtonDown(Buttons.B))
+                {
+                    GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                    Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.BuildShrine);
+                }
+            }
+
+            if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.SettlementMode)
+            {
+                if (m_GamePadState.IsButtonDown(Buttons.X))
+                {
+                    // Build Villager
+                }
+            }
+
+            if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.ShrineMode)
+            {
+                if (m_GamePadState.IsButtonDown(Buttons.X))
+                {
+                    // Build Shaman
                 }
             }
 
