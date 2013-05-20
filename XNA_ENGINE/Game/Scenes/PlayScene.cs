@@ -79,8 +79,6 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
-            m_GamePadState = GamePad.GetState(PlayerIndex.One);
-
             // Initialize player and AI
             var userplayer = new Player(Player.PlayerColor.Blue);
             var enemyPlayer = new Player(Player.PlayerColor.Red);
@@ -103,10 +101,13 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction goBackToMainMenu = new InputAction((int)PlayerInput.GoBackToMainMenu,TriggerState.Pressed);
             InputAction toggleDebug = new InputAction((int)PlayerInput.ToggleDebug,TriggerState.Pressed);
 
+            // Controller Specific
+            /* none */
+
             leftClick.MouseButton = MouseButtons.LeftButton;
             leftClick.GamePadButton = Buttons.A;
             rightClick.MouseButton = MouseButtons.RightButton;
-            rightClick.GamePadButton = Buttons.B;
+            rightClick.GamePadButton = Buttons.RightStick;
             leftHold.MouseButton = MouseButtons.LeftButton;
             scrollWheelDown.MouseButton = MouseButtons.MiddleButton;
             toggleCreativeMode.KeyButton = Keys.C;
@@ -312,33 +313,34 @@ namespace XNA_ENGINE.Game.Scenes
             rightVecCam = Vector3.Transform(forwardVecCam, rotMatrix);
             rightVecCam.Normalize();
 
+            m_GamePadState = GamePad.GetState(PlayerIndex.One);
+
             //Gamepad
             if (m_GamePadState.IsConnected)
             {
                 if (m_GamePadState.ThumbSticks.Left.Y > 0)
-                    m_CameraTargetPos += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
-                if (m_GamePadState.ThumbSticks.Left.X < 0)
-                    m_CameraTargetPos += rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
+                    m_CameraTargetPos += -forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * 5;
                 if (m_GamePadState.ThumbSticks.Left.Y < 0)
-                    m_CameraTargetPos += forwardVecCam * m_GamePadState.ThumbSticks.Left.Y * (float)m_CameraScale;
+                    m_CameraTargetPos += forwardVecCam * -m_GamePadState.ThumbSticks.Left.Y * 5;
+                if (m_GamePadState.ThumbSticks.Left.X < 0)
+                    m_CameraTargetPos += rightVecCam * -m_GamePadState.ThumbSticks.Left.X * 5;
                 if (m_GamePadState.ThumbSticks.Left.X > 0)
-                    m_CameraTargetPos += -rightVecCam * m_GamePadState.ThumbSticks.Left.X * (float)m_CameraScale;
+                    m_CameraTargetPos += -rightVecCam * m_GamePadState.ThumbSticks.Left.X * 5;
             }
 
 
             //Keyboard
             float scrollStrength = 10 * (float)m_CameraScale;
-
             if (keyboardState[Keys.Z] == KeyState.Down)
                 /*if (m_CameraTargetPos.Z > 850)*/
-                m_CameraTargetPos += -forwardVecCam * scrollStrength;
+                m_CameraTargetPos += -forwardVecCam*scrollStrength;
             if (keyboardState[Keys.S] == KeyState.Down)
-                m_CameraTargetPos += forwardVecCam * scrollStrength;
+                m_CameraTargetPos += forwardVecCam*scrollStrength;
             if (keyboardState[Keys.Q] == KeyState.Down)
                 /* if (m_CameraTargetPos.X > 620) */
-                m_CameraTargetPos += rightVecCam * scrollStrength;
+                m_CameraTargetPos += rightVecCam*scrollStrength;
             if (keyboardState[Keys.D] == KeyState.Down)
-                m_CameraTargetPos += -rightVecCam * scrollStrength;
+                m_CameraTargetPos += -rightVecCam*scrollStrength;
 
             //Rotate
             float camSpeed = 0.5f;
@@ -398,6 +400,32 @@ namespace XNA_ENGINE.Game.Scenes
 
             #endregion
             #endregion
+
+            if (m_GamePadState.Buttons.RightShoulder != 0)
+            {
+                System.Console.WriteLine("Right shoulder pressed");
+            }
+            if (m_GamePadState.Buttons.LeftShoulder != 0)
+            {
+                System.Console.WriteLine("Left shoulder pressed");
+            }
+
+            // Work with X Y B to select meu options
+            if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.VillagerMode)
+            {
+                if (m_GamePadState.IsButtonDown(Buttons.X))
+                {
+                    GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                    Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.BuildSettlement);
+                }
+
+                if (m_GamePadState.IsButtonDown(Buttons.Y))
+                {
+                    GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
+                    Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.BuildSchool);
+                }
+            }
+
 
             GridFieldManager.GetInstance().HandleInput(renderContext);
         }
