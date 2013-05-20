@@ -32,7 +32,6 @@ namespace XNA_ENGINE.Game.Objects
         private TileType m_TileType;
 
         private bool m_Selected;
-        private bool m_PermanentSelected;
         private bool m_Open = true;
         private bool m_IsUsedbyStructure = false;
 
@@ -44,6 +43,9 @@ namespace XNA_ENGINE.Game.Objects
         private float m_OffsetTransitionTime;
 
         private readonly GameScene m_GameScene;
+
+        private Army m_BoundArmy;
+        private bool m_ShamanGoal;
 
         public enum TileType
         {
@@ -61,6 +63,14 @@ namespace XNA_ENGINE.Game.Objects
             DirtGrass1,
             Dirt1,
             Dirt2,
+            TreeWillow,
+            TreeDead1,
+            TreeDead2,
+            OrangeGrass,
+            TreeShort3,
+            TreeShort4,
+            TreeShort5,
+            TreeShort6,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -95,6 +105,9 @@ namespace XNA_ENGINE.Game.Objects
                 m_YOffset += delta;
                 m_TileModel.Translate(m_TileModel.LocalPosition.X, m_YOffset, m_TileModel.LocalPosition.Z);
             }
+
+
+            m_TileModel.ShamanGoal = m_ShamanGoal;
 
             OnSelected();
         }
@@ -165,7 +178,7 @@ namespace XNA_ENGINE.Game.Objects
                     LoadTileType(new PrefabTreeLong(this));
                     break;
                 case TileType.TreeShort:
-                    LoadTileType(new PrefabTreeShort(this));
+                    LoadTileType(new PrefabTreeShort1(this));
                     break;
                 case TileType.Pond:
                     LoadTileType(new PrefabPond(this));
@@ -200,6 +213,30 @@ namespace XNA_ENGINE.Game.Objects
                 case TileType.Dirt2:
                     LoadTileType(new PrefabDirt2(this));
                     break;
+                case TileType.TreeWillow:
+                    LoadTileType(new PrefabTreeWillow(this));
+                    break;
+                case TileType.TreeDead1:
+                    LoadTileType(new PrefabTreeDead1(this));
+                    break;
+                case TileType.TreeDead2:
+                    LoadTileType(new PrefabTreeDead2(this));
+                    break;
+                case TileType.OrangeGrass:
+                    LoadTileType(new PrefabOrangeGrass(this));
+                    break;
+                case TileType.TreeShort3:
+                    LoadTileType(new PrefabTreeShort3(this));
+                    break;
+                case TileType.TreeShort4:
+                    LoadTileType(new PrefabTreeShort4(this));
+                    break;
+                case TileType.TreeShort5:
+                    LoadTileType(new PrefabTreeShort5(this));
+                    break;
+                case TileType.TreeShort6:
+                    LoadTileType(new PrefabTreeShort6(this));
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException("type");
             }
@@ -207,6 +244,10 @@ namespace XNA_ENGINE.Game.Objects
 
         private void LoadTileType(BasePrefab tilePrefab)
         {
+            bool isDangerous = false;
+            if (m_TileModel!= null)
+                isDangerous = m_TileModel.Danger;
+
             //Unload the previous model
             UnloadTileType();
 
@@ -237,6 +278,14 @@ namespace XNA_ENGINE.Game.Objects
                 prop.DiffuseColor = new Vector3(1, 1, 1);
                 m_TileModel.AddChild(prop);
             }
+
+            if (m_TileModel != null)
+                m_TileModel.Danger = isDangerous;
+
+            if (m_ShamanGoal)
+                m_TileModel.ShamanGoal = true;
+            else
+                m_TileModel.ShamanGoal = false;
         }
 
         private void UnloadTileType()
@@ -272,6 +321,11 @@ namespace XNA_ENGINE.Game.Objects
 
             return false;
         }
+        public bool ShamanGoal
+        {
+            get { return m_ShamanGoal; }
+            set { m_ShamanGoal = value; }
+        }
 
         public bool Selected
         {
@@ -304,6 +358,18 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_YOffsetTarget = offset;
             m_OffsetTransitionTime = time;
+        }
+
+        public void BoundArmy(Army army)
+        {
+            m_TileModel.Danger = true;
+            m_BoundArmy = army;
+        }
+
+        public void UnBoundArmy(Army army = null)
+        {
+            m_TileModel.Danger = false;
+            m_BoundArmy = null;
         }
 
         public bool PickupWood(Player player, bool pickup = true)

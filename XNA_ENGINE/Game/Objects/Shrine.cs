@@ -21,6 +21,10 @@ namespace XNA_ENGINE.Game.Objects
 
         private double m_InfluenceTimer = TIMEPERINFLUENCEPOINT;
 
+        private const float TIMEFORSHAMAN = 2;
+        private double m_Timer = TIMEFORSHAMAN;
+        private int m_AmountOfShamansQueued = 0;
+
         public Shrine(List<GridTile> tileList)
         {
             m_PlaceableType = PlaceableType.Shrine;
@@ -52,13 +56,27 @@ namespace XNA_ENGINE.Game.Objects
             SearchForDefaultRallyPointSpot();
         }
 
-        public virtual void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
         }
 
         public override void Update(RenderContext renderContext)
         {
+            if (m_AmountOfShamansQueued > 0)
+            {
+                m_Timer -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
+
+                if (m_Timer <= 0)
+                {
+                    Console.WriteLine("Shaman built");
+                    m_Timer = TIMEFORSHAMAN;
+                    --m_AmountOfShamansQueued;
+                    GridFieldManager.GetInstance().UserPlayer.AddPlaceable(new Shaman(m_RallyPointTile));
+                }
+            }
+
+
             m_InfluenceTimer -= (renderContext.GameTime.ElapsedGameTime.Milliseconds/1000.0);
 
             if (m_InfluenceTimer <= 0)
@@ -109,12 +127,25 @@ namespace XNA_ENGINE.Game.Objects
             m_Owner.GetResources().AddInfluence(10);
         }
 
+        public override void QueueShaman(int amount = 1)
+        {
+            int amountOfShamansInPlayer = 0;
+            foreach (Placeable placeable in m_Owner.GetOwnedList())
+                if (placeable.PlaceableTypeMeth == PlaceableType.Shaman) ++amountOfShamansInPlayer;
+
+            if (m_AmountOfShamansQueued == 0 && amountOfShamansInPlayer == 0)
+                m_AmountOfShamansQueued += amount;
+        }
+
         //Code to execute on Permanently selected
         public override void OnPermanentSelected()
         {
             //Get the inputmanager
             var inputManager = PlayScene.GetInputManager();
             var gridFieldManager = GridFieldManager.GetInstance();
+
+            //RallyPoint
+            m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
             m_Rallypoint.CanDraw = true;
 
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShrineMode;

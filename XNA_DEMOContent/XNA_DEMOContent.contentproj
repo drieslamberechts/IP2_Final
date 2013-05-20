@@ -81,13 +81,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\settlement_TestSettlementBlue.X">
-      <Name>settlement_TestSettlementBlue</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Split_Army.png">
       <Name>Split_Army</Name>
       <Importer>TextureImporter</Importer>
@@ -126,41 +119,6 @@
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </None>
-    <Compile Include="Models\tree_TreeShort.X">
-      <Name>tree_TreeShort</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\tile_Normal.X">
-      <Name>tile_Normal</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\building_FlagNormal.X">
-      <Name>building_FlagNormal</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\char_Soldier.X">
-      <Name>char_Soldier</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\char_Villager.X">
-      <Name>char_Villager</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\prop_Wood.X">
-      <Name>prop_Wood</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\tree_TreeTall.FBX">
-      <Name>tree_TreeTall</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\char_Goblin_Shaman.FBX">
       <Name>char_Goblin_Shaman</Name>
       <Importer>FbxImporter</Importer>
@@ -291,11 +249,6 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\tree_TreeShort2.FBX">
-      <Name>tree_TreeShort2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\tree_TreeShort3.FBX">
       <Name>tree_TreeShort3</Name>
       <Importer>FbxImporter</Importer>
@@ -321,14 +274,14 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\tree_TreeTall2.FBX">
-      <Name>tree_TreeTall2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\prop_Flag.FBX">
       <Name>prop_Flag</Name>
       <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\char_Soldier.X">
+      <Name>char_Soldier</Name>
+      <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
   </ItemGroup>

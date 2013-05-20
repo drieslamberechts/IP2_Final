@@ -19,6 +19,8 @@ namespace XNA_ENGINE.Game.Objects
         private Texture2D m_Texture { get; set; }
         private bool m_Selected { get; set; }
         private bool m_PermanentSelected { get; set; }
+        private bool m_DangerHighlight { get; set; }
+        private bool m_ShamanGoalHighlight { get; set; }
 
         private Vector3 m_DiffuseColor { get; set; }
         private float m_Alpha { get; set; }
@@ -34,7 +36,6 @@ namespace XNA_ENGINE.Game.Objects
             base.LoadContent(contentManager);
             
             m_Alpha = 1;
-            //m_UseTexture = true;
 
             CanDraw = true;
             m_DiffuseColor = new Vector3(1, 1, 1);
@@ -71,14 +72,36 @@ namespace XNA_ENGINE.Game.Objects
                     //Selected
                     if (m_PermanentSelected)
                     {
-                        effect.SpecularColor = new Vector3(1.0f, 1.0f, 1.0f); 
+                        effect.SpecularColor = new Vector3(0.5f, 0.5f, 0.5f); 
                         effect.EmissiveColor = new Vector3(0.5f, 0.5f, 0.5f);
                     }
                     else if (m_Selected)
                         effect.EmissiveColor = new Vector3(0.1f, 0.1f, 0.1f);
                     else 
                         effect.EmissiveColor = new Vector3(0.0f, 0.0f, 0.0f);
+                    
+                    if (m_DangerHighlight)
+                    {
+                        float totalTimeInMilliseconds = renderContext.GameTime.TotalGameTime.Milliseconds + (renderContext.GameTime.TotalGameTime.Seconds*1000);
+                        totalTimeInMilliseconds/=300.0f;
 
+                        float smooth = ((float)Math.Cos(totalTimeInMilliseconds) + 1)/2;
+
+                        effect.SpecularColor += new Vector3(0.5f * smooth + 0.1f, 0.0f, 0.0f);
+                        effect.EmissiveColor += new Vector3(0.1f * smooth + 0.02f, 0.0f, 0.0f);
+                    }
+
+                    if (m_ShamanGoalHighlight)
+                    {
+                        float totalTimeInMilliseconds = renderContext.GameTime.TotalGameTime.Milliseconds + (renderContext.GameTime.TotalGameTime.Seconds * 1000);
+                        totalTimeInMilliseconds /= 150.0f;
+
+                        float smooth = ((float)Math.Cos(totalTimeInMilliseconds) + 1) / 2;
+
+                        effect.SpecularColor += new Vector3(0.0f, 0.0f,1.0f * smooth + 0.2f);
+                        effect.EmissiveColor += new Vector3(0.0f, 0.0f, 0.1f * smooth + 0.04f);
+                    }
+                    
                     effect.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
                 }
 
@@ -113,6 +136,16 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_PermanentSelected; }
             set { m_PermanentSelected = value; }
+        }
+        public bool Danger
+        {
+            get { return m_DangerHighlight; }
+            set { m_DangerHighlight = value; }
+        }
+        public bool ShamanGoal
+        {
+            get { return m_ShamanGoalHighlight; }
+            set { m_ShamanGoalHighlight = value; }
         }
 
         public Vector3 DiffuseColor

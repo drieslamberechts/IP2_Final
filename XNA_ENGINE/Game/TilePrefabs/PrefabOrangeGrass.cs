@@ -10,17 +10,15 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.TilePrefabs
 {
-    class PrefabCliff : BasePrefab
+    class PrefabOrangeGrass : BasePrefab
     {
-        public PrefabCliff(GridTile tile)
+        public PrefabOrangeGrass(GridTile tile)
         {
-            m_TileModel = new GameModelGrid("Models/tile_Grass");
+            m_TileModel = new GameModelGrid("Models/tile_OrangeGrass");
             m_TileModel.LoadContent(PlayScene.GetContentManager());
-            m_TileModel.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
             m_TileModel.UseTexture = true;
-            m_TileModel.CanDraw = false;
             
-            m_bOpen = false;
+            m_bOpen = true;
 
             foreach (var prop in m_PropList)
             {

@@ -54,7 +54,7 @@ namespace XNA_ENGINE.Game.Objects
             SearchForDefaultRallyPointSpot();
         }
 
-        public virtual void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
         }
@@ -118,6 +118,9 @@ namespace XNA_ENGINE.Game.Objects
             //Get the inputmanager
             var inputManager = PlayScene.GetInputManager();
             var gridFieldManager = GridFieldManager.GetInstance();
+
+            //RallyPoint
+            m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
             m_Rallypoint.CanDraw = true;
 
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SchoolMode;

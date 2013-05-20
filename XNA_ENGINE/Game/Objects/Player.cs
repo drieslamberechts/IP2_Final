@@ -26,7 +26,6 @@ namespace XNA_ENGINE.Game.Objects
 
         // AI
         private AI m_Ai;
-        private bool m_bIsAI;
 
         // Army
         private List<Placeable> m_OwnedPlaceablesList;
@@ -78,7 +77,7 @@ namespace XNA_ENGINE.Game.Objects
                 placeable.Update(renderContext);
             }
 
-            if (m_bIsAI)
+           /* if (m_bIsAI)
             {
                 // -------------------------
                 // AI UPDATE
@@ -94,7 +93,7 @@ namespace XNA_ENGINE.Game.Objects
             else
             {
                 // REGULAR UPDATES
-            }
+            }*/
         }
 
         public Placeable HitTestPlaceables(Ray ray)

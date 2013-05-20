@@ -25,8 +25,9 @@ namespace XNA_ENGINE.Game.Scenes
             RotateCounterClockWise,
             ToggleSelectionMode,
             ToggleTileType,
-            GoBackToMainMenu,
-            ToggleDebug
+            ShowMenu,
+            ToggleDebug,
+            LeftShift
         }
 
         //DATAMEMBERS
@@ -98,8 +99,9 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction rotateCounterClockwise = new InputAction((int)PlayerInput.RotateCounterClockWise, TriggerState.Down);
             InputAction toggleSelectionMode = new InputAction((int)PlayerInput.ToggleSelectionMode, TriggerState.Pressed);
             InputAction toggleTileType = new InputAction((int)PlayerInput.ToggleTileType, TriggerState.Pressed);
-            InputAction goBackToMainMenu = new InputAction((int)PlayerInput.GoBackToMainMenu,TriggerState.Pressed);
+            InputAction goBackToMainMenu = new InputAction((int)PlayerInput.ShowMenu, TriggerState.Pressed);
             InputAction toggleDebug = new InputAction((int)PlayerInput.ToggleDebug,TriggerState.Pressed);
+            InputAction shift = new InputAction((int)PlayerInput.LeftShift, TriggerState.Down);
 
             // Controller Specific
             /* none */
@@ -117,6 +119,7 @@ namespace XNA_ENGINE.Game.Scenes
             toggleTileType.KeyButton = Keys.B;
             goBackToMainMenu.KeyButton = Keys.Escape;
             toggleDebug.KeyButton = Keys.N;
+            shift.KeyButton = Keys.LeftShift;
 
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
@@ -129,6 +132,7 @@ namespace XNA_ENGINE.Game.Scenes
             m_InputManager.MapAction(toggleTileType);
             m_InputManager.MapAction(goBackToMainMenu);
             m_InputManager.MapAction(toggleDebug);
+            m_InputManager.MapAction(shift);
 
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(800, 1000, 800);
@@ -222,9 +226,9 @@ namespace XNA_ENGINE.Game.Scenes
 
                 if (m_DrawDebug)
                 {
-                    int relativeDrawPos = 100;
+                    int relativeDrawPos = renderContext.GraphicsDevice.Viewport.Height/2;
                     // Creative mode
-                    renderContext.SpriteBatch.DrawString(m_DebugFont, "N: DEBUG: " + GridFieldManager.GetInstance().CreativeMode, new Vector2(10, relativeDrawPos), Color.Red);
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "N: DEBUG:", new Vector2(10, relativeDrawPos), Color.Red);
 
                     // Creative mode
                     relativeDrawPos += 20;
@@ -286,15 +290,20 @@ namespace XNA_ENGINE.Game.Scenes
                 GridFieldManager.GetInstance().NextSelectionMode();
 
             //SelectionMode
-            if (m_InputManager.IsActionTriggered((int)PlayerInput.ToggleTileType))
-                Menu.GetInstance().NextTileType();
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleTileType))
+            {
+                bool previous = m_InputManager.IsActionTriggered((int) PlayerInput.LeftShift);
+                Menu.GetInstance().NextTileType(previous);
+            }
+            
 
             //DebugMode
             if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleDebug))
                 m_DrawDebug = !m_DrawDebug;
 
-            if (m_InputManager.IsActionTriggered((int) PlayerInput.GoBackToMainMenu))
+            if (m_InputManager.IsActionTriggered((int)PlayerInput.ShowMenu))
             {
+                Menu.GetInstance().ToggleIngameMenu();
                 SceneManager.RemoveGameScene(this);
                 SceneManager.SetActiveScene("MainMenuScene");
             }
@@ -307,10 +316,8 @@ namespace XNA_ENGINE.Game.Scenes
             forwardVecCam.Y = 0;
             forwardVecCam.Normalize();
             //right
-            Vector3 rightVecCam;
-            Matrix rotMatrix;
-            rotMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(-90));
-            rightVecCam = Vector3.Transform(forwardVecCam, rotMatrix);
+            Matrix rotMatrix = Matrix.CreateRotationY(MathHelper.ToRadians(-90));
+            Vector3 rightVecCam = Vector3.Transform(forwardVecCam, rotMatrix);
             rightVecCam.Normalize();
 
             m_GamePadState = GamePad.GetState(PlayerIndex.One);
@@ -356,11 +363,10 @@ namespace XNA_ENGINE.Game.Scenes
 
             //MOUSE
             #region Mouse
+            Viewport vp = renderContext.GraphicsDevice.Viewport;
             if (isMouseInScreen)
             {
-                int offset = 5;
-
-                Viewport vp = renderContext.GraphicsDevice.Viewport;
+                const int offset = 5;
 
                 if (mouseX < offset) m_CameraTargetPos += rightVecCam * scrollStrength;
                 if (mouseY < offset) m_CameraTargetPos += -forwardVecCam * scrollStrength;
@@ -373,9 +379,9 @@ namespace XNA_ENGINE.Game.Scenes
             if (m_InputManager.IsActionTriggered((int)PlayerInput.ScrollWheelDown))
             {
                 m_CameraTargetPos += rightVecCam * (mouseX - renderContext.Input.OldMouseState.X) * (float)m_CameraScale *
-                                     1.33f; //magic numbers
+                                     1.33f / (vp.Width / 960.0f); //magic number
                 m_CameraTargetPos += -forwardVecCam * (mouseY - renderContext.Input.OldMouseState.Y) * (float)m_CameraScale *
-                                     1.8f; //magic number
+                                     1.8f / (vp.Height / 540.0f); //magic number
             }
 
             //Move the actual camera with the vector

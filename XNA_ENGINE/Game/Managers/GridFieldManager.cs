@@ -57,31 +57,42 @@ namespace XNA_ENGINE.Game.Managers
 
         public void Initialize()
         {
-             List<GridTile> settlementTiles = new List<GridTile>();
-             settlementTiles.Add(m_GridField[2, 3]);
-             settlementTiles.Add(m_GridField[2, 4]);
-             settlementTiles.Add(m_GridField[3, 3]);
-             settlementTiles.Add(m_GridField[3, 4]);
-             BuildPlaceable(Placeable.PlaceableType.Settlement, m_UserPlayer, settlementTiles);
+            List<GridTile> settlementTiles = new List<GridTile>();
+            settlementTiles.Add(m_GridField[2, 3]);
+            settlementTiles.Add(m_GridField[2, 4]);
+            settlementTiles.Add(m_GridField[3, 3]);
+            settlementTiles.Add(m_GridField[3, 4]);
+            BuildPlaceable(Placeable.PlaceableType.Settlement, m_UserPlayer, settlementTiles);
 
-             settlementTiles.Clear();
-             settlementTiles.Add(m_GridField[5, 2]);
-             settlementTiles.Add(m_GridField[6, 2]);
-             settlementTiles.Add(m_GridField[5, 3]);
-             settlementTiles.Add(m_GridField[6, 3]);
-             BuildPlaceable(Placeable.PlaceableType.School, m_UserPlayer, settlementTiles);
+            settlementTiles.Clear();
+            settlementTiles.Add(m_GridField[5, 2]);
+            settlementTiles.Add(m_GridField[6, 2]);
+            settlementTiles.Add(m_GridField[5, 3]);
+            settlementTiles.Add(m_GridField[6, 3]);
+            BuildPlaceable(Placeable.PlaceableType.School, m_UserPlayer, settlementTiles);
 
-             settlementTiles.Clear();
-             settlementTiles.Add(m_GridField[7, 2]);
-             BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer, settlementTiles);
+            settlementTiles.Clear();
+            settlementTiles.Add(m_GridField[7, 2]);
+            BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer, settlementTiles);
 
-            // TEST PLACEABLES
-             m_UserPlayer.AddPlaceable(new Villager(m_GridField[0,1]));
-             m_UserPlayer.AddPlaceable(new Army(m_GridField[1, 1]));
-             m_UserPlayer.AddPlaceable(new Shaman(m_GridField[2, 1]));
+            //TEST PLACEABLES
+            m_UserPlayer.AddPlaceable(new Villager(m_GridField[5,5]));
+            m_UserPlayer.AddPlaceable(new Army(m_GridField[6, 4]));
+            // m_UserPlayer.AddPlaceable(new Shaman(m_GridField[7, 3]));
 
-            m_PlayersList.ElementAt(1).AddPlaceable(new Army(m_GridField[15, 6]));
+            Army patrollingArmy1 = new Army(m_GridField[15, 6],5);
+            m_PlayersList.ElementAt(1).AddPlaceable(patrollingArmy1);
+            m_GridField[15, 6].BoundArmy(patrollingArmy1);
+            m_GridField[16, 6].BoundArmy(patrollingArmy1);
+            m_GridField[17, 6].BoundArmy(patrollingArmy1);
+            m_GridField[15, 7].BoundArmy(patrollingArmy1);
+            m_GridField[16, 7].BoundArmy(patrollingArmy1);
+            m_GridField[17, 7].BoundArmy(patrollingArmy1);
+            m_GridField[15, 8].BoundArmy(patrollingArmy1);
+            m_GridField[16, 8].BoundArmy(patrollingArmy1);
+            m_GridField[17, 8].BoundArmy(patrollingArmy1);
 
+            m_GridField[10, 10].ShamanGoal = true;
         }
 
         public void Update(RenderContext renderContext)
@@ -137,22 +148,26 @@ namespace XNA_ENGINE.Game.Managers
 
                 armyMergeList.Clear();
             }
-                
-                
 
-/*
-            Player attackPlayer = null;
-            Menu.GetInstance().Player.NewPlaceable(new Villager(m_GameScene, m_GridField[5, 7]));
-            {
-                attackPlayer.Update(renderContext);
-                if (attackPlayer.GetAttack()) attackPlayer = attackPlayer; // If the player is under attack initiate the battlesequence!
-            }
+            //GO OVER ALL PLACEABLES
+            //CHECK IF AN ARMY AND VILLAGER INTERSECT
+            /*List<Placeable> allPlaceables = GetAllPlaceables();
+            foreach (Placeable placeable1 in allPlaceables)
+                foreach (Placeable placeable2 in allPlaceables)
+                {
+                    if (placeable1 != placeable2)
+                    {
+                        if (placeable1.GetTargetTile() == placeable2.GetTargetTile())
+                        {
+                            if (placeable1.PlaceableTypeMeth == Placeable.PlaceableType.Villager &&
+                                placeable2.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                            {
+                                placeable1.GetOwner().RemovePlaceable(placeable1);
 
-            if (attackPlayer != null)
-            {
-                attackPlayer.ResetAttack();
-                SceneManager.SetActiveScene("AttackScene");
-            }*/
+                            }
+                        }
+                    }
+                }*/
         }
 
         public void LoadMap(GameScene gameScene, string map)
@@ -280,6 +295,18 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
+        public List<Placeable> GetAllPlaceables()
+        {
+            List<Placeable> returnList = new List<Placeable>();
+            foreach (Player player in m_PlayersList)
+                foreach (Placeable placeable in player.GetOwnedList())
+                {
+                    returnList.Add(placeable);
+                }
+
+            return returnList;
+        }
+
         public Placeable GetPermanentSelected()
         {
             foreach (var player in m_PlayersList)
@@ -319,6 +346,53 @@ namespace XNA_ENGINE.Game.Managers
             if (returnList.Any()) return returnList;
 
             return null;
+        }
+
+        public bool IsTileAccesible(GridTile currentTile , GridTile destinationTile, int radius = 1)
+        {
+            //If the destinationtile is not walkable, return
+            if (!destinationTile.IsWalkable()) return false;
+
+            //If the destinationtile = the current tile
+            if (currentTile == destinationTile && destinationTile.IsWalkable()) return true;
+
+            //Loop over NorthWest tiles
+            GridTile tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetNWTile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+            
+            //Loop over SouthWest tiles
+            tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetSWTile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+
+            //Loop over NorthEast tiles
+            tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetNETile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+
+            //Loop over SouthEast tiles
+            tileToTest = currentTile;
+            for (int i = 0; i < radius; ++i)
+            {
+                tileToTest = GetSETile(tileToTest);
+                if (tileToTest == destinationTile) return true;
+                if (tileToTest.IsWalkable() == false) break;
+            }
+
+            return false;
         }
 
         public void Select(GridTile tile)

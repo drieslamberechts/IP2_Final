@@ -111,7 +111,6 @@
     <Compile Include="Game\Objects\Villager.cs" />
     <Compile Include="Game\Objects\Shrine.cs" />
     <Compile Include="Game\Objects\School.cs" />
-    <Compile Include="Game\Objects\RallyPoint.cs" />
     <Compile Include="Game\Objects\Placeable.cs" />
     <Compile Include="Game\Managers\GridFieldManager.cs" />
     <Compile Include="Game\MainGame.cs" />
@@ -127,6 +126,14 @@
     <Compile Include="Game\Scenes\PlayScene.cs" />
     <Compile Include="Game\Scenes\MainMenuScene.cs" />
     <Compile Include="Game\TilePrefabs\BasePrefab.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeShort6.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeShort4.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeShort3.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeShort5.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabOrangeGrass.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeDead2.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeDead1.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeWillow.cs" />
     <Compile Include="Game\TilePrefabs\PrefabDirt2.cs" />
     <Compile Include="Game\TilePrefabs\PrefabDirt1.cs" />
     <Compile Include="Game\TilePrefabs\PrefabDirtGrass1.cs" />
@@ -136,7 +143,7 @@
     <Compile Include="Game\TilePrefabs\PrefabRock1.cs" />
     <Compile Include="Game\TilePrefabs\PrefabPond.cs" />
     <Compile Include="Game\TilePrefabs\PrefabCliff.cs" />
-    <Compile Include="Game\TilePrefabs\PrefabTreeShort.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabTreeShort1.cs" />
     <Compile Include="Game\TilePrefabs\PrefabTreeLong.cs" />
     <Compile Include="Game\TilePrefabs\PrefabNormalGrass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
