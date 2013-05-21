@@ -59,6 +59,7 @@ namespace XNA_ENGINE.Game.Scenes
         private float m_ArmyPatrolTimer = 0;
 
         private bool m_DrawDebug = true;
+        private bool m_bX, m_bY, m_bB;
 
 
         public PlayScene(ContentManager content, string map)
@@ -80,6 +81,10 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            m_bX = true;
+            m_bY = true;
+            m_bB = true;
+
             // Initialize player and AI
             var userplayer = new Player(Player.PlayerColor.Blue);
             var enemyPlayer = new Player(Player.PlayerColor.Red);
@@ -432,17 +437,28 @@ namespace XNA_ENGINE.Game.Scenes
 
             if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.SettlementMode)
             {
-                if (m_GamePadState.IsButtonDown(Buttons.X))
+                if (m_GamePadState.IsButtonDown(Buttons.X) && m_bX)
                 {
                     // Build Villager
+                    GridFieldManager.GetInstance().GetPermanentSelected().QueueVillager();
+                    m_bX = false;
+                }
+                else if (!m_GamePadState.IsButtonDown(Buttons.X))
+                {
+                    m_bX = true;
                 }
             }
 
             if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.ShrineMode)
             {
-                if (m_GamePadState.IsButtonDown(Buttons.X))
+                if (m_GamePadState.IsButtonDown(Buttons.X) && m_bX)
                 {
-                    // Build Shaman
+                    m_bY = false;
+                    GridFieldManager.GetInstance().GetPermanentSelected().QueueShaman();
+                }
+                else if (!m_GamePadState.IsButtonDown(Buttons.X))
+                {
+                    m_bX = true;
                 }
             }
 

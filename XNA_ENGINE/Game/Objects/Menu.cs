@@ -346,8 +346,8 @@ namespace XNA_ENGINE.Game.Objects
                     {
                         if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
                         {
-                            Console.WriteLine("Build Shaman");
-                            selectedPlaceable.QueueShaman();
+                                Console.WriteLine("Build Shaman");
+                                selectedPlaceable.QueueShaman();
                         }
                         return true;
                     }
@@ -716,6 +716,12 @@ namespace XNA_ENGINE.Game.Objects
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetVillagerCount(), new Vector2(vpWidth - 100, 50), Color.White);
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetArmySize(), new Vector2(vpWidth - 100, 130), Color.White);
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetShamanCount(), new Vector2(vpWidth - 100, 210), Color.White);
+            }
+
+            // INGAME MENU
+            if (m_IngameMenu)
+            {
+                // teken hier de menu
             }
         }
 
