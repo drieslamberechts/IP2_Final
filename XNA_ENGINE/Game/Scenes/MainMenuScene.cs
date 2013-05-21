@@ -92,6 +92,7 @@ namespace XNA_ENGINE.Game.Scenes
             }
             else
             {
+                renderContext.SpriteBatch.Draw(m_BackgroundTexture, m_BackgroundRect, Color.White);
                 renderContext.SpriteBatch.Draw(m_StartButton, m_StartRect, Color.White);
                 renderContext.SpriteBatch.Draw(m_ExitButton, m_ExitRect, Color.White);
             }
