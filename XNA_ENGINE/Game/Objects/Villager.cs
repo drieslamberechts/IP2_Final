@@ -19,7 +19,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private const float GRIDHEIGHT = 32;
         private const int m_MoveRadius = 1;
-        private float MOVEMENTSPEED = 1.5f; //seconds per tile
+        private float MOVEMENTSPEED = 0.5f; //seconds per tile
 
         private float m_PreviousDistanceToTile;
 
@@ -52,6 +52,13 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Update(Engine.RenderContext renderContext)
         {
+            if (m_CurrentTile.Model.Danger == true)
+            {
+                m_Owner.RemovePlaceable(this);
+                return;
+            }
+
+
             if (m_PathToFollow != null && m_PathToFollow.Any())
                 SetTargetTile(m_PathToFollow.ElementAt(0));
 
@@ -168,10 +175,15 @@ namespace XNA_ENGINE.Game.Objects
             base.OnPermanentSelected();
         }
 
-         public List<GridTile> PathToFollow
+        public List<GridTile> PathToFollow
         {
             get { return m_PathToFollow; }
             set { m_PathToFollow = value; }
+        }
+
+        public override void GoToTile(GridTile targetTile)
+        {
+            m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, targetTile);
         }
 
         public override bool SetTargetTile(GridTile targetTile)

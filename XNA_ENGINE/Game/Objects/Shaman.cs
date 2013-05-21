@@ -11,9 +11,16 @@ namespace XNA_ENGINE.Game.Objects
 {
     class Shaman : Placeable
     {
-        private GridTile m_TargetTile;
-
         private const float GRIDHEIGHT = 32;
+
+        private GridTile m_TargetTile;
+        private GridTile m_CurrentTile;
+        private List<GridTile> m_PathToFollow;
+
+        private const int m_MoveRadius = 1;
+        private float MOVEMENTSPEED = 0.5f; //seconds per tile
+
+        private float m_PreviousDistanceToTile;
 
         public Shaman(GridTile startTile)
         {
@@ -36,25 +43,76 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.DrawBoundingBox = false;
 
             m_TargetTile = startTile;
+            m_CurrentTile = startTile;
 
-            m_Model.Translate(m_TargetTile.Model.WorldPosition);
+            m_Model.Translate(m_CurrentTile.Model.LocalPosition);
 
             Initialize();
         }
 
         public override void Update(Engine.RenderContext renderContext)
         {
-            Vector3 newPos = m_TargetTile.Model.WorldPosition;
-            newPos.Y += 32;
-            m_Model.Translate(newPos);
-
-            if (m_Model.PermanentSelected)
-                Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
-
-            if (Menu.GetInstance().m_Enable9)
+            if (m_CurrentTile.ShamanGoal)
             {
-                Menu.GetInstance().m_Enable9 = false;
-                Menu.GetInstance().m_Enable10 = true;
+                GridFieldManager.GetInstance().Won = true;
+            }
+
+            if (m_CurrentTile.Model.Danger)
+            {
+                m_Owner.RemovePlaceable(this);
+                return;
+            }
+
+
+            if (m_PathToFollow != null && m_PathToFollow.Any())
+                SetTargetTile(m_PathToFollow.ElementAt(0));
+
+            //Do smooth movement
+            //Check if the targetTile exists
+            //Check if the targetTile and the Currenttile are the same
+            if (m_TargetTile != null && m_CurrentTile != m_TargetTile)
+            {
+                //Values
+                float deltaTime = renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0f;
+                Vector3 targetPos = m_TargetTile.Model.WorldPosition;
+                Vector3 worldPos = m_Model.WorldPosition;
+                Vector3 currentTilePos = m_CurrentTile.Model.WorldPosition;
+                //Offset the soldier so it has the correct position
+                targetPos.Y += 32;
+
+                //Calculate the distance for 1 tile to the other
+                Vector3 distanceVector = targetPos - currentTilePos;
+                //Calculate the direction
+                Vector3 directionVector = (targetPos - worldPos);
+                directionVector.Normalize();
+                distanceVector = distanceVector.Length() * directionVector;
+
+                //Calculate a new vector without y value
+                Vector3 directionVectorCalc = directionVector;
+                directionVectorCalc.Y = 0;
+                directionVectorCalc.Normalize();
+
+                //Do the right rotation
+                int add = 0;
+                if (directionVectorCalc.X != 0) add = 270;
+                m_Model.Rotate(0, (directionVectorCalc.X * 90 * -1) + (directionVectorCalc.Z * 90) + -90 + add, 0); //  90*dot - 90
+
+                //If the model is in the proximity, stick it to the tile
+                if (m_PreviousDistanceToTile < (targetPos - worldPos).Length())
+                {
+                    m_CurrentTile.Model.GreenHighLight = false;
+                    m_TargetTile.Model.GreenHighLight = true;
+                    m_CurrentTile = m_TargetTile;
+                    m_Model.Translate(targetPos);
+                    m_PathToFollow.Remove(m_TargetTile);
+
+                    m_PreviousDistanceToTile = 100000.0f;
+                }
+                else //else just move it towards it
+                {
+                    m_Model.Translate(worldPos + (distanceVector * (deltaTime / MOVEMENTSPEED)));
+                    m_PreviousDistanceToTile = (targetPos - worldPos).Length();
+                }
             }
 
             base.Update(renderContext);
@@ -68,7 +126,6 @@ namespace XNA_ENGINE.Game.Objects
 
             //What mode is there selected in the menu to build?
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
-
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
             {
 
@@ -98,6 +155,8 @@ namespace XNA_ENGINE.Game.Objects
 
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
 
+            List<GridTile> changeableTileList = gridFieldManager.GetSurroundingForShaman(m_CurrentTile);
+
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
             {
 
@@ -105,10 +164,15 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                SetTargetTile(selectedTile);
+                GoToTile(selectedTile);
             }
 
             base.OnPermanentSelected();
+        }
+
+        public override void GoToTile(GridTile targetTile)
+        {
+            m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, targetTile);
         }
 
         public override bool SetTargetTile(GridTile targetTile)

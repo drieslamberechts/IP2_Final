@@ -118,14 +118,12 @@ namespace XNA_ENGINE.Game.Scenes
             {
                 if (m_AttackersDice > m_DefendersDice)
                 {
-                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Attacker won!", new Vector2(300, 300),
-                                                         Color.White);
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Attacker won!", new Vector2(300, 300),Color.White);
                     m_AttackerWon = true;
                 }
                 else
                 {
-                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Defender won!", new Vector2(300, 300),
-                                                         Color.White);
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "Defender won!", new Vector2(300, 300),Color.White);
                     m_AttackerWon = false;
                 }
             }
@@ -167,7 +165,12 @@ namespace XNA_ENGINE.Game.Scenes
 
         private void EndAttack()
         {
+            Army loser = GetLoserObject();
+            GridFieldManager.GetInstance().UnboundArmy(loser);
             m_bEnd = true;
+            loser.SetTargetTileOverride(null);
+            loser.GetOwner().RemovePlaceable(loser);
+           // GridFieldManager.GetInstance().GameScene.RemoveSceneObject(loser.Model);
             SceneManager.RemoveGameScene(this);
             //SceneManager.SetActiveScene("FinalScene");
         }
@@ -181,6 +184,18 @@ namespace XNA_ENGINE.Game.Scenes
             else
             {
                 return "Defender";
+            }
+        }
+
+        public Army GetLoserObject()
+        {
+            if (!m_AttackerWon)
+            {
+                return m_Attacker;
+            }
+            else
+            {
+                return m_Defender;
             }
         }
     }
