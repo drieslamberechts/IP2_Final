@@ -17,7 +17,7 @@ namespace XNA_ENGINE.Game.Objects
 {
     internal class Menu
     {
-
+        //comment
         //Object that holds the menu
         private static Menu m_Menu;
 
