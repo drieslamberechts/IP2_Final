@@ -77,6 +77,7 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
+            // text
             int gameHeight = renderContext.GraphicsDevice.Viewport.Height;
             int gameWidth = renderContext.GraphicsDevice.Viewport.Width;
 
