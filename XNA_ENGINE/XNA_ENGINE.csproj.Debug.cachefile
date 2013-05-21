@@ -109,6 +109,8 @@ Content\Models\tree_TreeShort5.xnb
 Content\Models\tree_TreeShort6.xnb
 Content\Models\tree_TreeTall1.xnb
 Content\Models\prop_Flag.xnb
+Content\Models\char_Goblin_Soldier.xnb
+Content\Models\char_Goblin_Soldier2.xnb
 Content\Models\char_Soldier.xnb
 Content\Textures\tex_char_GoblinShaman_Body_0.xnb
 Content\Textures\tex_char_GoblinShaman_Hair+Staff_0.xnb
@@ -136,3 +138,5 @@ Content\Textures\tex_env_rock1_0.xnb
 Content\Textures\tex_env_rock2_0.xnb
 Content\Textures\tex_env_Treetrunk2_0.xnb
 Content\Textures\tex_env_Foliage1_0.xnb
+Content\Textures\tex_char_GoblinWarrior_Body_0.xnb
+Content\Textures\tex_char_GoblinWarrior_Flagg+Sta_0.xnb

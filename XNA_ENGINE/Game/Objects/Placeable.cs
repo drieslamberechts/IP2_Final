@@ -88,8 +88,6 @@ namespace XNA_ENGINE.Game.Objects
             set { m_LinkedTileList = value; }
         }
 
-
-
         public virtual void QueueVillager(int amount = 1)
         {
 
@@ -113,6 +111,10 @@ namespace XNA_ENGINE.Game.Objects
         public virtual GridTile GetTargetTile()
         {
             return null;
+        }
+
+        public virtual void GoToTile(GridTile targetTile)
+        {
         }
 
         public void SetOwner(Player owner)

@@ -36,6 +36,8 @@ namespace XNA_ENGINE.Game.Managers
         private List<Player> m_PlayersList;
         private Player m_UserPlayer;
 
+        private bool m_YouWon = false;
+
         // private int GRID_OFFSET = 64;
 
         private Random m_Random;
@@ -82,17 +84,27 @@ namespace XNA_ENGINE.Game.Managers
 
             Army patrollingArmy1 = new Army(m_GridField[15, 6],5);
             m_PlayersList.ElementAt(1).AddPlaceable(patrollingArmy1);
-            m_GridField[15, 6].BoundArmy(patrollingArmy1);
-            m_GridField[16, 6].BoundArmy(patrollingArmy1);
-            m_GridField[17, 6].BoundArmy(patrollingArmy1);
-            m_GridField[15, 7].BoundArmy(patrollingArmy1);
-            m_GridField[16, 7].BoundArmy(patrollingArmy1);
-            m_GridField[17, 7].BoundArmy(patrollingArmy1);
-            m_GridField[15, 8].BoundArmy(patrollingArmy1);
-            m_GridField[16, 8].BoundArmy(patrollingArmy1);
-            m_GridField[17, 8].BoundArmy(patrollingArmy1);
+            m_GridField[12, 12].BoundArmy(patrollingArmy1);
+            m_GridField[13, 12].BoundArmy(patrollingArmy1);
+            m_GridField[14, 12].BoundArmy(patrollingArmy1);
+            m_GridField[15, 12].BoundArmy(patrollingArmy1);
+            m_GridField[12, 13].BoundArmy(patrollingArmy1);
+            m_GridField[13, 13].BoundArmy(patrollingArmy1);
+            m_GridField[14, 13].BoundArmy(patrollingArmy1);
+            m_GridField[15, 13].BoundArmy(patrollingArmy1);
+            m_GridField[12, 14].BoundArmy(patrollingArmy1);
+            m_GridField[13, 14].BoundArmy(patrollingArmy1);
+            m_GridField[14, 14].BoundArmy(patrollingArmy1);
+            m_GridField[15, 14].BoundArmy(patrollingArmy1);
+            m_GridField[12, 15].BoundArmy(patrollingArmy1);
+            m_GridField[13, 15].BoundArmy(patrollingArmy1);
+            m_GridField[14, 15].BoundArmy(patrollingArmy1);
+            m_GridField[15, 15].BoundArmy(patrollingArmy1);
 
-            m_GridField[10, 10].ShamanGoal = true;
+
+            m_GridField[15, 20].ShamanGoal = true;
+
+            m_YouWon = false;
         }
 
         public void Update(RenderContext renderContext)
@@ -124,7 +136,6 @@ namespace XNA_ENGINE.Game.Managers
                 }
 
                 List<Placeable> ArmiesAlreadyMerged = new List<Placeable>();
-
                 foreach (Army army1 in armyMergeList)
                     foreach (Army army2 in armyMergeList)
                     {
@@ -196,6 +207,7 @@ namespace XNA_ENGINE.Game.Managers
             Menu.ModeSelected selectedMode = Menu.GetInstance().GetSelectedMode();
 
             Deselect();
+            
             //Handle menu //If menu is hit don't do the grid test
             if (Menu.GetInstance().HandleInput(renderContext)) return; // hier in Menu -> klikken?
             if (m_UserPlayer.HandleInput(renderContext)) return;
@@ -356,8 +368,11 @@ namespace XNA_ENGINE.Game.Managers
             ///////////////////////////////////////////
             foreach (var gridTile in m_GridField)
             {
-                gridTile.PFResetValues();//Reset all values for calculating the path
-                PFCalculateH(gridTile, targetTile);//Calculate the H value
+                if (gridTile != null && targetTile != null)
+                {
+                    gridTile.PFResetValues();//Reset all values for calculating the path
+                    PFCalculateH(gridTile, targetTile);//Calculate the H value
+                }
             }
 
 
@@ -427,82 +442,6 @@ namespace XNA_ENGINE.Game.Managers
             }
 
             return returnPath;
-            
-
-            /* ///////////////////////////////////////////
-            ////SECOND SOLUTION////////////////////////
-            /////////////////////////////////////////// 
-            ///////////////////////////////////////////
-            //Reset all values for calculating the path
-            foreach (var gridTile in m_GridField)
-               gridTile.PFResetValues();
-
-            //G : the exact cost to reach this node from the starting node.
-            //H : the estimated(heuristic) cost to reach the destination from here.
-            //F = G + H : As the algorithm runs the F value of a node tells us how expensive we think it will be to reach our goal by way of that node.
-
-            List<GridTile> returnPath = new List<GridTile>();
-
-            //Create the open list of nodes, initially containing only our starting node
-            List<GridTile> openNodeList = new List<GridTile>();
-            PFCalculateH(startTile, targetTile);
-            openNodeList.Add(startTile);
-
-            //Create the closed list of nodes, initially empty
-            List<GridTile> closedNodeList = new List<GridTile>();
-
-            GridTile currentNode = startTile;
-
-            bool finished = true;
-            while (finished)
-            {
-                //Check for the node with the lowest f
-                GridTile lowestFNode = openNodeList.ElementAt(0);
-                foreach (GridTile gridNode in openNodeList)
-                {
-                    if (lowestFNode.PFF > gridNode.PFF) lowestFNode = gridNode;
-                }
-                currentNode = lowestFNode;
-
-                if (currentNode == targetTile) // check if this node is the goal
-                {
-                    //TODO
-                    //Finish the stuff
-                    finished = false;
-                }
-                else
-                {
-                    //Move the current node to the closed list and consider all of its neighbors
-                    closedNodeList.Add(currentNode);
-                    List<GridTile> neighbourList = PFCheckAllNeighbours(currentNode);
-
-                    foreach (var neighbourNode in neighbourList)
-                    {
-                        GridTile closedNode = PFIsTileInNodeList(neighbourNode, closedNodeList);
-                        GridTile opendNode = PFIsTileInNodeList(neighbourNode, openNodeList);
-                        if (closedNode != null && closedNode.PFG > currentNode.PFG) //This neighbor is in the closed list and our current g value is lower
-                        {
-                            //update the neighbor with the new, lower, g value 
-                            closedNode.PFG = currentNode.PFG;
-                            //change the neighbor's parent to our current node
-                            closedNode = currentNode;
-                        }
-                        else if (opendNode != null && opendNode.PFG > currentNode.PFG) //This neighbor is in the open list and our current g value is lower
-                        {
-                            //update the neighbor with the new, lower, g value 
-                            opendNode.PFG = currentNode.PFG;
-                            //change the neighbor's parent to our current node
-                            opendNode.PFParent = currentNode;
-                        }
-                        else //this neighbor is not in either the open or closed list
-                        {
-                            //add the neighbor to the open list and set its g value
-                            //openNodeList.Add(new GridNode(neighbourNode, currentNode.m_GridTile, currentNode.m_G + 1));
-                        }
-                    }
-
-                }
-            }*/
         }
 
         private int PFCalculateH(GridTile startTile, GridTile endTile)
@@ -567,53 +506,6 @@ namespace XNA_ENGINE.Game.Managers
             return false;
         }
 
-       /* public bool IsTileAccesible(GridTile currentTile , GridTile destinationTile, int radius = 1)
-        {
-            //If the destinationtile is not walkable, return
-            if (!destinationTile.IsWalkable()) return false;
-
-            //If the destinationtile = the current tile
-            if (currentTile == destinationTile && destinationTile.IsWalkable()) return true;
-
-            //Loop over NorthWest tiles
-            GridTile tileToTest = currentTile;
-            for (int i = 0; i < radius; ++i)
-            {
-                tileToTest = GetNWTile(tileToTest);
-                if (tileToTest == destinationTile) return true;
-                if (tileToTest.IsWalkable() == false) break;
-            }
-            
-            //Loop over SouthWest tiles
-            tileToTest = currentTile;
-            for (int i = 0; i < radius; ++i)
-            {
-                tileToTest = GetSWTile(tileToTest);
-                if (tileToTest == destinationTile) return true;
-                if (tileToTest.IsWalkable() == false) break;
-            }
-
-            //Loop over NorthEast tiles
-            tileToTest = currentTile;
-            for (int i = 0; i < radius; ++i)
-            {
-                tileToTest = GetNETile(tileToTest);
-                if (tileToTest == destinationTile) return true;
-                if (tileToTest.IsWalkable() == false) break;
-            }
-
-            //Loop over SouthEast tiles
-            tileToTest = currentTile;
-            for (int i = 0; i < radius; ++i)
-            {
-                tileToTest = GetSETile(tileToTest);
-                if (tileToTest == destinationTile) return true;
-                if (tileToTest.IsWalkable() == false) break;
-            }
-
-            return false;
-        }*/
-
         public void Select(GridTile tile)
         {
             switch (m_SelectionMode)
@@ -640,6 +532,26 @@ namespace XNA_ENGINE.Game.Managers
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("SelectionMode (1x1, 2x2 or 3x3) is out of range in GridFieldManager");
+            }
+        }
+
+        public List<GridTile> GetSurroundingForShaman(GridTile tile)
+        {
+            List<GridTile> returnList = new List<GridTile>();
+            if (GetNWTile(tile) != null) returnList.Add(GetNWTile(tile));
+            if (GetNETile(tile) != null) returnList.Add(GetNETile(tile));
+            if (GetSWTile(tile) != null) returnList.Add(GetSWTile(tile));
+            if (GetSETile(tile) != null) returnList.Add(GetSETile(tile));
+
+            return returnList;
+        }
+
+        public void UnboundArmy(Army army)
+        {
+            foreach (GridTile gridTile in m_GridField)
+            {
+                if (gridTile.IsBoundArmy() == army)
+                    gridTile.UnBoundArmy(army);
             }
         }
 
@@ -834,6 +746,12 @@ namespace XNA_ENGINE.Game.Managers
         public Player AiPlayer
         {
             get { return m_PlayersList.ElementAt(1); }
+        }
+
+        public bool Won
+        {
+            set { m_YouWon = value; }
+            get { return m_YouWon; }
         }
 
         public void NextSelectionMode()

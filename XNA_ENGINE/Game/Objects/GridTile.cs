@@ -88,7 +88,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_Selected = false;
 
-            m_GameScene = pGameScene;
+            m_GameScene = pGameScene;            
         }
 
         public void Initialize()
@@ -98,7 +98,9 @@ namespace XNA_ENGINE.Game.Objects
             m_YOffset = GridFieldManager.GetInstance().Random.Next(YOFFSETMIN, YOFFSETMAX);
             m_YOffsetTarget = m_YOffset;
             
-            SetType(m_TileType); 
+            SetType(m_TileType);
+
+            m_BoundArmy = null;
         }
 
         public void Update(RenderContext renderContext)
@@ -158,6 +160,7 @@ namespace XNA_ENGINE.Game.Objects
                     {
                         GridFieldManager.GetInstance().PermanentDeselect();
                         Menu.GetInstance().SubMenu = Menu.SubMenuSelected.BaseMode;
+                        Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.None);
                     }
                 }
 
@@ -406,6 +409,11 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_TileModel.Danger = false;
             m_BoundArmy = null;
+        }
+
+        public Army IsBoundArmy()
+        {
+            return m_BoundArmy;
         }
 
         public bool PickupWood(Player player, bool pickup = true)
