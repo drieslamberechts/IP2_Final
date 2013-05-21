@@ -1,6 +1,12 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
+Content\Models\settlement_TestSettlementBlue.xnb
+Content\Models\tree_TreeShort.xnb
+Content\Models\tile_Normal.xnb
+Content\Models\building_FlagNormal.xnb
 Content\Models\char_Soldier.xnb
+Content\Models\char_Villager.xnb
+Content\Models\prop_Wood.xnb
 Content\Split_Army.xnb
 Content\defend.xnb
 Content\gather.xnb
@@ -31,6 +37,7 @@ Content\final Menu\hoverVillager.xnb
 Content\final Menu\unitList.xnb
 Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1+Grass2.xnb
 Content\Textures\tex_house_tent1+tent2+tent3+campfire.xnb
+Content\Models\tree_TreeTall.xnb
 Content\Models\char_Goblin_Shaman.xnb
 Content\Models\building_School.xnb
 Content\Models\building_Settlement.xnb
@@ -48,6 +55,7 @@ Content\Models\tile_LightGrass1.xnb
 Content\Models\tile_LightGrass2.xnb
 Content\Models\tile_OrangeGrass.xnb
 Content\Models\tile_Pond.xnb
+Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
 Content\Textures\tex_house_tent1+tent2+tent3+camp_0.xnb
 Content\Textures\tex_env_Foliage2.xnb
 Content\Textures\tex_env_Treetrunk1.xnb
@@ -108,11 +116,13 @@ Content\Models\prop_Rock2.xnb
 Content\Models\tree_TreeDead1.xnb
 Content\Models\tree_TreeDead2.xnb
 Content\Models\tree_TreeShort1.xnb
+Content\Models\tree_TreeShort2.xnb
 Content\Models\tree_TreeShort3.xnb
 Content\Models\tree_TreeShort4.xnb
 Content\Models\tree_TreeShort5.xnb
 Content\Models\tree_TreeShort6.xnb
 Content\Models\tree_TreeTall1.xnb
+Content\Models\tree_TreeTall2.xnb
 Content\Textures\tex_tree_Tall1_0.xnb
 Content\Textures\tex_env_grass_0.xnb
 Content\Textures\tex_env_FernLeaf_0.xnb
@@ -136,11 +146,3 @@ Content\final Menu\Button_DeleteHover.xnb
 Content\final Menu\hoverSchool.xnb
 Content\final Menu\hoverShaman.xnb
 Content\Models\prop_Flag.xnb
-Content\final Menu\Button_AddShrineHovered.xnb
-Content\final Menu\hoverShrine.xnb
-Content\final Menu\Button_AddShrine.xnb
-Content\final Menu\Background_StartMenu.xnb
-Content\Models\char_Goblin_Soldier.xnb
-Content\Models\char_Goblin_Soldier2.xnb
-Content\Textures\tex_char_GoblinWarrior_Body_0.xnb
-Content\Textures\tex_char_GoblinWarrior_Flagg+Sta_0.xnb

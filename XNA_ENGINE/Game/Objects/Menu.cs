@@ -17,7 +17,6 @@ namespace XNA_ENGINE.Game.Objects
 {
     internal class Menu
     {
-        //comment
         //Object that holds the menu
         private static Menu m_Menu;
 
@@ -44,7 +43,6 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexSchoolInfo,
                                    m_TexShrine,
                                    m_TexShrineInfo,
-                                   m_TexShrineHover,
                                    m_TexBuildTile,
                                    m_TexSplit;
 
@@ -193,15 +191,14 @@ namespace XNA_ENGINE.Game.Objects
             m_TexHoverVillager = Content.Load<Texture2D>("final Menu/hoverVillager");
             m_TexSettlementInfo = Content.Load<Texture2D>("final Menu/hoverSettlementInfo");
             m_TexSchoolInfo = Content.Load<Texture2D>("final Menu/hoverSchool");
-            m_TexShrineInfo = Content.Load<Texture2D>("final Menu/hoverShrine");
+            m_TexShrineInfo = Content.Load<Texture2D>("final Menu/hoverSchool");
 
             // BUILDING ICONS
             m_TexSettlement = Content.Load<Texture2D>("final Menu/Button_AddSettlement");
             m_TexSettlementHover = Content.Load<Texture2D>("final Menu/Button_AddSettlementHover");
             m_TexSchool = Content.Load<Texture2D>("final Menu/Button_AddSchool");
             m_TexSchoolHover = Content.Load<Texture2D>("final Menu/Button_AddSchoolHover");
-            m_TexShrine = Content.Load<Texture2D>("final Menu/Button_AddShrine");
-            m_TexShrineHover = Content.Load<Texture2D>("final Menu/Button_AddShrineHovered");
+            m_TexShrine = Content.Load<Texture2D>("final Menu/iconStandard");
 
             m_TexBuildTile = Content.Load<Texture2D>("final Menu/iconStandard");
 
@@ -594,7 +591,7 @@ namespace XNA_ENGINE.Game.Objects
                     if (m_bShowSettlementHover)
                     {
                         spriteBatch.Draw(m_TexSettlementHover, m_RectSettlement, Color.White);
-                        spriteBatch.Draw(m_TexSettlementInfo, m_RectSchoolInfo, Color.White);
+                        spriteBatch.Draw(m_TexSettlementInfo, m_RectSettlementInfo, Color.White);
                     }
                     else
                         spriteBatch.Draw(m_TexSettlement, m_RectSettlement, Color.White);
@@ -609,8 +606,8 @@ namespace XNA_ENGINE.Game.Objects
 
                     if (m_bShowShrineHover)
                     {
-                        spriteBatch.Draw(m_TexShrineHover, m_RectShrine, Color.White);
-                        spriteBatch.Draw(m_TexShrineInfo, m_RectSchoolInfo, Color.White);
+                        spriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
+                        spriteBatch.Draw(m_TexShrineInfo, m_RectShrineInfo, Color.White);
                     }
                     else
                         spriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);

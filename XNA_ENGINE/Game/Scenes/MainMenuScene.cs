@@ -25,12 +25,10 @@ namespace XNA_ENGINE.Game.Scenes
         private Texture2D m_StartButton;
         private Texture2D m_ExitButton;
         private Texture2D m_DaeScreen;
-        private Texture2D m_BackgroundTexture;
 
         private Rectangle m_StartRect;
         private Rectangle m_ExitRect;
         private Rectangle m_DaeRect;
-        private Rectangle m_BackgroundRect;
         private InputManager m_InputManager;
         private bool m_ExitGame;
         private  int m_Counter;
@@ -46,9 +44,6 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
-            // background
-            m_BackgroundTexture = m_Content.Load<Texture2D>("final Menu/Background_StartMenu");
-
             // DAE
             m_Counter = 0;
             m_DaeScreen = m_Content.Load<Texture2D>("DaeSplashScreen");
@@ -77,14 +72,12 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Draw2D(RenderContext renderContext, bool drawBefore3D)
         {
-            // text2
             int gameHeight = renderContext.GraphicsDevice.Viewport.Height;
             int gameWidth = renderContext.GraphicsDevice.Viewport.Width;
 
             m_DaeRect = new Rectangle(0, 0, gameWidth, gameHeight);
             m_StartRect = new Rectangle(gameWidth / 2 - m_StartButton.Width / 2, gameHeight / 2 - 175, m_StartButton.Width, m_StartButton.Height);
             m_ExitRect = new Rectangle(gameWidth / 2 - m_ExitButton.Width / 2, gameHeight / 2, m_ExitButton.Width, m_ExitButton.Height);
-            m_BackgroundRect = new Rectangle(0, 0, gameWidth, gameHeight);
 
             if (m_Counter < SPLASHSCREENTIME)
             {
@@ -93,7 +86,6 @@ namespace XNA_ENGINE.Game.Scenes
             }
             else
             {
-                renderContext.SpriteBatch.Draw(m_BackgroundTexture, m_BackgroundRect, Color.White);
                 renderContext.SpriteBatch.Draw(m_StartButton, m_StartRect, Color.White);
                 renderContext.SpriteBatch.Draw(m_ExitButton, m_ExitRect, Color.White);
             }
