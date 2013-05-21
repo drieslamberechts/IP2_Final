@@ -59,6 +59,7 @@ namespace XNA_ENGINE.Game.Scenes
         private float m_ArmyPatrolTimer = 0;
 
         private bool m_DrawDebug = true;
+        private bool m_bX, m_bY, m_bB;
 
 
         public PlayScene(ContentManager content, string map)
@@ -80,6 +81,10 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            m_bX = true;
+            m_bY = true;
+            m_bB = true;
+
             // Initialize player and AI
             var userplayer = new Player(Player.PlayerColor.Blue);
             var enemyPlayer = new Player(Player.PlayerColor.Red);
@@ -424,16 +429,8 @@ namespace XNA_ENGINE.Game.Scenes
             #endregion
             #endregion
 
-            if (m_GamePadState.Buttons.RightShoulder != 0)
-            {
-                System.Console.WriteLine("Right shoulder pressed");
-            }
-            if (m_GamePadState.Buttons.LeftShoulder != 0)
-            {
-                System.Console.WriteLine("Left shoulder pressed");
-            }
-
-            // Work with X Y B to select meu options
+            // CONTROLLER
+            // Work with X Y B to select menu options
             if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.VillagerMode)
             {
                 if (m_GamePadState.IsButtonDown(Buttons.X))
@@ -446,6 +443,39 @@ namespace XNA_ENGINE.Game.Scenes
                 {
                     GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select2x2;
                     Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.BuildSchool);
+                }
+
+                if (m_GamePadState.IsButtonDown(Buttons.B))
+                {
+                    GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                    Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.BuildShrine);
+                }
+            }
+
+            if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.SettlementMode)
+            {
+                if (m_GamePadState.IsButtonDown(Buttons.X) && m_bX)
+                {
+                    // Build Villager
+                    GridFieldManager.GetInstance().GetPermanentSelected().QueueVillager();
+                    m_bX = false;
+                }
+                else if (!m_GamePadState.IsButtonDown(Buttons.X))
+                {
+                    m_bX = true;
+                }
+            }
+
+            if (Menu.GetInstance().SubMenu == Menu.SubMenuSelected.ShrineMode)
+            {
+                if (m_GamePadState.IsButtonDown(Buttons.X) && m_bX)
+                {
+                    m_bY = false;
+                    GridFieldManager.GetInstance().GetPermanentSelected().QueueShaman();
+                }
+                else if (!m_GamePadState.IsButtonDown(Buttons.X))
+                {
+                    m_bX = true;
                 }
             }
 
