@@ -14,8 +14,6 @@ namespace XNA_ENGINE.Game.Objects
 {
     public class School : Building
     {
-        private GridTile m_RallyPointTile;
-        
         private const float GRIDHEIGHT = 32;
         private const float TIMEFORVILLAGER = 2;
         private double m_Timer = TIMEFORVILLAGER;
@@ -80,8 +78,6 @@ namespace XNA_ENGINE.Game.Objects
         //Code to execute on hit with mouse
         public override void OnSelected()
         {
-            //if (!m_LinkedTile.Selected) return false;
-
             //Get the inputmanager
             var inputManager = PlayScene.GetInputManager();
             //What mode is there selected in the menu to build?
@@ -119,11 +115,11 @@ namespace XNA_ENGINE.Game.Objects
             var inputManager = PlayScene.GetInputManager();
             var gridFieldManager = GridFieldManager.GetInstance();
 
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SchoolMode;
+
             //RallyPoint
             m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
             m_Rallypoint.CanDraw = true;
-
-            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SchoolMode;
 
             GridTile selectedTile;
             if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())

@@ -162,7 +162,7 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void GoToTile(GridTile targetTile)
         {
-            m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, targetTile);
+            m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, targetTile, m_PlaceableType);
         }
 
         public override GridTile GetTargetTile()

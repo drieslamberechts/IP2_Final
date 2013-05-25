@@ -355,7 +355,7 @@ namespace XNA_ENGINE.Game.Managers
             return null;
         }
 
-        public List<GridTile> CalculatePath(GridTile startTile, GridTile targetTile)
+        public List<GridTile> CalculatePath(GridTile startTile, GridTile targetTile, Placeable.PlaceableType placeableType = Placeable.PlaceableType.Army)
         {
             ///////////////////////////////////////////
             ////FIRST SOLUTION/////////////////////////
@@ -402,7 +402,7 @@ namespace XNA_ENGINE.Game.Managers
                 else
                 {
                     //Check for all neighbours
-                    List<GridTile> neighbourList = PFCheckAllNeighboursAndParentThem(lowestFTile);
+                    List<GridTile> neighbourList = PFCheckAllNeighboursAndParentThem(lowestFTile, placeableType);
 
                     //Add the neighbours to the open node list if they aren't in the closed list and check the G value if they are in the open list
                     foreach (var currentNeighbourTile in neighbourList)
@@ -466,27 +466,50 @@ namespace XNA_ENGINE.Game.Managers
             return removed;
         }
 
-        private List<GridTile> PFCheckAllNeighboursAndParentThem(GridTile parentTile)
+        private List<GridTile> PFCheckAllNeighboursAndParentThem(GridTile parentTile, Placeable.PlaceableType placeableType)
         {
             const int gHorVer = 10;
 
             List<GridTile> returnList = new List<GridTile>();
 
-            GridTile nwTile = GetNWTile(parentTile);
-            if (nwTile != null && nwTile.IsWalkable())
-                returnList.Add(nwTile);
+            if (placeableType != Placeable.PlaceableType.Villager)
+            {
+                GridTile nwTile = GetNWTile(parentTile);
+                if (nwTile != null && nwTile.IsWalkable() && !nwTile.PickupWood(m_UserPlayer, false))
+                    returnList.Add(nwTile);
 
-            GridTile neTile = GetNETile(parentTile);
-            if (neTile != null && neTile.IsWalkable())
-                returnList.Add(neTile);
+                GridTile neTile = GetNETile(parentTile);
+                if (neTile != null && neTile.IsWalkable() && !neTile.PickupWood(m_UserPlayer,false))
+                    returnList.Add(neTile);
 
-            GridTile seTile = GetSETile(parentTile);
-            if (seTile != null && seTile.IsWalkable())
-                returnList.Add(seTile);
+                GridTile seTile = GetSETile(parentTile);
+                if (seTile != null && seTile.IsWalkable() && !seTile.PickupWood(m_UserPlayer, false))
+                    returnList.Add(seTile);
 
-            GridTile swTile = GetSWTile(parentTile);
-            if (swTile != null && swTile.IsWalkable())
-                returnList.Add(swTile);
+                GridTile swTile = GetSWTile(parentTile);
+                if (swTile != null && swTile.IsWalkable() && !swTile.PickupWood(m_UserPlayer, false))
+                    returnList.Add(swTile);
+            }
+            else
+            {
+                GridTile nwTile = GetNWTile(parentTile);
+                if (nwTile != null && nwTile.IsWalkable())
+                    returnList.Add(nwTile);
+
+                GridTile neTile = GetNETile(parentTile);
+                if (neTile != null && neTile.IsWalkable())
+                    returnList.Add(neTile);
+
+                GridTile seTile = GetSETile(parentTile);
+                if (seTile != null && seTile.IsWalkable())
+                    returnList.Add(seTile);
+
+                GridTile swTile = GetSWTile(parentTile);
+                if (swTile != null && swTile.IsWalkable())
+                    returnList.Add(swTile);
+            }
+
+
 
             return returnList;
         }

@@ -35,6 +35,8 @@ namespace XNA_ENGINE.Game.Objects
         {
             if (m_PathToFollow != null && m_PathToFollow.Any())
                 SetTargetTile(m_PathToFollow.ElementAt(0));
+            else
+                SetTargetTile(m_CurrentTile);
 
             //Do smooth movement
             //Check if the targetTile exists
@@ -46,6 +48,7 @@ namespace XNA_ENGINE.Game.Objects
                 Vector3 targetPos = m_TargetTile.Model.WorldPosition;
                 Vector3 worldPos = m_Model.WorldPosition;
                 Vector3 currentTilePos = m_CurrentTile.Model.WorldPosition;
+
                 //Offset the soldier so it has the correct position
                 targetPos.Y += GRIDHEIGHT;
 
@@ -63,7 +66,7 @@ namespace XNA_ENGINE.Game.Objects
 
                 //Do the right rotation
                 int add = 0;
-                if (directionVectorCalc.X != 0) add = 270;
+                if (Math.Abs(directionVectorCalc.X - 0) > float.Epsilon) add = 270;
                 m_Model.Rotate(0, (directionVectorCalc.X * 90 * -1) + (directionVectorCalc.Z * 90) + -90 + add, 0); //  90*dot - 90
 
                 //If the model is in the proximity, stick it to the tile
@@ -71,7 +74,7 @@ namespace XNA_ENGINE.Game.Objects
                 {
                     m_CurrentTile = m_TargetTile;
                     m_Model.Translate(targetPos);
-                    m_PathToFollow.Remove(m_TargetTile);
+                    if (m_PathToFollow != null) m_PathToFollow.Remove(m_TargetTile);
 
                     m_PreviousDistanceToTile = 100000.0f;
                 }

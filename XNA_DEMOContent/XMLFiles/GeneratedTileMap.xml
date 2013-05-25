@@ -523,12 +523,12 @@
 	<tile>
 		<positionX>14</positionX>
 		<positionY>3</positionY>
-		<TileType>1</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
 		<positionY>3</positionY>
-		<TileType>2</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
@@ -828,7 +828,7 @@
 	<tile>
 		<positionX>15</positionX>
 		<positionY>5</positionY>
-		<TileType>1</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>16</positionX>
@@ -968,12 +968,12 @@
 	<tile>
 		<positionX>13</positionX>
 		<positionY>6</positionY>
-		<TileType>15</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>14</positionX>
 		<positionY>6</positionY>
-		<TileType>16</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>15</positionX>
@@ -2383,12 +2383,12 @@
 	<tile>
 		<positionX>26</positionX>
 		<positionY>15</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>15</positionY>
-		<TileType>5</TileType>
+		<TileType>1</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -2533,12 +2533,12 @@
 	<tile>
 		<positionX>26</positionX>
 		<positionY>16</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>27</positionX>
 		<positionY>16</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>28</positionX>
@@ -3093,12 +3093,12 @@
 	<tile>
 		<positionX>18</positionX>
 		<positionY>20</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>19</positionX>
 		<positionY>20</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
@@ -3248,12 +3248,12 @@
 	<tile>
 		<positionX>19</positionX>
 		<positionY>21</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>20</positionX>
 		<positionY>21</positionY>
-		<TileType>5</TileType>
+		<TileType>0</TileType>
 	</tile>
 	<tile>
 		<positionX>21</positionX>
@@ -4501,3 +4501,4 @@
 		<TileType>5</TileType>
 	</tile>
 </tilemap>
+

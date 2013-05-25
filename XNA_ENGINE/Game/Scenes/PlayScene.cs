@@ -51,8 +51,6 @@ namespace XNA_ENGINE.Game.Scenes
         private double m_CameraRotationOffset;
         private Vector3 m_CameraTargetPos;
 
-        private float m_ElapseTime;
-        private int m_FrameCounter;
         private int m_Fps;
 
         private const float PATROLINTERVAL = 2;
@@ -152,15 +150,7 @@ namespace XNA_ENGINE.Game.Scenes
         public override void Update(RenderContext renderContext)
         {
             // FPS
-            m_ElapseTime += (float)renderContext.GameTime.ElapsedGameTime.TotalSeconds;
-            ++m_FrameCounter;
-
-            if (m_ElapseTime > 1)
-            {
-                m_Fps = m_FrameCounter;
-                m_FrameCounter = 0;
-                m_ElapseTime = 0;
-            }
+            m_Fps = (int)(1.0f/((float)renderContext.GameTime.ElapsedGameTime.Milliseconds/1000.0f));
 
             // UPDATE MENU
             Menu.GetInstance().Update(renderContext);
@@ -230,9 +220,6 @@ namespace XNA_ENGINE.Game.Scenes
 
             if (drawBefore3D == false) // draw after the 3D is drawn
             {
-                // Show FPS 2
-                // renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, 10), Color.White);
-
                 // DrawGUI
                 Menu.GetInstance().Draw(renderContext);
 
@@ -245,8 +232,11 @@ namespace XNA_ENGINE.Game.Scenes
 
                 if (m_DrawDebug)
                 {
-                    
+                    // Show FPS 2
+                    renderContext.SpriteBatch.DrawString(m_DebugFont, "FPS: " + m_Fps, new Vector2(10, relativeDrawPos), Color.Red);
+
                     // Creative mode
+                    relativeDrawPos += 20;
                     renderContext.SpriteBatch.DrawString(m_DebugFont, "N: DEBUG:", new Vector2(10, relativeDrawPos), Color.Red);
 
                     // Creative mode
@@ -256,7 +246,6 @@ namespace XNA_ENGINE.Game.Scenes
                     // TileType
                     relativeDrawPos += 20;
                     renderContext.SpriteBatch.DrawString(m_DebugFont, "B: Tiletype to build: " + Menu.GetInstance().TileTypeSelected, new Vector2(10, relativeDrawPos), Color.Red);
-
 
 
 
