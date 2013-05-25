@@ -108,6 +108,8 @@
     <Compile Include="Engine\Scenegraph\SceneManager.cs" />
     <Compile Include="Game\Helpers\MapLoadSave.cs" />
     <Compile Include="Game\Helpers\StandardCost.cs" />
+    <Compile Include="Game\Objects\Building.cs" />
+    <Compile Include="Game\Objects\Unit.cs" />
     <Compile Include="Game\Objects\Villager.cs" />
     <Compile Include="Game\Objects\Shrine.cs" />
     <Compile Include="Game\Objects\School.cs" />

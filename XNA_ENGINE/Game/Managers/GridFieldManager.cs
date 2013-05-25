@@ -78,11 +78,11 @@ namespace XNA_ENGINE.Game.Managers
             BuildPlaceable(Placeable.PlaceableType.Shrine, m_UserPlayer, settlementTiles);
 
             //TEST PLACEABLES
-            m_UserPlayer.AddPlaceable(new Villager(m_GridField[5,5]));
-            m_UserPlayer.AddPlaceable(new Army(m_GridField[6, 4]));
+            m_UserPlayer.AddPlaceable(new Villager(m_GridField[5, 5], m_GridField[5, 5]));
+            m_UserPlayer.AddPlaceable(new Army(m_GridField[6, 4], m_GridField[6, 4]));
             // m_UserPlayer.AddPlaceable(new Shaman(m_GridField[7, 3]));
 
-            Army patrollingArmy1 = new Army(m_GridField[15, 6],5);
+            Army patrollingArmy1 = new Army(m_GridField[15, 6], m_GridField[15, 6], 5);
             m_PlayersList.ElementAt(1).AddPlaceable(patrollingArmy1);
             m_GridField[12, 12].BoundArmy(patrollingArmy1);
             m_GridField[13, 12].BoundArmy(patrollingArmy1);
@@ -160,25 +160,20 @@ namespace XNA_ENGINE.Game.Managers
                 armyMergeList.Clear();
             }
 
-            //GO OVER ALL PLACEABLES
-            //CHECK IF AN ARMY AND VILLAGER INTERSECT
-            /*List<Placeable> allPlaceables = GetAllPlaceables();
-            foreach (Placeable placeable1 in allPlaceables)
-                foreach (Placeable placeable2 in allPlaceables)
-                {
-                    if (placeable1 != placeable2)
-                    {
-                        if (placeable1.GetTargetTile() == placeable2.GetTargetTile())
-                        {
-                            if (placeable1.PlaceableTypeMeth == Placeable.PlaceableType.Villager &&
-                                placeable2.PlaceableTypeMeth == Placeable.PlaceableType.Army)
-                            {
-                                placeable1.GetOwner().RemovePlaceable(placeable1);
 
-                            }
-                        }
-                    }
-                }*/
+            //GO OVER ALL PLACEABLES
+           /* List<Placeable> allPlaceables = GetAllPlaceables();
+            foreach (Placeable placeable in allPlaceables)
+            {
+                //GO OVER ALL UNITS
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Villager ||
+                    placeable.PlaceableTypeMeth == Placeable.PlaceableType.Army ||
+                    placeable.PlaceableTypeMeth == Placeable.PlaceableType.Shaman)
+                {
+                    //Unit unit = (Unit) placeable;
+                   // unit.CurrentTile.IsInUse = true;
+                }
+            }*/
         }
 
         public void LoadMap(GameScene gameScene, string map)

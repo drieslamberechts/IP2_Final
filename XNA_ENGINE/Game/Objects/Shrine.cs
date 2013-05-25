@@ -12,10 +12,8 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    public class Shrine : Placeable
+    public class Shrine : Building
     {
-        private GridTile m_RallyPointTile;
-
         private const float GRIDHEIGHT = 32;
         private const float TIMEPERINFLUENCEPOINT = 5;
 
@@ -53,7 +51,7 @@ namespace XNA_ENGINE.Game.Objects
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
             Initialize();
-            SearchForDefaultRallyPointSpot();
+            PlaceRallyPoint(SearchForDefaultRallyPointSpot());
         }
 
         public override void Initialize()
@@ -72,10 +70,9 @@ namespace XNA_ENGINE.Game.Objects
                     Console.WriteLine("Shaman built");
                     m_Timer = TIMEFORSHAMAN;
                     --m_AmountOfShamansQueued;
-                    GridFieldManager.GetInstance().UserPlayer.AddPlaceable(new Shaman(m_RallyPointTile));
+                    GridFieldManager.GetInstance().UserPlayer.AddPlaceable(new Shaman(SearchForDefaultRallyPointSpot(),m_RallyPointTile));
                 }
             }
-
 
             m_InfluenceTimer -= (renderContext.GameTime.ElapsedGameTime.Milliseconds/1000.0);
 
@@ -86,10 +83,10 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             if (Menu.GetInstance().m_Enable8)
-                {
-                    Menu.GetInstance().m_Enable8 = false;
-                    Menu.GetInstance().m_Enable9 = true;
-                }
+            {
+                Menu.GetInstance().m_Enable8 = false;
+                Menu.GetInstance().m_Enable9 = true;
+            }
 
             base.Update(renderContext);
         }
@@ -97,8 +94,6 @@ namespace XNA_ENGINE.Game.Objects
         //Code to execute on hit with mouse
         public override void OnSelected()
         {
-            //if (!m_LinkedTile.Selected) return false;
-
             //Get the inputmanager
             var inputManager = PlayScene.GetInputManager();
             //What mode is there selected in the menu to build?
@@ -144,11 +139,11 @@ namespace XNA_ENGINE.Game.Objects
             var inputManager = PlayScene.GetInputManager();
             var gridFieldManager = GridFieldManager.GetInstance();
 
+            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShrineMode;
+
             //RallyPoint
             m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
             m_Rallypoint.CanDraw = true;
-
-            Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShrineMode;
 
             GridTile selectedTile;
             if (gridFieldManager.GetSelectedTiles() != null && gridFieldManager.GetSelectedTiles().Any())
@@ -164,55 +159,6 @@ namespace XNA_ENGINE.Game.Objects
             }
 
             base.OnPermanentSelected();
-        }
-
-        private void SearchForDefaultRallyPointSpot()
-        {
-            List<GridTile> totalSurroundingTiles = new List<GridTile>();
-            List<GridTile> surroundingTiles = new List<GridTile>();
-            foreach (var structureTile in m_LinkedTileList)
-            {
-                surroundingTiles.Clear();
-                surroundingTiles = GridFieldManager.GetInstance().GetAllSurroundingTiles(structureTile);
-
-                //Loop over surrounding tiles
-                foreach (var surroundingTile in surroundingTiles)
-                    totalSurroundingTiles.Add(surroundingTile);
-            }
-
-            List<GridTile> removeList = new List<GridTile>();
-            foreach (var surroundingTile in totalSurroundingTiles)
-            {
-                foreach (var structureTile in m_LinkedTileList)
-                {
-                    //If the tile is a tile on the structure
-                    if (structureTile == surroundingTile)
-                        removeList.Add(structureTile);
-                }
-            }
-
-            //Remove the elements form the list
-            foreach (var gridTile in removeList)
-            {
-                totalSurroundingTiles.Remove(gridTile);
-            }
-
-            foreach (var surroundingTile in totalSurroundingTiles)
-                if (PlaceRallyPoint(surroundingTile))
-                    return;
-        }
-
-        public bool PlaceRallyPoint(GridTile gridTile)
-        {
-            if (gridTile.IsOpen() && gridTile.GetIsUsedByStructure() == false)
-            {
-                m_RallyPointTile = gridTile;
-                m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
-
-                return true;
-            }
-            //Couldn't place the rallypoint
-            return false;
         }
     }
 }

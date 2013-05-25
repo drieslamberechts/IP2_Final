@@ -46,6 +46,7 @@ namespace XNA_ENGINE.Game.Objects
 
         private Army m_BoundArmy;
         private bool m_ShamanGoal;
+        private bool m_IsInUse = false;
 
         //PathFinding
         private int m_PFH;
@@ -113,8 +114,10 @@ namespace XNA_ENGINE.Game.Objects
                 m_TileModel.Translate(m_TileModel.LocalPosition.X, m_YOffset, m_TileModel.LocalPosition.Z);
             }
 
-
             m_TileModel.ShamanGoal = m_ShamanGoal;
+            m_TileModel.GreenHighLight = m_IsInUse;
+
+            m_IsInUse = false;
 
             OnSelected();
         }
@@ -386,6 +389,12 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_TileType; }
             set { m_TileType = value; }
+        }
+
+        public bool IsInUse
+        {
+            get { return m_IsInUse; }
+            set { m_IsInUse = value; }
         }
 
         public GameModelGrid Model

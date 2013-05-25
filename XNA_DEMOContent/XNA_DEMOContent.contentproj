@@ -279,11 +279,6 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\char_Soldier.X">
-      <Name>char_Soldier</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\char_Goblin_Soldier.FBX">
       <Name>char_Goblin_Soldier</Name>
       <Importer>FbxImporter</Importer>

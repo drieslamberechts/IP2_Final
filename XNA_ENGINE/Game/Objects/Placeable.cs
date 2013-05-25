@@ -30,19 +30,12 @@ namespace XNA_ENGINE.Game.Objects
 
         protected PlaceableType m_PlaceableType;
         protected GameModelGrid m_Model;
-        protected GameModelGrid m_Rallypoint;
         protected List<GridTile> m_LinkedTileList;
         protected Player m_Owner;
 
         public virtual void Initialize()
         {
-            //Load a rallyPointFlag
-            m_Rallypoint = new GameModelGrid("Models/prop_Flag");
-            m_Rallypoint.CanDraw = true;
-            m_Rallypoint.LoadContent(PlayScene.GetContentManager());
-            m_Rallypoint.DiffuseColor = new Vector3(0.0f, 0.8f, 0.0f);
-            GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Rallypoint);
-            m_Rallypoint.LocalPosition += new Vector3(0, 300, 0);
+            
         }
 
         public virtual void Update(RenderContext renderContext)
@@ -52,8 +45,6 @@ namespace XNA_ENGINE.Game.Objects
 
             if (Model.PermanentSelected)
                 OnPermanentSelected();
-            else
-                m_Rallypoint.CanDraw = false;
         }
 
         public virtual void OnSelected()

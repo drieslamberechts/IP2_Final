@@ -12,10 +12,8 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.Objects
 {
-    public class Settlement : Placeable
+    public class Settlement : Building
     {
-        private GridTile m_RallyPointTile;
-
         private const float GRIDHEIGHT = 32;
         private const float TIMEFORVILLAGER = 2;
         private double m_Timer = TIMEFORVILLAGER;
@@ -57,7 +55,7 @@ namespace XNA_ENGINE.Game.Objects
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
             Initialize();
-            SearchForDefaultRallyPointSpot();
+            PlaceRallyPoint(SearchForDefaultRallyPointSpot());
         }
 
         public override void Initialize()
@@ -76,7 +74,7 @@ namespace XNA_ENGINE.Game.Objects
                     Console.WriteLine("Villager built");
                     m_Timer = TIMEFORVILLAGER;
                     --m_AmountOfVillagersQueued;
-                    GridFieldManager.GetInstance().UserPlayer.AddPlaceable(new Villager(m_RallyPointTile));
+                    GridFieldManager.GetInstance().UserPlayer.AddPlaceable(new Villager(SearchForDefaultRallyPointSpot(), m_RallyPointTile));
                 }
             }
 
@@ -145,54 +143,6 @@ namespace XNA_ENGINE.Game.Objects
             m_AmountOfVillagersQueued += amount;
         }
 
-        public bool PlaceRallyPoint(GridTile gridTile)
-        {
-            if (gridTile.IsOpen() && gridTile.GetIsUsedByStructure() == false)
-            {
-                m_RallyPointTile = gridTile;
-                m_Rallypoint.Translate(m_RallyPointTile.Model.WorldPosition);
-
-                return true;
-            }
-            //Couldn't place the rallypoint
-            return false;
-        }
-
-        private void SearchForDefaultRallyPointSpot()
-        {
-            List<GridTile> totalSurroundingTiles = new List<GridTile>();
-            List<GridTile> surroundingTiles = new List<GridTile>();
-            foreach (var structureTile in m_LinkedTileList)
-            {
-                surroundingTiles.Clear();
-                surroundingTiles = GridFieldManager.GetInstance().GetAllSurroundingTiles(structureTile);
-
-                //Loop over surrounding tiles
-                foreach (var surroundingTile in surroundingTiles)
-                    totalSurroundingTiles.Add(surroundingTile);
-            }
-
-            List<GridTile> removeList = new List<GridTile>();
-            foreach (var surroundingTile in totalSurroundingTiles)
-            {
-                foreach (var structureTile in m_LinkedTileList)
-                {
-                    //If the tile is a tile on the structure
-                    if (structureTile == surroundingTile)
-                        removeList.Add(structureTile);
-                }
-            }
-
-            //Remove the elements form the list
-            foreach (var gridTile in removeList)
-            {
-                totalSurroundingTiles.Remove(gridTile);
-            }
-
-            foreach (var surroundingTile in totalSurroundingTiles)
-                if (PlaceRallyPoint(surroundingTile))
-                    return;
-        }
 
         public int GetAmountOfVillagersQueued()
         {
