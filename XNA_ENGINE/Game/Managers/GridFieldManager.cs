@@ -402,7 +402,7 @@ namespace XNA_ENGINE.Game.Managers
                 else
                 {
                     //Check for all neighbours
-                    List<GridTile> neighbourList = PFCheckAllNeighboursAndParentThem(lowestFTile, placeableType);
+                    List<GridTile> neighbourList = PFCheckAllNeighboursAndParentThem(lowestFTile, targetTile, placeableType);
 
                     //Add the neighbours to the open node list if they aren't in the closed list and check the G value if they are in the open list
                     foreach (var currentNeighbourTile in neighbourList)
@@ -466,7 +466,7 @@ namespace XNA_ENGINE.Game.Managers
             return removed;
         }
 
-        private List<GridTile> PFCheckAllNeighboursAndParentThem(GridTile parentTile, Placeable.PlaceableType placeableType)
+        private List<GridTile> PFCheckAllNeighboursAndParentThem(GridTile parentTile, GridTile targetTile, Placeable.PlaceableType placeableType)
         {
             const int gHorVer = 10;
 
@@ -493,19 +493,19 @@ namespace XNA_ENGINE.Game.Managers
             else
             {
                 GridTile nwTile = GetNWTile(parentTile);
-                if (nwTile != null && nwTile.IsWalkable())
+                if (nwTile != null && nwTile.IsWalkable() && (!nwTile.PickupWood(m_UserPlayer, false) || nwTile == targetTile))
                     returnList.Add(nwTile);
 
                 GridTile neTile = GetNETile(parentTile);
-                if (neTile != null && neTile.IsWalkable())
+                if (neTile != null && neTile.IsWalkable() && !neTile.PickupWood(m_UserPlayer, false) || neTile == targetTile)
                     returnList.Add(neTile);
 
                 GridTile seTile = GetSETile(parentTile);
-                if (seTile != null && seTile.IsWalkable())
+                if (seTile != null && seTile.IsWalkable() && !seTile.PickupWood(m_UserPlayer, false) || seTile == targetTile)
                     returnList.Add(seTile);
 
                 GridTile swTile = GetSWTile(parentTile);
-                if (swTile != null && swTile.IsWalkable())
+                if (swTile != null && swTile.IsWalkable() && !swTile.PickupWood(m_UserPlayer, false) || swTile == targetTile)
                     returnList.Add(swTile);
             }
 

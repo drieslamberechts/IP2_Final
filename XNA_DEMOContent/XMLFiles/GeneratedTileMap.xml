@@ -803,7 +803,7 @@
 	<tile>
 		<positionX>10</positionX>
 		<positionY>5</positionY>
-		<TileType>4</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>11</positionX>
@@ -813,7 +813,7 @@
 	<tile>
 		<positionX>12</positionX>
 		<positionY>5</positionY>
-		<TileType>0</TileType>
+		<TileType>2</TileType>
 	</tile>
 	<tile>
 		<positionX>13</positionX>
