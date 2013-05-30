@@ -24,6 +24,8 @@ namespace XNA_ENGINE.Game.Scenes
 
         private Texture2D m_StartButton;
         private Texture2D m_ExitButton;
+        private Texture2D m_StartButtonHovered;
+        private Texture2D m_ExitButtonHovered;
         private Texture2D m_DaeScreen;
         private Texture2D m_BackgroundTexture;
 
@@ -34,6 +36,9 @@ namespace XNA_ENGINE.Game.Scenes
         private InputManager m_InputManager;
         private bool m_ExitGame;
         private  int m_Counter;
+
+        private bool m_bStartButtonHovered;
+        private bool m_bExitButtonHovered;
 
         private const int SPLASHSCREENTIME = 200;
 
@@ -46,6 +51,9 @@ namespace XNA_ENGINE.Game.Scenes
 
         public override void Initialize()
         {
+            m_bStartButtonHovered = false;
+            m_bExitButtonHovered = false;
+
             // background
             m_BackgroundTexture = m_Content.Load<Texture2D>("final Menu/Background_StartMenu");
 
@@ -54,8 +62,10 @@ namespace XNA_ENGINE.Game.Scenes
             m_DaeScreen = m_Content.Load<Texture2D>("DaeSplashScreen");
 
             // Buttons
-            m_StartButton = m_Content.Load<Texture2D>("menu/startButton");
-            m_ExitButton = m_Content.Load<Texture2D>("menu/exitButton");
+            m_StartButton = m_Content.Load<Texture2D>("final Menu/Button_StartMenu_StartButtonUnhovered");
+            m_ExitButton = m_Content.Load<Texture2D>("final Menu/Button_StartMenu_ExitButtonUnhovered");
+            m_StartButtonHovered = m_Content.Load<Texture2D>("final Menu/Button_StartMenu_StartButtonHovered");
+            m_ExitButtonHovered = m_Content.Load<Texture2D>("final Menu/Button_StartMenu_ExitButtonHovered");
 
             // InputManager
             m_InputManager = new InputManager();
@@ -85,6 +95,12 @@ namespace XNA_ENGINE.Game.Scenes
             m_ExitRect = new Rectangle(gameWidth / 2 - m_ExitButton.Width / 2, gameHeight / 2, m_ExitButton.Width, m_ExitButton.Height);
             m_BackgroundRect = new Rectangle(0, 0, gameWidth, gameHeight);
 
+            if (gameWidth < renderContext.GraphicsDevice.Adapter.CurrentDisplayMode.Width)
+            {
+                m_StartRect = new Rectangle(gameWidth / 2 - m_StartButton.Width / 4, gameHeight / 2 - 85, m_StartButton.Width / 2, m_StartButton.Height / 2);
+                m_ExitRect = new Rectangle(gameWidth / 2 - m_ExitButton.Width / 4, gameHeight / 2, m_ExitButton.Width / 2, m_ExitButton.Height / 2);
+            }
+
             if (m_Counter < SPLASHSCREENTIME)
             {
                 ++m_Counter;
@@ -93,8 +109,16 @@ namespace XNA_ENGINE.Game.Scenes
             else
             {
                 renderContext.SpriteBatch.Draw(m_BackgroundTexture, m_BackgroundRect, Color.White);
-                renderContext.SpriteBatch.Draw(m_StartButton, m_StartRect, Color.White);
-                renderContext.SpriteBatch.Draw(m_ExitButton, m_ExitRect, Color.White);
+
+                if (m_bStartButtonHovered == false)
+                    renderContext.SpriteBatch.Draw(m_StartButton, m_StartRect, Color.White);
+                else
+                    renderContext.SpriteBatch.Draw(m_StartButtonHovered, m_StartRect, Color.White);  
+
+                if (m_bExitButtonHovered == false)
+                    renderContext.SpriteBatch.Draw(m_ExitButton, m_ExitRect, Color.White);
+                else
+                    renderContext.SpriteBatch.Draw(m_ExitButtonHovered, m_ExitRect, Color.White);
             }
 
             base.Draw2D(renderContext, drawBefore3D);
@@ -106,6 +130,23 @@ namespace XNA_ENGINE.Game.Scenes
             m_InputManager.Update();
 
             var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
+
+            // HOVER
+            if (CheckHitButton(mousePos, m_StartRect))
+            {
+                m_bStartButtonHovered = true;
+            }
+            else
+                m_bStartButtonHovered = false;
+
+            if (CheckHitButton(mousePos, m_ExitRect))
+            {
+                m_bExitButtonHovered = true;
+            }
+            else
+            {
+                m_bExitButtonHovered = false;
+            }
 
             if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_StartRect))
             {
