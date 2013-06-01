@@ -44,7 +44,21 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexShrine,
                                    m_TexShrineInfo,
                                    m_TexBuildTile,
-                                   m_TexSplit;
+                                   m_TexSplit,
+                                   m_TexMenuExit,
+                                   m_TexMenuFullscreen,
+                                   m_TexMenuWindowed,
+                                   m_TexMainMenu,
+                                   m_TexMenuRestart,
+                                   m_TexMenuResume,
+                                   m_TexMenuSave,
+                                   m_TexMenuExitHovered,
+                                   m_TexMenuFullscreenHovered,
+                                   m_TexMenuWindowedHovered,
+                                   m_TexMainMenuHovered,
+                                   m_TexMenuRestartHovered,
+                                   m_TexMenuResumeHovered,
+                                   m_TexMenuSaveHovered;
 
         private Rectangle m_RectMenuBackground,
                           m_RectWoodResource,
@@ -65,7 +79,14 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectShrine,
                           m_RectShrineInfo,
                           m_RectBuildTile,
-                          m_RectSplit;
+                          m_RectSplit,
+                          m_RectMenuExit,
+                          m_RectMenuFullscreen,
+                          m_RectMenuWindowed,
+                          m_RectMainMenu,
+                          m_RectMenuRestart,
+                          m_RectMenuResume,
+                          m_RectMenuSave;
 
         // tutorial variables
         private readonly Texture2D m_TexScreen1,
@@ -231,6 +252,20 @@ namespace XNA_ENGINE.Game.Objects
 
             // INGAME MENU
             m_bDrawMenu = false;
+
+            m_TexMenuExit = Content.Load<Texture2D>("pause Menu/Button_ExitUnhovered");
+            m_TexMenuFullscreen = Content.Load<Texture2D>("pause Menu/Button_FullscreenUnhovered");
+            m_TexMenuWindowed = Content.Load<Texture2D>("pause Menu/Button_WindowedUnhovered");
+            m_TexMainMenu = Content.Load<Texture2D>("pause Menu/Button_MainMenuUnhovered");
+            m_TexMenuRestart = Content.Load<Texture2D>("pause Menu/Button_RestartUnhovered");
+            m_TexMenuResume = Content.Load<Texture2D>("pause Menu/Button_ResumeUnhovered");
+            m_TexMenuSave = Content.Load<Texture2D>("pause Menu/Button_SaveUnhovered");
+            m_TexMenuFullscreenHovered = Content.Load<Texture2D>("pause Menu/Button_FullscreenHovered");
+            m_TexMenuWindowedHovered = Content.Load<Texture2D>("pause Menu/Button_WindowedHovered");
+            m_TexMainMenuHovered = Content.Load<Texture2D>("pause Menu/Button_MainMenuHovered");
+            m_TexMenuRestartHovered = Content.Load<Texture2D>("pause Menu/Button_RestartHovered");
+            m_TexMenuResumeHovered = Content.Load<Texture2D>("pause Menu/Button_ResumeHovered");
+            m_TexMenuSaveHovered = Content.Load<Texture2D>("pause Menu/Button_SaveHovered");
 
             // FONT
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
@@ -434,6 +469,32 @@ namespace XNA_ENGINE.Game.Objects
                 m_Enable11 = false;
             }
 
+            // INGAME MENU INPUT
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMenuFullscreen) && m_bDrawMenu)
+            {
+                if (renderContext.GraphicsDevice.Viewport.Height < renderContext.GraphicsDevice.Adapter.CurrentDisplayMode.Height)
+                {
+                    MainGame.graphics.IsFullScreen = true;
+                    MainGame.graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                    MainGame.graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                    MainGame.graphics.ApplyChanges();
+                }
+                else
+                {
+                    MainGame.graphics.IsFullScreen = false;
+                    MainGame.graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2;
+                    MainGame.graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2;
+                    MainGame.graphics.ApplyChanges();
+                }
+            }
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMenuExit) && m_bDrawMenu)
+                SceneManager.MainGame.Exit();
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMainMenu) && m_bDrawMenu)
+                // Switchen doet iets raar met de game
+                SceneManager.SetActiveScene("MainMenuScene");
+
             return false;
         }
 
@@ -511,35 +572,38 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectMenuBackground = new Rectangle(0,vpHeight -m_TexMenuBackground.Height/2, m_TexMenuBackground.Width/2,m_TexMenuBackground.Height/2);
 
                 // RESOURCE STATS RECTANGLES
-                m_RectWoodResource =
-                    new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 - m_TexWoodResource.Width/2, 5,
-                                  m_TexWoodResource.Width/2, m_TexWoodResource.Height/2);
+                m_RectWoodResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 - m_TexWoodResource.Width/2, 5, m_TexWoodResource.Width/2, m_TexWoodResource.Height/2);
 
-                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 + 10, 5,
-                                                        m_TexInfluenceResource.Width/2, m_TexInfluenceResource.Height/2);
+                m_RectInfluenceResource = new Rectangle(renderContext.GraphicsDevice.Viewport.Width/2 + 10, 5, m_TexInfluenceResource.Width/2, m_TexInfluenceResource.Height/2);
 
                 // CHARACTER STATS RECTANGLES
-                m_RectCharacterStats =new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2, 0,
-                                  m_TexCharacterStats.Width/2, m_TexCharacterStats.Height/2);
-
-                m_RectUnitList =new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2 + 10, 10,
-                                  m_TexUnitList.Width/2, m_TexUnitList.Height/2);
+                m_RectCharacterStats =new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2, 0, m_TexCharacterStats.Width/2, m_TexCharacterStats.Height/2);
+                m_RectUnitList =new Rectangle(renderContext.GraphicsDevice.Viewport.Width - m_TexCharacterStats.Width/2 + 10, 10, m_TexUnitList.Width/2, m_TexUnitList.Height/2);
 
                 // ICONS
-                m_RectDelete = new Rectangle(10, vpHeight - m_TexDelete.Height + 45,m_TexDelete.Width/2, m_TexDelete.Height/2);
-                m_RectDeleteHover = new Rectangle(10, vpHeight - m_TexDeleteHover.Height +45, m_TexDeleteHover.Width/2, m_TexDeleteHover.Height/2);
-                m_RectVillager = new Rectangle(10, vpHeight - m_TexDelete.Height + 45,m_TexDelete.Width/2, m_TexDelete.Height/2);
-                m_RectShaman = new Rectangle(10, vpHeight - m_TexShaman.Height + 45, m_TexShaman.Width/2, m_TexShaman.Height/2);
-                m_RectSchool = new Rectangle(10, vpHeight - m_TexSchool.Height + 45,m_TexSchool.Width/2, m_TexSchool.Height/2);
-                m_RectSchoolHover = new Rectangle(10, vpHeight - m_TexSchool.Height + 45,m_TexSchool.Width/2, m_TexSchool.Height/2);
-                m_RectSchoolInfo = new Rectangle(m_RectSchoolInfo.X, m_RectDelete.Y - m_TexSchoolInfo.Height/2 - 10, m_TexSchoolInfo.Width/2, m_TexSchoolInfo.Height/2);
-                m_RectShrine = new Rectangle(10*2 + m_TexSchool.Width/2, vpHeight - m_TexShrine.Height + 45,m_TexShrine.Width/2, m_TexShrine.Height/2);
-                m_RectSettlement = new Rectangle(10*3 + m_TexSchool.Width, vpHeight - m_TexSettlement.Height +45, m_TexSettlement.Width/2, m_TexSettlement.Height/2);
-                m_RectSplit = new Rectangle(10, vpHeight - m_TexSplit.Height + 45, m_TexSplit.Width/2, m_TexSplit.Height/2);
+                m_RectDelete        = new Rectangle(10, vpHeight - m_TexDelete.Height + 45,m_TexDelete.Width/2, m_TexDelete.Height/2);
+                m_RectDeleteHover   = new Rectangle(10, vpHeight - m_TexDeleteHover.Height +45, m_TexDeleteHover.Width/2, m_TexDeleteHover.Height/2);
+                m_RectVillager      = new Rectangle(10, vpHeight - m_TexDelete.Height + 45,m_TexDelete.Width/2, m_TexDelete.Height/2);
+                m_RectShaman        = new Rectangle(10, vpHeight - m_TexShaman.Height + 45, m_TexShaman.Width/2, m_TexShaman.Height/2);
+                m_RectSchool        = new Rectangle(10, vpHeight - m_TexSchool.Height + 45,m_TexSchool.Width/2, m_TexSchool.Height/2);
+                m_RectSchoolHover   = new Rectangle(10, vpHeight - m_TexSchool.Height + 45,m_TexSchool.Width/2, m_TexSchool.Height/2);
+                m_RectSchoolInfo    = new Rectangle(m_RectSchoolInfo.X, m_RectDelete.Y - m_TexSchoolInfo.Height/2 - 10, m_TexSchoolInfo.Width/2, m_TexSchoolInfo.Height/2);
+                m_RectShrine        = new Rectangle(10*2 + m_TexSchool.Width/2, vpHeight - m_TexShrine.Height + 45,m_TexShrine.Width/2, m_TexShrine.Height/2);
+                m_RectSettlement    = new Rectangle(10*3 + m_TexSchool.Width, vpHeight - m_TexSettlement.Height +45, m_TexSettlement.Width/2, m_TexSettlement.Height/2);
+                m_RectSplit         = new Rectangle(10, vpHeight - m_TexSplit.Height + 45, m_TexSplit.Width/2, m_TexSplit.Height/2);
 
                 // HOVERING
-                m_RectHoverVillager = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10,m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
+                m_RectHoverVillager  = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10,m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
                 m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10, m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
+
+                // INGAME MENU
+                m_RectMenuExit          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 5 + 10 * 5, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuFullscreen    = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 4 + 10 * 4, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuWindowed      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 4 + 10 * 4, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMainMenu          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 3 + 10 * 3, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuRestart       = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 2 + 10 * 2, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuResume        = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 + 10, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuSave          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
             }
                 // ------------------------------------------
                 // FULLSCREEN
@@ -575,6 +639,15 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectSchoolInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexSchoolInfo.Height - 20, m_TexSchoolInfo.Width, m_TexSchoolInfo.Height);
                 m_RectShamanInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShamanInfo.Height - 20,m_TexShamanInfo.Width, m_TexShamanInfo.Height);
                 m_RectShrineInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShrineInfo.Height - 20, m_TexShrineInfo.Width, m_TexShrineInfo.Height);
+
+                // INGAME MENU
+                m_RectMenuExit          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 5 + 20 * 5, m_TexMenuExit.Width, m_TexMenuExit.Height);
+                m_RectMenuFullscreen    = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 4 + 20 * 4, m_TexMenuExit.Width, m_TexMenuExit.Height);
+                m_RectMenuWindowed      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 4 + 20 * 4, m_TexMenuExit.Width, m_TexMenuExit.Height);
+                m_RectMainMenu          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 3 + 20 * 3, m_TexMenuExit.Width, m_TexMenuExit.Height);
+                m_RectMenuRestart       = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 2 + 20 * 2, m_TexMenuExit.Width, m_TexMenuExit.Height);
+                m_RectMenuResume        = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height + 20, m_TexMenuExit.Width, m_TexMenuExit.Height);
+                m_RectMenuSave          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50, m_TexMenuExit.Width, m_TexMenuExit.Height);
             }
 
             // MENU ONDERKANT DRAW
@@ -725,8 +798,15 @@ namespace XNA_ENGINE.Game.Objects
             // DRAW IN-GAME MENU
             if (m_bDrawMenu)
             {
-                // test
-                spriteBatch.Draw(m_TexSchool, m_RectCharacterStats, Color.White);
+                if (vpHeight < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+                    spriteBatch.Draw(m_TexMenuFullscreen, m_RectMenuFullscreen, Color.White);
+                else
+                    spriteBatch.Draw(m_TexMenuWindowed, m_RectMenuFullscreen, Color.White);
+                spriteBatch.Draw(m_TexMenuResume, m_RectMenuResume, Color.White);
+                spriteBatch.Draw(m_TexMenuRestart, m_RectMenuRestart, Color.White);
+                spriteBatch.Draw(m_TexMainMenu, m_RectMainMenu, Color.White);
+                spriteBatch.Draw(m_TexMenuExit, m_RectMenuExit, Color.White);
+                spriteBatch.Draw(m_TexMenuSave, m_RectMenuSave, Color.White);
             }
         }
 

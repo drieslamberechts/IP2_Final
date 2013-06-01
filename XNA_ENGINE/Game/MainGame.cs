@@ -22,7 +22,7 @@ namespace XNA_ENGINE.Game
 
         private InputManager m_InputManager;
 
-        GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public MainGame()
