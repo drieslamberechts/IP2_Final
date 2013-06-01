@@ -27,7 +27,8 @@ namespace XNA_ENGINE.Game.Scenes
             ToggleTileType,
             ShowMenu,
             ToggleDebug,
-            LeftShift
+            LeftShift,
+            Escape
         }
 
         //DATAMEMBERS
@@ -105,6 +106,7 @@ namespace XNA_ENGINE.Game.Scenes
             InputAction goBackToMainMenu = new InputAction((int)PlayerInput.ShowMenu, TriggerState.Pressed);
             InputAction toggleDebug = new InputAction((int)PlayerInput.ToggleDebug,TriggerState.Pressed);
             InputAction shift = new InputAction((int)PlayerInput.LeftShift, TriggerState.Down);
+            InputAction Escape = new InputAction((int) PlayerInput.Escape, TriggerState.Pressed);
 
             // Controller Specific
             /* none */
@@ -123,6 +125,8 @@ namespace XNA_ENGINE.Game.Scenes
             goBackToMainMenu.KeyButton = Keys.Escape;
             toggleDebug.KeyButton = Keys.N;
             shift.KeyButton = Keys.LeftShift;
+            Escape.KeyButton = Keys.Escape;
+            Escape.GamePadButton = Buttons.Start;
 
             m_InputManager.MapAction(leftClick);
             m_InputManager.MapAction(rightClick);
@@ -133,9 +137,10 @@ namespace XNA_ENGINE.Game.Scenes
             m_InputManager.MapAction(rotateCounterClockwise);
             m_InputManager.MapAction(toggleSelectionMode);
             m_InputManager.MapAction(toggleTileType);
-            m_InputManager.MapAction(goBackToMainMenu);
+            //m_InputManager.MapAction(goBackToMainMenu);
             m_InputManager.MapAction(toggleDebug);
             m_InputManager.MapAction(shift);
+            m_InputManager.MapAction(Escape);
 
             //Adjust the camera position
             SceneManager.RenderContext.Camera.Translate(800, 1000, 800);
@@ -307,6 +312,14 @@ namespace XNA_ENGINE.Game.Scenes
                 Menu.GetInstance().NextTileType(previous);
             }
             
+            // Show In-game Menu
+            if (m_InputManager.IsActionTriggered((int) PlayerInput.Escape))
+            {
+                if (Menu.GetInstance().GetShowInGameMenu())
+                    Menu.GetInstance().ShowInGameMenu(false);
+                else
+                    Menu.GetInstance().ShowInGameMenu(true);
+            }
 
             //DebugMode
             if (m_InputManager.IsActionTriggered((int) PlayerInput.ToggleDebug))

@@ -148,6 +148,8 @@ namespace XNA_ENGINE.Game.Objects
                      m_bShowShrineHover,
                      m_bShowSchoolHover;
 
+        private bool m_bDrawMenu;
+
         //Singleton implementation
         static public Menu GetInstance()
         {
@@ -226,6 +228,9 @@ namespace XNA_ENGINE.Game.Objects
             m_TexScreen9 = Content.Load<Texture2D>("tutorial/screen9");
             m_TexScreen10 = Content.Load<Texture2D>("tutorial/screen10");
             m_TexScreen11 = Content.Load<Texture2D>("tutorial/screen11");
+
+            // INGAME MENU
+            m_bDrawMenu = false;
 
             // FONT
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
@@ -717,10 +722,11 @@ namespace XNA_ENGINE.Game.Objects
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetShamanCount(), new Vector2(vpWidth - 100, 210), Color.White);
             }
 
-            // INGAME MENU
-            if (m_IngameMenu)
+            // DRAW IN-GAME MENU
+            if (m_bDrawMenu)
             {
-                // teken hier de menu
+                // test
+                spriteBatch.Draw(m_TexSchool, m_RectCharacterStats, Color.White);
             }
         }
 
@@ -770,6 +776,16 @@ namespace XNA_ENGINE.Game.Objects
         {
             get { return m_TileTypeSelected; }
             set { m_TileTypeSelected = value; }
+        }
+
+        public void ShowInGameMenu(bool show)
+        {
+            m_bDrawMenu = show;
+        }
+
+        public bool GetShowInGameMenu()
+        {
+            return m_bDrawMenu;
         }
     }
 }
