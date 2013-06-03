@@ -25,6 +25,8 @@ namespace XNA_ENGINE.Game.Objects
 
         private double m_SacrificeCountdown = 0.0;
 
+        private List<Villager> m_DesignatedVillagerList;
+
         public Shrine(List<GridTile> tileList)
         {
             m_PlaceableType = PlaceableType.Shrine;
@@ -54,6 +56,8 @@ namespace XNA_ENGINE.Game.Objects
 
             Initialize();
             PlaceRallyPoint(SearchForDefaultRallyPointSpot());
+
+            m_DesignatedVillagerList = new List<Villager>();
         }
 
         public override void Initialize()
@@ -63,6 +67,26 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Update(RenderContext renderContext)
         {
+            if (m_DesignatedVillagerList.Any())
+            {
+                List<Villager> deleteList = new List<Villager>();
+
+                foreach (Villager villager in m_DesignatedVillagerList)
+                {
+                    if (villager.CurrentTile == SearchForDefaultRallyPointSpot())
+                    {
+                        villager.GetOwner().RemovePlaceable(villager);
+                        Sacrifice();
+                        deleteList.Add(villager);
+                    }
+                }
+
+                foreach (Villager villager in deleteList)
+                {
+                    m_DesignatedVillagerList.Remove(villager);
+                }
+            }
+
             if (m_SacrificeCountdown > 0)
             {
                 m_SacrificeCountdown -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
@@ -120,8 +144,8 @@ namespace XNA_ENGINE.Game.Objects
                 Placeable permaSelected = GridFieldManager.GetInstance().GetPermanentSelected();
                 if (permaSelected != null && permaSelected.PlaceableTypeMeth == PlaceableType.Villager)
                 {
-                    permaSelected.GetOwner().RemovePlaceable(permaSelected);
-                    Sacrifice();
+                    permaSelected.GoToTile(SearchForDefaultRallyPointSpot());
+                    m_DesignatedVillagerList.Add((Villager)permaSelected);
                 }
             }
 

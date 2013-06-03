@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
@@ -19,6 +20,8 @@ namespace XNA_ENGINE.Game.Objects
         private double m_Timer = TIMEFORVILLAGER;
 
         private int m_AmountOfSoldiersQueued = 0;
+
+        private List<Villager> m_DesignatedVillagerList;
 
         public School(List<GridTile> tileList)
         {
@@ -50,6 +53,8 @@ namespace XNA_ENGINE.Game.Objects
 
             Initialize();
             PlaceRallyPoint(SearchForDefaultRallyPointSpot());
+
+            m_DesignatedVillagerList = new List<Villager>();
         }
 
         public override void Initialize()
@@ -59,6 +64,28 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Update(RenderContext renderContext)
         {
+            if (m_DesignatedVillagerList.Any())
+            {
+                List<Villager> deleteList = new List<Villager>();
+
+                foreach (Villager villager in m_DesignatedVillagerList)
+                {
+                    if (villager.CurrentTile == SearchForDefaultRallyPointSpot() && villager.GetOwner().GetResources().GetWood() >= StandardCost.COSTOFWOOD_SOLDIER)
+                    {
+                        villager.GetOwner().RemovePlaceable(villager);
+                        m_Owner.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SOLDIER);
+                        m_Owner.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SOLDIER);
+                        QueueSoldier();
+                        deleteList.Add(villager);
+                    }
+                }
+
+                foreach (Villager villager in deleteList)
+                {
+                    m_DesignatedVillagerList.Remove(villager);
+                }
+            }
+
             if (m_AmountOfSoldiersQueued > 0)
             {
                 m_Timer -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
@@ -93,9 +120,8 @@ namespace XNA_ENGINE.Game.Objects
                 Placeable permaSelected = GridFieldManager.GetInstance().GetPermanentSelected();
                 if (permaSelected != null && permaSelected.PlaceableTypeMeth == PlaceableType.Villager)
                 {
-                    permaSelected.GetOwner().RemovePlaceable(permaSelected);
-                    m_Owner.GetResources().DecreaseWood(20);
-                    QueueSoldier();
+                    permaSelected.GoToTile(SearchForDefaultRallyPointSpot());
+                    m_DesignatedVillagerList.Add((Villager)permaSelected);
                 }
             }
 

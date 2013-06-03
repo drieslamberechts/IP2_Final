@@ -243,6 +243,16 @@ namespace XNA_ENGINE.Game.Objects
             return resourceArray;
         }
 
+        public float GetWood()
+        {
+            return m_Wood;
+        }
+
+        public float GetInfluence()
+        {
+            return m_Influence;
+        }
+
         // ADD RESOURCES
         public void AddWood(int wood)
         {
