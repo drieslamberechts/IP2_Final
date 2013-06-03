@@ -104,15 +104,10 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                GoToTile(selectedTile);
+                if (selectedTile != null) GoToTile(selectedTile);
             }
 
             base.OnPermanentSelected();
-        }
-
-        public override void GoToTile(GridTile targetTile)
-        {
-            m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, targetTile, m_PlaceableType);
         }
 
         public override bool SetTargetTile(GridTile targetTile)

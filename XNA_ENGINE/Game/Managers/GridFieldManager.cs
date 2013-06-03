@@ -370,7 +370,6 @@ namespace XNA_ENGINE.Game.Managers
                 }
             }
 
-
             //Create the lists
             List<GridTile> returnPath = new List<GridTile>();
             List<GridTile> openNodeList = new List<GridTile>(); //Create the open list of nodes, initially containing only our starting node
@@ -424,7 +423,6 @@ namespace XNA_ENGINE.Game.Managers
                             currentNeighbourTile.PFG = lowestFTile.PFG + 10;
                             openNodeList.Add(currentNeighbourTile);
                         }
-
                     }
                 }
             }

@@ -94,7 +94,7 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                GoToTile(selectedTile);
+                if (selectedTile != null) GoToTile(selectedTile);
 
                 if (selectedPlaceableList != null && selectedPlaceableList.ElementAt(0).PlaceableTypeMeth == PlaceableType.Army)
                 {
@@ -105,7 +105,7 @@ namespace XNA_ENGINE.Game.Objects
                     }
                     else
                     {
-                        MergeArmies((Army)selectedPlaceableList.ElementAt(0),true);   
+                        //MergeArmies((Army)selectedPlaceableList.ElementAt(0),true);   
                     }
                 }
             }
@@ -158,11 +158,6 @@ namespace XNA_ENGINE.Game.Objects
                 ArmySize += otherArmy.ArmySize;
                 m_Owner.RemovePlaceable(otherArmy);
             }
-        }
-
-        public override void GoToTile(GridTile targetTile)
-        {
-            m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, targetTile, m_PlaceableType);
         }
 
         public override GridTile GetTargetTile()

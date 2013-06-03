@@ -24,7 +24,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Rallypoint = new GameModelGrid("Models/prop_Flag");
             m_Rallypoint.CanDraw = true;
             m_Rallypoint.LoadContent(PlayScene.GetContentManager());
-            m_Rallypoint.DiffuseColor = new Vector3(0.0f, 0.8f, 0.0f);
+           // m_Rallypoint.DiffuseColor = new Vector3(0.0f, 0.8f, 0.0f);
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Rallypoint);
          
             base.Initialize();

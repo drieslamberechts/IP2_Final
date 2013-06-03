@@ -607,6 +607,9 @@ namespace XNA_ENGINE.Game.Objects
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectButtonReturn) && m_bShowControls)
                 m_bShowControls = false;
 
+            if (inputManager.GetAction((int) PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMenuSave) && m_bDrawMenu)
+                MapLoadSave.GetInstance().SaveMap(GridFieldManager.GetInstance().GridField);
+
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectButtonControllerSwitch) && m_bShowControls && m_bShowControllerLayout && m_bLayoutSwitch)
             {
                 m_bShowControllerLayout = false;
@@ -720,6 +723,7 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectShrine        = new Rectangle(10*2 + m_TexSchool.Width/2, vpHeight - m_TexShrine.Height + 45,m_TexShrine.Width/2, m_TexShrine.Height/2);
                 m_RectSettlement    = new Rectangle(10*3 + m_TexSchool.Width, vpHeight - m_TexSettlement.Height +45, m_TexSettlement.Width/2, m_TexSettlement.Height/2);
                 m_RectSplit         = new Rectangle(10, vpHeight - m_TexSplit.Height + 45, m_TexSplit.Width/2, m_TexSplit.Height/2);
+
 
                 // HOVERING
                 m_RectHoverVillager  = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10,m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);

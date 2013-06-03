@@ -109,9 +109,9 @@ namespace XNA_ENGINE.Game.Objects
                         effect.World = transforms[mesh.ParentBone.Index]*WorldMatrix;
 
                         //Texture
-                        /*if (m_Texture != null)
+                        if (m_Texture != null)
                             effect.Texture = m_Texture;
-                        effect.Texture = m_UseTexture;*/
+                       // effect.Texture = m_UseTexture;
 
                         //Diffuse
                         effect.DiffuseColor = m_DiffuseColor;
@@ -181,9 +181,9 @@ namespace XNA_ENGINE.Game.Objects
                         effect.World = transforms[mesh.ParentBone.Index] * WorldMatrix;
 
                         //Texture
-                        /*if (m_Texture != null)
+                        if (m_Texture != null)
                             effect.Texture = m_Texture;
-                        effect.Texture = m_UseTexture;*/
+                        //effect.Texture = m_UseTexture;
 
                         //Diffuse
                         effect.DiffuseColor = m_DiffuseColor;

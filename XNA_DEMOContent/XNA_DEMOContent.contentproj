@@ -940,13 +940,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="final Menu\Button_AddShrineHovered.png">
-      <Name>Button_AddShrineHovered</Name>
+    <Compile Include="Textures\tex_env_house_Shrine.png">
+      <Name>tex_env_house_Shrine</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="final Menu\Button_AddShrineUnhovered.png">
-      <Name>Button_AddShrineUnhovered</Name>
+    <Compile Include="Textures\tex_env_house_ShrineBloodied.png">
+      <Name>tex_env_house_ShrineBloodied</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
