@@ -95,6 +95,7 @@
     <Compile Include="Engine\Helpers\BaseCamera.cs" />
     <Compile Include="Engine\Helpers\Debug2D.cs" />
     <Compile Include="Engine\Helpers\Extensions.cs" />
+    <Compile Include="Engine\Objects\GameAnimatedModel.cs" />
     <Compile Include="Engine\Objects\GameHitRegion2D.cs" />
     <Compile Include="Engine\Helpers\InputManager.cs" />
     <Compile Include="Engine\Objects\GameAnimatedSprite.cs" />
@@ -128,6 +129,17 @@
     <Compile Include="Game\Scenes\PlayScene.cs" />
     <Compile Include="Game\Scenes\MainMenuScene.cs" />
     <Compile Include="Game\TilePrefabs\BasePrefab.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabEmpty.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal10.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal09.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal08.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal07.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal06.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal05.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal04.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal03.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal02.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabFinal01.cs" />
     <Compile Include="Game\TilePrefabs\PrefabTreeShort6.cs" />
     <Compile Include="Game\TilePrefabs\PrefabTreeShort4.cs" />
     <Compile Include="Game\TilePrefabs\PrefabTreeShort3.cs" />
@@ -185,6 +197,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SkinnedModelData\SkinnedModelData.csproj">
+      <Project>{3899fb5e-0ed8-4606-81d5-4053c24c52af}</Project>
+      <Name>SkinnedModelData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
+      <Project>{fdc4eb6b-4fc3-45dc-8e17-7f560c58cd0c}</Project>
+      <Name>SkinnedModelPipeline</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XNA_DEMOContent\XNA_DEMOContent.contentproj">
       <Project>{019DE630-5711-48FA-8AE7-C0C67A910398}</Project>
       <Name>XNA_DEMOContent %28Content%29</Name>

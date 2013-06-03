@@ -77,6 +77,17 @@ namespace XNA_ENGINE.Game.Objects
             TreeShort4,
             TreeShort5,
             TreeShort6,
+            Final1,
+            Final2,
+            Final3,
+            Final4,
+            Final5,
+            Final6,
+            Final7,
+            Final8,
+            Final9,
+            Final10,
+            Empty,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -247,6 +258,39 @@ namespace XNA_ENGINE.Game.Objects
                     break;
                 case TileType.TreeShort6:
                     LoadTileType(new PrefabTreeShort6(this));
+                    break;
+                case TileType.Final1:
+                    LoadTileType(new PrefabFinal01(this));
+                    break;
+                case TileType.Final2:
+                    LoadTileType(new PrefabFinal02(this));
+                    break;
+                case TileType.Final3:
+                    LoadTileType(new PrefabFinal03(this));
+                    break;
+                case TileType.Final4:
+                    LoadTileType(new PrefabFinal04(this));
+                    break;
+                case TileType.Final5:
+                    LoadTileType(new PrefabFinal05(this));
+                    break;
+                case TileType.Final6:
+                    LoadTileType(new PrefabFinal06(this));
+                    break;
+                case TileType.Final7:
+                    LoadTileType(new PrefabFinal07(this));
+                    break;
+                case TileType.Final8:
+                    LoadTileType(new PrefabFinal08(this));
+                    break;
+                case TileType.Final9:
+                    LoadTileType(new PrefabFinal09(this));
+                    break;
+                case TileType.Final10:
+                    LoadTileType(new PrefabFinal10(this));
+                    break;
+                case TileType.Empty:
+                    LoadTileType(new PrefabEmpty(this));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("type");

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine;
+using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
 

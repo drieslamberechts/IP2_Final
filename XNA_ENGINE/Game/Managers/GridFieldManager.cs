@@ -448,8 +448,7 @@ namespace XNA_ENGINE.Game.Managers
 
         private GridTile PFGetLowestFTile(List<GridTile> list)
         {
-            GridTile lowestFTile;
-            lowestFTile = list.ElementAt(0);
+            GridTile lowestFTile = list.ElementAt(0);
             foreach (var gridTile in list)
             {
                 if (gridTile.PFGetF() < lowestFTile.PFGetF()) lowestFTile = gridTile;
@@ -469,7 +468,6 @@ namespace XNA_ENGINE.Game.Managers
         private List<GridTile> PFCheckAllNeighboursAndParentThem(GridTile parentTile, GridTile targetTile, Placeable.PlaceableType placeableType)
         {
             const int gHorVer = 10;
-
             List<GridTile> returnList = new List<GridTile>();
 
             if (placeableType != Placeable.PlaceableType.Villager)
@@ -508,8 +506,6 @@ namespace XNA_ENGINE.Game.Managers
                 if (swTile != null && swTile.IsWalkable() && !swTile.PickupWood(m_UserPlayer, false) || swTile == targetTile)
                     returnList.Add(swTile);
             }
-
-
 
             return returnList;
         }
