@@ -195,4 +195,8 @@ Content\tex_house_tent1+tent2+tent3+camp_0.xnb
 Content\Textures\tex_env_house_Shrine_0.xnb
 Content\Textures\tex_env_house_Shrine.xnb
 Content\Textures\tex_env_house_ShrineBloodied.xnb
-Content\tex_env_prop_Banner_0.xnb
+Content\final Menu\hoverShrine.xnb
+Content\final Menu\Information_NrUnitsShaman.xnb
+Content\final Menu\Information_NrUnitsVillager.xnb
+Content\final Menu\Information_NrUnitsWarrior.xnb
+Content\Textures\tex_env_prop_Banner_0.xnb
