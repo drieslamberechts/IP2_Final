@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Helpers;
 using XNA_ENGINE.Engine.Scenegraph;
@@ -64,6 +65,11 @@ namespace XNA_ENGINE.Game.Scenes
 
         private const int SPLASHSCREENTIME = 200;
 
+        // VARIABLES WHEN USING A CONTROLLER
+        private bool m_bStartSelected, m_bExitSelected, m_bControlsSelected, m_bReturnSelected;
+        private static GamePadState m_GamePadState;
+        private bool m_bCanSelectNextButton;
+
         public MainMenuScene(ContentManager content)
             : base("MainMenuScene")
         {
@@ -83,6 +89,15 @@ namespace XNA_ENGINE.Game.Scenes
             m_bShowControllerLayout = true;
             m_bShowKeyboardLayout = false;
             m_bLayoutSwitch = true;
+
+            // CONTROLLER USAGE
+            m_bStartSelected = true;
+            m_bExitSelected = false;
+            m_bControlsSelected = false;
+            m_bCanSelectNextButton = true;
+            m_bReturnSelected = false;
+
+            m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
             // background
             m_BackgroundTexture = m_Content.Load<Texture2D>("final Menu/Background_StartMenu");
@@ -206,6 +221,32 @@ namespace XNA_ENGINE.Game.Scenes
                 else renderContext.SpriteBatch.Draw(m_TexButtonReturn, m_RectButtonReturn, Color.White);
             }
 
+            // CONTROLLER USAGE
+            if (m_GamePadState.IsConnected)
+            {
+                if (m_bStartSelected)
+                {
+                    m_bStartButtonHovered = true;
+                    m_bExitButtonHovered = false;
+                    m_bControlsHovered = false;
+                }
+                else if (m_bExitSelected)
+                {
+                    m_bStartButtonHovered = false;
+                    m_bExitButtonHovered = true;
+                    m_bControlsHovered = false;
+                }
+                else if (m_bControlsSelected)
+                {
+                    m_bStartButtonHovered = false;
+                    m_bExitButtonHovered = false;
+                    m_bControlsHovered = true;
+                }
+
+                if (m_bShowControls)
+                    m_bButtonReturnHovered = true;
+            }
+
             base.Draw2D(renderContext, drawBefore3D);
         }
 
@@ -264,6 +305,93 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             m_bLayoutSwitch = true;
+
+            // CONTROLLER USAGE
+            if (m_GamePadState.IsConnected)
+            {
+                if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bStartSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bStartSelected = false;
+                    m_bExitSelected = true;
+                    m_bControlsSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bExitSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bStartSelected = false;
+                    m_bExitSelected = false;
+                    m_bControlsSelected = true;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bExitSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bStartSelected = true;
+                    m_bExitSelected = false;
+                    m_bControlsSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bControlsSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bStartSelected = false;
+                    m_bExitSelected = true;
+                    m_bControlsSelected = false;
+                }
+
+                if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Released)
+                    m_bCanSelectNextButton = true;
+
+                // SELECT A BUTTON
+                if (m_bShowControls == false)
+                {
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bStartSelected)
+                    {
+                        var playScene = new PlayScene(m_Content, "GeneratedTileMap");
+                        SceneManager.AddGameScene(playScene);
+                        SceneManager.SetActiveScene("PlayScene");
+                        playScene.Initialize();
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bExitSelected)
+                    {
+                        ExitGame = true;
+                        SceneManager.MainGame.Exit();
+                    }
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bControlsSelected &&
+                        m_bCanSelectNextButton)
+                    {
+                        m_bShowControls = true;
+                        m_bCanSelectNextButton = false;
+                    }
+                }
+
+                // CONTROL LAYOUT
+                if (m_bShowControls)
+                {
+                    m_bReturnSelected = true;
+
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bReturnSelected && m_bCanSelectNextButton)
+                    {
+                        m_bShowControls = false;
+                        m_bCanSelectNextButton = false;
+                    }
+
+                    if (GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed && m_bCanSelectNextButton)
+                    {
+                        if (m_bShowKeyboardLayout)
+                        {
+                            m_bShowKeyboardLayout = false;
+                            m_bShowControllerLayout = true;
+                            m_bCanSelectNextButton = false;
+                        }
+                        else
+                        {
+                            m_bShowKeyboardLayout = true;
+                            m_bShowControllerLayout = false;
+                            m_bCanSelectNextButton = false;
+                        }
+                    }
+                }
+            }
 
             if (m_InputManager.GetAction((int)PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_StartRect))
             {

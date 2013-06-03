@@ -67,7 +67,9 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexMenuSaveHovered,
                                    m_TexMenuControls,
                                    m_TexMenuControlsHovered,
-                                   m_TexPauseMenuBackground;
+                                   m_TexPauseMenuBackground,
+                                   m_TexSplitIcon,
+                                   m_TexSplitIconHover;
 
         private Rectangle m_RectMenuBackground,
                           m_RectWoodResource,
@@ -203,7 +205,8 @@ namespace XNA_ENGINE.Game.Objects
                      m_bShowMenuSaveHover,
                      m_bShowMenuResumeHover,
                      m_bShowMenuRestartHover,
-                     m_bShowMenuControlsHover;
+                     m_bShowMenuControlsHover,
+                     m_bShowSplitHover;
 
         private bool m_bDrawMenu;
         private bool m_bLayoutSwitch;
@@ -241,6 +244,7 @@ namespace XNA_ENGINE.Game.Objects
             m_bShowMenuRestartHover = false;
             m_bShowMenuControlsHover = false;
             m_bShowMainMenuHover = false;
+            m_bShowSplitHover = false;
 
             m_bShowControls = false;
             m_bButtonReturnHovered = false;
@@ -270,6 +274,8 @@ namespace XNA_ENGINE.Game.Objects
             m_TexShaman = Content.Load<Texture2D>("final Menu/Button_AddShaman");
             m_TexVillagerHover = Content.Load<Texture2D>("final Menu/Button_AddVillagerHover");
             m_TexShamanHover = Content.Load<Texture2D>("final Menu/Button_AddShamanHover");
+            m_TexSplitIcon = Content.Load<Texture2D>("final Menu/Button_SplitArmyUnhovered");
+            m_TexSplitIconHover = Content.Load<Texture2D>("final Menu/Button_SplitArmyHovered"); 
 
             m_TexSoldierQueue = Content.Load<Texture2D>("final Menu/Information_NrUnitsWarrior");
             m_TexShamanQueue = Content.Load<Texture2D>("final Menu/Information_NrUnitsShaman");
@@ -444,6 +450,13 @@ namespace XNA_ENGINE.Game.Objects
                 m_bButtonReturnHovered = true;
             else m_bButtonReturnHovered = false;
 
+            // Split Icon
+            if (CheckHitButton(mousePos, m_RectDelete) && m_SubMenuSelected == SubMenuSelected.SoldierMode)
+                m_bShowSplitHover = true;
+            else
+                m_bShowSplitHover = false;
+
+
             //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
             switch (m_SubMenuSelected)
             {
@@ -537,10 +550,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         Console.WriteLine("Split!");
-                        // m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
+                        
 
-                        // Get the Split Army working
-                        // m_Player.GetPlayerOptions().SplitArmy(/* Add selected army */, new Army(SceneManager.ActiveScene, new GridTile(SceneManager.ActiveScene, 10, 10)));
 
                         m_SelectedMode = ModeSelected.Gather;
                         return true;
@@ -885,7 +896,9 @@ namespace XNA_ENGINE.Game.Objects
                     // SOLDIER MODE
                     // --------------------------------------------
                 case SubMenuSelected.SoldierMode:
-                    // Do nothing
+                    if (m_bShowSplitHover)
+                        spriteBatch.Draw(m_TexSplitIconHover, m_RectDelete, Color.White);
+                    else spriteBatch.Draw(m_TexSplitIcon, m_RectDelete, Color.White);
                     break;
 
                     // --------------------------------------------
