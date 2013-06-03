@@ -46,19 +46,22 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexBuildTile,
                                    m_TexSplit,
                                    m_TexMenuExit,
+                                   m_TexMenuExitHovered,
                                    m_TexMenuFullscreen,
                                    m_TexMenuWindowed,
-                                   m_TexMainMenu,
-                                   m_TexMenuRestart,
-                                   m_TexMenuResume,
-                                   m_TexMenuSave,
-                                   m_TexMenuExitHovered,
                                    m_TexMenuFullscreenHovered,
                                    m_TexMenuWindowedHovered,
+                                   m_TexMainMenu,
                                    m_TexMainMenuHovered,
+                                   m_TexMenuRestart,
                                    m_TexMenuRestartHovered,
+                                   m_TexMenuResume,
                                    m_TexMenuResumeHovered,
-                                   m_TexMenuSaveHovered;
+                                   m_TexMenuSave,
+                                   m_TexMenuSaveHovered,
+                                   m_TexMenuControls,
+                                   m_TexMenuControlsHovered,
+                                   m_TexPauseMenuBackground;
 
         private Rectangle m_RectMenuBackground,
                           m_RectWoodResource,
@@ -83,10 +86,30 @@ namespace XNA_ENGINE.Game.Objects
                           m_RectMenuExit,
                           m_RectMenuFullscreen,
                           m_RectMenuWindowed,
+                          m_RectMenuControls,
                           m_RectMainMenu,
                           m_RectMenuRestart,
                           m_RectMenuResume,
-                          m_RectMenuSave;
+                          m_RectMenuSave,
+                          m_RectPauseMenuBackground;
+
+        // Variables Controls Menu
+        private bool m_bShowControls, m_bButtonReturnHovered, m_bShowControllerLayout, m_bShowKeyboardLayout;
+
+        private Texture2D m_TexControlsBackground,
+                          m_TexControlsKeyboard,
+                          m_TexControlsController,
+                          m_TexButtonReturn,
+                          m_TexButtonReturnHovered,
+                          m_TexButtonControllerSwitch,
+                          m_TexButtonKeyboardSwitch;
+
+        private Rectangle m_RectControlsBackground,
+                          m_RectControlsKeyboard,
+                          m_RectControlsController,
+                          m_RectButtonReturn,
+                          m_RectButtonControllerSwitch,
+                          m_RectButtonKeyboardSwitch;
 
         // tutorial variables
         private readonly Texture2D m_TexScreen1,
@@ -159,7 +182,7 @@ namespace XNA_ENGINE.Game.Objects
         private GridTile.TileType m_TileTypeSelected = GridTile.TileType.NormalGrass;
         private SpriteFont m_DebugFont;
 
-        //IngameMenu
+        //In-game Menu
         private bool m_IngameMenu = false;
 
         // HOVERING
@@ -167,9 +190,17 @@ namespace XNA_ENGINE.Game.Objects
                      m_bShowSettlementHover,
                      m_bShowShamanHover,
                      m_bShowShrineHover,
-                     m_bShowSchoolHover;
+                     m_bShowSchoolHover,
+                     m_bShowMenuFullscreenHover,
+                     m_bShowMenuExitHover,
+                     m_bShowMainMenuHover,
+                     m_bShowMenuSaveHover,
+                     m_bShowMenuResumeHover,
+                     m_bShowMenuRestartHover,
+                     m_bShowMenuControlsHover;
 
         private bool m_bDrawMenu;
+        private bool m_bLayoutSwitch;
 
         //Singleton implementation
         static public Menu GetInstance()
@@ -188,6 +219,19 @@ namespace XNA_ENGINE.Game.Objects
             m_bShowShrineHover = false;
             m_bShowShamanHover = false;
             m_bShowSchoolHover = false;
+            m_bShowMenuFullscreenHover = false;
+            m_bShowMenuExitHover = false;
+            m_bShowMenuSaveHover = false;
+            m_bShowMenuResumeHover = false;
+            m_bShowMenuRestartHover = false;
+            m_bShowMenuControlsHover = false;
+            m_bShowMainMenuHover = false;
+
+            m_bShowControls = false;
+            m_bButtonReturnHovered = false;
+            m_bShowControllerLayout = true;
+            m_bShowKeyboardLayout = false;
+            m_bLayoutSwitch = true;
 
             // MENU ONDERKANT BACKGROUND
             m_TexMenuBackground = Content.Load<Texture2D>("final Menu/grootMenu_Onderkant");
@@ -266,6 +310,19 @@ namespace XNA_ENGINE.Game.Objects
             m_TexMenuRestartHovered = Content.Load<Texture2D>("pause Menu/Button_RestartHovered");
             m_TexMenuResumeHovered = Content.Load<Texture2D>("pause Menu/Button_ResumeHovered");
             m_TexMenuSaveHovered = Content.Load<Texture2D>("pause Menu/Button_SaveHovered");
+            m_TexMenuExitHovered = Content.Load<Texture2D>("pause Menu/Button_ExitHovered");
+            m_TexPauseMenuBackground = Content.Load<Texture2D>("pause Menu/Background_GamePause");
+            m_TexMenuControls = Content.Load<Texture2D>("pause Menu/Button_ControlsUnhovered");
+            m_TexMenuControlsHovered = Content.Load<Texture2D>("pause Menu/Button_ControlsHovered");
+
+            // CONTROLLER MENU
+            m_TexControlsBackground = Content.Load<Texture2D>("ControllerMenu/Controller_Background");
+            m_TexControlsKeyboard = Content.Load<Texture2D>("ControllerMenu/Controller_MouseAndKeyboard");
+            m_TexControlsController = Content.Load<Texture2D>("ControllerMenu/Controller_xboxController");
+            m_TexButtonReturn = Content.Load<Texture2D>("ControllerMenu/Controller_ReturnButtonUnhovered");
+            m_TexButtonReturnHovered = Content.Load<Texture2D>("ControllerMenu/Controller_ReturnButtonHovered");
+            m_TexButtonControllerSwitch = Content.Load<Texture2D>("ControllerMenu/Controller_xboxControllerButton");
+            m_TexButtonKeyboardSwitch = Content.Load<Texture2D>("ControllerMenu/Controller_MouseAndKeyboardButton");
 
             // FONT
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
@@ -294,38 +351,70 @@ namespace XNA_ENGINE.Game.Objects
 
             // HOVER VILLAGER BUTTON
             if (CheckHitButton(mousePos, m_RectVillager) && m_SubMenuSelected == SubMenuSelected.SettlementMode)
-            {
                 m_bShowVillagerHover = true;
-            }
             else m_bShowVillagerHover = false;
 
             // HOVER SHAMAN BUTTON
             if (CheckHitButton(mousePos, m_RectShaman) && m_SubMenuSelected == SubMenuSelected.ShrineMode)
-            {
                 m_bShowShamanHover = true;
-            }
             else m_bShowShamanHover = false;
 
             // HOVER SHRINE BUTTON
             if (CheckHitButton(mousePos, m_RectShrine) && m_SubMenuSelected == SubMenuSelected.VillagerMode)
-            {
                 m_bShowShrineHover = true;
-            }
             else m_bShowShrineHover = false;
 
             // HOVER SCHOOL BUTTON
             if (CheckHitButton(mousePos, m_RectSchool) && m_SubMenuSelected == SubMenuSelected.VillagerMode)
-            {
                 m_bShowSchoolHover = true;
-            }
             else m_bShowSchoolHover = false;
 
             // HOVER SETTLEMENT BUTTON
             if (CheckHitButton(mousePos, m_RectSettlement) && m_SubMenuSelected == SubMenuSelected.VillagerMode)
-            {
                 m_bShowSettlementHover = true;
-            }
             else m_bShowSettlementHover = false;
+
+            // HOVER INGAME MENU
+            // exit
+            if (CheckHitButton(mousePos, m_RectMenuExit) && m_bDrawMenu)
+                m_bShowMenuExitHover = true;
+            else m_bShowMenuExitHover = false;
+
+            // fullscreen / windowed
+            if (CheckHitButton(mousePos, m_RectMenuFullscreen) && m_bDrawMenu)
+                m_bShowMenuFullscreenHover = true;
+            else m_bShowMenuFullscreenHover = false;
+
+            // save
+            if (CheckHitButton(mousePos, m_RectMenuSave) && m_bDrawMenu)
+                m_bShowMenuSaveHover = true;
+            else m_bShowMenuSaveHover = false;
+
+            // restart
+            if (CheckHitButton(mousePos, m_RectMenuRestart) && m_bDrawMenu)
+                m_bShowMenuRestartHover = true;
+            else m_bShowMenuRestartHover = false;
+
+            // main menu
+            if (CheckHitButton(mousePos, m_RectMainMenu) && m_bDrawMenu)
+                m_bShowMainMenuHover = true;
+            else m_bShowMainMenuHover = false;
+
+            // controls
+            if (CheckHitButton(mousePos, m_RectMenuControls) && m_bDrawMenu)
+                m_bShowMenuControlsHover = true;
+            else m_bShowMenuControlsHover = false;
+
+            // resume
+            if (CheckHitButton(mousePos, m_RectMenuResume) && m_bDrawMenu)
+                m_bShowMenuResumeHover = true;
+            else m_bShowMenuResumeHover = false;
+
+            // CONTROLLER MENU
+            // return
+            if (CheckHitButton(mousePos, m_RectButtonReturn) && m_bShowControls)
+                m_bButtonReturnHovered = true;
+            else m_bButtonReturnHovered = false;
 
             //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
             switch (m_SubMenuSelected)
@@ -495,6 +584,32 @@ namespace XNA_ENGINE.Game.Objects
                 // Switchen doet iets raar met de game
                 SceneManager.SetActiveScene("MainMenuScene");
 
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMenuResume) && m_bDrawMenu)
+               m_bDrawMenu = false;
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMenuControls) && m_bDrawMenu)
+                m_bShowControls = true;
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectButtonReturn) && m_bShowControls)
+                m_bShowControls = false;
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectButtonControllerSwitch) && m_bShowControls && m_bShowControllerLayout && m_bLayoutSwitch)
+            {
+                m_bShowControllerLayout = false;
+                m_bShowKeyboardLayout = true;
+                m_bLayoutSwitch = false;
+            }
+
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectButtonKeyboardSwitch) && m_bShowControls && m_bShowKeyboardLayout && m_bLayoutSwitch)
+            {
+                m_bShowKeyboardLayout = false;
+                m_bShowControllerLayout = true;
+                m_bLayoutSwitch = false;
+            }
+
+            m_bLayoutSwitch = true;
+
+
             return false;
         }
 
@@ -597,13 +712,23 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10, m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
 
                 // INGAME MENU
-                m_RectMenuExit          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 5 + 10 * 5, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
-                m_RectMenuFullscreen    = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 4 + 10 * 4, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
-                m_RectMenuWindowed      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 4 + 10 * 4, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
-                m_RectMainMenu          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 3 + 10 * 3, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
-                m_RectMenuRestart       = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 * 2 + 10 * 2, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
-                m_RectMenuResume        = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25 + m_TexMenuExit.Height/ 2 + 10, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
-                m_RectMenuSave          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 25, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuControls      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height / 4 * 5, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectMenuExit          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height/ 4 * 6, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectMenuFullscreen    = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height/ 4 * 4, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectMenuWindowed      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height/ 4 * 4, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectMainMenu          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height/ 4 * 3, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectMenuRestart       = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height/ 4 * 2, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectMenuResume        = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height/ 4, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectMenuSave          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
+                m_RectPauseMenuBackground = new Rectangle(vpWidth / 2 - m_TexPauseMenuBackground.Width / 8, 152, m_TexPauseMenuBackground.Width / 4, m_TexPauseMenuBackground.Height / 4);
+
+                // CONTROLLER MENU
+                m_RectControlsBackground = new Rectangle(vpWidth / 2 - m_TexControlsBackground.Width / 4, 20, m_TexControlsBackground.Width / 2, m_TexControlsBackground.Height / 2);
+                m_RectControlsKeyboard = new Rectangle(vpWidth / 2 - m_TexControlsKeyboard.Width / 4, 150, m_TexControlsKeyboard.Width / 2, m_TexControlsKeyboard.Height / 2);
+                m_RectControlsController = new Rectangle(vpWidth / 2 - m_TexControlsController.Width / 4, 150, m_TexControlsController.Width / 2, m_TexControlsController.Height / 2);
+                m_RectButtonReturn = new Rectangle(vpWidth / 2 - 300, 450, m_TexButtonReturn.Width / 2, m_TexButtonReturn.Height / 2);
+                m_RectButtonControllerSwitch = new Rectangle(vpWidth / 2 - m_TexButtonControllerSwitch.Width / 4, 70, m_TexButtonControllerSwitch.Width / 2, m_TexButtonControllerSwitch.Height / 2);
+                m_RectButtonKeyboardSwitch = new Rectangle(vpWidth / 2 - m_TexButtonKeyboardSwitch.Width / 4, 70, m_TexButtonKeyboardSwitch.Width / 2, m_TexButtonKeyboardSwitch.Height / 2);
             }
                 // ------------------------------------------
                 // FULLSCREEN
@@ -641,13 +766,23 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectShrineInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShrineInfo.Height - 20, m_TexShrineInfo.Width, m_TexShrineInfo.Height);
 
                 // INGAME MENU
-                m_RectMenuExit          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 5 + 20 * 5, m_TexMenuExit.Width, m_TexMenuExit.Height);
-                m_RectMenuFullscreen    = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 4 + 20 * 4, m_TexMenuExit.Width, m_TexMenuExit.Height);
-                m_RectMenuWindowed      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 4 + 20 * 4, m_TexMenuExit.Width, m_TexMenuExit.Height);
-                m_RectMainMenu          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 3 + 20 * 3, m_TexMenuExit.Width, m_TexMenuExit.Height);
-                m_RectMenuRestart       = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height * 2 + 20 * 2, m_TexMenuExit.Width, m_TexMenuExit.Height);
-                m_RectMenuResume        = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50 + m_TexMenuExit.Height + 20, m_TexMenuExit.Width, m_TexMenuExit.Height);
-                m_RectMenuSave          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 2, 50, m_TexMenuExit.Width, m_TexMenuExit.Height);
+                m_RectMenuControls      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + m_TexMenuExit.Height / 2 * 5 + 20, m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuExit          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + m_TexMenuExit.Height / 2 * 6 + 20   , m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuFullscreen    = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + m_TexMenuExit.Height / 2 * 4 + 20   , m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuWindowed      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + m_TexMenuExit.Height / 2 * 4 + 20   , m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMainMenu          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + m_TexMenuExit.Height / 2 * 3 + 20   , m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuRestart       = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + m_TexMenuExit.Height / 2 * 2 + 20   , m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuResume        = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + m_TexMenuExit.Height / 2 + 20   , m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectMenuSave          = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 4, 350 + 20                                  , m_TexMenuExit.Width / 2, m_TexMenuExit.Height / 2);
+                m_RectPauseMenuBackground = new Rectangle(vpWidth / 2 - m_TexPauseMenuBackground.Width / 4, 325, m_TexPauseMenuBackground.Width / 2, m_TexPauseMenuBackground.Height / 2);
+
+                // CONTROLLER MENU
+                m_RectControlsBackground = new Rectangle(vpWidth / 2 - m_TexControlsBackground.Width / 2, 40, m_TexControlsBackground.Width, m_TexControlsBackground.Height);
+                m_RectControlsKeyboard = new Rectangle(vpWidth / 2 - m_TexControlsKeyboard.Width / 2, 300, m_TexControlsKeyboard.Width, m_TexControlsKeyboard.Height);
+                m_RectControlsController = new Rectangle(vpWidth / 2 - m_TexControlsController.Width / 2, 300, m_TexControlsController.Width, m_TexControlsController.Height);
+                m_RectButtonReturn = new Rectangle(vpWidth / 2 - 600, 900, m_TexButtonReturn.Width, m_TexButtonReturn.Height);
+                m_RectButtonControllerSwitch = new Rectangle(vpWidth / 2 - m_TexButtonControllerSwitch.Width / 2, 160, m_TexButtonControllerSwitch.Width, m_TexButtonControllerSwitch.Height);
+                m_RectButtonKeyboardSwitch = new Rectangle(vpWidth / 2 - m_TexButtonKeyboardSwitch.Width / 2, 160, m_TexButtonKeyboardSwitch.Width, m_TexButtonKeyboardSwitch.Height);
             }
 
             // MENU ONDERKANT DRAW
@@ -798,15 +933,70 @@ namespace XNA_ENGINE.Game.Objects
             // DRAW IN-GAME MENU
             if (m_bDrawMenu)
             {
+                spriteBatch.Draw(m_TexPauseMenuBackground, m_RectPauseMenuBackground, Color.White);
+
                 if (vpHeight < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
-                    spriteBatch.Draw(m_TexMenuFullscreen, m_RectMenuFullscreen, Color.White);
+                    if (m_bShowMenuFullscreenHover)
+                        spriteBatch.Draw(m_TexMenuFullscreenHovered, m_RectMenuFullscreen, Color.White);
+                    else
+                        spriteBatch.Draw(m_TexMenuFullscreen, m_RectMenuFullscreen, Color.White);
                 else
-                    spriteBatch.Draw(m_TexMenuWindowed, m_RectMenuFullscreen, Color.White);
-                spriteBatch.Draw(m_TexMenuResume, m_RectMenuResume, Color.White);
-                spriteBatch.Draw(m_TexMenuRestart, m_RectMenuRestart, Color.White);
-                spriteBatch.Draw(m_TexMainMenu, m_RectMainMenu, Color.White);
-                spriteBatch.Draw(m_TexMenuExit, m_RectMenuExit, Color.White);
-                spriteBatch.Draw(m_TexMenuSave, m_RectMenuSave, Color.White);
+                    if (m_bShowMenuFullscreenHover)
+                        spriteBatch.Draw(m_TexMenuWindowedHovered, m_RectMenuFullscreen, Color.White);
+                    else
+                        spriteBatch.Draw(m_TexMenuWindowed, m_RectMenuFullscreen, Color.White);
+
+                if (m_bShowMenuResumeHover)
+                    spriteBatch.Draw(m_TexMenuResumeHovered, m_RectMenuResume, Color.White);
+                else
+                    spriteBatch.Draw(m_TexMenuResume, m_RectMenuResume, Color.White);
+
+                if (m_bShowMenuRestartHover)
+                    spriteBatch.Draw(m_TexMenuRestartHovered, m_RectMenuRestart, Color.White);
+                else
+                    spriteBatch.Draw(m_TexMenuRestart, m_RectMenuRestart, Color.White);
+
+                if (m_bShowMainMenuHover)
+                    spriteBatch.Draw(m_TexMainMenuHovered, m_RectMainMenu, Color.White);
+                else
+                    spriteBatch.Draw(m_TexMainMenu, m_RectMainMenu, Color.White);
+
+                if (m_bShowMenuControlsHover)
+                    spriteBatch.Draw(m_TexMenuControlsHovered, m_RectMenuControls, Color.White);
+                else
+                    spriteBatch.Draw(m_TexMenuControls, m_RectMenuControls, Color.White);
+
+                if (m_bShowMenuExitHover)
+                    spriteBatch.Draw(m_TexMenuExitHovered, m_RectMenuExit, Color.White);
+                else
+                    spriteBatch.Draw(m_TexMenuExit, m_RectMenuExit, Color.White);
+
+                if (m_bShowMenuSaveHover)
+                    spriteBatch.Draw(m_TexMenuSaveHovered, m_RectMenuSave, Color.White);
+                else
+                    spriteBatch.Draw(m_TexMenuSave, m_RectMenuSave, Color.White);
+            }
+
+            // DRAW CONTROLLER MENU
+            if (m_bShowControls)
+            {
+                spriteBatch.Draw(m_TexControlsBackground, m_RectControlsBackground, Color.White);
+
+                if (m_bShowControllerLayout)
+                {
+                    spriteBatch.Draw(m_TexButtonControllerSwitch, m_RectButtonControllerSwitch, Color.White);
+                    spriteBatch.Draw(m_TexControlsController, m_RectControlsController, Color.White);
+                }
+                else if (m_bShowKeyboardLayout)
+                {
+                    spriteBatch.Draw(m_TexButtonKeyboardSwitch, m_RectButtonKeyboardSwitch, Color.White);
+                    spriteBatch.Draw(m_TexControlsKeyboard, m_RectControlsKeyboard, Color.White);
+                }
+
+                // Return Button
+                if (m_bButtonReturnHovered)
+                    spriteBatch.Draw(m_TexButtonReturnHovered, m_RectButtonReturn, Color.White);
+                else spriteBatch.Draw(m_TexButtonReturn, m_RectButtonReturn, Color.White);
             }
         }
 
