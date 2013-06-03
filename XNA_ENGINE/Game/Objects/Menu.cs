@@ -360,7 +360,6 @@ namespace XNA_ENGINE.Game.Objects
             var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
             var inputManager = PlayScene.GetInputManager();
             
-
             //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
 
             // HOVER VILLAGER BUTTON
@@ -433,7 +432,6 @@ namespace XNA_ENGINE.Game.Objects
             //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
             switch (m_SubMenuSelected)
             {
-
                 case SubMenuSelected.BaseMode:
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
                     {
