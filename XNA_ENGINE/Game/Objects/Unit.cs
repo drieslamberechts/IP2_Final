@@ -92,16 +92,14 @@ namespace XNA_ENGINE.Game.Objects
                 directionVectorCalc.Normalize();
 
                 //Do the right rotation
-               /* int add = 0;
-                if (Math.Abs(directionVectorCalc.X) > float.Epsilon) 
-                    add = 270;
-                m_Model.Rotate(0, (directionVectorCalc.X * 90 * -1) + (directionVectorCalc.Z * 90) + -90 + add, 0); //  90*dot - 90 */
-
                 var pathFindingDirection = targetPos - currentTilePos;
                 pathFindingDirection.Y = 0;
                 pathFindingDirection.Normalize();
 
-                m_Model.Rotate(0, MathHelper.ToDegrees(UnsignedAngleBetweenTwoV3(new Vector3(1, 0, 0), pathFindingDirection)) + 90, 0);
+                int add = 0;
+                if (pathFindingDirection.Z == 1)
+                    add = 180;
+                m_Model.Rotate(0, MathHelper.ToDegrees(UnsignedAngleBetweenTwoV3(new Vector3(1, 0, 0), pathFindingDirection)) + 90 + add, 0);
 
                 //If the model is in the proximity, stick it to the tile
                 if (m_PreviousDistanceToTile < (targetPos - worldPos).Length())
