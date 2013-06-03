@@ -104,7 +104,7 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                GoToTile(selectedTile);
+                if (selectedTile != null) GoToTile(selectedTile);
             }
 
             base.OnPermanentSelected();

@@ -593,6 +593,9 @@ namespace XNA_ENGINE.Game.Objects
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectButtonReturn) && m_bShowControls)
                 m_bShowControls = false;
 
+            if (inputManager.GetAction((int) PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectMenuSave) && m_bDrawMenu)
+                MapLoadSave.GetInstance().SaveMap(GridFieldManager.GetInstance().GridField);
+
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectButtonControllerSwitch) && m_bShowControls && m_bShowControllerLayout && m_bLayoutSwitch)
             {
                 m_bShowControllerLayout = false;

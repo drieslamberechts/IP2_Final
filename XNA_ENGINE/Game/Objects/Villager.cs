@@ -88,6 +88,14 @@ namespace XNA_ENGINE.Game.Objects
             if (gridFieldManager.GetSelectedTiles() != null)
                 selectedTile = gridFieldManager.GetSelectedTiles().ElementAt(0);
 
+          /*  if (gridFieldManager.GetSelectedPlaceables() != null)
+            {
+                foreach (Placeable placeables in gridFieldManager.GetSelectedPlaceables())
+                {
+                    selectedTile = placeables.LinkedTiles.ElementAt(0);
+                }
+            }*/
+
             if (Menu.GetInstance().m_Enable1)
             {
                 Menu.GetInstance().m_Enable1 = false;
@@ -103,7 +111,7 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                GoToTile(selectedTile);
+                if (selectedTile != null) GoToTile(selectedTile);
             }
 
             base.OnPermanentSelected();
