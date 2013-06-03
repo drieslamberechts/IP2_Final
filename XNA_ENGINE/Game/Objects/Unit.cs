@@ -89,6 +89,15 @@ namespace XNA_ENGINE.Game.Objects
                     m_PreviousDistanceToTile = (targetPos - worldPos).Length();
                 }
             }
+            else if (m_TargetTile != null && m_CurrentTile == m_TargetTile)
+            {
+                Vector3 targetPos = m_TargetTile.Model.WorldPosition;
+
+                //Offset the soldier so it has the correct position
+                targetPos.Y += GRIDHEIGHT;
+
+                m_Model.Translate(targetPos);
+            }
 
             if (m_CalculateNewPath && m_CurrentTile == m_TargetTile)
             {
