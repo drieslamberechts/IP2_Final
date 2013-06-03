@@ -174,5 +174,10 @@ namespace XNA_ENGINE.Game.Objects
 
             base.OnPermanentSelected();
         }
+
+        public override int GetQueuedShaman()
+        {
+            return m_AmountOfShamansQueued;
+        }
     }
 }

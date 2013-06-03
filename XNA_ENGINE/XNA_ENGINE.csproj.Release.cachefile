@@ -191,3 +191,9 @@ Content\Textures\tex_Tile_BasicGround4_0.xnb
 Content\Textures\tex_tile_BasicDirtWithGrass1_0.xnb
 Content\Textures\tex_Tile_BasicGround3_0.xnb
 Content\Textures\tex_tile_GrassWithGround2_0.xnb
+Content\final Menu\Button_AddShrineHovered.xnb
+Content\final Menu\Button_AddShrineUnhovered.xnb
+Content\final Menu\hoverShrine.xnb
+Content\final Menu\Information_NrUnitsShaman.xnb
+Content\final Menu\Information_NrUnitsVillager.xnb
+Content\final Menu\Information_NrUnitsWarrior.xnb

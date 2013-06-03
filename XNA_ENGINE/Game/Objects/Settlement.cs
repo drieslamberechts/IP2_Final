@@ -143,8 +143,7 @@ namespace XNA_ENGINE.Game.Objects
             m_AmountOfVillagersQueued += amount;
         }
 
-
-        public int GetAmountOfVillagersQueued()
+        public override int GetQueuedVillager()
         {
             return m_AmountOfVillagersQueued;
         }

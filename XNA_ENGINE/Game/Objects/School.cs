@@ -141,5 +141,10 @@ namespace XNA_ENGINE.Game.Objects
         {
             m_AmountOfSoldiersQueued += amount;
         }
+
+        public override int GetQueuedSoldiers()
+        {
+            return m_AmountOfSoldiersQueued;
+        }
     }
 }
