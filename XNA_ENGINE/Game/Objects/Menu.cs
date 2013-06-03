@@ -67,7 +67,9 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexMenuSaveHovered,
                                    m_TexMenuControls,
                                    m_TexMenuControlsHovered,
-                                   m_TexPauseMenuBackground;
+                                   m_TexPauseMenuBackground,
+                                   m_TexSplitIcon,
+                                   m_TexSplitIconHover;
 
         private Rectangle m_RectMenuBackground,
                           m_RectWoodResource,
@@ -203,7 +205,8 @@ namespace XNA_ENGINE.Game.Objects
                      m_bShowMenuSaveHover,
                      m_bShowMenuResumeHover,
                      m_bShowMenuRestartHover,
-                     m_bShowMenuControlsHover;
+                     m_bShowMenuControlsHover,
+                     m_bShowSplitHover;
 
         private bool m_bDrawMenu;
         private bool m_bLayoutSwitch;
@@ -216,6 +219,11 @@ namespace XNA_ENGINE.Game.Objects
 
         private Rectangle m_RectBackgroundVictory,
                           m_RectBackgroundDefeat;
+
+        // VARIABLES WHEN USING A CONTROLLER
+        private bool m_bResumeSelected, m_bExitSelected, m_bControlsSelected, m_bSaveSelected, m_bFullscreenWindowedSelected, m_bRestartSelected, m_bMainMenuSelected, m_bReturnSelected;
+        private static GamePadState m_GamePadState;
+        private bool m_bCanSelectNextButton;
 
         //Singleton implementation
         static public Menu GetInstance()
@@ -241,6 +249,7 @@ namespace XNA_ENGINE.Game.Objects
             m_bShowMenuRestartHover = false;
             m_bShowMenuControlsHover = false;
             m_bShowMainMenuHover = false;
+            m_bShowSplitHover = false;
 
             m_bShowControls = false;
             m_bButtonReturnHovered = false;
@@ -249,6 +258,19 @@ namespace XNA_ENGINE.Game.Objects
             m_bLayoutSwitch = true;
 
             m_bAttackingScene = false;
+
+            // CONTROLLER USAGE
+            m_bResumeSelected = false;
+            m_bExitSelected = false;
+            m_bControlsSelected = false;
+            m_bSaveSelected = true;
+            m_bFullscreenWindowedSelected = false;
+            m_bRestartSelected = false;
+            m_bMainMenuSelected = false;
+            m_bCanSelectNextButton = true;
+            m_bReturnSelected = false;
+
+            m_GamePadState = GamePad.GetState(PlayerIndex.One);
 
             // MENU ONDERKANT BACKGROUND
             m_TexMenuBackground = Content.Load<Texture2D>("final Menu/grootMenu_Onderkant");
@@ -270,6 +292,8 @@ namespace XNA_ENGINE.Game.Objects
             m_TexShaman = Content.Load<Texture2D>("final Menu/Button_AddShaman");
             m_TexVillagerHover = Content.Load<Texture2D>("final Menu/Button_AddVillagerHover");
             m_TexShamanHover = Content.Load<Texture2D>("final Menu/Button_AddShamanHover");
+            m_TexSplitIcon = Content.Load<Texture2D>("final Menu/Button_SplitArmyUnhovered");
+            m_TexSplitIconHover = Content.Load<Texture2D>("final Menu/Button_SplitArmyHovered"); 
 
             m_TexSoldierQueue = Content.Load<Texture2D>("final Menu/Information_NrUnitsWarrior");
             m_TexShamanQueue = Content.Load<Texture2D>("final Menu/Information_NrUnitsShaman");
@@ -366,6 +390,84 @@ namespace XNA_ENGINE.Game.Objects
 
             if (m_SelectedMode == ModeSelected.None && GridFieldManager.GetInstance().CreativeMode == false)
                 GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+
+            // CONTROLLER USAGE
+            if (m_GamePadState.IsConnected)
+            {
+                if (m_bSaveSelected)
+                {
+                    m_bShowMenuSaveHover = true;
+                    m_bShowMenuResumeHover = false;
+                    m_bShowMenuRestartHover = false;
+                    m_bShowMenuControlsHover = false;
+                    m_bShowMenuExitHover = false;
+                    m_bShowMainMenuHover = false;
+                    m_bShowMenuFullscreenHover = false;
+                }
+                if (m_bResumeSelected)
+                {
+                    m_bShowMenuSaveHover = false;
+                    m_bShowMenuResumeHover = true;
+                    m_bShowMenuRestartHover = false;
+                    m_bShowMenuControlsHover = false;
+                    m_bShowMenuExitHover = false;
+                    m_bShowMainMenuHover = false;
+                    m_bShowMenuFullscreenHover = false;
+                }
+                if (m_bRestartSelected)
+                {
+                    m_bShowMenuSaveHover = false;
+                    m_bShowMenuResumeHover = false;
+                    m_bShowMenuRestartHover = true;
+                    m_bShowMenuControlsHover = false;
+                    m_bShowMenuExitHover = false;
+                    m_bShowMainMenuHover = false;
+                    m_bShowMenuFullscreenHover = false;
+                }
+                if (m_bMainMenuSelected)
+                {
+                    m_bShowMenuSaveHover = false;
+                    m_bShowMenuResumeHover = false;
+                    m_bShowMenuRestartHover = false;
+                    m_bShowMenuControlsHover = false;
+                    m_bShowMenuExitHover = false;
+                    m_bShowMainMenuHover = true;
+                    m_bShowMenuFullscreenHover = false;
+                }
+                if (m_bFullscreenWindowedSelected)
+                {
+                    m_bShowMenuSaveHover = false;
+                    m_bShowMenuResumeHover = false;
+                    m_bShowMenuRestartHover = false;
+                    m_bShowMenuControlsHover = false;
+                    m_bShowMenuExitHover = false;
+                    m_bShowMainMenuHover = false;
+                    m_bShowMenuFullscreenHover = true;
+                }
+                if (m_bControlsSelected)
+                {
+                    m_bShowMenuSaveHover = false;
+                    m_bShowMenuResumeHover = false;
+                    m_bShowMenuRestartHover = false;
+                    m_bShowMenuControlsHover = true;
+                    m_bShowMenuExitHover = false;
+                    m_bShowMainMenuHover = false;
+                    m_bShowMenuFullscreenHover = false;
+                }
+                if (m_bExitSelected)
+                {
+                    m_bShowMenuSaveHover = false;
+                    m_bShowMenuResumeHover = false;
+                    m_bShowMenuRestartHover = false;
+                    m_bShowMenuControlsHover = false;
+                    m_bShowMenuExitHover = true;
+                    m_bShowMainMenuHover = false;
+                    m_bShowMenuFullscreenHover = false;
+                }
+
+                if (m_bShowControls)
+                    m_bButtonReturnHovered = true;
+            }
         }
 
         public bool HandleInput(RenderContext renderContext)
@@ -402,47 +504,275 @@ namespace XNA_ENGINE.Game.Objects
                 m_bShowSettlementHover = true;
             else m_bShowSettlementHover = false;
 
-            // HOVER INGAME MENU
-            // exit
-            if (CheckHitButton(mousePos, m_RectMenuExit) && m_bDrawMenu)
-                m_bShowMenuExitHover = true;
-            else m_bShowMenuExitHover = false;
+            // HOVER INGAME MENU WITHOUT CONTROLLER
+            if (!GamePad.GetState(PlayerIndex.One).IsConnected)
+            {
+                // exit
+                if (CheckHitButton(mousePos, m_RectMenuExit) && m_bDrawMenu)
+                    m_bShowMenuExitHover = true;
+                else m_bShowMenuExitHover = false;
 
-            // fullscreen / windowed
-            if (CheckHitButton(mousePos, m_RectMenuFullscreen) && m_bDrawMenu)
-                m_bShowMenuFullscreenHover = true;
-            else m_bShowMenuFullscreenHover = false;
+                // fullscreen / windowed
+                if (CheckHitButton(mousePos, m_RectMenuFullscreen) && m_bDrawMenu)
+                    m_bShowMenuFullscreenHover = true;
+                else m_bShowMenuFullscreenHover = false;
 
-            // save
-            if (CheckHitButton(mousePos, m_RectMenuSave) && m_bDrawMenu)
-                m_bShowMenuSaveHover = true;
-            else m_bShowMenuSaveHover = false;
+                // save
+                if (CheckHitButton(mousePos, m_RectMenuSave) && m_bDrawMenu)
+                    m_bShowMenuSaveHover = true;
+                else m_bShowMenuSaveHover = false;
 
-            // restart
-            if (CheckHitButton(mousePos, m_RectMenuRestart) && m_bDrawMenu)
-                m_bShowMenuRestartHover = true;
-            else m_bShowMenuRestartHover = false;
+                // restart
+                if (CheckHitButton(mousePos, m_RectMenuRestart) && m_bDrawMenu)
+                    m_bShowMenuRestartHover = true;
+                else m_bShowMenuRestartHover = false;
 
-            // main menu
-            if (CheckHitButton(mousePos, m_RectMainMenu) && m_bDrawMenu)
-                m_bShowMainMenuHover = true;
-            else m_bShowMainMenuHover = false;
+                // main menu
+                if (CheckHitButton(mousePos, m_RectMainMenu) && m_bDrawMenu)
+                    m_bShowMainMenuHover = true;
+                else m_bShowMainMenuHover = false;
 
-            // controls
-            if (CheckHitButton(mousePos, m_RectMenuControls) && m_bDrawMenu)
-                m_bShowMenuControlsHover = true;
-            else m_bShowMenuControlsHover = false;
+                // controls
+                if (CheckHitButton(mousePos, m_RectMenuControls) && m_bDrawMenu)
+                    m_bShowMenuControlsHover = true;
+                else m_bShowMenuControlsHover = false;
 
-            // resume
-            if (CheckHitButton(mousePos, m_RectMenuResume) && m_bDrawMenu)
-                m_bShowMenuResumeHover = true;
-            else m_bShowMenuResumeHover = false;
+                // resume
+                if (CheckHitButton(mousePos, m_RectMenuResume) && m_bDrawMenu)
+                    m_bShowMenuResumeHover = true;
+                else m_bShowMenuResumeHover = false;
 
-            // CONTROLLER MENU
-            // return
-            if (CheckHitButton(mousePos, m_RectButtonReturn) && m_bShowControls)
-                m_bButtonReturnHovered = true;
-            else m_bButtonReturnHovered = false;
+                // CONTROLLER MENU
+                // return
+                if (CheckHitButton(mousePos, m_RectButtonReturn) && m_bShowControls)
+                    m_bButtonReturnHovered = true;
+                else m_bButtonReturnHovered = false;
+            }
+
+            // Split Icon
+            if (CheckHitButton(mousePos, m_RectDelete) && m_SubMenuSelected == SubMenuSelected.SoldierMode)
+                m_bShowSplitHover = true;
+            else
+                m_bShowSplitHover = false;
+
+            // CONTROLLER USAGE
+            if (m_GamePadState.IsConnected)
+            {
+                // GO DOWN
+                if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bSaveSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = true;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bResumeSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = true;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bRestartSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = true;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bMainMenuSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = true;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bFullscreenWindowedSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = true;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed && m_bControlsSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = true;
+                }
+
+                    // GO UP
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bExitSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = true;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bControlsSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = true;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bFullscreenWindowedSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = true;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bMainMenuSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = true;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bRestartSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = false;
+                    m_bSaveSelected = false;
+                    m_bResumeSelected = true;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+                else if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed && m_bResumeSelected && m_bCanSelectNextButton)
+                {
+                    m_bCanSelectNextButton = true;
+                    m_bSaveSelected = true;
+                    m_bResumeSelected = false;
+                    m_bRestartSelected = false;
+                    m_bMainMenuSelected = false;
+                    m_bFullscreenWindowedSelected = false;
+                    m_bControlsSelected = false;
+                    m_bExitSelected = false;
+                }
+
+                if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Released && GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Released)
+                    m_bCanSelectNextButton = true;
+
+                // SELECT A BUTTON
+                if (!m_bShowControls)
+                {
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bSaveSelected)
+                    {
+                        // geen idee
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bResumeSelected)
+                    {
+                        m_bDrawMenu = false;
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bRestartSelected)
+                    {
+                        // geen idee
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bMainMenuSelected)
+                    {
+                        SceneManager.SetActiveScene("MainMenuScene");
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bFullscreenWindowedSelected)
+                    {
+                        if (renderContext.GraphicsDevice.Viewport.Height < renderContext.GraphicsDevice.Adapter.CurrentDisplayMode.Height)
+                        {
+                            MainGame.graphics.IsFullScreen = true;
+                            MainGame.graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                            MainGame.graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                            MainGame.graphics.ApplyChanges();
+                        }
+                        else
+                        {
+                            MainGame.graphics.IsFullScreen = false;
+                            MainGame.graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 2;
+                            MainGame.graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2;
+                            MainGame.graphics.ApplyChanges();
+                        }
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bControlsSelected)
+                    {
+                        // fuk tees
+                        m_bShowControls = true;
+                        m_bCanSelectNextButton = false;
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bExitSelected)
+                    {
+                        SceneManager.MainGame.Exit();
+                    }
+                }
+
+                // CONTROL LAYOUT
+                if (m_bShowControls)
+                {
+                    m_bReturnSelected = true;
+
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bReturnSelected && m_bCanSelectNextButton)
+                    {
+                        m_bShowControls = false;
+                        m_bCanSelectNextButton = false;
+                    }
+
+                    if (GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed && m_bCanSelectNextButton)
+                    {
+                        if (m_bShowKeyboardLayout)
+                        {
+                            m_bShowKeyboardLayout = false;
+                            m_bShowControllerLayout = true;
+                            m_bCanSelectNextButton = false;
+                        }
+                        else
+                        {
+                            m_bShowKeyboardLayout = true;
+                            m_bShowControllerLayout = false;
+                            m_bCanSelectNextButton = false;
+                        }
+                    }
+                }
+            }
 
             //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
             switch (m_SubMenuSelected)
@@ -537,10 +867,8 @@ namespace XNA_ENGINE.Game.Objects
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
                     {
                         Console.WriteLine("Split!");
-                        // m_Player.GetArmyList().Add(m_Player.GetPlayerOptions().SplitArmy(m_Player.GetSelectedArmy()));
+                        
 
-                        // Get the Split Army working
-                        // m_Player.GetPlayerOptions().SplitArmy(/* Add selected army */, new Army(SceneManager.ActiveScene, new GridTile(SceneManager.ActiveScene, 10, 10)));
 
                         m_SelectedMode = ModeSelected.Gather;
                         return true;
@@ -885,7 +1213,9 @@ namespace XNA_ENGINE.Game.Objects
                     // SOLDIER MODE
                     // --------------------------------------------
                 case SubMenuSelected.SoldierMode:
-                    // Do nothing
+                    if (m_bShowSplitHover)
+                        spriteBatch.Draw(m_TexSplitIconHover, m_RectDelete, Color.White);
+                    else spriteBatch.Draw(m_TexSplitIcon, m_RectDelete, Color.White);
                     break;
 
                     // --------------------------------------------
