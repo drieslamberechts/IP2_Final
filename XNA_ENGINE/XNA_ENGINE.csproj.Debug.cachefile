@@ -191,7 +191,6 @@ Content\ControllerMenu\Controller_ReturnButtonHovered.xnb
 Content\ControllerMenu\Controller_ReturnButtonUnhovered.xnb
 Content\ControllerMenu\Controller_xboxController.xnb
 Content\ControllerMenu\Controller_xboxControllerButton.xnb
-Content\tex_house_tent1+tent2+tent3+camp_0.xnb
 Content\Textures\tex_env_house_Shrine_0.xnb
 Content\Textures\tex_env_house_Shrine.xnb
 Content\Textures\tex_env_house_ShrineBloodied.xnb
@@ -200,3 +199,6 @@ Content\final Menu\Information_NrUnitsShaman.xnb
 Content\final Menu\Information_NrUnitsVillager.xnb
 Content\final Menu\Information_NrUnitsWarrior.xnb
 Content\Textures\tex_env_prop_Banner_0.xnb
+Content\final Menu\Button_AddShrine.xnb
+Content\final Menu\Button_AddShrineHovered.xnb
+Content\final Menu\Button_AddShrineUnhovered.xnb
