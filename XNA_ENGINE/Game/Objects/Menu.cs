@@ -208,6 +208,15 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_bDrawMenu;
         private bool m_bLayoutSwitch;
 
+        // ATTACKING INFO
+        private bool m_bAttackingScene;
+
+        private Texture2D m_TexBackgroundVictory,
+                          m_TexBackgroundDefeat;
+
+        private Rectangle m_RectBackgroundVictory,
+                          m_RectBackgroundDefeat;
+
         //Singleton implementation
         static public Menu GetInstance()
         {
@@ -238,6 +247,8 @@ namespace XNA_ENGINE.Game.Objects
             m_bShowControllerLayout = true;
             m_bShowKeyboardLayout = false;
             m_bLayoutSwitch = true;
+
+            m_bAttackingScene = false;
 
             // MENU ONDERKANT BACKGROUND
             m_TexMenuBackground = Content.Load<Texture2D>("final Menu/grootMenu_Onderkant");
@@ -335,6 +346,10 @@ namespace XNA_ENGINE.Game.Objects
             m_TexButtonReturnHovered = Content.Load<Texture2D>("ControllerMenu/Controller_ReturnButtonHovered");
             m_TexButtonControllerSwitch = Content.Load<Texture2D>("ControllerMenu/Controller_xboxControllerButton");
             m_TexButtonKeyboardSwitch = Content.Load<Texture2D>("ControllerMenu/Controller_MouseAndKeyboardButton");
+
+            // ATTAKING
+            m_TexBackgroundVictory = Content.Load<Texture2D>("VictoryScreen");
+            m_TexBackgroundDefeat = Content.Load<Texture2D>("DefeatScreen");
 
             // FONT
             m_DebugFont = Content.Load<SpriteFont>("Fonts/DebugFont");
@@ -626,6 +641,14 @@ namespace XNA_ENGINE.Game.Objects
 
             m_bLayoutSwitch = true;
 
+            if (m_bAttackingScene)
+            {
+                if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBackgroundVictory))
+                {
+                    m_bAttackingScene = false;
+                }
+            }
+
 
             return false;
         }
@@ -748,6 +771,10 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectButtonReturn = new Rectangle(vpWidth / 2 - 300, 450, m_TexButtonReturn.Width / 2, m_TexButtonReturn.Height / 2);
                 m_RectButtonControllerSwitch = new Rectangle(vpWidth / 2 - m_TexButtonControllerSwitch.Width / 4, 70, m_TexButtonControllerSwitch.Width / 2, m_TexButtonControllerSwitch.Height / 2);
                 m_RectButtonKeyboardSwitch = new Rectangle(vpWidth / 2 - m_TexButtonKeyboardSwitch.Width / 4, 70, m_TexButtonKeyboardSwitch.Width / 2, m_TexButtonKeyboardSwitch.Height / 2);
+
+                // ATTACKER
+                m_RectBackgroundVictory = new Rectangle(vpWidth / 2 - m_TexBackgroundVictory.Width / 4, 0, m_TexBackgroundVictory.Width / 2, m_TexBackgroundVictory.Height / 2);
+                m_RectBackgroundDefeat  = new Rectangle(vpWidth / 2 - m_TexBackgroundDefeat.Width / 4, 0, m_TexBackgroundDefeat.Width / 2, m_TexBackgroundDefeat.Height / 2);
             }
                 // ------------------------------------------
                 // FULLSCREEN
@@ -802,6 +829,10 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectButtonReturn              = new Rectangle(vpWidth / 2 - 600, 900, m_TexButtonReturn.Width, m_TexButtonReturn.Height);
                 m_RectButtonControllerSwitch    = new Rectangle(vpWidth / 2 - m_TexButtonControllerSwitch.Width / 2, 160, m_TexButtonControllerSwitch.Width, m_TexButtonControllerSwitch.Height);
                 m_RectButtonKeyboardSwitch      = new Rectangle(vpWidth / 2 - m_TexButtonKeyboardSwitch.Width / 2, 160, m_TexButtonKeyboardSwitch.Width, m_TexButtonKeyboardSwitch.Height);
+
+                // ATTACKER
+                m_RectBackgroundVictory = new Rectangle(vpWidth / 2 - m_TexBackgroundVictory.Width / 2, 0, m_TexBackgroundVictory.Width, m_TexBackgroundVictory.Height);
+                m_RectBackgroundDefeat  = new Rectangle(vpWidth / 2 - m_TexBackgroundDefeat.Width / 2, 0, m_TexBackgroundDefeat.Width, m_TexBackgroundDefeat.Height);
             }
 
             // MENU ONDERKANT DRAW
@@ -1048,6 +1079,43 @@ namespace XNA_ENGINE.Game.Objects
                     spriteBatch.Draw(m_TexButtonReturnHovered, m_RectButtonReturn, Color.White);
                 else spriteBatch.Draw(m_TexButtonReturn, m_RectButtonReturn, Color.White);
             }
+
+            // SHOW ATTACKER SCENE
+            if (m_bAttackingScene)
+            {
+                AttackScene tempScene = null;
+
+                for (int t = 0; t < SceneManager.GameScenes.Count; ++t)
+                {
+                    if (SceneManager.GameScenes.ElementAt(t).SceneName == "AttackScene")
+                    {
+                        tempScene = (AttackScene)SceneManager.GameScenes.ElementAt(t);
+                        break;
+                    }
+                }
+
+                // DRAW INFORMATION
+                if (tempScene != null)
+                {
+                    if (tempScene.GetWinner() == "Attacker")
+                        spriteBatch.Draw(m_TexBackgroundVictory, m_RectBackgroundVictory, Color.White);
+                    else
+                        spriteBatch.Draw(m_TexBackgroundDefeat, m_RectBackgroundDefeat, Color.White);
+
+                    if (vpWidth < renderContext.GraphicsDevice.Adapter.CurrentDisplayMode.Width)
+                    {
+                        spriteBatch.DrawString(m_DebugFont, "" + tempScene.GetAttackerArmySize(), new Vector2(vpWidth / 2 + 100, 140), Color.Black);
+                        spriteBatch.DrawString(m_DebugFont, "" + tempScene.GetDefenderArmySize(), new Vector2(vpWidth / 2 + 100, 180), Color.Black);
+                        spriteBatch.DrawString(m_DebugFont, "" + tempScene.GetHighestDieThrown(), new Vector2(vpWidth / 2 + 100, 220), Color.Black);
+                    }
+                    else if (vpWidth == renderContext.GraphicsDevice.Adapter.CurrentDisplayMode.Width)
+                    {
+                        spriteBatch.DrawString(m_DebugFont, "" + tempScene.GetAttackerArmySize(), new Vector2(vpWidth / 2 + 200, 280), Color.Black);
+                        spriteBatch.DrawString(m_DebugFont, "" + tempScene.GetDefenderArmySize(), new Vector2(vpWidth / 2 + 200, 360), Color.Black);
+                        spriteBatch.DrawString(m_DebugFont, "" + tempScene.GetHighestDieThrown(), new Vector2(vpWidth / 2 + 200, 440), Color.Black);
+                    }
+                }
+            }
         }
 
         public void ToggleIngameMenu()
@@ -1106,6 +1174,11 @@ namespace XNA_ENGINE.Game.Objects
         public bool GetShowInGameMenu()
         {
             return m_bDrawMenu;
+        }
+
+        public void SetAttackingScene()
+        {
+            m_bAttackingScene = true;
         }
     }
 }

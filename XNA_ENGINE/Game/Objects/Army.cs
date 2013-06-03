@@ -123,7 +123,7 @@ namespace XNA_ENGINE.Game.Objects
                 if (boundArmy != null)
                 {
                     SceneManager.AddGameScene(new AttackScene(PlayScene.GetContentManager(), this, boundArmy));
-                    SceneManager.SetActiveScene("AttackScene");
+                    Menu.GetInstance().SetAttackingScene();
                 }
             }
 

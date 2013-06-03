@@ -198,5 +198,33 @@ namespace XNA_ENGINE.Game.Scenes
                 return m_Defender;
             }
         }
+
+        public int GetAttackerDice()
+        {
+            return m_AttackersDice;
+        }
+
+        public int GetDefenderDice()
+        {
+            return m_DefendersDice;
+        }
+
+        public int GetHighestDieThrown()
+        {
+            if (m_AttackerWon)
+                return m_AttackersDice;
+            else
+                return m_DefendersDice;
+        }
+
+        public int GetAttackerArmySize()
+        {
+            return m_Attacker.ArmySize;
+        }
+
+        public int GetDefenderArmySize()
+        {
+            return m_Defender.ArmySize;
+        }
     }
 }
