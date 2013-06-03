@@ -19,7 +19,6 @@ namespace XNA_ENGINE.Game.Objects
         private static MapLoadSave m_MapLoadSave;
 
         // Generate a new Map
-        
         private const int MAX_ROWS = 30;
         private const int MAX_COLUMNS = 30;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
@@ -17,7 +18,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_PlaceableType = PlaceableType.Shaman;
 
-            m_Model = new GameModelGrid("Models/char_Goblin_Shaman");
+            m_Model = new GameModelGrid("Models/char_Goblin_Shaman_Animated",true);
             m_Model.LocalPosition += new Vector3(0, 0, 0);
            // m_Model.LocalScale = new Vector3(0.4f, 0.4f, 0.4f);
             // Quaternion rotation = new Quaternion(new Vector3(0, 1, 0), 0);
@@ -25,6 +26,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.CanDraw = true;
             m_Model.LoadContent(PlayScene.GetContentManager());
             m_Model.UseTexture = true;
+            //m_Model.PlayAnimation("Take001");
          
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 
