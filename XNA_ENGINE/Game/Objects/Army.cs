@@ -88,6 +88,18 @@ namespace XNA_ENGINE.Game.Objects
             else
                 selectedTile = null;
 
+            if (gridFieldManager.GetSelectedPlaceables() != null && selectedTile == null)
+            {
+                foreach (Placeable placeables in gridFieldManager.GetSelectedPlaceables())
+                {
+                    if (placeables.PlaceableTypeMeth == PlaceableType.Army)
+                    {
+                        Army army = (Army)placeables;
+                        selectedTile = army.CurrentTile;
+                    }
+                }
+            }
+
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.SoldierMode;
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
@@ -130,8 +142,6 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Update(Engine.RenderContext renderContext)
         {
-          //  if (m_TargetTile == null) return;
-
             if (m_ImmuneForMerging >= 0)
             {
                 m_ImmuneForMerging -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
