@@ -22,6 +22,8 @@ namespace XNA_ENGINE.Game.Objects
 
         private ContentManager Content;
 
+        private Placeable m_SelectedPlaceable;
+
         private readonly Texture2D m_TexMenuBackground,
                                    m_TexWoodResource,
                                    m_TexInfluenceResource,
@@ -31,6 +33,9 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexHoverVillager,
                                    m_TexVillager,
                                    m_TexVillagerHover,
+                                   m_TexSoldierQueue,
+                                   m_TexShamanQueue,
+                                   m_TexVillagerQueue,
                                    m_TexShaman,
                                    m_TexShamanHover,
                                    m_TexShamanInfo,
@@ -42,6 +47,7 @@ namespace XNA_ENGINE.Game.Objects
                                    m_TexSchoolHover,
                                    m_TexSchoolInfo,
                                    m_TexShrine,
+                                   m_TexShrineHover,
                                    m_TexShrineInfo,
                                    m_TexBuildTile,
                                    m_TexSplit,
@@ -249,23 +255,29 @@ namespace XNA_ENGINE.Game.Objects
             m_TexDeleteHover = Content.Load<Texture2D>("final Menu/Button_DeleteHover");
             m_TexSplit = Content.Load<Texture2D>("final Menu/iconStandard");
             m_TexVillager = Content.Load<Texture2D>("final Menu/Button_AddVillager");
+            m_TexVillager = Content.Load<Texture2D>("final Menu/Button_AddVillager");
             m_TexShaman = Content.Load<Texture2D>("final Menu/Button_AddShaman");
             m_TexVillagerHover = Content.Load<Texture2D>("final Menu/Button_AddVillagerHover");
             m_TexShamanHover = Content.Load<Texture2D>("final Menu/Button_AddShamanHover");
+
+            m_TexSoldierQueue = Content.Load<Texture2D>("final Menu/Information_NrUnitsWarrior");
+            m_TexShamanQueue = Content.Load<Texture2D>("final Menu/Information_NrUnitsShaman");
+            m_TexVillagerQueue = Content.Load<Texture2D>("final Menu/Information_NrUnitsVillager");
 
             // HOVERING
             m_TexShamanInfo = Content.Load<Texture2D>("final Menu/hoverShaman");
             m_TexHoverVillager = Content.Load<Texture2D>("final Menu/hoverVillager");
             m_TexSettlementInfo = Content.Load<Texture2D>("final Menu/hoverSettlementInfo");
             m_TexSchoolInfo = Content.Load<Texture2D>("final Menu/hoverSchool");
-            m_TexShrineInfo = Content.Load<Texture2D>("final Menu/hoverSchool");
+            m_TexShrineInfo = Content.Load<Texture2D>("final Menu/hoverShrine");
 
             // BUILDING ICONS
             m_TexSettlement = Content.Load<Texture2D>("final Menu/Button_AddSettlement");
             m_TexSettlementHover = Content.Load<Texture2D>("final Menu/Button_AddSettlementHover");
             m_TexSchool = Content.Load<Texture2D>("final Menu/Button_AddSchool");
             m_TexSchoolHover = Content.Load<Texture2D>("final Menu/Button_AddSchoolHover");
-            m_TexShrine = Content.Load<Texture2D>("final Menu/iconStandard");
+            m_TexShrine = Content.Load<Texture2D>("final Menu/Button_AddShrineUnhovered");
+            m_TexShrineHover = Content.Load<Texture2D>("final Menu/Button_AddShrineHovered");
 
             m_TexBuildTile = Content.Load<Texture2D>("final Menu/iconStandard");
 
@@ -335,6 +347,8 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(RenderContext renderContext)
         {
+            m_SelectedPlaceable = GridFieldManager.GetInstance().GetPermanentSelected();
+
             if (m_SelectedMode == ModeSelected.None && GridFieldManager.GetInstance().CreativeMode == false)
                 GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
         }
@@ -345,7 +359,7 @@ namespace XNA_ENGINE.Game.Objects
 
             var mousePos = new Vector2(renderContext.Input.CurrentMouseState.X, renderContext.Input.CurrentMouseState.Y);
             var inputManager = PlayScene.GetInputManager();
-            Placeable selectedPlaceable = GridFieldManager.GetInstance().GetPermanentSelected();
+            
 
             //if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSwitch))
 
@@ -472,10 +486,10 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.ShrineMode:
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShaman))
                     {
-                        if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
+                        if (m_SelectedPlaceable != null && m_SelectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Shrine)
                         {
                                 Console.WriteLine("Build Shaman");
-                                selectedPlaceable.QueueShaman();
+                                m_SelectedPlaceable.QueueShaman();
                         }
                         return true;
                     }
@@ -526,9 +540,9 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.SettlementMode:
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectVillager))
                     {
-                        if (selectedPlaceable != null && selectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
+                        if (m_SelectedPlaceable != null && m_SelectedPlaceable.PlaceableTypeMeth == Placeable.PlaceableType.Settlement)
                         {
-                            selectedPlaceable.QueueVillager();
+                            m_SelectedPlaceable.QueueVillager();
                             Console.WriteLine("Build Villager");
                         }
 
@@ -710,6 +724,7 @@ namespace XNA_ENGINE.Game.Objects
                 // HOVERING
                 m_RectHoverVillager  = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10,m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
                 m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10, m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
+                m_RectShrineInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexShrineInfo.Height / 2 - 10, m_TexShrineInfo.Width / 2, m_TexShrineInfo.Height / 2);
 
                 // INGAME MENU
                 m_RectMenuControls      = new Rectangle(vpWidth / 2 - m_TexMenuExit.Width / 8, 175 + m_TexMenuExit.Height / 4 * 5, m_TexMenuExit.Width / 4, m_TexMenuExit.Height / 4);
@@ -777,12 +792,12 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectPauseMenuBackground = new Rectangle(vpWidth / 2 - m_TexPauseMenuBackground.Width / 4, 325, m_TexPauseMenuBackground.Width / 2, m_TexPauseMenuBackground.Height / 2);
 
                 // CONTROLLER MENU
-                m_RectControlsBackground = new Rectangle(vpWidth / 2 - m_TexControlsBackground.Width / 2, 40, m_TexControlsBackground.Width, m_TexControlsBackground.Height);
-                m_RectControlsKeyboard = new Rectangle(vpWidth / 2 - m_TexControlsKeyboard.Width / 2, 300, m_TexControlsKeyboard.Width, m_TexControlsKeyboard.Height);
-                m_RectControlsController = new Rectangle(vpWidth / 2 - m_TexControlsController.Width / 2, 300, m_TexControlsController.Width, m_TexControlsController.Height);
-                m_RectButtonReturn = new Rectangle(vpWidth / 2 - 600, 900, m_TexButtonReturn.Width, m_TexButtonReturn.Height);
-                m_RectButtonControllerSwitch = new Rectangle(vpWidth / 2 - m_TexButtonControllerSwitch.Width / 2, 160, m_TexButtonControllerSwitch.Width, m_TexButtonControllerSwitch.Height);
-                m_RectButtonKeyboardSwitch = new Rectangle(vpWidth / 2 - m_TexButtonKeyboardSwitch.Width / 2, 160, m_TexButtonKeyboardSwitch.Width, m_TexButtonKeyboardSwitch.Height);
+                m_RectControlsBackground        = new Rectangle(vpWidth / 2 - m_TexControlsBackground.Width / 2, 40, m_TexControlsBackground.Width, m_TexControlsBackground.Height);
+                m_RectControlsKeyboard          = new Rectangle(vpWidth / 2 - m_TexControlsKeyboard.Width / 2, 300, m_TexControlsKeyboard.Width, m_TexControlsKeyboard.Height);
+                m_RectControlsController        = new Rectangle(vpWidth / 2 - m_TexControlsController.Width / 2, 300, m_TexControlsController.Width, m_TexControlsController.Height);
+                m_RectButtonReturn              = new Rectangle(vpWidth / 2 - 600, 900, m_TexButtonReturn.Width, m_TexButtonReturn.Height);
+                m_RectButtonControllerSwitch    = new Rectangle(vpWidth / 2 - m_TexButtonControllerSwitch.Width / 2, 160, m_TexButtonControllerSwitch.Width, m_TexButtonControllerSwitch.Height);
+                m_RectButtonKeyboardSwitch      = new Rectangle(vpWidth / 2 - m_TexButtonKeyboardSwitch.Width / 2, 160, m_TexButtonKeyboardSwitch.Width, m_TexButtonKeyboardSwitch.Height);
             }
 
             // MENU ONDERKANT DRAW
@@ -819,7 +834,7 @@ namespace XNA_ENGINE.Game.Objects
 
                     if (m_bShowShrineHover)
                     {
-                        spriteBatch.Draw(m_TexShrine, m_RectShrine, Color.White);
+                        spriteBatch.Draw(m_TexShrineHover, m_RectShrine, Color.White);
                         spriteBatch.Draw(m_TexShrineInfo, m_RectShrineInfo, Color.White);
                     }
                     else
@@ -851,6 +866,16 @@ namespace XNA_ENGINE.Game.Objects
                     }
                     else
                         spriteBatch.Draw(m_TexShaman, m_RectShaman, Color.White);
+
+                    // SHOW QUEUE
+                    if (m_SelectedPlaceable != null)
+                    {
+                        for (int t = 0; t < m_SelectedPlaceable.GetQueuedShaman(); ++t)
+                        {
+                            m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexShamanQueue.Width / 2 + 10, m_TexShamanQueue.Height / 2 + 10);
+                            spriteBatch.Draw(m_TexShamanQueue, m_RectVillager, Color.White);
+                        }
+                    }
                     break;
                     // --------------------------------------------
                     // SETTLEMENT MODE
@@ -864,10 +889,31 @@ namespace XNA_ENGINE.Game.Objects
                     }
                     else
                         spriteBatch.Draw(m_TexVillager, m_RectVillager, Color.White);
+
+                    // SHOW QUEUE
+                    if (m_SelectedPlaceable != null)
+                    {
+                        for (int t = 0; t < m_SelectedPlaceable.GetQueuedVillager(); ++t)
+                        {
+                            m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexVillagerQueue.Width / 2 + 10, m_TexVillagerQueue.Height / 2 + 10);
+                            spriteBatch.Draw(m_TexVillagerQueue, m_RectVillager, Color.White);
+                        }
+                    }
                     break;
 
+                    // --------------------------------------------
+                    // SCHOOL MODE
+                    // --------------------------------------------
                 case SubMenuSelected.SchoolMode:
-
+                    // SHOW QUEUE
+                    if (m_SelectedPlaceable != null)
+                    {
+                        for (int t = 0; t < m_SelectedPlaceable.GetQueuedSoldiers(); ++t)
+                        {
+                            m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexSoldierQueue.Width / 2 + 10, m_TexSoldierQueue.Height / 2 + 10);
+                            spriteBatch.Draw(m_TexSoldierQueue, m_RectVillager, Color.White);
+                        }
+                    }
                     break;
             }
 

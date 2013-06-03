@@ -80,6 +80,20 @@ namespace XNA_ENGINE.Game.Objects
             set { m_LinkedTileList = value; }
         }
 
+        public virtual int GetQueuedVillager()
+        {
+            return 0;
+        }
+
+        public virtual int GetQueuedSoldiers()
+        {
+            return 0;
+        }
+        public virtual int GetQueuedShaman()
+        {
+            return 0;
+        }
+
         public virtual void QueueVillager(int amount = 1)
         {
 
