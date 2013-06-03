@@ -81,13 +81,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\settlement_TestSettlementBlue.X">
-      <Name>settlement_TestSettlementBlue</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Split_Army.png">
       <Name>Split_Army</Name>
       <Importer>TextureImporter</Importer>
@@ -126,41 +119,6 @@
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </None>
-    <Compile Include="Models\tree_TreeShort.X">
-      <Name>tree_TreeShort</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\tile_Normal.X">
-      <Name>tile_Normal</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\building_FlagNormal.X">
-      <Name>building_FlagNormal</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\char_Soldier.X">
-      <Name>char_Soldier</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\char_Villager.X">
-      <Name>char_Villager</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\prop_Wood.X">
-      <Name>prop_Wood</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\tree_TreeTall.FBX">
-      <Name>tree_TreeTall</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\char_Goblin_Shaman.FBX">
       <Name>char_Goblin_Shaman</Name>
       <Importer>FbxImporter</Importer>
@@ -291,11 +249,6 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\tree_TreeShort2.FBX">
-      <Name>tree_TreeShort2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\tree_TreeShort3.FBX">
       <Name>tree_TreeShort3</Name>
       <Importer>FbxImporter</Importer>
@@ -321,8 +274,78 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\tree_TreeTall2.FBX">
-      <Name>tree_TreeTall2</Name>
+    <Compile Include="Models\prop_Flag.FBX">
+      <Name>prop_Flag</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\char_Goblin_Soldier.FBX">
+      <Name>char_Goblin_Soldier</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\char_Goblin_Soldier2.FBX">
+      <Name>char_Goblin_Soldier2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\char_Goblin_Shaman_Animated.FBX">
+      <Name>char_Goblin_Shaman_Animated</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>SkinnedModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final1.FBX">
+      <Name>tile_final1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final2.FBX">
+      <Name>tile_final2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final10.FBX">
+      <Name>tile_final10</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final3.FBX">
+      <Name>tile_final3</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final4.FBX">
+      <Name>tile_final4</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final5.FBX">
+      <Name>tile_final5</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final6.FBX">
+      <Name>tile_final6</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final7.FBX">
+      <Name>tile_final7</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final8.FBX">
+      <Name>tile_final8</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_final9.FBX">
+      <Name>tile_final9</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_finalEmpty.FBX">
+      <Name>tile_finalEmpty</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
@@ -587,7 +610,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
+    <Compile Include="Textures\tex_env_grass.png">
+      <Name>tex_env_grass</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_env_rock1.png">
+      <Name>tex_env_rock1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_env_rock2.png">
+      <Name>tex_env_rock2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_env_Weed.png">
+      <Name>tex_env_Weed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_env_FernLeaf.png">
+      <Name>tex_env_FernLeaf</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="final Menu\Button_Delete.png">
       <Name>Button_Delete</Name>
       <Importer>TextureImporter</Importer>
@@ -642,115 +693,252 @@
   <ItemGroup>
     <Compile Include="final Menu\Button_AddSettlementHover.png">
       <Name>Button_AddSettlementHover</Name>
-=======
-    <Compile Include="Textures\tex_env_FernLeaf.png">
-      <Name>tex_env_FernLeaf</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\tex_env_grass.png">
-      <Name>tex_env_grass</Name>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="tutorial\screen1.png">
+      <Name>screen1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\tex_env_rock1.png">
-      <Name>tex_env_rock1</Name>
+    <Compile Include="tutorial\screen10.png">
+      <Name>screen10</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\tex_env_rock2.png">
-      <Name>tex_env_rock2</Name>
-    <Compile Include="Textures\tex_env_grass.png">
-      <Name>tex_env_grass</Name>
+    <Compile Include="tutorial\screen11.png">
+      <Name>screen11</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\tex_env_rock1.png">
-      <Name>tex_env_rock1</Name>
+    <Compile Include="tutorial\screen2.png">
+      <Name>screen2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\tex_env_rock2.png">
-      <Name>tex_env_rock2</Name>
+    <Compile Include="tutorial\screen3.png">
+      <Name>screen3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Textures\tex_env_Weed.png">
-      <Name>tex_env_Weed</Name>
+    <Compile Include="tutorial\screen4.png">
+      <Name>screen4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="tutorial\screen5.png">
+      <Name>screen5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="tutorial\screen6.png">
+      <Name>screen6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="tutorial\screen7.png">
+      <Name>screen7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="tutorial\screen8.png">
+      <Name>screen8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="tutorial\screen9.png">
+      <Name>screen9</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_AddSchoolHover.png">
+      <Name>Button_AddSchoolHover</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Button_DeleteHover.png">
+      <Name>Button_DeleteHover</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\hoverSchool.png">
+      <Name>hoverSchool</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\hoverShaman.png">
+      <Name>hoverShaman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Background_StartMenu.png">
+      <Name>Background_StartMenu</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_StartMenu_ExitButtonHovered.png">
+      <Name>Button_StartMenu_ExitButtonHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Button_StartMenu_ExitButtonUnhovered.png">
+      <Name>Button_StartMenu_ExitButtonUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Button_StartMenu_StartButtonHovered.png">
+      <Name>Button_StartMenu_StartButtonHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Button_StartMenu_StartButtonUnhovered.png">
+      <Name>Button_StartMenu_StartButtonUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="pause Menu\Button_Exithovered.png">
+      <Name>Button_Exithovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_ExitUnhovered.png">
+      <Name>Button_ExitUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_FullscreenHovered.png">
+      <Name>Button_FullscreenHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_FullscreenUnhovered.png">
+      <Name>Button_FullscreenUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_MainMenuHovered.png">
+      <Name>Button_MainMenuHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_MainMenuUnhovered.png">
+      <Name>Button_MainMenuUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_RestartHovered.png">
+      <Name>Button_RestartHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_RestartUnhovered.png">
+      <Name>Button_RestartUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_ResumeHovered.png">
+      <Name>Button_ResumeHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_ResumeUnhovered.png">
+      <Name>Button_ResumeUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_SaveHovered.png">
+      <Name>Button_SaveHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_SaveUnhovered.png">
+      <Name>Button_SaveUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_WindowedHovered.png">
+      <Name>Button_WindowedHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_WindowedUnhovered.png">
+      <Name>Button_WindowedUnhovered</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
-    <Compile Include="Textures\tex_env_FernLeaf.png">
-      <Name>tex_env_FernLeaf</Name>
+    <Compile Include="pause Menu\Background_GamePause.png">
+      <Name>Background_GamePause</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="pause Menu\Button_ControlsHovered.png">
+      <Name>Button_ControlsHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="pause Menu\Button_ControlsUnhovered.png">
+      <Name>Button_ControlsUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControllerMenu\Controller_Background.png">
+      <Name>Controller_Background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="ControllerMenu\Controller_MouseAndKeyboard.png">
+      <Name>Controller_MouseAndKeyboard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="ControllerMenu\Controller_MouseAndKeyboardButton.png">
+      <Name>Controller_MouseAndKeyboardButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="ControllerMenu\Controller_ReturnButtonHovered.png">
+      <Name>Controller_ReturnButtonHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="ControllerMenu\Controller_ReturnButtonUnhovered.png">
+      <Name>Controller_ReturnButtonUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="ControllerMenu\Controller_xboxController.png">
+      <Name>Controller_xboxController</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="ControllerMenu\Controller_xboxControllerButton.png">
+      <Name>Controller_xboxControllerButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
 =======
-    <Compile Include="final Menu\Button_Delete.png">
-      <Name>Button_Delete</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="final Menu\Button_AddSchool.png">
-      <Name>Button_AddSchool</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="final Menu\Button_AddSettlement.png">
-      <Name>Button_AddSettlement</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="final Menu\Button_AddShaman.png">
-      <Name>Button_AddShaman</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="final Menu\Button_AddVIllager.png">
-      <Name>Button_AddVIllager</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="final Menu\Button_AddVIllagerHover.png">
-      <Name>Button_AddVIllagerHover</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="final Menu\Button_AddShamanHover.png">
-      <Name>Button_AddShamanHover</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="final Menu\hoverSettlementInfo.png">
-      <Name>hoverSettlementInfo</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Textures\tex_env_Weed.png">
-      <Name>tex_env_Weed</Name>
->>>>>>> bdffe4a721e5f8259a1f223a009b5dd4880c67aa
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="final Menu\Button_AddSettlementHover.png">
-      <Name>Button_AddSettlementHover</Name>
->>>>>>> 661f95e9777fe22acef761c2756604d076956ea3
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
+    <ProjectReference Include="..\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
+      <Project>{fdc4eb6b-4fc3-45dc-8e17-7f560c58cd0c}</Project>
+      <Name>SkinnedModelPipeline</Name>
+    </ProjectReference>
+>>>>>>> e6eff68b5f163ba2a83039b1b27b2a9d5faa64f1
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
