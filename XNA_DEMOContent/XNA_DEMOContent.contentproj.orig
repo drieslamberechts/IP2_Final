@@ -878,7 +878,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
+    <ProjectReference Include="..\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
+      <Project>{fdc4eb6b-4fc3-45dc-8e17-7f560c58cd0c}</Project>
+      <Name>SkinnedModelPipeline</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="pause Menu\Background_GamePause.png">
       <Name>Background_GamePause</Name>
       <Importer>TextureImporter</Importer>
@@ -933,12 +938,42 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-=======
-    <ProjectReference Include="..\SkinnedModelPipeline\SkinnedModelPipeline.csproj">
-      <Project>{fdc4eb6b-4fc3-45dc-8e17-7f560c58cd0c}</Project>
-      <Name>SkinnedModelPipeline</Name>
-    </ProjectReference>
->>>>>>> e6eff68b5f163ba2a83039b1b27b2a9d5faa64f1
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Button_AddShrineHovered.png">
+      <Name>Button_AddShrineHovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Button_AddShrineUnhovered.png">
+      <Name>Button_AddShrineUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\hoverShrine.png">
+      <Name>hoverShrine</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="final Menu\Information_NrUnitsShaman.png">
+      <Name>Information_NrUnitsShaman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Information_NrUnitsVillager.png">
+      <Name>Information_NrUnitsVillager</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="final Menu\Information_NrUnitsWarrior.png">
+      <Name>Information_NrUnitsWarrior</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
