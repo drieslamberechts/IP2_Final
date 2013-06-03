@@ -41,6 +41,7 @@ namespace XNA_ENGINE.Game.Scenes
         private SpriteFont m_DebugFont;
 
         private readonly Texture2D m_TexBackground;
+        private Rectangle m_RectBackground;
 
         //CameraVariables
         private const double CAMERAZOOMMIN = 0.2;
@@ -212,6 +213,12 @@ namespace XNA_ENGINE.Game.Scenes
                 }
             }
 
+            var vp = renderContext.GraphicsDevice.Viewport;
+            int vpHeight = vp.Height;
+            int vpWidth = vp.Width;
+
+            m_RectBackground = new Rectangle(0, 0, vpWidth, vpHeight);
+
             base.Update(renderContext);
         }
 
@@ -272,7 +279,7 @@ namespace XNA_ENGINE.Game.Scenes
             }
             else // Draw before the 3D is drawn
             {
-                renderContext.SpriteBatch.Draw(m_TexBackground, new Vector2(0, 0), Color.White);
+                renderContext.SpriteBatch.Draw(m_TexBackground, m_RectBackground, Color.White);
             }
 
 
