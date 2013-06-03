@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -23,6 +24,9 @@ namespace XNA_ENGINE.Game.Objects
         protected GridTile m_CurrentTile;
 
         protected float m_PreviousDistanceToTile;
+
+        protected bool m_CalculateNewPath = false;
+        protected GridTile m_TargetPathfinding;
 
         protected float MOVEMENTSPEED = 0.5f; //seconds per tile
 
@@ -66,14 +70,15 @@ namespace XNA_ENGINE.Game.Objects
 
                 //Do the right rotation
                 int add = 0;
-                if (Math.Abs(directionVectorCalc.X - 0) > float.Epsilon) add = 270;
-                m_Model.Rotate(0, (directionVectorCalc.X * 90 * -1) + (directionVectorCalc.Z * 90) + -90 + add, 0); //  90*dot - 90
+                if (Math.Abs(directionVectorCalc.X) > float.Epsilon) 
+                    add = 270;
+                m_Model.Rotate(0, (directionVectorCalc.X * 90 * -1) + (directionVectorCalc.Z * 90) + -90 + add, 0); //  90*dot - 90 
 
                 //If the model is in the proximity, stick it to the tile
                 if (m_PreviousDistanceToTile < (targetPos - worldPos).Length())
                 {
                     m_CurrentTile = m_TargetTile;
-                    m_Model.Translate(targetPos);
+                    //if (m_CurrentTile == m_PathToFollow.First()) m_Model.Translate(targetPos);
                     if (m_PathToFollow != null) m_PathToFollow.Remove(m_TargetTile);
 
                     m_PreviousDistanceToTile = 100000.0f;
@@ -83,6 +88,12 @@ namespace XNA_ENGINE.Game.Objects
                     m_Model.Translate(worldPos + (distanceVector * (deltaTime / MOVEMENTSPEED)));
                     m_PreviousDistanceToTile = (targetPos - worldPos).Length();
                 }
+            }
+
+            if (m_CalculateNewPath && m_CurrentTile == m_TargetTile)
+            {
+                m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, m_TargetPathfinding, m_PlaceableType);
+                m_CalculateNewPath = false;
             }
 
             base.Update(renderContext);
@@ -107,6 +118,19 @@ namespace XNA_ENGINE.Game.Objects
         public GridTile TargetTile
         {
             get { return m_TargetTile; }
+        }
+
+        public override void GoToTile(GridTile targetTile)
+        {
+            m_CalculateNewPath = true;
+            m_TargetPathfinding = targetTile;
+        }
+
+        public float UnsignedAngleBetweenTwoV3(Vector3 v1, Vector3 v2)
+        {
+            v1.Normalize();
+            v2.Normalize();
+            return (float)Math.Acos(Vector3.Dot(v1, v2));
         }
     }
 }

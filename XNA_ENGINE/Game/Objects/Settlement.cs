@@ -44,13 +44,13 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.CreateBoundingBox(100, 64, 100, new Vector3(0, 20, -20));
             m_Model.DrawBoundingBox = false;
 
-            //Child Model
-            var childModel = new GameModelGrid("Models/building_Settlement");
-            childModel.LocalPosition += new Vector3(0, 0, -64);
-            childModel.CanDraw = true;
-            childModel.LoadContent(PlayScene.GetContentManager());
-            childModel.UseTexture = true;
-            m_Model.AddChild(childModel);
+            ////Child Model
+            //var childModel = new GameModelGrid("Models/building_Settlement");
+            //childModel.LocalPosition += new Vector3(0, 0, -64);
+            //childModel.CanDraw = true;
+            //childModel.LoadContent(PlayScene.GetContentManager());
+            //childModel.UseTexture = true;
+            //m_Model.AddChild(childModel);
 
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
 

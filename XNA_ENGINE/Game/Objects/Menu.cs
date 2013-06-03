@@ -707,6 +707,7 @@ namespace XNA_ENGINE.Game.Objects
                 m_RectSettlement    = new Rectangle(10*3 + m_TexSchool.Width, vpHeight - m_TexSettlement.Height +45, m_TexSettlement.Width/2, m_TexSettlement.Height/2);
                 m_RectSplit         = new Rectangle(10, vpHeight - m_TexSplit.Height + 45, m_TexSplit.Width/2, m_TexSplit.Height/2);
 
+
                 // HOVERING
                 m_RectHoverVillager  = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10,m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);
                 m_RectSettlementInfo = new Rectangle(m_RectDelete.X, m_RectDelete.Y - m_TexHoverVillager.Height/2 - 10, m_TexHoverVillager.Width/2, m_TexHoverVillager.Height/2);

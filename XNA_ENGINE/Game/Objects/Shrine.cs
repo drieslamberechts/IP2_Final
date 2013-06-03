@@ -23,6 +23,8 @@ namespace XNA_ENGINE.Game.Objects
         private double m_Timer = TIMEFORSHAMAN;
         private int m_AmountOfShamansQueued = 0;
 
+        private double m_SacrificeCountdown = 0.0;
+
         public Shrine(List<GridTile> tileList)
         {
             m_PlaceableType = PlaceableType.Shrine;
@@ -61,6 +63,15 @@ namespace XNA_ENGINE.Game.Objects
 
         public override void Update(RenderContext renderContext)
         {
+            if (m_SacrificeCountdown > 0)
+            {
+                m_SacrificeCountdown -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
+                if (m_SacrificeCountdown <= 0)
+                {
+                    m_Model.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_env_house_Shrine");
+                }
+            }
+
             if (m_AmountOfShamansQueued > 0)
             {
                 m_Timer -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
@@ -119,6 +130,9 @@ namespace XNA_ENGINE.Game.Objects
 
         private void Sacrifice()
         {
+            m_Model.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_env_house_ShrineBloodied");
+            m_SacrificeCountdown = 5.0;
+
             m_Owner.GetResources().AddInfluence(10);
         }
 

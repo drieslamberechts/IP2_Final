@@ -115,11 +115,6 @@ namespace XNA_ENGINE.Game.Objects
             set { m_PathToFollow = value; }
         }
 
-        public override void GoToTile(GridTile targetTile)
-        {
-            m_PathToFollow = GridFieldManager.GetInstance().CalculatePath(m_CurrentTile, targetTile, m_PlaceableType);
-        }
-
         public override bool SetTargetTile(GridTile targetTile)
         {
             if (targetTile != null)

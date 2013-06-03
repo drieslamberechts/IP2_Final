@@ -181,3 +181,17 @@ Content\Textures\tex_Tile_BasicGround4_0.xnb
 Content\Textures\tex_tile_BasicDirtWithGrass1_0.xnb
 Content\Textures\tex_Tile_BasicGround3_0.xnb
 Content\Textures\tex_tile_GrassWithGround2_0.xnb
+Content\pause Menu\Background_GamePause.xnb
+Content\pause Menu\Button_ControlsHovered.xnb
+Content\pause Menu\Button_ControlsUnhovered.xnb
+Content\ControllerMenu\Controller_Background.xnb
+Content\ControllerMenu\Controller_MouseAndKeyboard.xnb
+Content\ControllerMenu\Controller_MouseAndKeyboardButton.xnb
+Content\ControllerMenu\Controller_ReturnButtonHovered.xnb
+Content\ControllerMenu\Controller_ReturnButtonUnhovered.xnb
+Content\ControllerMenu\Controller_xboxController.xnb
+Content\ControllerMenu\Controller_xboxControllerButton.xnb
+Content\tex_house_tent1+tent2+tent3+camp_0.xnb
+Content\Textures\tex_env_house_Shrine_0.xnb
+Content\Textures\tex_env_house_Shrine.xnb
+Content\Textures\tex_env_house_ShrineBloodied.xnb
