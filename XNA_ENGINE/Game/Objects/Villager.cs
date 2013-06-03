@@ -37,7 +37,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_Model.Translate(m_CurrentTile.Model.LocalPosition);
 
-            MOVEMENTSPEED = 0.5f;
+            MOVEMENTSPEED = 0.8f;
 
             Initialize();
         }

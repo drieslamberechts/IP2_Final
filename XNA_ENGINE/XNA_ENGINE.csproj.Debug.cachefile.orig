@@ -1,10 +1,9 @@
 Content\Fonts\menufont.xnb
 Content\Fonts\DebugFont.xnb
-Content\Models\settlement_TestSettlementBlue.xnb
+Content\Split_Army.xnb
 Content\defend.xnb
 Content\gather.xnb
 Content\Textures\RainbowTexture.xnb
-Content\Split_Army.xnb
 Content\switch.xnb
 Content\attack.xnb
 Content\move.xnb
@@ -12,33 +11,96 @@ Content\Tile3.xnb
 Content\Tile4.xnb
 Content\BuildBase.xnb
 Content\BuildTile.xnb
-Content\Models\tree_TreeShort.xnb
-Content\Models\tile_Normal.xnb
 Content\Textures\tex_tile_Basic.xnb
 Content\Textures\tex_tile_BasicWithDirt.xnb
-Content\Build.xnb
 Content\menu\exitButton.xnb
 Content\menu\startButton.xnb
+Content\Build.xnb
 Content\Textures\Background.xnb
-Content\Models\building_FlagNormal.xnb
 Content\Tile1.xnb
 Content\Tile2.xnb
-Content\Models\char_Soldier.xnb
-Content\Models\char_Villager.xnb
-Content\Models\prop_Wood.xnb
 Content\Textures\tex_tree_Tall1.xnb
 Content\DaeSplashScreen.xnb
-Content\Models\tree_TreeTall.xnb
+Content\final Menu\grootMenu_Onderkant.xnb
+Content\final Menu\resources_influence.xnb
+Content\final Menu\resources_wood.xnb
+Content\final Menu\iconStandard.xnb
+Content\final Menu\characterStats.xnb
+Content\final Menu\hoverVillager.xnb
+Content\final Menu\unitList.xnb
+Content\Textures\tex_env_Tree1+Tree2+Bush1+Grass1+Grass2.xnb
+Content\Textures\tex_house_tent1+tent2+tent3+campfire.xnb
+Content\Textures\tex_env_Foliage2.xnb
+Content\Textures\tex_env_Treetrunk1.xnb
+Content\Textures\tex_tile_Basic2.xnb
+Content\Textures\tex_Tile_BasicGrass1.xnb
+Content\Textures\tex_Tile_BasicGrass2.xnb
+Content\Textures\tex_Tile_BasicGrass3.xnb
+Content\Textures\tex_Tile_BasicGrass4.xnb
+Content\Textures\tex_tile_BasicGrass5.xnb
+Content\Textures\tex_tile_BasicGround1.xnb
+Content\Textures\tex_tile_BasicGround2.xnb
+Content\Textures\tex_Tile_BasicWithDirt1.xnb
+Content\Textures\tex_Tile_BasicWithDirt2.xnb
+Content\Textures\tex_Tile_BasicWithDirt3.xnb
+Content\Textures\tex_Tile_BasicWithDirt4.xnb
+Content\Textures\tex_Tile_BasicWithDirt4_test.xnb
+Content\Textures\tex_tile_BasicWithDirt5.xnb
+Content\Textures\tex_char_GoblinShaman_Body.xnb
+Content\Textures\tex_char_GoblinShaman_Hair+Staff.xnb
+Content\Textures\tex_env_grass.xnb
+Content\Textures\tex_env_rock1.xnb
+Content\Textures\tex_env_rock2.xnb
+Content\Textures\tex_env_Weed.xnb
+Content\Textures\tex_env_FernLeaf.xnb
+Content\final Menu\Button_Delete.xnb
+Content\final Menu\Button_AddSchool.xnb
+Content\final Menu\Button_AddSettlement.xnb
+Content\final Menu\Button_AddShaman.xnb
+Content\final Menu\Button_AddVIllager.xnb
+Content\final Menu\Button_AddVIllagerHover.xnb
+Content\final Menu\Button_AddShamanHover.xnb
+Content\final Menu\hoverSettlementInfo.xnb
+Content\final Menu\Button_AddSettlementHover.xnb
+Content\tutorial\screen1.xnb
+Content\tutorial\screen10.xnb
+Content\tutorial\screen11.xnb
+Content\tutorial\screen2.xnb
+Content\tutorial\screen3.xnb
+Content\tutorial\screen4.xnb
+Content\tutorial\screen5.xnb
+Content\tutorial\screen6.xnb
+Content\tutorial\screen7.xnb
+Content\tutorial\screen8.xnb
+Content\tutorial\screen9.xnb
+Content\final Menu\Button_AddSchoolHover.xnb
+Content\final Menu\Button_DeleteHover.xnb
+Content\final Menu\hoverSchool.xnb
+Content\final Menu\hoverShaman.xnb
+Content\final Menu\Background_StartMenu.xnb
+Content\final Menu\Button_StartMenu_ExitButtonHovered.xnb
+Content\final Menu\Button_StartMenu_ExitButtonUnhovered.xnb
+Content\final Menu\Button_StartMenu_StartButtonHovered.xnb
+Content\final Menu\Button_StartMenu_StartButtonUnhovered.xnb
+Content\pause Menu\Button_Exithovered.xnb
+Content\pause Menu\Button_ExitUnhovered.xnb
+Content\pause Menu\Button_FullscreenHovered.xnb
+Content\pause Menu\Button_FullscreenUnhovered.xnb
+Content\pause Menu\Button_MainMenuHovered.xnb
+Content\pause Menu\Button_MainMenuUnhovered.xnb
+Content\pause Menu\Button_RestartHovered.xnb
+Content\pause Menu\Button_RestartUnhovered.xnb
+Content\pause Menu\Button_ResumeHovered.xnb
+Content\pause Menu\Button_ResumeUnhovered.xnb
+Content\pause Menu\Button_SaveHovered.xnb
+Content\pause Menu\Button_SaveUnhovered.xnb
+Content\pause Menu\Button_WindowedHovered.xnb
+Content\pause Menu\Button_WindowedUnhovered.xnb
 Content\Models\char_Goblin_Shaman.xnb
-<<<<<<< HEAD
 Content\Models\building_School.xnb
-Content\tex_house_tent1+tent2+tent3+camp_0.xnb
-Content\tex_env_Tree1+Tree2+Bush1+Grass1_1.xnb
 Content\Models\building_Settlement.xnb
 Content\Models\building_Shrine.xnb
 Content\Models\tree_TreeWillow.xnb
-Content\tex_env_Treetrunk1_0.xnb
-Content\tex_env_Foliage2_0.xnb
 Content\Models\tile_Dirt1.xnb
 Content\Models\tile_Dirt2.xnb
 Content\Models\tile_Grass.xnb
@@ -51,26 +113,99 @@ Content\Models\tile_LightGrass1.xnb
 Content\Models\tile_LightGrass2.xnb
 Content\Models\tile_OrangeGrass.xnb
 Content\Models\tile_Pond.xnb
-Content\tex_tile_Basic_ground2_0.xnb
-Content\tex_tile_Basic_ground1_0.xnb
-Content\tex_tile_Basic2_0.xnb
-Content\tex_Tile_BasicGrass2_0.xnb
-Content\tex_Tile_BasicWithDirt4_test_0.xnb
-Content\tex_Tile_BasicWithDirt2_0.xnb
-Content\tex_Tile_BasicWithDirt1_0.xnb
-Content\tex_tile_Basic1_0.xnb
-Content\tex_Tile_BasicGrass1_0.xnb
-Content\tex_Tile_BasicGrass3_0.xnb
-Content\tex_Tile_BasicGrass4_0.xnb
-Content\tex_Tile_Oasis_0.xnb
+Content\Models\char_Goblin_Villager.xnb
+Content\Models\prop_Grass1.xnb
+Content\Models\prop_Grass2.xnb
+Content\Models\prop_Grass3.xnb
+Content\Models\prop_Rock1.xnb
+Content\Models\prop_Rock2.xnb
+Content\Models\tree_TreeDead1.xnb
+Content\Models\tree_TreeDead2.xnb
+Content\Models\tree_TreeShort1.xnb
+Content\Models\tree_TreeShort3.xnb
+Content\Models\tree_TreeShort4.xnb
+Content\Models\tree_TreeShort5.xnb
+Content\Models\tree_TreeShort6.xnb
+Content\Models\tree_TreeTall1.xnb
+Content\Models\prop_Flag.xnb
+Content\Models\char_Goblin_Soldier.xnb
+Content\Models\char_Goblin_Soldier2.xnb
+Content\Models\char_Goblin_Shaman_Animated.xnb
+Content\Models\tile_final1.xnb
+Content\Models\tile_final2.xnb
+Content\Models\tile_final10.xnb
+Content\Models\tile_final3.xnb
+Content\Models\tile_final4.xnb
+Content\Models\tile_final5.xnb
+Content\Models\tile_final6.xnb
+Content\Models\tile_final7.xnb
+Content\Models\tile_final8.xnb
+Content\Models\tile_final9.xnb
+Content\Models\tile_finalEmpty.xnb
+Content\Textures\tex_char_GoblinShaman_Body_0.xnb
+Content\Textures\tex_char_GoblinShaman_Hair+Staff_0.xnb
+Content\Textures\tex_house_tent1+tent2+tent3+camp_0.xnb
+Content\Textures\tex_env_Treetrunk1_0.xnb
+Content\Textures\tex_env_Foliage2_0.xnb
+Content\Textures\tex_tile_BasicGround2_0.xnb
+Content\Textures\tex_tile_BasicGround1_0.xnb
+Content\Textures\tex_tile_Basic2_0.xnb
+Content\Textures\tex_Tile_BasicGrass2_0.xnb
+Content\Textures\tex_Tile_BasicWithDirt4_0.xnb
+Content\Textures\tex_Tile_BasicWithDirt2_0.xnb
+Content\Textures\tex_Tile_BasicWithDirt1_0.xnb
+Content\Textures\tex_tile_BasicWithDirt_0.xnb
+Content\Textures\tex_Tile_BasicGrass1_0.xnb
+Content\Textures\tex_Tile_BasicGrass3_0.xnb
+Content\Textures\tex_Tile_BasicGrass4_0.xnb
+Content\Textures\tex_Tile_Oasis_0.xnb
+Content\Textures\tex_char_GoblinVillager_Hair+Acc_0.xnb
+Content\Textures\tex_char_GoblinVillager_Body_0.xnb
+Content\Textures\tex_tree_Tall1_0.xnb
+Content\Textures\tex_env_grass_0.xnb
+Content\Textures\tex_env_FernLeaf_0.xnb
+Content\Textures\tex_env_rock1_0.xnb
+Content\Textures\tex_env_rock2_0.xnb
+Content\Textures\tex_env_Treetrunk2_0.xnb
+Content\Textures\tex_env_Foliage1_0.xnb
+Content\Textures\tex_char_GoblinWarrior_Body_0.xnb
+Content\Textures\tex_char_GoblinWarrior_Flagg+Sta_0.xnb
+Content\Textures\tex_tile_BasicGrassWithDirt3_0.xnb
+Content\Textures\tex_env_SmallProps_0.xnb
+Content\Textures\tex_Tile_BasicFirstGrass3_0.xnb
+Content\Textures\tex_Tile_BasicSecondGrass3_0.xnb
+Content\Textures\tex_tile_BasicGrassWithDirt2_0.xnb
+Content\Textures\tex_tile_BasicDirtWithGrass2_0.xnb
+Content\Textures\tex_Tile_BasicSecondGrass1_0.xnb
+Content\Textures\tex_Tile_BasicGround4_0.xnb
+Content\Textures\tex_tile_BasicDirtWithGrass1_0.xnb
+Content\Textures\tex_Tile_BasicGround3_0.xnb
+Content\Textures\tex_tile_GrassWithGround2_0.xnb
+<<<<<<< HEAD
+Content\pause Menu\Background_GamePause.xnb
+Content\pause Menu\Button_ControlsHovered.xnb
+Content\pause Menu\Button_ControlsUnhovered.xnb
+Content\ControllerMenu\Controller_Background.xnb
+Content\ControllerMenu\Controller_MouseAndKeyboard.xnb
+Content\ControllerMenu\Controller_MouseAndKeyboardButton.xnb
+Content\ControllerMenu\Controller_ReturnButtonHovered.xnb
+Content\ControllerMenu\Controller_ReturnButtonUnhovered.xnb
+Content\ControllerMenu\Controller_xboxController.xnb
+Content\ControllerMenu\Controller_xboxControllerButton.xnb
+Content\Textures\tex_env_house_Shrine_0.xnb
+Content\Textures\tex_env_house_Shrine.xnb
+Content\Textures\tex_env_house_ShrineBloodied.xnb
+Content\final Menu\hoverShrine.xnb
+Content\final Menu\Information_NrUnitsShaman.xnb
+Content\final Menu\Information_NrUnitsVillager.xnb
+Content\final Menu\Information_NrUnitsWarrior.xnb
+Content\Textures\tex_env_prop_Banner_0.xnb
+Content\final Menu\Button_AddShrine.xnb
+Content\final Menu\Button_AddShrineHovered.xnb
+Content\final Menu\Button_AddShrineUnhovered.xnb
+Content\DefeatScreen.xnb
+Content\VictoryScreen.xnb
 =======
-Content\FBX\B84D346A\tree_TreeTall.fbm\tex_env_Tree1+Tree2+Bush1+Grass1_0.xnb
-Content\DaeSplashScreen.xnb
-Content\final Menu\grootMenu_Onderkant.xnb
-Content\final Menu\resources_influence.xnb
-Content\final Menu\resources_wood.xnb
-Content\final Menu\iconStandard.xnb
-Content\final Menu\characterStats.xnb
-Content\final Menu\hoverVillager.xnb
-Content\final Menu\unitList.xnb
->>>>>>> 5b008b7cefc7e151fb8ead9c44e7d7079061dbc5
+Content\final Menu\Button_SplitArmyHovered.xnb
+Content\final Menu\Button_SplitArmyUnhovered.xnb
+>>>>>>> ac8d217521685877d72614e384b187c6bba08231

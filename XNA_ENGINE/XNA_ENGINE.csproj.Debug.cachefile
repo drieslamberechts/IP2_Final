@@ -183,8 +183,6 @@ Content\Textures\tex_Tile_BasicGround3_0.xnb
 Content\Textures\tex_tile_GrassWithGround2_0.xnb
 Content\pause Menu\Background_GamePause.xnb
 Content\pause Menu\Button_ControlsHovered.xnb
-Content\final Menu\Button_SplitArmyHovered.xnb
-Content\final Menu\Button_SplitArmyUnhovered.xnb
 Content\pause Menu\Button_ControlsUnhovered.xnb
 Content\ControllerMenu\Controller_Background.xnb
 Content\ControllerMenu\Controller_MouseAndKeyboard.xnb
@@ -206,3 +204,5 @@ Content\final Menu\Button_AddShrineHovered.xnb
 Content\final Menu\Button_AddShrineUnhovered.xnb
 Content\DefeatScreen.xnb
 Content\VictoryScreen.xnb
+Content\final Menu\Button_SplitArmyHovered.xnb
+Content\final Menu\Button_SplitArmyUnhovered.xnb

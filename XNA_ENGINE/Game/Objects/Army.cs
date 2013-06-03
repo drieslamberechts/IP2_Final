@@ -14,8 +14,9 @@ namespace XNA_ENGINE.Game.Objects
     public class Army : Unit
     {
         private int m_ArmySize;
+        private double m_ImmuneForMerging = 0;
 
-        public Army(GridTile startTile, GridTile goToTile, int armySize = 1)
+        public Army(GridTile startTile, GridTile goToTile, int armySize = 1, double immuneForMerging = 0)
         {
             m_ArmySize = armySize;
 
@@ -43,6 +44,8 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.Translate(m_CurrentTile.Model.LocalPosition);
 
             MOVEMENTSPEED = 0.5f;
+
+            m_ImmuneForMerging = immuneForMerging;
 
             Initialize();
         }
@@ -110,12 +113,30 @@ namespace XNA_ENGINE.Game.Objects
                 }
             }
 
+            if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered || inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
+            {
+                if (Menu.GetInstance().GetSelectedMode() == Menu.ModeSelected.Split)
+                {
+                    if (selectedTile != null)
+                    {
+                        Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.None);
+                        SplitArmies(selectedTile);
+                    }
+                }
+            }
+
             base.OnPermanentSelected();
         }
 
         public override void Update(Engine.RenderContext renderContext)
         {
           //  if (m_TargetTile == null) return;
+
+            if (m_ImmuneForMerging >= 0)
+            {
+                m_ImmuneForMerging -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
+
+            }
 
             if (m_Owner == GridFieldManager.GetInstance().UserPlayer)
             {
@@ -158,6 +179,22 @@ namespace XNA_ENGINE.Game.Objects
                 ArmySize += otherArmy.ArmySize;
                 m_Owner.RemovePlaceable(otherArmy);
             }
+        }
+
+        private void SplitArmies(GridTile tile)
+        {
+            int armysizeDivided = m_ArmySize/2;
+            if (armysizeDivided > 0)
+            {
+                m_Owner.AddPlaceable(new Army(CurrentTile, tile, armysizeDivided, 2));
+                m_ArmySize -= armysizeDivided;
+            }
+        }
+
+        public bool IsImmune()
+        {
+            if (m_ImmuneForMerging > 0) return true;
+            return false;
         }
 
         public override GridTile GetTargetTile()

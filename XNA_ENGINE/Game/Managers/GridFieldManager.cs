@@ -139,13 +139,17 @@ namespace XNA_ENGINE.Game.Managers
                 foreach (Army army1 in armyMergeList)
                     foreach (Army army2 in armyMergeList)
                     {
-                        if (army1.GetTargetTile() == army2.GetTargetTile() && army1 != army2)
+                        if (army1.CurrentTile == army2.CurrentTile && army1 != army2)
                         {
                             bool mayProceed = true;
                             foreach (Army armyAlreadyMerged in ArmiesAlreadyMerged)
                             {
                                 if (armyAlreadyMerged == army1 || armyAlreadyMerged == army2) mayProceed = false;
+                                
                             }
+
+                            if (army1.IsImmune() || army2.IsImmune())
+                                mayProceed = false;
 
                             if (mayProceed)
                             {
@@ -234,7 +238,7 @@ namespace XNA_ENGINE.Game.Managers
                                 break;
                             case Menu.ModeSelected.Defend:
                                 break;
-                            case Menu.ModeSelected.Gather:
+                            case Menu.ModeSelected.Split:
                                 break;
                             case Menu.ModeSelected.BuildSettlement:
                                 BuildPlaceable(Placeable.PlaceableType.Settlement, m_UserPlayer);

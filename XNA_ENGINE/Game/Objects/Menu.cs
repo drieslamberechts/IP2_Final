@@ -172,7 +172,7 @@ namespace XNA_ENGINE.Game.Objects
             None,
             Attack,
             Defend,
-            Gather,
+            Split,
             BuildSettlement,
             BuildShrine,
             BuildSchool,
@@ -870,7 +870,7 @@ namespace XNA_ENGINE.Game.Objects
                         
 
 
-                        m_SelectedMode = ModeSelected.Gather;
+                        m_SelectedMode = ModeSelected.Split;
                         return true;
                     }
                     break;
