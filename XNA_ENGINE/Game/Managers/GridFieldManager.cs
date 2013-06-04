@@ -255,7 +255,7 @@ namespace XNA_ENGINE.Game.Managers
 
                             // CREATE TILES WITH SHAMAN
                             case Menu.ModeSelected.BuildTile1:
-                                hittedTile.SetType(GridTile.TileType.Spiked);
+                                //hittedTile.SetType(GridTile.TileType.Spiked);
                                 break;
                             case Menu.ModeSelected.BuildTile2:
                                 break;
@@ -551,7 +551,7 @@ namespace XNA_ENGINE.Game.Managers
             }
         }
 
-        public List<GridTile> GetSurroundingForShaman(GridTile tile)
+        public List<GridTile> GetSurroundingTilesForUnit(GridTile tile)
         {
             List<GridTile> returnList = new List<GridTile>();
             if (GetNWTile(tile) != null) returnList.Add(GetNWTile(tile));
@@ -632,9 +632,12 @@ namespace XNA_ENGINE.Game.Managers
             foreach (var player in m_PlayersList)
                 foreach (var ownedPlaceable in player.GetOwnedList())
                     ownedPlaceable.Model.Selected = false;
-            
+
             foreach (var gridTile in m_GridField)
+            {
                 gridTile.Selected = false;
+                gridTile.Model.GreenHighLight = false;
+            }
         }
 
         public void PermanentDeselect()
