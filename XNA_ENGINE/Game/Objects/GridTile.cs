@@ -48,6 +48,9 @@ namespace XNA_ENGINE.Game.Objects
         private bool m_ShamanGoal;
         private bool m_IsInUse = false;
 
+        private GameModelGrid m_Tree;
+        private double m_ChoppingWood = 0.0;
+
         //PathFinding
         private int m_PFH;
         private int m_PFG;
@@ -117,6 +120,21 @@ namespace XNA_ENGINE.Game.Objects
 
         public void Update(RenderContext renderContext)
         {
+            if (m_ChoppingWood > 0)
+            {
+                var scale = m_Tree.LocalScale;
+                scale.X -= renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0f;
+                scale.Y -= renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0f;
+                scale.Z -= renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0f;
+                m_ChoppingWood -= renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0f;
+                m_Tree.Scale((float)m_ChoppingWood / 5.0f, (float)m_ChoppingWood / 5.0f, (float)m_ChoppingWood / 5.0f);
+
+                if (m_ChoppingWood < 0)
+                {
+                    SetType(TileType.NormalGrass);
+                }
+            }
+
             if (m_YOffset != m_YOffsetTarget)
             {
                 float delta = m_YOffsetTarget - m_YOffset;
@@ -322,7 +340,6 @@ namespace XNA_ENGINE.Game.Objects
             int rand = GridFieldManager.GetInstance().Random.Next(0,4);
             m_TileModel.Rotate( 0, 90 * rand, 0);
 
-
             m_TileModel.CreateBoundingBox(GRIDWIDTH, 1, GRIDDEPTH, new Vector3(0, GRIDHEIGHT, 0));
             m_TileModel.DrawBoundingBox = false;
 
@@ -332,6 +349,8 @@ namespace XNA_ENGINE.Game.Objects
 
                 prop.DiffuseColor = new Vector3(1, 1, 1);
                 m_TileModel.AddChild(prop);
+
+                m_Tree = prop;
             }
 
             if (m_TileModel != null)
@@ -471,12 +490,11 @@ namespace XNA_ENGINE.Game.Objects
 
         public bool PickupWood(Player player, bool pickup = true)
         {
-            if (pickup)
+            if (pickup && m_WoodCount > 0)
             {
                 player.GetResources().AddWood(m_WoodCount);
 
-                if (m_WoodCount > 0)
-                    SetType(TileType.NormalGrass);
+                if (m_WoodCount > 0) m_ChoppingWood = 5.0;
                 m_WoodCount = 0;
 
                 return true;
@@ -490,6 +508,8 @@ namespace XNA_ENGINE.Game.Objects
 
                 return false;
             }
+
+            return false;
         }
     }
 }

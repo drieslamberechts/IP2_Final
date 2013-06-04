@@ -13,6 +13,8 @@ namespace XNA_ENGINE.Game.Objects
 {
     class Villager : Unit
     {
+        private double m_IsWoodChopping = 0.0;
+
         public Villager(GridTile startTile, GridTile goToTile)
         {
             m_LinkedTileList = null;
@@ -37,18 +39,24 @@ namespace XNA_ENGINE.Game.Objects
 
             MOVEMENTSPEED = 0.8f;
 
+
+
             Initialize();
         }
 
         public override void Update(Engine.RenderContext renderContext)
         {
+            if (m_IsWoodChopping > 0)
+                m_IsWoodChopping -= (renderContext.GameTime.ElapsedGameTime.Milliseconds / 1000.0);
+
             if (m_CurrentTile.Model.Danger == true)
             {
                 m_Owner.RemovePlaceable(this);
                 return;
             }
 
-            m_CurrentTile.PickupWood(m_Owner);
+            if (m_CurrentTile.PickupWood(m_Owner)) 
+                m_IsWoodChopping = 5.0;
 
             base.Update(renderContext);
         }
@@ -109,7 +117,7 @@ namespace XNA_ENGINE.Game.Objects
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
-                if (selectedTile != null) GoToTile(selectedTile);
+                if (selectedTile != null && m_IsWoodChopping <= 0) GoToTile(selectedTile);
             }
 
             base.OnPermanentSelected();
