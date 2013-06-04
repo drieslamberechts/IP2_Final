@@ -1329,13 +1329,13 @@ namespace XNA_ENGINE.Game.Objects
             if (vpHeight < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
             {
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetVillagerCount(), new Vector2(vpWidth - 50, 25), Color.White);
-                spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetArmySize(), new Vector2(vpWidth - 50, 65), Color.White);
+                spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetArmySize() + "  (" + userPlayer.GetSelectedArmySize()+")", new Vector2(vpWidth - 50, 65), Color.White);
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetShamanCount(), new Vector2(vpWidth - 50, 105), Color.White);
             }
             else
             {
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetVillagerCount(), new Vector2(vpWidth - 100, 50), Color.White);
-                spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetArmySize(), new Vector2(vpWidth - 100, 130), Color.White);
+                spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetArmySize() + "  (" + userPlayer.GetSelectedArmySize() + ")", new Vector2(vpWidth - 100, 130), Color.White);
                 spriteBatch.DrawString(m_DebugFont, "" + userPlayer.GetShamanCount(), new Vector2(vpWidth - 100, 210), Color.White);
             }
 

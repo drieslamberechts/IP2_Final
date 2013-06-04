@@ -35,8 +35,6 @@ namespace XNA_ENGINE.Game.Objects
             m_CurrentTile = startTile;
             GoToTile(goToTile);
 
-            m_Model.Translate(m_CurrentTile.Model.LocalPosition);
-
             MOVEMENTSPEED = 0.8f;
 
             Initialize();

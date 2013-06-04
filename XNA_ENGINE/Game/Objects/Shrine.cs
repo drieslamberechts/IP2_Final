@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using XNA_ENGINE.Engine;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Objects;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
@@ -49,7 +50,7 @@ namespace XNA_ENGINE.Game.Objects
             m_Model.LoadContent(PlayScene.GetContentManager());
             m_Model.UseTexture = true;
 
-            m_Model.CreateBoundingBox(50, 64, 50, new Vector3(0, 50, 0));
+            m_Model.CreateBoundingBox(50, 30, 50, new Vector3(0, 20, 0));
             m_Model.DrawBoundingBox = false;
 
             GridFieldManager.GetInstance().GameScene.AddSceneObject(m_Model);
@@ -166,8 +167,12 @@ namespace XNA_ENGINE.Game.Objects
             foreach (Placeable placeable in m_Owner.GetOwnedList())
                 if (placeable.PlaceableTypeMeth == PlaceableType.Shaman) ++amountOfShamansInPlayer;
 
-            if (m_AmountOfShamansQueued == 0 && amountOfShamansInPlayer == 0)
+            if (m_AmountOfShamansQueued == 0 && amountOfShamansInPlayer == 0 && m_Owner.GetResources().GetInfluence() >= StandardCost.COSTOFINFLUENCE_SHAMAN)
+            {
+                m_Owner.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SHAMAN);
+                m_Owner.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_SHAMAN);
                 m_AmountOfShamansQueued += amount;
+            }
         }
 
         //Code to execute on Permanently selected

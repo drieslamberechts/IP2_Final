@@ -148,14 +148,31 @@ namespace XNA_ENGINE.Game.Objects
         public int GetArmySize()
         {
             var count = 0;
-            for (int t = 0; t < m_OwnedPlaceablesList.Count; ++t)
+
+            foreach (Placeable placeable in m_OwnedPlaceablesList)
             {
-                if (m_OwnedPlaceablesList.ElementAt(t).PlaceableTypeMeth == Placeable.PlaceableType.Army)
-                    count++;
+                if (placeable.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+                {
+                    Army army = (Army) placeable;
+                    count += army.ArmySize;
+                }
             }
+
             m_ArmyCount = count;
 
             return m_ArmyCount;
+        }
+
+        public int GetSelectedArmySize()
+        {
+            var permaSelected = GridFieldManager.GetInstance().GetPermanentSelected();
+            if (permaSelected != null && permaSelected.PlaceableTypeMeth == Placeable.PlaceableType.Army)
+            {
+                Army army = (Army) permaSelected;
+
+                return army.ArmySize;
+            }
+            return 0;
         }
 
         public int GetVillagerCount()
@@ -230,7 +247,7 @@ namespace XNA_ENGINE.Game.Objects
         public Resources()
         {
             m_Wood = 100;
-            m_Influence = 100;
+            m_Influence = 30;
         }
 
         // GET RESOURCES

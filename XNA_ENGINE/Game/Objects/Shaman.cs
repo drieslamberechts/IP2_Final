@@ -18,7 +18,7 @@ namespace XNA_ENGINE.Game.Objects
 
             m_PlaceableType = PlaceableType.Shaman;
 
-            m_Model = new GameModelGrid("Models/char_Goblin_Shaman_Animated",true);
+            m_Model = new GameModelGrid("Models/char_Goblin_Shaman",false);
             m_Model.LocalPosition += new Vector3(0, 0, 0);
            // m_Model.LocalScale = new Vector3(0.4f, 0.4f, 0.4f);
             // Quaternion rotation = new Quaternion(new Vector3(0, 1, 0), 0);
@@ -35,8 +35,6 @@ namespace XNA_ENGINE.Game.Objects
 
             m_CurrentTile = startTile;
             GoToTile(goToTile);
-
-            m_Model.Translate(m_CurrentTile.Model.LocalPosition);
 
             MOVEMENTSPEED = 1.0f;
 

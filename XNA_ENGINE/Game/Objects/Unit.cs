@@ -38,30 +38,7 @@ namespace XNA_ENGINE.Game.Objects
         public override void Update(RenderContext renderContext)
         {
             if (m_PathToFollow != null && m_PathToFollow.Any())
-            {
                 SetTargetTile(m_PathToFollow.ElementAt(0));
-
-                //if( )
-                ////Set the correct vector
-                //Vector3 targetPos = m_TargetTile.Model.WorldPosition;
-                //Vector3 worldPos = m_Model.WorldPosition;
-                //Vector3 currentTilePos = m_CurrentTile.Model.WorldPosition;
-                //targetPos.Y += GRIDHEIGHT;
-
-                ////Calculate the distance for 1 tile to the other
-                //Vector3 distanceVector = targetPos - currentTilePos;
-                ////Calculate the direction
-                //Vector3 directionVector = targetPos - worldPos;
-                //directionVector.Normalize();
-                //distanceVector = distanceVector.Length() * directionVector;
-
-                ////Calculate a new vector without y value
-                //Vector3 directionVectorCalc = directionVector;
-                //directionVectorCalc.Y = 0;
-                //directionVectorCalc.Normalize();
-
-                //m_PathFindingDirection = directionVectorCalc;
-            }
             else
                 SetTargetTile(m_CurrentTile);
 
