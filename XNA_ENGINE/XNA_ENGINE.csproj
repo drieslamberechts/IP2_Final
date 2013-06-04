@@ -129,6 +129,10 @@
     <Compile Include="Game\Scenes\PlayScene.cs" />
     <Compile Include="Game\Scenes\MainMenuScene.cs" />
     <Compile Include="Game\TilePrefabs\BasePrefab.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabPond5.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabPond4.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabPond3.cs" />
+    <Compile Include="Game\TilePrefabs\PrefabPond2.cs" />
     <Compile Include="Game\TilePrefabs\PrefabEmpty.cs" />
     <Compile Include="Game\TilePrefabs\PrefabFinal10.cs" />
     <Compile Include="Game\TilePrefabs\PrefabFinal09.cs" />

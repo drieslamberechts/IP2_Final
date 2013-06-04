@@ -349,6 +349,26 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
+    <Compile Include="Models\tile_Pond2.FBX">
+      <Name>tile_Pond2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Pond3.FBX">
+      <Name>tile_Pond3</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Pond4.FBX">
+      <Name>tile_Pond4</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\tile_Pond5.FBX">
+      <Name>tile_Pond5</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="attack.png">
@@ -1012,6 +1032,65 @@
     </Compile>
     <Compile Include="final Menu\Button_SplitArmyUnhovered.png">
       <Name>Button_SplitArmyUnhovered</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_tile_BasicDirtWithGrass1.png">
+      <Name>tex_tile_BasicDirtWithGrass1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicDirtWithGrass2.png">
+      <Name>tex_tile_BasicDirtWithGrass2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicDirtWithGrass3.png">
+      <Name>tex_tile_BasicDirtWithGrass3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicDirtWithGrass4.png">
+      <Name>tex_tile_BasicDirtWithGrass4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicGrassWithDirt2.png">
+      <Name>tex_tile_BasicGrassWithDirt2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_tile_BasicGrassWithDirt3.png">
+      <Name>tex_tile_BasicGrassWithDirt3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicGround3.png">
+      <Name>tex_Tile_BasicGround3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicGround4.png">
+      <Name>tex_Tile_BasicGround4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicSecondGrass1.png">
+      <Name>tex_Tile_BasicSecondGrass1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Textures\tex_Tile_BasicSecondGrass3.png">
+      <Name>tex_Tile_BasicSecondGrass3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tex_Tile_BasicSecondGrass2.png">
+      <Name>tex_Tile_BasicSecondGrass2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

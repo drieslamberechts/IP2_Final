@@ -91,6 +91,10 @@ namespace XNA_ENGINE.Game.Objects
             Final9,
             Final10,
             Empty,
+            Pond2,
+            Pond3,
+            Pond4,
+            Pond5,
 
             //<----Add new types in front of this comment 
             enumSize
@@ -309,6 +313,18 @@ namespace XNA_ENGINE.Game.Objects
                     break;
                 case TileType.Empty:
                     LoadTileType(new PrefabEmpty(this));
+                    break;
+                case TileType.Pond2:
+                    LoadTileType(new PrefabPond2(this));
+                    break;
+                case TileType.Pond3:
+                    LoadTileType(new PrefabPond3(this));
+                    break;
+                case TileType.Pond4:
+                    LoadTileType(new PrefabPond4(this));
+                    break;
+                case TileType.Pond5:
+                    LoadTileType(new PrefabPond5(this));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("type");

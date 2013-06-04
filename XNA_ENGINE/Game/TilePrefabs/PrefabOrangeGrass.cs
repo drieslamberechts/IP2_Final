@@ -14,8 +14,9 @@ namespace XNA_ENGINE.Game.TilePrefabs
     {
         public PrefabOrangeGrass(GridTile tile)
         {
-            m_TileModel = new GameModelGrid("Models/tile_OrangeGrass");
+            m_TileModel = new GameModelGrid("Models/tile_finalEmpty");
             m_TileModel.LoadContent(PlayScene.GetContentManager());
+            m_TileModel.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicDirtWithGrass4");
             m_TileModel.UseTexture = true;
             
             m_bOpen = true;

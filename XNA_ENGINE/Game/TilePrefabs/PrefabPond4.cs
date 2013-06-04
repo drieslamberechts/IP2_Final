@@ -10,17 +10,15 @@ using XNA_ENGINE.Game.Scenes;
 
 namespace XNA_ENGINE.Game.TilePrefabs
 {
-    class PrefabDirt2 : BasePrefab
+    class PrefabPond4 : BasePrefab
     {
-        public PrefabDirt2(GridTile tile)
+        public PrefabPond4(GridTile tile)
         {
-            m_TileModel = new GameModelGrid("Models/tile_finalEmpty");
+            m_TileModel = new GameModelGrid("Models/tile_Pond4");
             m_TileModel.LoadContent(PlayScene.GetContentManager());
-            m_TileModel.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_BasicDirtWithGrass1");
             m_TileModel.UseTexture = true;
 
-            m_bOpen = true;
-
+            m_bOpen = false;
             foreach (var prop in m_PropList)
                 prop.LoadContent(PlayScene.GetContentManager());
         }

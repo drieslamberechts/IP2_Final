@@ -58,7 +58,7 @@ namespace XNA_ENGINE.Game.Scenes
         private const float PATROLINTERVAL = 2;
         private float m_ArmyPatrolTimer = 0;
 
-        private bool m_DrawDebug = true;
+        private bool m_DrawDebug = false;
         private bool m_bX, m_bY, m_bB;
 
 

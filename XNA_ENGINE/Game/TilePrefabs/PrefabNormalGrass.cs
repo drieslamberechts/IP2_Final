@@ -14,9 +14,9 @@ namespace XNA_ENGINE.Game.TilePrefabs
     {
         public PrefabNormalGrass(GridTile tile)
         {
-            m_TileModel = new GameModelGrid("Models/tile_Grass");
+            m_TileModel = new GameModelGrid("Models/tile_finalEmpty");
             m_TileModel.LoadContent(PlayScene.GetContentManager());
-            m_TileModel.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_tile_Basic");
+            m_TileModel.Texture2D = PlayScene.GetContentManager().Load<Texture2D>("Textures/tex_Tile_BasicSecondGrass2");
             m_TileModel.UseTexture = true;
             
             m_bOpen = true;
