@@ -158,9 +158,15 @@ namespace XNA_ENGINE.Game.Scenes
             }
 
             if (m_AttackersDice > m_DefendersDice)
+            {
+                m_AttackerWon = true;
                 if (m_Defender.ArmySize > 0) m_Defender.ArmySize = m_Defender.ArmySize;
+            }
             else
+            {
+                m_AttackerWon = false;
                 if (m_Attacker.ArmySize > 0) m_Attacker.ArmySize = m_Attacker.ArmySize;
+            }
         }
 
         private void EndAttack()
