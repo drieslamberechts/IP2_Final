@@ -735,7 +735,6 @@ namespace XNA_ENGINE.Game.Objects
                     }
                     else if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && m_bControlsSelected)
                     {
-                        // fuk tees
                         m_bShowControls = true;
                         m_bCanSelectNextButton = false;
                     }
@@ -864,7 +863,7 @@ namespace XNA_ENGINE.Game.Objects
                 // SOLDIER MODE
                 // --------------------------------------------
                 case SubMenuSelected.SoldierMode:
-                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSplit))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
                     {
                         Console.WriteLine("Split!");
                         
@@ -1215,7 +1214,8 @@ namespace XNA_ENGINE.Game.Objects
                 case SubMenuSelected.SoldierMode:
                     if (m_bShowSplitHover)
                         spriteBatch.Draw(m_TexSplitIconHover, m_RectDelete, Color.White);
-                    else spriteBatch.Draw(m_TexSplitIcon, m_RectDelete, Color.White);
+                    else 
+                        spriteBatch.Draw(m_TexSplitIcon, m_RectDelete, Color.White);
                     break;
 
                     // --------------------------------------------

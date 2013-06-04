@@ -96,6 +96,27 @@ Content\pause Menu\Button_SaveHovered.xnb
 Content\pause Menu\Button_SaveUnhovered.xnb
 Content\pause Menu\Button_WindowedHovered.xnb
 Content\pause Menu\Button_WindowedUnhovered.xnb
+Content\pause Menu\Background_GamePause.xnb
+Content\pause Menu\Button_ControlsHovered.xnb
+Content\pause Menu\Button_ControlsUnhovered.xnb
+Content\ControllerMenu\Controller_Background.xnb
+Content\ControllerMenu\Controller_MouseAndKeyboard.xnb
+Content\ControllerMenu\Controller_MouseAndKeyboardButton.xnb
+Content\ControllerMenu\Controller_ReturnButtonHovered.xnb
+Content\ControllerMenu\Controller_ReturnButtonUnhovered.xnb
+Content\ControllerMenu\Controller_xboxController.xnb
+Content\ControllerMenu\Controller_xboxControllerButton.xnb
+Content\Textures\tex_env_house_Shrine.xnb
+Content\Textures\tex_env_house_ShrineBloodied.xnb
+Content\final Menu\hoverShrine.xnb
+Content\final Menu\Information_NrUnitsShaman.xnb
+Content\final Menu\Information_NrUnitsVillager.xnb
+Content\final Menu\Information_NrUnitsWarrior.xnb
+Content\final Menu\Button_AddShrine.xnb
+Content\final Menu\Button_AddShrineHovered.xnb
+Content\final Menu\Button_AddShrineUnhovered.xnb
+Content\DefeatScreen.xnb
+Content\VictoryScreen.xnb
 Content\Models\char_Goblin_Shaman.xnb
 Content\Models\building_School.xnb
 Content\Models\building_Settlement.xnb
@@ -145,6 +166,7 @@ Content\Models\tile_finalEmpty.xnb
 Content\Textures\tex_char_GoblinShaman_Body_0.xnb
 Content\Textures\tex_char_GoblinShaman_Hair+Staff_0.xnb
 Content\Textures\tex_house_tent1+tent2+tent3+camp_0.xnb
+Content\Textures\tex_env_house_Shrine_0.xnb
 Content\Textures\tex_env_Treetrunk1_0.xnb
 Content\Textures\tex_env_Foliage2_0.xnb
 Content\Textures\tex_tile_BasicGround2_0.xnb
@@ -168,6 +190,7 @@ Content\Textures\tex_env_rock1_0.xnb
 Content\Textures\tex_env_rock2_0.xnb
 Content\Textures\tex_env_Treetrunk2_0.xnb
 Content\Textures\tex_env_Foliage1_0.xnb
+Content\Textures\tex_env_prop_Banner_0.xnb
 Content\Textures\tex_char_GoblinWarrior_Body_0.xnb
 Content\Textures\tex_char_GoblinWarrior_Flagg+Sta_0.xnb
 Content\Textures\tex_tile_BasicGrassWithDirt3_0.xnb
@@ -181,28 +204,5 @@ Content\Textures\tex_Tile_BasicGround4_0.xnb
 Content\Textures\tex_tile_BasicDirtWithGrass1_0.xnb
 Content\Textures\tex_Tile_BasicGround3_0.xnb
 Content\Textures\tex_tile_GrassWithGround2_0.xnb
-Content\pause Menu\Background_GamePause.xnb
-Content\pause Menu\Button_ControlsHovered.xnb
-Content\pause Menu\Button_ControlsUnhovered.xnb
-Content\ControllerMenu\Controller_Background.xnb
-Content\ControllerMenu\Controller_MouseAndKeyboard.xnb
-Content\ControllerMenu\Controller_MouseAndKeyboardButton.xnb
-Content\ControllerMenu\Controller_ReturnButtonHovered.xnb
-Content\ControllerMenu\Controller_ReturnButtonUnhovered.xnb
-Content\ControllerMenu\Controller_xboxController.xnb
-Content\ControllerMenu\Controller_xboxControllerButton.xnb
-Content\Textures\tex_env_house_Shrine_0.xnb
-Content\Textures\tex_env_house_Shrine.xnb
-Content\Textures\tex_env_house_ShrineBloodied.xnb
-Content\final Menu\hoverShrine.xnb
-Content\final Menu\Information_NrUnitsShaman.xnb
-Content\final Menu\Information_NrUnitsVillager.xnb
-Content\final Menu\Information_NrUnitsWarrior.xnb
-Content\Textures\tex_env_prop_Banner_0.xnb
-Content\final Menu\Button_AddShrine.xnb
-Content\final Menu\Button_AddShrineHovered.xnb
-Content\final Menu\Button_AddShrineUnhovered.xnb
-Content\DefeatScreen.xnb
-Content\VictoryScreen.xnb
 Content\final Menu\Button_SplitArmyHovered.xnb
 Content\final Menu\Button_SplitArmyUnhovered.xnb
