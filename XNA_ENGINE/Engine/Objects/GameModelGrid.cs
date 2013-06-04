@@ -59,6 +59,9 @@ namespace XNA_ENGINE.Game.Objects
 
             CanDraw = true;
             m_DiffuseColor = new Vector3(1, 1, 1);
+
+            HighlightGreen = false;
+            HighlightRed = false;
         }
 
         public override void Update(RenderContext renderContext)
@@ -172,7 +175,6 @@ namespace XNA_ENGINE.Game.Objects
                 }
                 else 
                 {
-
                     foreach (BasicEffect effect in mesh.Effects)
                     {
                         effect.EnableDefaultLighting();
@@ -235,7 +237,17 @@ namespace XNA_ENGINE.Game.Objects
                             effect.SpecularColor += new Vector3(0.0f, 0.8f * smooth, 0.0f);
                             effect.EmissiveColor += new Vector3(0.0f, 0.1f * smooth, 0.0f);
                         }
-                    
+
+                        if (HighlightGreen)
+                        {
+                            effect.SpecularColor += new Vector3(0.0f, 0.3f, 0.0f);
+                        }
+
+                        if (HighlightRed)
+                        {
+                            effect.SpecularColor += new Vector3(0.3f, 0.0f, 0.0f);
+                        }
+
                         effect.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
                     }
 
@@ -321,6 +333,9 @@ namespace XNA_ENGINE.Game.Objects
             get { return m_GreenHighlight; }
             set { m_GreenHighlight = value; }
         }
+
+        public bool HighlightRed { get; set; }
+        public bool HighlightGreen { get; set; }
 
         public Vector3 DiffuseColor
         {

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using XNA_ENGINE.Engine.Objects;
 using XNA_ENGINE.Engine.Scenegraph;
+using XNA_ENGINE.Game.Helpers;
 using XNA_ENGINE.Game.Managers;
 using XNA_ENGINE.Game.Scenes;
 
@@ -93,17 +94,44 @@ namespace XNA_ENGINE.Game.Objects
 
             Menu.GetInstance().SubMenu = Menu.SubMenuSelected.ShamanMode;
 
-            List<GridTile> changeableTileList = gridFieldManager.GetSurroundingForShaman(m_CurrentTile);
+            List<GridTile> changeableTileList = gridFieldManager.GetSurroundingTilesForUnit(m_CurrentTile);
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered)
             {
+                if (Menu.GetInstance().GetSelectedMode() == Menu.ModeSelected.BuildTile1
+                    && m_Owner.GetResources().GetWood() >= StandardCost.COSTOFWOOD_TILE1
+                    && m_Owner.GetResources().GetInfluence() >= StandardCost.COSTOFINFLUENCE_TILE1)
+                {
+                    bool mayBuild = false;
+                    foreach (GridTile gridTile in changeableTileList)
+                    {
+                        if (gridTile == selectedTile) mayBuild = true;
+                    }
 
+                    if (mayBuild)
+                    {
+                        Console.WriteLine("Create Tile 1");
+                        selectedTile.SetType(GridTile.TileType.NormalGrass);
+                        m_Owner.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_TILE1);
+                        m_Owner.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_TILE1);
+                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+                        Menu.GetInstance().SetSelectedMode(Menu.ModeSelected.None);
+                    }
+                }
             }
 
             if (inputManager.GetAction((int)PlayScene.PlayerInput.RightClick).IsTriggered)
             {
                 if (selectedTile != null) GoToTile(selectedTile);
             }
+
+          /*  if (Menu.GetInstance().GetSelectedMode() == Menu.ModeSelected.BuildTile1)
+            {
+                foreach (GridTile gridTile in changeableTileList)
+                {
+                    gridTile.Model.HighlightGreen = true;
+                }
+            }*/
 
             base.OnPermanentSelected();
         }

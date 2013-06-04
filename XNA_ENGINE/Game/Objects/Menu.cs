@@ -777,7 +777,9 @@ namespace XNA_ENGINE.Game.Objects
             switch (m_SubMenuSelected)
             {
                 case SubMenuSelected.BaseMode:
-                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectDelete) 
+                        && userPlayer.GetResources().GetWood() >= StandardCost.COSTOFWOOD_SETTLEMENT
+                        && userPlayer.GetResources().GetInfluence() >= StandardCost.COSTOFINFLUENCE_SETTLEMENT)
                     {
                         // DELETE ITEM THAT WILL BE SELECTED
                         userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SETTLEMENT);
@@ -791,7 +793,9 @@ namespace XNA_ENGINE.Game.Objects
                 // VILLAGER MODE
                 // --------------------------------------------
                 case SubMenuSelected.VillagerMode:
-                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSchool)
+                        && userPlayer.GetResources().GetWood() >= StandardCost.COSTOFWOOD_SCHOOL
+                        && userPlayer.GetResources().GetInfluence() >= StandardCost.COSTOFINFLUENCE_SCHOOL)
                     {
                         // SET DECREASE RESOURCES
                         userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SCHOOL);
@@ -801,7 +805,9 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectSettlement)
+                        && userPlayer.GetResources().GetWood() >= StandardCost.COSTOFWOOD_SETTLEMENT
+                        && userPlayer.GetResources().GetInfluence() >= StandardCost.COSTOFINFLUENCE_SETTLEMENT)
                     {
                         // SET DECREASE RESOURCES
                         userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SETTLEMENT);
@@ -811,7 +817,10 @@ namespace XNA_ENGINE.Game.Objects
                         return true;
                     }
 
-                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine))
+                    if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectShrine)
+
+                        && userPlayer.GetResources().GetWood() >= StandardCost.COSTOFWOOD_SHRINE
+                        && userPlayer.GetResources().GetInfluence() >= StandardCost.COSTOFINFLUENCE_SHRINE)
                     {
                         // SET DECREASE RESOURCES
                         userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_SHRINE);
@@ -844,10 +853,7 @@ namespace XNA_ENGINE.Game.Objects
                     // BUILD TILES WITH SHAMAN
                     if (inputManager.GetAction((int)PlayScene.PlayerInput.LeftClick).IsTriggered && CheckHitButton(mousePos, m_RectBuildTile))
                     {
-                        Console.WriteLine("Create Tile 1");
-                        userPlayer.GetResources().DecreaseWood(StandardCost.COSTOFWOOD_TILE1);
-                        userPlayer.GetResources().DecreaseInfluence(StandardCost.COSTOFINFLUENCE_TILE1);
-                        GridFieldManager.GetInstance().SelectionModeMeth = GridFieldManager.SelectionMode.select1x1;
+
                         m_SelectedMode = ModeSelected.BuildTile1;
 
                         if (m_Enable10)
