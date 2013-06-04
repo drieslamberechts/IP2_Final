@@ -1241,7 +1241,9 @@ namespace XNA_ENGINE.Game.Objects
                     {
                         for (int t = 0; t < m_SelectedPlaceable.GetQueuedShaman(); ++t)
                         {
-                            m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexShamanQueue.Width / 2 + 10, m_TexShamanQueue.Height / 2 + 10);
+                            if (vpHeight < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+                                m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexShamanQueue.Width / 2 + 10, m_TexShamanQueue.Height / 2 + 10);
+                            else m_RectVillager = new Rectangle(530 + t * 50, 950, m_TexShamanQueue.Width + 20, m_TexShamanQueue.Height + 20);
                             spriteBatch.Draw(m_TexShamanQueue, m_RectVillager, Color.White);
                         }
                     }
@@ -1264,7 +1266,10 @@ namespace XNA_ENGINE.Game.Objects
                     {
                         for (int t = 0; t < m_SelectedPlaceable.GetQueuedVillager(); ++t)
                         {
-                            m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexVillagerQueue.Width / 2 + 10, m_TexVillagerQueue.Height / 2 + 10);
+                            if (vpHeight < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+                                m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexVillagerQueue.Width / 2 + 10, m_TexVillagerQueue.Height / 2 + 10);
+                            else m_RectVillager = new Rectangle(530 + t * 50, 950, m_TexVillagerQueue.Width + 20, m_TexVillagerQueue.Height + 20);
+
                             spriteBatch.Draw(m_TexVillagerQueue, m_RectVillager, Color.White);
                         }
                     }
@@ -1279,7 +1284,9 @@ namespace XNA_ENGINE.Game.Objects
                     {
                         for (int t = 0; t < m_SelectedPlaceable.GetQueuedSoldiers(); ++t)
                         {
-                            m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexSoldierQueue.Width / 2 + 10, m_TexSoldierQueue.Height / 2 + 10);
+                            if (vpHeight < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)
+                                m_RectVillager = new Rectangle(265 + t * 50, 475, m_TexSoldierQueue.Width / 2 + 10, m_TexSoldierQueue.Height / 2 + 10);
+                            else m_RectVillager = new Rectangle(530 + t * 50, 950, m_TexSoldierQueue.Width + 20, m_TexSoldierQueue.Height + 20);
                             spriteBatch.Draw(m_TexSoldierQueue, m_RectVillager, Color.White);
                         }
                     }
