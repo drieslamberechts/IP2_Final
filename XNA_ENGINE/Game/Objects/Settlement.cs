@@ -143,6 +143,7 @@ namespace XNA_ENGINE.Game.Objects
             m_AmountOfVillagersQueued += amount;
         }
 
+        // Returns amount of villagers in game
         public override int GetQueuedVillager()
         {
             return m_AmountOfVillagersQueued;
