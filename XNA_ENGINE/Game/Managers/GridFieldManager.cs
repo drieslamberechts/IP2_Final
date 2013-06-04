@@ -82,7 +82,7 @@ namespace XNA_ENGINE.Game.Managers
             m_UserPlayer.AddPlaceable(new Army(m_GridField[6, 4], m_GridField[6, 4]));
             // m_UserPlayer.AddPlaceable(new Shaman(m_GridField[7, 3]));
 
-            Army patrollingArmy1 = new Army(m_GridField[15, 6], m_GridField[15, 6], 5);
+            Army patrollingArmy1 = new Army(m_GridField[15, 6], m_GridField[15, 6], 4);
             m_PlayersList.ElementAt(1).AddPlaceable(patrollingArmy1);
             m_GridField[12, 12].BoundArmy(patrollingArmy1);
             m_GridField[13, 12].BoundArmy(patrollingArmy1);
@@ -101,6 +101,17 @@ namespace XNA_ENGINE.Game.Managers
             m_GridField[14, 15].BoundArmy(patrollingArmy1);
             m_GridField[15, 15].BoundArmy(patrollingArmy1);
 
+            Army patrollingArmy2 = new Army(m_GridField[12, 2], m_GridField[12, 2], 2);
+            m_PlayersList.ElementAt(1).AddPlaceable(patrollingArmy2);
+            m_GridField[12, 2].BoundArmy(patrollingArmy2);
+            m_GridField[12, 3].BoundArmy(patrollingArmy2);
+            m_GridField[12, 4].BoundArmy(patrollingArmy2);
+            m_GridField[13, 2].BoundArmy(patrollingArmy2);
+            m_GridField[13, 3].BoundArmy(patrollingArmy2);
+            m_GridField[13, 4].BoundArmy(patrollingArmy2);
+            m_GridField[14, 2].BoundArmy(patrollingArmy2);
+            m_GridField[14, 3].BoundArmy(patrollingArmy2);
+            m_GridField[14, 4].BoundArmy(patrollingArmy2);
 
             m_GridField[15, 20].ShamanGoal = true;
 
